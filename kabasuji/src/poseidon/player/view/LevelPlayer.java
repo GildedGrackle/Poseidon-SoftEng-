@@ -14,10 +14,14 @@ import javax.swing.JButton;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.CardLayout;
+import java.awt.TextArea;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class LevelPlayer extends JFrame {
 
 	private JPanel contentPane;
+	private final JButton btnNext = new JButton("Next");
 
 	/**
 	 * Launch the application.
@@ -208,10 +212,101 @@ public class LevelPlayer extends JFrame {
 		Release_5.setBounds(564, 397, 75, 68);
 		LevelSelect.add(Release_5);
 		
+		StarViewer L1Pstars = new StarViewer();
+		L1Pstars.setBounds(194, 191, 69, 31);
+		LevelSelect.add(L1Pstars);
+		
+		StarViewer L2Pstars = new StarViewer();
+		L2Pstars.setBounds(287, 191, 69, 31);
+		LevelSelect.add(L2Pstars);
+		
+		StarViewer L3Pstars = new StarViewer();
+		L3Pstars.setBounds(380, 191, 69, 31);
+		LevelSelect.add(L3Pstars);
+		
+		StarViewer L4Pstars = new StarViewer();
+		L4Pstars.setBounds(473, 191, 69, 31);
+		LevelSelect.add(L4Pstars);
+		
+		StarViewer L5Pstars = new StarViewer();
+		L5Pstars.setBounds(570, 191, 69, 31);
+		LevelSelect.add(L5Pstars);
+		
+		StarViewer L1Lstars = new StarViewer();
+		L1Lstars.setBounds(194, 324, 69, 31);
+		LevelSelect.add(L1Lstars);
+		
+		StarViewer L2Lstars = new StarViewer();
+		L2Lstars.setBounds(287, 324, 69, 31);
+		LevelSelect.add(L2Lstars);
+		
+		StarViewer L3Lstars = new StarViewer();
+		L3Lstars.setBounds(380, 324, 69, 31);
+		LevelSelect.add(L3Lstars);
+		
+		StarViewer L4Lstars = new StarViewer();
+		L4Lstars.setBounds(473, 324, 69, 31);
+		LevelSelect.add(L4Lstars);
+		
+		StarViewer L5Lstars = new StarViewer();
+		L5Lstars.setBounds(564, 324, 69, 31);
+		LevelSelect.add(L5Lstars);
+		
+		StarViewer L1Rstars = new StarViewer();
+		L1Rstars.setBounds(194, 466, 69, 31);
+		LevelSelect.add(L1Rstars);
+		
+		StarViewer L2Rstars = new StarViewer();
+		L2Rstars.setBounds(287, 466, 69, 31);
+		LevelSelect.add(L2Rstars);
+		
+		StarViewer L3Rstars = new StarViewer();
+		L3Rstars.setBounds(380, 466, 69, 31);
+		LevelSelect.add(L3Rstars);
+		
+		StarViewer L4Rstars = new StarViewer();
+		L4Rstars.setBounds(473, 466, 69, 31);
+		LevelSelect.add(L4Rstars);
+		
+		StarViewer L5Rstars = new StarViewer();
+		L5Rstars.setBounds(570, 466, 69, 31);
+		LevelSelect.add(L5Rstars);
+		
 		JPanel AboutPage = new JPanel();
 		contentPane.add(AboutPage, "name_1460040278225538000");
+		AboutPage.setLayout(null);
+		
+		JLabel AboutLbl = new JLabel("About");
+		AboutLbl.setBounds(269, 6, 131, 90);
+		AboutLbl.setFont(new Font("Lucida Handwriting", Font.PLAIN, 35));
+		AboutPage.add(AboutLbl);
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		btnNewButton.setBounds(20, 552, 125, 72);
+		AboutPage.add(btnNewButton);
+		btnNext.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		btnNext.setBounds(517, 557, 125, 72);
+		AboutPage.add(btnNext);
+		
+		JTextArea aboutTextArea = new JTextArea();
+		aboutTextArea.setWrapStyleWord(true);
+		aboutTextArea.setLineWrap(true);
+		aboutTextArea.setText("Welcome to Kabasuji Level player! We will figure out what we want to put here and then get back to you about how to actually play the game! ");
+		aboutTextArea.setBounds(39, 96, 589, 439);
+		AboutPage.add(aboutTextArea);
 		
 		JPanel LevelView = new JPanel();
 		contentPane.add(LevelView, "name_1460040350501362000");
+		LevelView.setLayout(null);
+		
+		JLabel lblLevelTypename = new JLabel("Level Type/Name");
+		lblLevelTypename.setFont(new Font("Lucida Handwriting", Font.PLAIN, 35));
+		lblLevelTypename.setBounds(165, 6, 340, 56);
+		LevelView.add(lblLevelTypename);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(42, 64, 585, 134);
+		LevelView.add(scrollPane);
 	}
 }
