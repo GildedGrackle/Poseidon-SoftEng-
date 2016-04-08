@@ -17,11 +17,15 @@ import java.awt.CardLayout;
 import java.awt.TextArea;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LevelPlayer extends JFrame {
 
 	private JPanel contentPane;
 	private final JButton btnNext = new JButton("Next");
+	private final JButton btnFlip = new JButton("Flip");
+	private final JButton btnReplay = new JButton("Replay");
 
 	/**
 	 * Launch the application.
@@ -306,7 +310,100 @@ public class LevelPlayer extends JFrame {
 		LevelView.add(lblLevelTypename);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(42, 64, 585, 134);
+		scrollPane.setBounds(134, 64, 402, 134);
 		LevelView.add(scrollPane);
+		btnFlip.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnFlip.setBounds(553, 76, 95, 56);
+		LevelView.add(btnFlip);
+		
+		JButton button = new JButton("<");
+		button.setBounds(553, 144, 44, 42);
+		LevelView.add(button);
+		
+		JButton button_1 = new JButton(">");
+		button_1.setBounds(603, 144, 44, 42);
+		LevelView.add(button_1);
+		
+		JButton btnQuit = new JButton("Quit");
+		btnQuit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnQuit.setBounds(17, 294, 95, 56);
+		LevelView.add(btnQuit);
+		
+		JButton btnReset = new JButton("Reset");
+		btnReset.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnReset.setBounds(17, 377, 95, 56);
+		LevelView.add(btnReset);
+		
+		JButton btnFinishLevel = new JButton("Finish Level");
+		btnFinishLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnFinishLevel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		btnFinishLevel.setBounds(17, 477, 95, 96);
+		LevelView.add(btnFinishLevel);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(134, 225, 402, 346);
+		LevelView.add(panel);
+		
+		JLabel lblLevel = new JLabel("Level:");
+		lblLevel.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		lblLevel.setBounds(26, 6, 86, 56);
+		LevelView.add(lblLevel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(36, 56, 55, 56);
+		LevelView.add(panel_1);
+		
+		JLabel lblScore = new JLabel("Score:");
+		lblScore.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		lblScore.setBounds(562, 336, 86, 42);
+		LevelView.add(lblScore);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(548, 377, 116, 56);
+		LevelView.add(panel_2);
+		
+		JLabel lblBest = new JLabel("Best:");
+		lblBest.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		lblBest.setBounds(31, 144, 82, 31);
+		LevelView.add(lblBest);
+		
+		JLabel lblCountdown = new JLabel("Countdown:");
+		lblCountdown.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblCountdown.setBounds(548, 213, 116, 42);
+		LevelView.add(lblCountdown);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(548, 248, 116, 76);
+		LevelView.add(panel_3);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(6, 187, 116, 56);
+		LevelView.add(panel_5);
+		
+		JPanel EndLevel = new JPanel();
+		contentPane.add(EndLevel, "name_1460071702538425000");
+		EndLevel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Level #");
+		lblNewLabel.setFont(new Font("Lucida Handwriting", Font.PLAIN, 35));
+		lblNewLabel.setBounds(258, 23, 153, 81);
+		EndLevel.add(lblNewLabel);
+		
+		JPanel BigStarView = new JPanel();
+		BigStarView.setBounds(85, 163, 499, 196);
+		EndLevel.add(BigStarView);
+		btnReplay.setBounds(27, 450, 129, 81);
+		EndLevel.add(btnReplay);
+		
+		JButton btnLevelselect = new JButton("Level Select");
+		btnLevelselect.setBounds(270, 450, 129, 81);
+		EndLevel.add(btnLevelselect);
+		
+		JButton btnNextLevel = new JButton("Next Level");
+		btnNextLevel.setBounds(518, 450, 129, 81);
+		EndLevel.add(btnNextLevel);
 	}
 }
