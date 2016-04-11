@@ -10,6 +10,7 @@ public class StarViewer extends JPanel {
 	 * Create the panel.
 	 */
 	public StarViewer() {
+		setLayout(null);
 
 	}
 
