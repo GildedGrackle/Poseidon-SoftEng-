@@ -31,7 +31,7 @@ public class LevelPlayerView
 	/**
 	 * Create the application.
 	 */
-	LevelPlayerView()
+	public LevelPlayerView()
 	{
 		kabasuji = new JFrame();
 		initialize();

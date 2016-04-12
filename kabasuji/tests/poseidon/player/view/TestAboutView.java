@@ -4,11 +4,12 @@ import junit.framework.TestCase;
 
 public class TestAboutView extends TestCase
 {
-	AboutPlayerView view;
+	LevelPlayerView view;
+	AboutPlayerView aboutView;
 	
 	public void setUp()
 	{
-		view = new AboutPlayerView();
+		aboutView = new AboutPlayerView(view);
 	}
 	
 	
@@ -23,7 +24,7 @@ public class TestAboutView extends TestCase
 	 */
 	public void testGetCurrentlyPlaying()
 	{
-		LevelView curPlay = view.getCurrentlyPlaying();
+		LevelView curPlay = aboutView.getCurrentlyPlaying();
 		
 		assertTrue(curPlay == null);
 	}

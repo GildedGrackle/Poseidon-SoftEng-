@@ -32,10 +32,10 @@ public class TestLevelPlayerView extends TestCase
 	public void testGetInstance()
 	{
 		// Check that initially instance doesn't exist
-	  assertTrue(LevelPlayerView.instance == null);
+	  assertTrue(game == null);
 	  
 	  // Try to access instance, causing it to be created
-	  game = LevelPlayerView.getInstance();
+	  game = new LevelPlayerView();
 	  
 	  // Check that instance now exists
 		assertTrue(game instanceof LevelPlayerView);
