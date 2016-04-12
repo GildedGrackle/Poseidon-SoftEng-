@@ -1,4 +1,4 @@
-package player;
+package poseidon.player.entity;
 
 public class BoardToBoardMove implements IMove{
 	Point from, to;

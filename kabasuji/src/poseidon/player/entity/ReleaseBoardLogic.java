@@ -1,4 +1,4 @@
-package player;
+package poseidon.player.entity;
 
 public class ReleaseBoardLogic implements IBoardLogic{
 	ReleaseBoardLogic() {

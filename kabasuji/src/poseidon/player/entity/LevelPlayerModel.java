@@ -1,4 +1,4 @@
-package player;
+package poseidon.player.entity;
 
 public class LevelPlayerModel {
 	int[] currentLevel = new int[3];	//Where the player is on each mode

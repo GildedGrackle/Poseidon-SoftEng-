@@ -1,4 +1,4 @@
-package player;
+package poseidon.player.entity;
 
 public class PuzzleLevel extends Level {
 	int allottedMoves, remainingMoves;

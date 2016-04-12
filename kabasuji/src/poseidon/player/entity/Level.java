@@ -1,4 +1,4 @@
-package player;
+package poseidon.player.entity;
 
 public class Level {
 	static final int PUZZLE = 1;

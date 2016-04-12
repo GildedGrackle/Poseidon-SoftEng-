@@ -1,4 +1,4 @@
-package player;
+package poseidon.player.entity;
 
 public interface IMove {
 	Boolean isValid();
