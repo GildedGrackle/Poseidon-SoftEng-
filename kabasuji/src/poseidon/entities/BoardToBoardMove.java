@@ -1,4 +1,7 @@
-package poseidon.player.entity;
+package poseidon.entities;
+
+import poseidon.entities.PieceContainer;
+import poseidon.entities.Point;
 
 public class BoardToBoardMove implements IMove{
 	Point from, to;

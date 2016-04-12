@@ -1,4 +1,4 @@
-package poseidon.player.entity;
+package poseidon.entities;
 
 public class PuzzleBullpenLogic implements IBullpenLogic{
 	PuzzleBullpenLogic(){

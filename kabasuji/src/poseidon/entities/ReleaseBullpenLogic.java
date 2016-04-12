@@ -1,4 +1,4 @@
-package poseidon.player.entity;
+package poseidon.entities;
 
 public class ReleaseBullpenLogic implements IBullpenLogic{
 	ReleaseBullpenLogic() {

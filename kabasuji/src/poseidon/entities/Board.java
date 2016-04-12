@@ -1,9 +1,12 @@
 package poseidon.entities;
 import java.util.ArrayList;
 
+import poseidon.entities.PieceContainer;
+
 public class Board {
 	Square [] playArea = new Square [144];			
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
+	PieceContainer activeDragged;
 	IBoardLogic logic;						
 	
 	
@@ -27,5 +30,9 @@ public class Board {
 	
 	Boolean intersects (PieceContainer piece, Point location) {
 		return false;							//TODO: Change return value
+	}
+	
+	void showHint () {
+		//TODO: Change return value
 	}
 }

@@ -1,4 +1,6 @@
-package poseidon.player.entity;
+package poseidon.entities;
+
+import poseidon.entities.Point;
 
 public class LightningBullpenLogic implements IBullpenLogic {
 	LightningBullpenLogic() {

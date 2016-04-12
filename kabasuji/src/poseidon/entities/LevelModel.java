@@ -10,13 +10,19 @@ public class LevelModel {
 	Bullpen infiniteBullpen, playableBullpen;
 	int gameMode, score; 
 	Board board;
+	Boolean isCustom;
 	
 	
-	LevelModel (String levelName, Bullpen bullpen, int gameMode, Board board ) {
+	LevelModel (Bullpen bullpen, Board board, int gameMode, String levelName, Boolean isCustom) {
 		this.levelName = levelName;
 		this.playableBullpen = bullpen; //Not sure, should playable/infinite to be set as the passed bullpen?
 		this.gameMode = gameMode;
 		this.board = board;
+		this.isCustom = isCustom;
+	}
+	
+	void Initialize() {
+		//TODO: Change return value
 	}
 	
 	void SaveLevel () {
@@ -25,5 +31,13 @@ public class LevelModel {
 	
 	void addToGame () {
 		//TODO: change return value
+	}
+	
+	Boolean hasWon(){
+		return false;							//TODO: Change return value
+	}
+	
+	void reset() {
+		//TODO: Change return value
 	}
 }

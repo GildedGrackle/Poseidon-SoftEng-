@@ -1,11 +1,11 @@
-package poseidon.player.entity;
+package poseidon.entities;
 
 public class LevelPlayerModel {
 	int[] currentLevel = new int[3];	//Where the player is on each mode
-	Level playingLevel;
+	LevelModel playingLevel;
 	LevelPlayerModel instance;
 	
-	LevelPlayerModel (int[] current, Level playing) {
+	LevelPlayerModel (int[] current, LevelModel playing) {
 		this.currentLevel = current;
 		this.playingLevel = playing;
 	}

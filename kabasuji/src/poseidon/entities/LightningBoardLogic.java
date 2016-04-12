@@ -1,6 +1,11 @@
-package poseidon.player.entity;
+package poseidon.entities;
+
+import poseidon.entities.PieceContainer;
 
 public class LightningBoardLogic implements IBoardLogic {
+	
+	PieceContainer piece;
+	
 	LightningBoardLogic(){
 		//TODO: Change return value
 	}
@@ -8,4 +13,5 @@ public class LightningBoardLogic implements IBoardLogic {
 	public Boolean addPiece(PieceContainer piece, int row, int col) {
 		return false;							//TODO: Change return value
 	}
+
 }
