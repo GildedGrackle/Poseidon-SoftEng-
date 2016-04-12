@@ -12,7 +12,7 @@ public class TestPlayerViews extends TestCase
 	
 	public void setUp()
 	{
-		aboutView = new AboutPlayerView(game);
+
 	}
 	
 	
@@ -27,6 +27,7 @@ public class TestPlayerViews extends TestCase
 	 */
 	public void testGetCurrentlyPlaying()
 	{
+		aboutView = new AboutPlayerView(game);
 		LevelView curPlay = aboutView.getCurrentlyPlaying();
 		
 		assertTrue(curPlay == null);
