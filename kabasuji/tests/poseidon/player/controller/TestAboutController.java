@@ -15,7 +15,7 @@ public class TestAboutController extends TestCase
 	
 	public void setUp()
 	{
-		view = LevelPlayerView.getInstance();
+		view = new LevelPlayerView();
 //		model = new LevelPlayerModel();
 	}
 	
