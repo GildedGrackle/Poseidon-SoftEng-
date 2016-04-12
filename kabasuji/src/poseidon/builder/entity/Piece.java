@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 public class Piece {
 	Point [] piece = new Point[6];

@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 public class ReleaseLevel extends LevelModel {
 	int allottedPieces, piecesRemaining, redNumberCaptive, greenNumberCaptive, yellownumberCaptive;

@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 public class MakeHintMove implements IMove{
 	Square [] locations = new Square[6];

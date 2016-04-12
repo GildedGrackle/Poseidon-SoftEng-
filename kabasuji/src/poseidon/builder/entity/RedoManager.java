@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 import java.util.ArrayList;
 

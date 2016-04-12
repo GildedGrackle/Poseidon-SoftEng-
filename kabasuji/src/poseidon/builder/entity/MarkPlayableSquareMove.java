@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 public class MarkPlayableSquareMove implements IMove{
 	Square square;

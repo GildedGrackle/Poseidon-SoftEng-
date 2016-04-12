@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 public class LevelModel {
 	static final int PUZZLE = 1;

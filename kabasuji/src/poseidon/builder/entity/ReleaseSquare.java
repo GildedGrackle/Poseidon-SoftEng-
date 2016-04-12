@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 public class ReleaseSquare extends Square{
 	ReleaseNumber isNumber;

@@ -1,4 +1,4 @@
-package builder;
+package poseidon.builder.entity;
 
 public class ReleaseNumber {
 	static final int RED = 1;
