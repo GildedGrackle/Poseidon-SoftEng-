@@ -1,4 +1,4 @@
-package poseidon.player.controller;
+package poseidon.tests;
 
 import java.awt.event.ActionEvent;
 
@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import poseidon.player.view.LevelPlayerView;
 import junit.framework.TestCase;
 
-public class TestAboutController extends TestCase
+public class TestPlayerControllers extends TestCase
 {
 	LevelPlayerView view;
 //	LevelPlayerModel model;
