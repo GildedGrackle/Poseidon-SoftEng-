@@ -116,7 +116,7 @@ public class XMLHandler {
 	}
 
 	// Return a LevelModel based on the XML document at the specified location
-	LevelModel loadXML (File file) {
+	LevelModel loadXML (File file, boolean inBuilder) {
 		if (!file.exists()) {
 			return null; // Can't load a level that doesn't exist
 		}
@@ -132,6 +132,7 @@ public class XMLHandler {
 
 		// Get all of the elements out of the tree
 		Element levelElement = doc.getRootElement();
+		int loadGameMode = Integer.parseInt(levelElement.getAttributeValue("gameMode"));
 
 		Element nameElement = levelElement.getChild("name");
 
@@ -155,8 +156,18 @@ public class XMLHandler {
 			loadPieces.add(index, new PieceContainer(new Piece(loadPoints), null, false)); // !!! Location?
 			index++;
 		}
-		Bullpen loadBullpen = new Bullpen(loadPieces, null); // !!! Logic?
-		
+		Bullpen loadBullpen;
+		if (inBuilder) {
+			loadBullpen = new Bullpen(loadPieces, new BuilderBullpenLogic());
+		} else if (loadGameMode == 1) {
+			loadBullpen = new Bullpen(loadPieces, new PuzzleBullpenLogic());
+		} else if (loadGameMode == 2) {
+			loadBullpen = new Bullpen(loadPieces, new LightningBullpenLogic());
+		} else if (loadGameMode == 2) {
+			loadBullpen = new Bullpen(loadPieces, new ReleaseBullpenLogic());
+		} else {
+			return null; // Invalid gameMode
+		}
 
 		Element boardElement = levelElement.getChild("board");
 		Element [] squareElement = new Element[(boardElement.getContentSize() - 1) / 2]; // Compensate for reading '/n' as element
@@ -180,13 +191,23 @@ public class XMLHandler {
 			}
 			index++;
 		}
-		Board loadBoard = new Board(loadSquares, null, null); // !!! Logic, pieces in constructor?
+		Board loadBoard;
+		if (inBuilder) {
+			loadBoard = new Board(loadSquares, new BuilderBoardLogic());
+		} else if (loadGameMode == 1) {
+			loadBoard = new Board(loadSquares, new PuzzleBoardLogic());
+		} else if (loadGameMode == 2) {
+			loadBoard = new Board(loadSquares, new LightningBoardLogic());
+		} else if (loadGameMode == 3) {
+			loadBoard = new Board(loadSquares, new ReleaseBoardLogic());
+		} else {
+			return null; // Invalid gameMode
+		}
 
 		Element isCustomElement = levelElement.getChild("isCustom");
 
 		// Construct level object
 		LevelModel loadLevel;
-		int loadGameMode = Integer.parseInt(levelElement.getAttributeValue("gameMode"));
 		if (loadGameMode == 1) {
 			loadLevel =  new PuzzleLevel(Integer.parseInt(countdownElement.getText()),
 										nameElement.getText(),
@@ -250,7 +271,7 @@ public class XMLHandler {
 		testSquares[3] = new LightningSquare(false);
 		testSquares[5] = new ReleaseSquare(false, new ReleaseNumber(3,2));
 		
-		Board testBoard = new Board(testSquares, null, null);
+		Board testBoard = new Board(testSquares, new PuzzleBoardLogic());
 		
 		PuzzleLevel testLevel = new PuzzleLevel(42, "testLevel", testBullpen, testBoard, true);
 		
@@ -259,6 +280,6 @@ public class XMLHandler {
 		// Test saveXML() and loadXML()
 		XMLHandler testXMLHandler = new XMLHandler();
 		testXMLHandler.saveXML(testLevel, testFile);
-		testXMLHandler.loadXML(testFile);
+		testXMLHandler.loadXML(testFile, false);
 	}
 }
