@@ -180,7 +180,7 @@ public class XMLHandler {
 			}
 			index++;
 		}
-		Board loadBoard = new Board(loadSquares, null, null); // !!! Logic, pieces in constructor?
+		Board loadBoard = new Board(loadSquares, null); // !!! Logic, pieces in constructor?
 
 		Element isCustomElement = levelElement.getChild("isCustom");
 
@@ -250,7 +250,7 @@ public class XMLHandler {
 		testSquares[3] = new LightningSquare(false);
 		testSquares[5] = new ReleaseSquare(false, new ReleaseNumber(3,2));
 		
-		Board testBoard = new Board(testSquares, null, null);
+		Board testBoard = new Board(testSquares, null);
 		
 		PuzzleLevel testLevel = new PuzzleLevel(42, "testLevel", testBullpen, testBoard, true);
 		
