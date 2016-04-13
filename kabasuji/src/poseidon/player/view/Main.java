@@ -12,7 +12,7 @@ public class Main
 		EventQueue.invokeLater(new Runnable() {
 			public void run(){
 				try{
-					Thread.sleep(10000);
+					Thread.sleep(1000);
 					LevelPlayerView window = new LevelPlayerView();
 					window.kabasuji.setVisible(true);
 				}catch(Exception e){
