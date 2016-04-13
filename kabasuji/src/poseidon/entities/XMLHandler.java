@@ -191,6 +191,7 @@ public class XMLHandler {
 			}
 			index++;
 		}
+<<<<<<< HEAD
 		Board loadBoard;
 		if (inBuilder) {
 			loadBoard = new Board(loadSquares, new BuilderBoardLogic());
@@ -203,6 +204,9 @@ public class XMLHandler {
 		} else {
 			return null; // Invalid gameMode
 		}
+=======
+		Board loadBoard = new Board(loadSquares, null); // !!! Logic, pieces in constructor?
+>>>>>>> branch 'develop' of https://github.com/Morgan05180/Poseidon-SoftEng-
 
 		Element isCustomElement = levelElement.getChild("isCustom");
 
@@ -271,7 +275,11 @@ public class XMLHandler {
 		testSquares[3] = new LightningSquare(false);
 		testSquares[5] = new ReleaseSquare(false, new ReleaseNumber(3,2));
 		
+<<<<<<< HEAD
 		Board testBoard = new Board(testSquares, new PuzzleBoardLogic());
+=======
+		Board testBoard = new Board(testSquares, null);
+>>>>>>> branch 'develop' of https://github.com/Morgan05180/Poseidon-SoftEng-
 		
 		PuzzleLevel testLevel = new PuzzleLevel(42, "testLevel", testBullpen, testBoard, true);
 		
