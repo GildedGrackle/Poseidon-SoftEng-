@@ -12,7 +12,7 @@ public class Main
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Thread.sleep(10000);
+					Thread.sleep(1000);
 					LevelBuilderView application = new LevelBuilderView();
 					application.getBuilder().setVisible(true);
 				} catch (Exception e) {
