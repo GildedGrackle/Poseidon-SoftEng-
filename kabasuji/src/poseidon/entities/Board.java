@@ -10,9 +10,9 @@ public class Board {
 	IBoardLogic logic;						
 	
 	
-	Board (Square [] playArea, ArrayList<PieceContainer> pieces, BuilderBoardLogic logic) {
+	Board (Square [] playArea, IBoardLogic logic) {
 		this.playArea = playArea;
-		this.pieces = pieces;
+		pieces = new ArrayList<PieceContainer>();
 		this.logic = logic;
 	}
 	

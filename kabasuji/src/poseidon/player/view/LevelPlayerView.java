@@ -11,7 +11,6 @@ import javax.swing.JButton;
 
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.ContinueController;
-import poseidon.player.controller.CustomLevelController;
 import poseidon.player.controller.ExitPlayerController;
 import poseidon.player.controller.LevelSelectController;
 
@@ -72,36 +71,30 @@ public class LevelPlayerView
 		JLabel lblNewLabel = new JLabel("Kabasuji");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Lucida Handwriting", Font.BOLD, 35));
-		lblNewLabel.setBounds(219, 40, 225, 60);
+		lblNewLabel.setBounds(219, 38, 225, 60);
 		mainMenu.add(lblNewLabel);
 		
 		continueGameButton = new JButton("Start Game");
 		continueGameButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		continueGameButton.setBounds(229, 190, 200, 50);
+		continueGameButton.setBounds(229, 207, 200, 50);
 		continueGameButton.addActionListener(new ContinueController(this));
 		mainMenu.add(continueGameButton);
 		
 		levelSelectButton = new JButton("Level Select");
 		levelSelectButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		levelSelectButton.setBounds(229, 265, 200, 50);
+		levelSelectButton.setBounds(229, 299, 200, 50);
 		levelSelectButton.addActionListener(new LevelSelectController(this));
 		mainMenu.add(levelSelectButton);
 		
-		customLevelsButton = new JButton("Custom Levels");
-		customLevelsButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		customLevelsButton.setBounds(229, 340, 200, 50);
-		customLevelsButton.addActionListener(new CustomLevelController(this));
-		mainMenu.add(customLevelsButton);
-		
 		aboutButton = new JButton("About");
 		aboutButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		aboutButton.setBounds(229, 415, 200, 50);
+		aboutButton.setBounds(229, 388, 200, 50);
 		aboutButton.addActionListener(new AboutPlayerController(this));
 		mainMenu.add(aboutButton);
 		
 		exitButton = new JButton("Exit");
 		exitButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		exitButton.setBounds(229, 490, 200, 50);
+		exitButton.setBounds(229, 477, 200, 50);
 		exitButton.addActionListener(new ExitPlayerController(this));
 		mainMenu.add(exitButton);
 		
