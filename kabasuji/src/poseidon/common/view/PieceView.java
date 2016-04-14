@@ -5,10 +5,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Random;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import poseidon.common.PieceContainer;
+import poseidon.entities.Piece;
+import poseidon.entities.PieceContainer;
+import poseidon.entities.Point;
 
 public class PieceView extends JPanel
 {
@@ -65,9 +66,9 @@ public class PieceView extends JPanel
 		g.setColor(pieceColor);  // Set the color
 		
 		// For each Point in model, draw a square at that location
-		for(int i = 0; i < 6; i++)
+		for(Point pt : p.getPiece())
 		{
-			Point square = p.getPoint(i);  // TODO use correct method
+			Point square = pt;  // TODO use correct method
 			g.fillRoundRect(10 * square.getRow(), 10 * square.getCol(),
 					10, 10, 3, 3);
 		}

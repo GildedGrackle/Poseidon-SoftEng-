@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import poseidon.entities.Bullpen;
+import poseidon.entities.Piece;
+import poseidon.entities.PieceContainer;
 import poseidon.player.view.LevelView;
 
 
@@ -44,11 +47,11 @@ public class BullpenView extends JPanel
 	 */
 	public Boolean createPieces()
 	{
-		pieces = new ArrayList<PieceView>(model.getSize());
-		// TODO use iterator?
-		for(int i = 0; i < model.getSize(); i++)  // TODO use proper method
+		pieces = new ArrayList<PieceView>(model.getPieces().size());
+		
+		for(PieceContainer p : model.getPieces())
 		{
-			pieces.add(new PieceView(model.getPiece(i)));  // TODO use proper method
+			pieces.add(new PieceView(p, this));  // TODO use proper method
 		}
 		
 		return true;

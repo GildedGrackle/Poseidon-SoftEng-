@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.ContinueController;
 import poseidon.player.controller.CustomLevelController;

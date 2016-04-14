@@ -9,6 +9,7 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 
 public class AboutPlayerView extends JPanel implements IGameScreen

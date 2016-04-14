@@ -27,18 +27,6 @@ public class TestLevelPlayerView extends TestCase
 //		assertTrue(game.exitButton instanceof JButton);
 //	}	
 	
-	
 
-	public void testGetInstance()
-	{
-		// Check that initially instance doesn't exist
-	  assertTrue(LevelPlayerView.instance == null);
-	  
-	  // Try to access instance, causing it to be created
-	  game = LevelPlayerView.getInstance();
-	  
-	  // Check that instance now exists
-		assertTrue(game instanceof LevelPlayerView);
-	}
 	
 }

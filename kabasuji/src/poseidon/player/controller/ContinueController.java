@@ -3,6 +3,7 @@ package poseidon.player.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
 import poseidon.player.view.LevelView;

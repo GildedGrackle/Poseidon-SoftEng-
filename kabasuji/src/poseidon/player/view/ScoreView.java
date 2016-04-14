@@ -1,14 +1,14 @@
 package poseidon.player.view;
 
-import java.awt.Graphics;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import poseidon.entities.LevelModel;
+
 public class ScoreView extends JPanel {
 	LevelView game;  // The GUI object StarViewer belongs to
-	Level model;  // The state of the Level
+	LevelModel model;  // The state of the Level
 	JLabel firstStar;  // The left-most star in the score
 	JLabel secondStar;  // The middle star in the score
 	JLabel thirdStar;  // The right-most star in the score
@@ -17,7 +17,7 @@ public class ScoreView extends JPanel {
 	/**
 	 * Create the panel. All stars start as empty sockets
 	 */
-	public ScoreView(Level model, LevelView view) {
+	public ScoreView(LevelModel model, LevelView view) {
 		this.model = model;
 		game = view;
 		
@@ -72,6 +72,8 @@ public class ScoreView extends JPanel {
 		}
 		
 		this.repaint();  // TODO Figure out how this works with double-buffering
+		
+		return true;
 	}
 	
 }

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import poseidon.entities.Board;
+import poseidon.player.view.LevelView;
+
 public class BoardView extends JPanel
 {
 	Board board;  // The model of the Board

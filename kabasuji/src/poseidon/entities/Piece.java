@@ -18,4 +18,17 @@ public class Piece {
 	void flip() {
 		//TODO: change return value
 	}
+
+				/*********************
+				 *  Getter & Setter  *
+				 *********************/
+	public Point[] getPiece()
+	{
+		return piece;
+	}
+
+	public void setPiece(Point[] piece)
+	{
+		this.piece = piece;
+	}
 }

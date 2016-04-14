@@ -15,13 +15,15 @@ import javax.swing.ScrollPaneConstants;
 
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
+import poseidon.entities.LevelModel;
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.LevelSelectController;
 
 public class LevelView extends JPanel
 {
 	LevelPlayerModel topModel;  // The top-level representation of the game
-	Level model;  // The state of the Level
+	LevelModel model;  // The state of the Level
 	LevelPlayerView game;  // The top-level GUI object
 	BullpenView bullpen;  // The graphical representation of the Bullpen
 	BoardView board;  // The graphical representation of the Board
@@ -43,7 +45,7 @@ public class LevelView extends JPanel
 	public LevelView(LevelPlayerModel model, LevelPlayerView view)
 	{
 		topModel = model;
-		model = topModel.getPlaying().getLevel();  // TODO use correct methods
+		this.model = topModel.getPlayingLevel();  // TODO use correct methods
 		game = view;
 		setLayout(null);
 		
@@ -103,11 +105,11 @@ public class LevelView extends JPanel
 		scoreLabel.setBounds(10, 250, 115, 25);
 		rightPanel.add(scoreLabel);
 		
-		scoreView = new ScoreView(model.getLevel());
+		scoreView = new ScoreView(this.model, this);
 		scoreView.setBounds(10, 280, 115, 35);
 		rightPanel.add(scoreView);
 		
-		if(model.gamemode == 1)  // If Puzzle Level
+		if(this.model.getGameMode() == LevelModel.PUZZLE)  // If Puzzle Level
 		{
 			String limitDisplay = "<html>Moves:<br><center>" + model.getAllotedMoves() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
@@ -117,9 +119,9 @@ public class LevelView extends JPanel
 			limitView.setHorizontalAlignment(SwingConstants.LEFT);
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		}
-		else if(model.gamemode == 2)  // If Lightning Level
+		else if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning Level
 		{
-			String limitDisplay = "<html>Moves:<br><center>" + model.getAllotedTime() + "</center></html>";
+			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedTime() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
 			limitView.setBounds(10, 340, 140, 55);
@@ -127,9 +129,9 @@ public class LevelView extends JPanel
 			limitView.setHorizontalAlignment(SwingConstants.LEFT);
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		}
-		else if(model.gamemode == 3)  // If Release Level
+		else if(this.model.getGameMode() == LevelModel.RELEASE)  // If Release Level
 		{
-			String limitDisplay = "<html>Moves:<br><center>" + model.getAllotedMoves() + "</center></html>";
+			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedMoves() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
 			limitView.setBounds(10, 340, 140, 55);
@@ -138,13 +140,13 @@ public class LevelView extends JPanel
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		}
 		
-		bullpen = new BullpenView(model.getPlayableBullpen());
+		bullpen = new BullpenView(this.model.getPlayableBullpen(), this);
 		bullpenContainer = new JScrollPane(bullpen);
 		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		bullpenContainer.setBounds(160, 85, 360, 70);
 		add(bullpenContainer);
 
-		board = new BoardView(model.getBoard(), this);
+		board = new BoardView(this.model.getBoard(), this);
 		board.setBounds(160, 195, 361, 361);
 		add(board);
 	}

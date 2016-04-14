@@ -10,4 +10,38 @@ public class PieceContainer {
 		this.location = location;
 		this.isSelected = isSelected;
 	}
+
+	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	public Piece getPiece()
+	{
+		return piece;
+	}
+
+	public Point getLocation()
+	{
+		return location;
+	}
+
+	public Boolean getIsSelected()
+	{
+		return isSelected;
+	}
+
+	public void setPiece(Piece piece)
+	{
+		this.piece = piece;
+	}
+
+	public void setLocation(Point location)
+	{
+		this.location = location;
+	}
+
+	public void setIsSelected(Boolean isSelected)
+	{
+		this.isSelected = isSelected;
+	}
 }

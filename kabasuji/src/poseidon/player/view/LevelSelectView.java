@@ -8,6 +8,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 
 public class LevelSelectView extends JPanel implements IGameScreen

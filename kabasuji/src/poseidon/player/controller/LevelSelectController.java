@@ -3,6 +3,7 @@ package poseidon.player.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
 
@@ -40,7 +41,7 @@ public class LevelSelectController implements ActionListener
 	 */
 	public Boolean toLevelSelect()
 	{
-		LevelSelectView newScreen = new LevelSelectView(game);  // The new screen to display
+		LevelSelectView newScreen = new LevelSelectView(model, game);  // The new screen to display
 		
 		// Set new screen
 		game.setCurrentView(newScreen);

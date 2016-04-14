@@ -5,10 +5,11 @@ import java.awt.event.ActionListener;
 
 import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
+import poseidon.entities.LevelBuilderModel;
 
 public class MakePuzzleController implements ActionListener
 {
-//	LevelBuilderModel model;  // The top-level entity object, representing the application's state
+	LevelBuilderModel model;  // The top-level entity object, representing the application's state
 	LevelBuilderView application;  // The top-level GUI object
 
 	
@@ -16,9 +17,9 @@ public class MakePuzzleController implements ActionListener
 	 *  Constructor
 	 * @param view
 	 */
-	public MakePuzzleController(/* LevelBuilderModel model, */ LevelBuilderView view)
+	public MakePuzzleController(LevelBuilderModel model, LevelBuilderView view)
 	{
-//		this.model = model;
+		this.model = model;
 		this.application = view;
 	}
 
@@ -41,7 +42,7 @@ public class MakePuzzleController implements ActionListener
 	 */
 	public Boolean toPuzzleLevel()
 	{
-		BuilderView newScreen = new BuilderView(application);  // The new screen to display
+		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
 		
 		// Set new screen
 		application.setCurrentScreen(newScreen);
