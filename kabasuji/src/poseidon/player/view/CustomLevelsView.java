@@ -14,7 +14,7 @@ public class CustomLevelsView extends JPanel implements IGameScreen
 {
 	LevelPlayerView game;  // The top-level GUI object
 	LevelView currentlyPlaying;  // The level currently being played on
-	ArrayList<StarViewer> customLevels;  // Custom levels made by user
+	ArrayList<ScoreView> customLevels;  // Custom levels made by user
 
 	
 	/**

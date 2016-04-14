@@ -8,7 +8,7 @@ import poseidon.player.view.LevelPlayerView;
 
 public class AboutPlayerController implements ActionListener
 {
-//	LevelPlayerModel model;  // The top-level entity object, representing the game
+	LevelPlayerModel model;  // The top-level entity object, representing the game
 	LevelPlayerView game;  // The top-level GUI object
 	
 	
@@ -16,9 +16,9 @@ public class AboutPlayerController implements ActionListener
 	 *  Constructor
 	 * @param view
 	 */
-	public AboutPlayerController(/* LevelPlayerModel model, */ LevelPlayerView view)
+	public AboutPlayerController(LevelPlayerModel model, LevelPlayerView view)
 	{
-//		this.model = model;
+		this.model = model;
 		this.game = view;
 	}
 
@@ -41,7 +41,7 @@ public class AboutPlayerController implements ActionListener
 	 */
 	public Boolean toAbout()
 	{
-		AboutPlayerView newScreen = new AboutPlayerView(game);  // The new screen to display
+		AboutPlayerView newScreen = new AboutPlayerView(model, game);  // The new screen to display
 		
 		// Set new screen
 		game.setCurrentView(newScreen);

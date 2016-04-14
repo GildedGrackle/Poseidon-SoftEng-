@@ -9,12 +9,13 @@ import poseidon.player.view.LevelView;
 
 public class ContinueController implements ActionListener
 {
-//	LevelPlayerModel model;
+	LevelPlayerModel model;
 	LevelPlayerView game;
 	
 	
-	public ContinueController(/* LevelPlayerModel model, */LevelPlayerView view)
+	public ContinueController(LevelPlayerModel model, LevelPlayerView view)
 	{
+		this.model = model;
 		game = view;
 	}
 
@@ -28,13 +29,13 @@ public class ContinueController implements ActionListener
 	
 	public Boolean beginGame()
 	{
-		/** Find most recently unlocked level
+		/** TODO Find most recently unlocked level
 		 *  and create it instead of making a new one here */
-		LevelView newScreen = new LevelView(game);
+		LevelView newScreen = new LevelView(model, game);
 		
 		// Set new screen
 		// First set level select screen as current screen for main GUI
-		game.setCurrentView(new LevelSelectView(game));
+		game.setCurrentView(new LevelSelectView(model, game));
 		// Then set new level as that screen's currently playing
 		game.getCurrentView().setCurrentlyPlaying(newScreen);
 		game.getfrmKabasuji().setContentPane(newScreen);

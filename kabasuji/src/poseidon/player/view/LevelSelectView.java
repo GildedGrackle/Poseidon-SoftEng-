@@ -12,21 +12,36 @@ import poseidon.player.controller.BackPlayerController;
 
 public class LevelSelectView extends JPanel implements IGameScreen
 {
-//	LevelPlayerModel model;  // The top-level entity object, representing the game
+	LevelPlayerModel model;  // The top-level entity object, representing the game
 	LevelPlayerView game;  // The top-level GUI object
-	LevelView currentlyPlaying;
-	StarViewer levels[][];
+	LevelView currentlyPlaying;  // The GUI of the Level being played
+	ScoreView levels[][];
 
 	
 	/**
 	 *  Create the panel. Does some work to figure out which levels are
 	 *  available for play
 	 */
-	public LevelSelectView(LevelPlayerView view)
+	public LevelSelectView(LevelPlayerModel model, LevelPlayerView view)
 	{
+		this.model = model;
 		game = view;
 		setLayout(null);
 		
+		// TODO get levels, which are unlocked and such
+		
+		initialize();
+		
+		
+	}
+
+	
+	/**
+	 *  Creates and fills the screen with selectable levels
+	 *  and buttons
+	 */
+	private void initialize()
+	{
 		JLabel title = new JLabel("Level Select");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Lucida Handwriting", Font.PLAIN, 35));
@@ -51,7 +66,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		JButton backButton = new JButton("Back");
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		backButton.setBounds(10, 550, 180, 50);
-		backButton.addActionListener(new BackPlayerController(game));
+		backButton.addActionListener(new BackPlayerController(model, game));
 		add(backButton);
 		
 		JButton btnPlay = new JButton("Play");
@@ -59,6 +74,8 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		btnPlay.setBounds(470, 550, 180, 50);
 		add(btnPlay);
 		
+		// TODO using what was determined to be unlocked levels,
+		// create different selectable levels and make them selectable
 		JButton pzl1 = new JButton("1");
 		pzl1.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		pzl1.setBounds(175, 170, 50, 50);
@@ -135,7 +152,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		add(rls5);
 	}
 
-	
+
 	/**
 	 *  Returns the current level boundary object
 	 */

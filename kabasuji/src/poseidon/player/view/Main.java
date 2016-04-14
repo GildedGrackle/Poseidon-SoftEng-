@@ -11,7 +11,8 @@ public class Main
 			{
 				try
 				{
-					LevelPlayerView window = new LevelPlayerView();
+					LevelPlayerModel model = new LevelPlayerModel();
+					LevelPlayerView window = new LevelPlayerView(model);
 					window.kabasuji.setVisible(true);
 				}
 				catch(Exception e)

@@ -8,7 +8,7 @@ import poseidon.player.view.LevelSelectView;
 
 public class LevelSelectController implements ActionListener
 {
-//	LevelPlayerModel model;  // The top-level entity object, representing the game
+	LevelPlayerModel model;  // The top-level entity object, representing the game
 	LevelPlayerView game;  // The top-level GUI object
 
 	
@@ -16,9 +16,9 @@ public class LevelSelectController implements ActionListener
 	 *  Constructor
 	 * @param view
 	 */
-	public LevelSelectController(/* LevelPlayerModel model, */LevelPlayerView view)
+	public LevelSelectController(LevelPlayerModel model, LevelPlayerView view)
 	{
-//		this.model = model;
+		this.model = model;
 		this.game = view;
 	}
 	

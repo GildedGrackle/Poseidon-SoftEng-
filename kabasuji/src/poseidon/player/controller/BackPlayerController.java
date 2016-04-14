@@ -7,17 +7,18 @@ import poseidon.player.view.LevelPlayerView;
 
 public class BackPlayerController implements ActionListener
 {
-//	LevelPlayerModel model;  // The top-level entity object, representing the game
+	LevelPlayerModel model;  // The top-level entity object, representing the game
 	LevelPlayerView game;  // The top-level GUI object
 	
 	
 	/**
 	 *  Constructor
+	 * @param model
 	 * @param view
 	 */
-	public BackPlayerController(/* LevelPlayerModel model, */ LevelPlayerView view)
+	public BackPlayerController(LevelPlayerModel model, LevelPlayerView view)
 	{
-		//this.model = model;
+		this.model = model;
 		this.game = view;
 	}
 	
