@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.ContinueController;
-import poseidon.player.controller.CustomLevelController;
 import poseidon.player.controller.ExitPlayerController;
 import poseidon.player.controller.LevelSelectController;
 
@@ -89,12 +88,6 @@ public class LevelPlayerView
 		levelSelectButton.setBounds(229, 265, 200, 50);
 		levelSelectButton.addActionListener(new LevelSelectController(model, this));
 		mainMenu.add(levelSelectButton);
-		
-		customLevelsButton = new JButton("Custom Levels");
-		customLevelsButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		customLevelsButton.setBounds(229, 340, 200, 50);
-		customLevelsButton.addActionListener(new CustomLevelController(this));  // TODO find out if this is still needed
-		mainMenu.add(customLevelsButton);
 		
 		aboutButton = new JButton("About");
 		aboutButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
