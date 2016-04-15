@@ -5,10 +5,11 @@ import java.awt.event.ActionListener;
 
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.NewLevelView;
+import poseidon.entities.LevelBuilderModel;
 
 public class NewLevelController implements ActionListener
 {
-//	LevelBuilderModel model;  // The top-level entity object, representing the application's state
+	LevelBuilderModel model;  // The top-level entity object, representing the application's state
 	LevelBuilderView application;  // The top-level GUI object
 	
 	
@@ -16,9 +17,9 @@ public class NewLevelController implements ActionListener
 	 *  Constructor
 	 * @param view
 	 */
-	public NewLevelController(/* LevelBuilderModel model, */ LevelBuilderView view)
+	public NewLevelController(LevelBuilderModel model,  LevelBuilderView view)
 	{
-//		this.model = model;
+		this.model = model;
 		this.application = view;
 	}
 	
@@ -41,7 +42,7 @@ public class NewLevelController implements ActionListener
 	 */
 	public Boolean toNewLevel()
 	{
-		NewLevelView newScreen = new NewLevelView(application);  // The new screen to display
+		NewLevelView newScreen = new NewLevelView(model, application);  // The new screen to display
 		
 		// Set new screen
 		application.setCurrentScreen(newScreen);

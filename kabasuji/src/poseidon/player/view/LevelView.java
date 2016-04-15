@@ -12,43 +12,40 @@ import java.awt.Color;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JScrollBar;
-
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.border.BevelBorder;
 
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
+import poseidon.entities.LevelModel;
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
+import poseidon.player.controller.LevelSelectController;
 
 public class LevelView extends JPanel
 {
+	LevelPlayerModel topModel;  // The top-level representation of the game
+	LevelModel model;  // The state of the Level
 	LevelPlayerView game;  // The top-level GUI object
-	BullpenView bullpen;
-	BoardView board;
-	JButton resetButton;
-	JButton quitButton;
-	JButton finishButton;
-	JButton rotateCWButton;
-	JButton rotateCCWButton;
-	JButton flipButton;
-	JScrollPane bullpenContainer;
-	JLabel levelTitle;
-	JLabel scoreView;
-	JLabel countdownView;
+	BullpenView bullpen;  // The graphical representation of the Bullpen
+	BoardView board;  // The graphical representation of the Board
+	JButton resetButton;  // To return the board to its initial state
+	JButton quitButton;  // To return to the Level Select screen (LevelSelectView)
+	JButton finishButton;  // To prematurely end a Level
+	JButton rotateCWButton;  // To rotate a Piece clockwise
+	JButton rotateCCWButton;  // To rotate a Piece counter-clockwise
+	JButton flipButton;  // To flip a Piece
+	JScrollPane bullpenContainer;  // Allows Bullpen to be scrolled if more than 7 Pieces
+	JLabel levelTitle;  // Name of the Level
+	JLabel scoreLabel;  // The label for the star-based score
+	ScoreView scoreView;  // The score for the Level, in stars
+	JLabel limitView;  // The current move/time limit for the Level
 
 	/**
 	 * Create the panel.
 	 */
-	public LevelView(LevelPlayerView view)
+	public LevelView(LevelPlayerModel model, LevelPlayerView view)
 	{
+		topModel = model;
+		this.model = topModel.getPlayingLevel();  // TODO use correct methods
 		game = view;
 		setLayout(null);
 		
@@ -74,7 +71,7 @@ public class LevelView extends JPanel
 		
 		quitButton = new JButton("Quit");
 		quitButton.addActionListener(
-				new BackPlayerController(game));
+				new LevelSelectController(topModel, game));
 		quitButton.setBounds(10, 340, 130, 40);
 		leftPanel.add(quitButton);
 		quitButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -103,25 +100,53 @@ public class LevelView extends JPanel
 		flipButton.setBounds(10, 75, 130, 40);
 		rightPanel.add(flipButton);
 		
-		scoreView = new JLabel("Score:");
-		scoreView.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		scoreView.setBounds(10, 250, 115, 25);
+		scoreLabel = new JLabel("Score:");
+		scoreLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		scoreLabel.setBounds(10, 250, 115, 25);
+		rightPanel.add(scoreLabel);
+		
+		scoreView = new ScoreView(this.model, this);
+		scoreView.setBounds(10, 280, 115, 35);
 		rightPanel.add(scoreView);
 		
-		countdownView = new JLabel("<html>Countdown:<br><center>Number</center></html>");
-		countdownView.setBackground(Color.WHITE);
-		countdownView.setBounds(10, 340, 140, 55);
-		rightPanel.add(countdownView);
-		countdownView.setHorizontalAlignment(SwingConstants.LEFT);
-		countdownView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		if(this.model.getGameMode() == LevelModel.PUZZLE)  // If Puzzle Level
+		{
+			String limitDisplay = "<html>Moves:<br><center>" + model.getAllotedMoves() + "</center></html>";
+			limitView = new JLabel(limitDisplay);
+			limitView.setBackground(Color.WHITE);
+			limitView.setBounds(10, 340, 140, 55);
+			rightPanel.add(limitView);
+			limitView.setHorizontalAlignment(SwingConstants.LEFT);
+			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		}
+		else if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning Level
+		{
+			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedTime() + "</center></html>";
+			limitView = new JLabel(limitDisplay);
+			limitView.setBackground(Color.WHITE);
+			limitView.setBounds(10, 340, 140, 55);
+			rightPanel.add(limitView);
+			limitView.setHorizontalAlignment(SwingConstants.LEFT);
+			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		}
+		else if(this.model.getGameMode() == LevelModel.RELEASE)  // If Release Level
+		{
+			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedMoves() + "</center></html>";
+			limitView = new JLabel(limitDisplay);
+			limitView.setBackground(Color.WHITE);
+			limitView.setBounds(10, 340, 140, 55);
+			rightPanel.add(limitView);
+			limitView.setHorizontalAlignment(SwingConstants.LEFT);
+			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		}
 		
-		bullpen = new BullpenView();
+		bullpen = new BullpenView(this.model.getPlayableBullpen(), this);
 		bullpenContainer = new JScrollPane(bullpen);
 		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		bullpenContainer.setBounds(160, 85, 360, 70);
 		add(bullpenContainer);
 
-		board = new BoardView();
+		board = new BoardView(this.model.getBoard(), this);
 		board.setBounds(160, 195, 361, 361);
 		add(board);
 	}
