@@ -14,6 +14,7 @@ import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.EditLevelController;
 import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.NewLevelController;
+import poseidon.entities.LevelBuilderModel;
 
 public class LevelBuilderView implements IBuilderScreen{
 
@@ -25,10 +26,10 @@ public class LevelBuilderView implements IBuilderScreen{
 	JButton aboutButton;  // To see information about Level Builder (AboutBuilderView)
 	JButton exitButton;  // To exit the application
 	IBuilderScreen currentScreen;  // The current screen displayed in the frame
-
+	LevelBuilderModel levelBuilderModel;
 
 	/**
-	 * Creates the frame and intializes the frame, model, and other variables.
+	 * Creates the frame and initializes the frame, model, and other variables.
 	 */
 	public LevelBuilderView()
 	{
@@ -83,7 +84,7 @@ public class LevelBuilderView implements IBuilderScreen{
 		 newLevelButton = new JButton("New Level");
 		 newLevelButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		 newLevelButton.setBounds(262, 235, 145, 52);
-		 newLevelButton.addActionListener(new NewLevelController(this));
+		 newLevelButton.addActionListener(new NewLevelController(levelBuilderModel, this));
 		 mainMenu.add(newLevelButton);
 			
 		 editLevelButton = new JButton("Edit Level");

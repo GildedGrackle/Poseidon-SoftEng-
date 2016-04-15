@@ -60,4 +60,14 @@ public class LevelModel {
 	{
 		return board;
 	}
+
+	public String getAllotedTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getAllotedMoves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
