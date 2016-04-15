@@ -8,7 +8,7 @@ public class Bullpen {
 	PieceContainer pieceSelected;
 	IBullpenLogic logic;
 	
-	Bullpen ( ArrayList <PieceContainer> pieces, IBullpenLogic logic) {
+	public Bullpen(ArrayList <PieceContainer> pieces, IBullpenLogic logic) {
 		this.pieces = pieces;
 		this.logic = logic;
 	}
@@ -19,5 +19,34 @@ public class Bullpen {
 	
 	Boolean addPiece (PieceContainer piece) {
 		return false;							//TODO: Change return value
+	}
+
+	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	public ArrayList<PieceContainer> getPieces()
+	{
+		return pieces;
+	}
+	public PieceContainer getPieceSelected()
+	{
+		return pieceSelected;
+	}
+	public IBullpenLogic getLogic()
+	{
+		return logic;
+	}
+	public void setPieces(ArrayList<PieceContainer> pieces)
+	{
+		this.pieces = pieces;
+	}
+	public void setPieceSelected(PieceContainer pieceSelected)
+	{
+		this.pieceSelected = pieceSelected;
+	}
+	public void setLogic(IBullpenLogic logic)
+	{
+		this.logic = logic;
 	}
 }

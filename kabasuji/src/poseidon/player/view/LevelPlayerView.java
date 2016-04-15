@@ -9,13 +9,16 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.ContinueController;
+import poseidon.player.controller.CustomLevelController;
 import poseidon.player.controller.ExitPlayerController;
 import poseidon.player.controller.LevelSelectController;
 
 public class LevelPlayerView
 {
+	LevelPlayerModel model;  // The state of the game
 	JFrame kabasuji;  // The frame holding the screens
 	JPanel mainMenu;  // The panel containing the menu buttons
 	JButton continueGameButton;  // Goes to most recently unlocked Level
@@ -30,8 +33,9 @@ public class LevelPlayerView
 	/**
 	 * Create the application.
 	 */
-	public LevelPlayerView()
+	LevelPlayerView(LevelPlayerModel model)
 	{
+		this.model = model;
 		kabasuji = new JFrame();
 		initialize();
 	}
@@ -68,33 +72,39 @@ public class LevelPlayerView
 		mainMenu = new JPanel();
 		mainMenu.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Kabasuji");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Lucida Handwriting", Font.BOLD, 35));
-		lblNewLabel.setBounds(219, 38, 225, 60);
-		mainMenu.add(lblNewLabel);
+		JLabel title = new JLabel("Kabasuji");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setFont(new Font("Lucida Handwriting", Font.BOLD, 35));
+		title.setBounds(219, 40, 225, 60);
+		mainMenu.add(title);
 		
 		continueGameButton = new JButton("Start Game");
 		continueGameButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		continueGameButton.setBounds(229, 207, 200, 50);
-		continueGameButton.addActionListener(new ContinueController(this));
+		continueGameButton.setBounds(229, 190, 200, 50);
+		continueGameButton.addActionListener(new ContinueController(model, this));
 		mainMenu.add(continueGameButton);
 		
 		levelSelectButton = new JButton("Level Select");
 		levelSelectButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		levelSelectButton.setBounds(229, 299, 200, 50);
-		levelSelectButton.addActionListener(new LevelSelectController(this));
+		levelSelectButton.setBounds(229, 265, 200, 50);
+		levelSelectButton.addActionListener(new LevelSelectController(model, this));
 		mainMenu.add(levelSelectButton);
+		
+		customLevelsButton = new JButton("Custom Levels");
+		customLevelsButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+		customLevelsButton.setBounds(229, 340, 200, 50);
+		customLevelsButton.addActionListener(new CustomLevelController(this));  // TODO find out if this is still needed
+		mainMenu.add(customLevelsButton);
 		
 		aboutButton = new JButton("About");
 		aboutButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		aboutButton.setBounds(229, 388, 200, 50);
-		aboutButton.addActionListener(new AboutPlayerController(this));
+		aboutButton.setBounds(229, 415, 200, 50);
+		aboutButton.addActionListener(new AboutPlayerController(model, this));
 		mainMenu.add(aboutButton);
 		
 		exitButton = new JButton("Exit");
 		exitButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		exitButton.setBounds(229, 477, 200, 50);
+		exitButton.setBounds(229, 490, 200, 50);
 		exitButton.addActionListener(new ExitPlayerController(this));
 		mainMenu.add(exitButton);
 		

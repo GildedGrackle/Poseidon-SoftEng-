@@ -13,4 +13,49 @@ public class LevelContainer {
 		this.level = level;
 		this.isChanged = false;				//Set to false by default
 	}
+
+	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	public String getLevelFileName()
+	{
+		return levelFileName;
+	}
+	public int getInGame()
+	{
+		return inGame;
+	}
+	public int getLevelNumber()
+	{
+		return levelNumber;
+	}
+	public LevelModel getLevel()
+	{
+		return level;
+	}
+	public Boolean getIsChanged()
+	{
+		return isChanged;
+	}
+	public void setLevelFileName(String levelFileName)
+	{
+		this.levelFileName = levelFileName;
+	}
+	public void setInGame(int inGame)
+	{
+		this.inGame = inGame;
+	}
+	public void setLevelNumber(int levelNumber)
+	{
+		this.levelNumber = levelNumber;
+	}
+	public void setLevel(LevelModel level)
+	{
+		this.level = level;
+	}
+	public void setIsChanged(Boolean isChanged)
+	{
+		this.isChanged = isChanged;
+	}
 }

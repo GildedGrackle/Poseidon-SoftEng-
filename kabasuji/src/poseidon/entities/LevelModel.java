@@ -1,9 +1,9 @@
 package poseidon.entities;
 
 public class LevelModel {
-	static final int PUZZLE = 1;
-	static final int LIGHTNING = 2;
-	static final int RELEASE = 3;
+	public static final int PUZZLE = 1;
+	public static final int LIGHTNING = 2;
+	public static final int RELEASE = 3;
 	
 	
 	String levelName;
@@ -39,5 +39,25 @@ public class LevelModel {
 	
 	void reset() {
 		//TODO: Change return value
+	}
+	
+	/***********************
+	 *  Getters & Setters  *
+	 ***********************/
+	public Bullpen getPlayableBullpen()
+	{
+		return playableBullpen;
+	}
+	public int getScore()
+	{
+		return score;
+	}
+	public int getGameMode()
+	{
+		return gameMode;
+	}
+	public Board getBoard()
+	{
+		return board;
 	}
 }

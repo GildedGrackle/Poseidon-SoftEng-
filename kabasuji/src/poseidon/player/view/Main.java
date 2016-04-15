@@ -2,20 +2,25 @@ package poseidon.player.view;
 
 import java.awt.EventQueue;
 
+import poseidon.entities.LevelPlayerModel;
+
 public class Main
 {
-	/**
-	 * Launch the application.
-	 * Starts with the splash screen and then opens to the main menu
-	 */
-	public static void main(String[] args){
+	public static void main(String[] args)
+	{
 		EventQueue.invokeLater(new Runnable() {
-			public void run(){
-				try{
-					Thread.sleep(1000);
-					LevelPlayerView window = new LevelPlayerView();
+			public void run()
+			{
+				try
+				{
+					int dummy[];  // TODO instead of this, read progress from file
+					dummy = new int[3];
+					LevelPlayerModel model = new LevelPlayerModel(dummy, null);
+					LevelPlayerView window = new LevelPlayerView(model);
 					window.kabasuji.setVisible(true);
-				}catch(Exception e){
+				}
+				catch(Exception e)
+				{
 					e.printStackTrace();
 				}
 			}

@@ -9,10 +9,12 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 
 public class AboutPlayerView extends JPanel implements IGameScreen
 {
+	LevelPlayerModel model;  // The state of the game
 	LevelPlayerView game;  // The top-level GUI object
 	JButton backButton;  // Returns to the main menu (LevelPlayerView)
 
@@ -20,8 +22,9 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 	/**
 	 * Create the panel.
 	 */
-	public AboutPlayerView(LevelPlayerView view)
+	public AboutPlayerView(LevelPlayerModel model, LevelPlayerView view)
 	{
+		this.model = model;
 		game = view;
 		setLayout(null);
 		
@@ -41,7 +44,7 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		backButton.setBounds(25, 555, 130, 45);
-		backButton.addActionListener(new BackPlayerController(game));
+		backButton.addActionListener(new BackPlayerController(model, game));
 		add(backButton);
 	}
 

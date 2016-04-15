@@ -5,19 +5,27 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import poseidon.entities.Bullpen;
+import poseidon.entities.Piece;
+import poseidon.entities.PieceContainer;
+import poseidon.player.view.LevelView;
+
 
 public class BullpenView extends JPanel
 {
-//	LevelBuilderModel model;  // The top-level entity object, representing the application's state
+	Bullpen model;  // The state of the Bullpen
+	LevelView game;  // The GUI of the Level
 	ArrayList<PieceView> pieces;  // The Pieces in the Bullpen
 
 	/**
 	 * Create the panel.
 	 */
-	public BullpenView(/* LevelBuilderModel model */)
+	public BullpenView(Bullpen model, LevelView view)
 	{
+		this.model = model;
+		game = view;
+
 		setLayout(null);
-//		model = model;
 		createPieces();
 		setPreferredSize(new Dimension(60 * pieces.size(), 60));
 		for(int i = 0; i < 10; i++)
@@ -39,11 +47,11 @@ public class BullpenView extends JPanel
 	 */
 	public Boolean createPieces()
 	{
-		// TODO
-		pieces = new ArrayList<PieceView>();
-		for(int i = 0; i < 10; i++)
+		pieces = new ArrayList<PieceView>(model.getPieces().size());
+		
+		for(PieceContainer p : model.getPieces())
 		{
-			pieces.add(new PieceView());
+			pieces.add(new PieceView(p, this));  // TODO use proper method
 		}
 		
 		return true;
@@ -52,8 +60,16 @@ public class BullpenView extends JPanel
 	 *  Updates display when the model changes
 	 *  @return
 	 */
-	public void update()
+	public Boolean update()
 	{
-		repaint();
+		setPreferredSize(new Dimension(60 * pieces.size(), 60));
+		for(int i = 0; i < 10; i++)
+		{
+			pieces.get(i).setBounds(i*60,0,60,60);
+			add(pieces.get(i));
+		}
+		repaint();  // TODO figure out if this is the correct method to call here
+		
+		return true;
 	}
 }

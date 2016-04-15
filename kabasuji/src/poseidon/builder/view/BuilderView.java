@@ -13,12 +13,14 @@ import javax.swing.SwingConstants;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
+import poseidon.entities.LevelBuilderModel;
+
 import javax.swing.ScrollPaneConstants;
 
 public class BuilderView extends JPanel implements IBuilderScreen
 {
 	LevelBuilderView application;  // The top-level GUI object
-//	LevelBuilderModel model;  // The top-level entity object, representing the application's state
+	LevelBuilderModel model;  // The top-level entity object, representing the application's state
 	BoardView board;  // The game Board being built
 	JScrollPane bullpenContainer;  // To hold Infinite Bullpen
 	BullpenView bullpen;  // The Infinite Bullpen, to help build the Board and for Hints
@@ -40,8 +42,9 @@ public class BuilderView extends JPanel implements IBuilderScreen
 	/**
 	 * Create the panel.
 	 */
-	public BuilderView(LevelBuilderView view)
+	public BuilderView(LevelBuilderModel model, LevelBuilderView view)
 	{
+		this.model = model;
 		application = view;
 		
 		initialize();
@@ -68,11 +71,11 @@ public class BuilderView extends JPanel implements IBuilderScreen
 		rotateCWButton.setBounds(621, 160, 45, 45);
 		add(rotateCWButton);
 		
-		board = new BoardView();
+		board = new BoardView(model.getBuildingLevel().getLevel().getBoard(), this);
 		board.setBounds(160, 250, 361, 361);
 		add(board);
 		
-		bullpen = new BullpenView();
+		bullpen = new BullpenView(model.getBuildingLevel().getLevel().getBullpen(), this);
 		bullpenContainer = new JScrollPane(bullpen);
 		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		bullpenContainer.setBounds(160, 80, 360, 70);
