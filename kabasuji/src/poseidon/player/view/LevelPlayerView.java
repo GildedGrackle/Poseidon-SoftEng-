@@ -32,7 +32,7 @@ public class LevelPlayerView
 	/**
 	 * Create the application.
 	 */
-	LevelPlayerView(LevelPlayerModel model)
+	public LevelPlayerView(LevelPlayerModel model)
 	{
 		this.model = model;
 		kabasuji = new JFrame();
