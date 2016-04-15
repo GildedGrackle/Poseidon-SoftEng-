@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 
 public class CustomLevelsView extends JPanel implements IGameScreen
@@ -15,6 +16,7 @@ public class CustomLevelsView extends JPanel implements IGameScreen
 	LevelPlayerView game;  // The top-level GUI object
 	LevelView currentlyPlaying;  // The level currently being played on
 	ArrayList<ScoreView> customLevels;  // Custom levels made by user
+	LevelPlayerModel model; 
 
 	
 	/**
@@ -51,7 +53,7 @@ public class CustomLevelsView extends JPanel implements IGameScreen
 		JButton backButton = new JButton("Back");
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		backButton.setBounds(10, 550, 180, 50);
-		backButton.addActionListener(new BackPlayerController(game));
+		backButton.addActionListener(new BackPlayerController(model, game));
 		add(backButton);
 		
 		JButton btnPlay = new JButton("Play");
