@@ -79,25 +79,25 @@ public class LevelPlayerView
 		
 		continueGameButton = new JButton("Start Game");
 		continueGameButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		continueGameButton.setBounds(229, 190, 200, 50);
+		continueGameButton.setBounds(231, 197, 200, 50);
 		continueGameButton.addActionListener(new ContinueController(model, this));
 		mainMenu.add(continueGameButton);
 		
 		levelSelectButton = new JButton("Level Select");
 		levelSelectButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		levelSelectButton.setBounds(229, 265, 200, 50);
+		levelSelectButton.setBounds(231, 281, 200, 50);
 		levelSelectButton.addActionListener(new LevelSelectController(model, this));
 		mainMenu.add(levelSelectButton);
 		
 		aboutButton = new JButton("About");
 		aboutButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		aboutButton.setBounds(229, 415, 200, 50);
+		aboutButton.setBounds(231, 359, 200, 50);
 		aboutButton.addActionListener(new AboutPlayerController(model, this));
 		mainMenu.add(aboutButton);
 		
 		exitButton = new JButton("Exit");
 		exitButton.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		exitButton.setBounds(229, 490, 200, 50);
+		exitButton.setBounds(231, 439, 200, 50);
 		exitButton.addActionListener(new ExitPlayerController(this));
 		mainMenu.add(exitButton);
 		
