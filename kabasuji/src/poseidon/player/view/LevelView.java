@@ -111,7 +111,7 @@ public class LevelView extends JPanel
 		
 		if(this.model.getGameMode() == LevelModel.PUZZLE)  // If Puzzle Level
 		{
-			String limitDisplay = "<html>Moves:<br><center>" + model.getAllotedMoves() + "</center></html>";
+			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedMoves() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
 			limitView.setBounds(10, 340, 140, 55);
