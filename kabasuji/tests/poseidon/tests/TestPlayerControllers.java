@@ -17,7 +17,7 @@ public class TestPlayerControllers extends TestCase
 	LevelModel level;
 	
 	public void setUp(){
-		view = new LevelPlayerView();
+		view = new LevelPlayerView(model);
 //		current = new int[3];
 //		level = new LevelModel(null, null, 0, getName(), null);
 //		model = new LevelPlayerModel(current, level);
