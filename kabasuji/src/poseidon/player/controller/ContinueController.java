@@ -17,13 +17,14 @@ public class ContinueController implements ActionListener
 	public ContinueController(LevelPlayerModel model, LevelPlayerView view)
 	{
 		this.model = model;
-		game = view;
+		this.game = view;
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		// Need to add check to see if the game has already started or is new
 		beginGame();
 	}
 	
