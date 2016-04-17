@@ -13,7 +13,7 @@ public class LevelModel {
 	Boolean isCustom;
 	
 	
-	LevelModel (Bullpen bullpen, Board board, int gameMode, String levelName, Boolean isCustom) {
+	public LevelModel (Bullpen bullpen, Board board, int gameMode, String levelName, Boolean isCustom) {
 		this.levelName = levelName;
 		this.playableBullpen = bullpen; //Not sure, should playable/infinite to be set as the passed bullpen?
 		this.gameMode = gameMode;

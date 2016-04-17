@@ -104,4 +104,7 @@ public class LevelPlayerView
 		kabasuji.setContentPane(mainMenu);
 	}
 
+	public JButton getAbout(){
+		return aboutButton;
+	}
 }
