@@ -107,4 +107,17 @@ public class LevelPlayerView
 	public JButton getAbout(){
 		return aboutButton;
 	}
+	
+	public JButton getContinue(){
+		return continueGameButton;
+	}
+	
+	public JButton getLvlSelect(){
+		return levelSelectButton;
+	}
+	
+	public JButton getExit(){
+		return exitButton;
+	}
+
 }
