@@ -69,4 +69,7 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 		return false;
 	}
 	
+	public JButton getBack(){
+		return backButton;
+	}
 }

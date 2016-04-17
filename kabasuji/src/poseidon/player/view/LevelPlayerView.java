@@ -32,7 +32,7 @@ public class LevelPlayerView
 	/**
 	 * Create the application.
 	 */
-	LevelPlayerView(LevelPlayerModel model)
+	public LevelPlayerView(LevelPlayerModel model)
 	{
 		this.model = model;
 		kabasuji = new JFrame();
@@ -102,6 +102,22 @@ public class LevelPlayerView
 		mainMenu.add(exitButton);
 		
 		kabasuji.setContentPane(mainMenu);
+	}
+
+	public JButton getAbout(){
+		return aboutButton;
+	}
+	
+	public JButton getContinue(){
+		return continueGameButton;
+	}
+	
+	public JButton getLvlSelect(){
+		return levelSelectButton;
+	}
+	
+	public JButton getExit(){
+		return exitButton;
 	}
 
 }
