@@ -1,6 +1,6 @@
 package poseidon.entities;
 
-public class LevelModel {
+public abstract class LevelModel {
 	public static final int PUZZLE = 1;
 	public static final int LIGHTNING = 2;
 	public static final int RELEASE = 3;
@@ -65,13 +65,7 @@ public class LevelModel {
 		return board;
 	}
 
-	public String getAllotedTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getAllotedMoves() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	// Override this in level subclasses to provided the maximum move or time limit
+	public abstract int getLimit();
 }

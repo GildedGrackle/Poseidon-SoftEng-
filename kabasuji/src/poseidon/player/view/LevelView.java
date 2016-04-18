@@ -17,7 +17,6 @@ import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
-import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.LevelSelectController;
 
 public class LevelView extends JPanel
@@ -111,7 +110,7 @@ public class LevelView extends JPanel
 		
 		if(this.model.getGameMode() == LevelModel.PUZZLE)  // If Puzzle Level
 		{
-			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedMoves() + "</center></html>";
+			String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
 			limitView.setBounds(10, 340, 140, 55);
@@ -121,7 +120,7 @@ public class LevelView extends JPanel
 		}
 		else if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning Level
 		{
-			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedTime() + "</center></html>";
+			String limitDisplay = "<html>Time:<br><center>" + this.model.getLimit() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
 			limitView.setBounds(10, 340, 140, 55);
@@ -131,7 +130,7 @@ public class LevelView extends JPanel
 		}
 		else if(this.model.getGameMode() == LevelModel.RELEASE)  // If Release Level
 		{
-			String limitDisplay = "<html>Moves:<br><center>" + this.model.getAllotedMoves() + "</center></html>";
+			String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
 			limitView.setBounds(10, 340, 140, 55);
