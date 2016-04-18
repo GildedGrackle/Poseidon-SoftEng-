@@ -140,13 +140,13 @@ public class LevelView extends JPanel
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		}
 		
-		bullpen = new BullpenView(this.model.getPlayableBullpen(), this);
+		bullpen = new BullpenView(this.model.getPlayableBullpen());
 		bullpenContainer = new JScrollPane(bullpen);
 		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		bullpenContainer.setBounds(160, 85, 360, 70);
 		add(bullpenContainer);
 
-		board = new BoardView(this.model.getBoard(), this);
+		board = new BoardView(this.model.getBoard());
 		board.setBounds(160, 195, 361, 361);
 		add(board);
 	}

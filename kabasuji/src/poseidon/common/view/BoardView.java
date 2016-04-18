@@ -11,7 +11,6 @@ import poseidon.player.view.LevelView;
 public class BoardView extends JPanel
 {
 	Board board;  // The model of the Board
-	LevelView game;  // The GUI of the Level
 	ArrayList<PieceView> pieces;  // The Pieces currently on the Board
 	PieceView activeDragging;  // The Piece currently being dragged (if applicable)
 	
@@ -19,10 +18,9 @@ public class BoardView extends JPanel
 	/**
 	 * Create the panel.
 	 */
-	public BoardView(Board board, LevelView view)
+	public BoardView(Board board)
 	{
 		this.board = board;
-		game = view;
 		pieces = new ArrayList<PieceView>();
 		activeDragging = null;
 	}
