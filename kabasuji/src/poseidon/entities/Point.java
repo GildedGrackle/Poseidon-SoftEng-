@@ -8,6 +8,16 @@ public class Point {
 		this.col = col;
 	}
 
+	/*
+	 * Flips the axis of the point
+	 */
+	void flip () {
+		int temp;
+		temp = this.row;
+		this.row = this.col;
+		this.col = temp;
+	}
+	
 	
 	/***********************
 	 *  Getters & Setters  *
