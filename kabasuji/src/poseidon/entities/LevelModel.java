@@ -15,7 +15,7 @@ public class LevelModel {
 	
 	public LevelModel (Bullpen bullpen, Board board, int gameMode, String levelName, Boolean isCustom) {
 		this.levelName = levelName;
-		this.playableBullpen = bullpen; //Not sure, should playable/infinite to be set as the passed bullpen?
+		this.playableBullpen = bullpen; // Correct, should be playable bullpen, infinite can be easily constructed separately
 		this.gameMode = gameMode;
 		this.board = board;
 		this.isCustom = isCustom;
@@ -44,6 +44,10 @@ public class LevelModel {
 	/***********************
 	 *  Getters & Setters  *
 	 ***********************/
+	public Bullpen getInfiniteBullpen()
+	{
+		return infiniteBullpen;
+	}
 	public Bullpen getPlayableBullpen()
 	{
 		return playableBullpen;
