@@ -14,16 +14,14 @@ import poseidon.player.view.LevelView;
 public class BullpenView extends JPanel
 {
 	Bullpen model;  // The state of the Bullpen
-	LevelView game;  // The GUI of the Level
 	ArrayList<PieceView> pieces;  // The Pieces in the Bullpen
 
 	/**
 	 * Create the panel.
 	 */
-	public BullpenView(Bullpen model, LevelView view)
+	public BullpenView(Bullpen model)
 	{
 		this.model = model;
-		game = view;
 
 		setLayout(null);
 		createPieces();
