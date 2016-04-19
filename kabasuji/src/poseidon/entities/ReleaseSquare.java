@@ -1,12 +1,22 @@
 package poseidon.entities;
 
 public class ReleaseSquare extends Square{
-	ReleaseNumber isNumber;
+	ReleaseNumber number;					//type releasenumber. consists of number and color
 	Boolean isHint;
 	
-	ReleaseSquare(Boolean isFilled, ReleaseNumber isNumber) {
+	ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
 		super(isFilled);
-		this.isNumber = isNumber;
+		this.number = number;
 		isHint = false;						//Set to false as default
 	}
+	
+	void fillSquare() {
+		this.isFilled = true;
+		
+	}
+	
+	void makeHint() {
+		this.isHint = true;
+	}
+
 }

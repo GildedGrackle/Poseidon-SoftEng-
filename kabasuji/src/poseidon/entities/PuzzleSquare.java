@@ -7,5 +7,13 @@ public class PuzzleSquare extends Square {
 		super(isFilled);
 		this.isHint = false;					//Set to false as default
 	}
+	
+	void fillSquare() {
+		this.isFilled = true;
+	}
+	
+	void makeHint() {
+		this.isHint = true;
+	}
 
 }

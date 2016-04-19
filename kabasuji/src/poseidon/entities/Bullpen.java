@@ -13,12 +13,20 @@ public class Bullpen {
 		this.logic = logic;
 	}
 	
-	Boolean removePiece (Point location) {		//UML says "int location". Point?
+	Boolean removePiece (Piece piece) {		
 		return false;							//TODO: change return value
 	}
 	
 	Boolean addPiece (PieceContainer piece) {
 		return false;							//TODO: Change return value
+	}
+	
+	void addPieceToList (PieceContainer piece) {
+		pieces.add(piece);
+	}
+	
+	void removePieceFromList (PieceContainer piece) {
+		pieces.remove(piece);
 	}
 
 	

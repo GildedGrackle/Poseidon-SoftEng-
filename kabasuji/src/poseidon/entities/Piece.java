@@ -2,9 +2,11 @@ package poseidon.entities;
 
 public class Piece {
 	Point [] piece = new Point[6];
+	PieceContainer container;
 	
 	Piece(Point[] piece) {
 		this.piece = piece;
+		this.container = new PieceContainer (this, null, false);
 	}
 
 	/*
@@ -121,5 +123,9 @@ public class Piece {
 	public void setPiece(Point[] piece)
 	{
 		this.piece = piece;
+	}
+	
+	public PieceContainer getContainer() {
+		return this.container;
 	}
 }

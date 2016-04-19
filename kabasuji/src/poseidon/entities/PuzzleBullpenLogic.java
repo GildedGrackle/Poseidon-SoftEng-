@@ -5,7 +5,13 @@ public class PuzzleBullpenLogic implements IBullpenLogic{
 		//TODO: Change return value
 	}
 	
-	public Boolean removePiece(Point location) {
-		return false;							//TODO: Change return value
+	public Boolean removePiece(Bullpen bullpen, PieceContainer piece) {
+		bullpen.removePieceFromList(piece);
+		return true;
+	}
+
+	public Boolean addPiece(Bullpen bullpen, PieceContainer piece) {
+		//TODO Not sure how to find location on the bullpen
+		return null;
 	}
 }

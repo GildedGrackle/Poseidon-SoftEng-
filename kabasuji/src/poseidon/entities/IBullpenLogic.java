@@ -1,5 +1,6 @@
 package poseidon.entities;
 
 public interface IBullpenLogic {
-	Boolean removePiece (Point location);
+	Boolean addPiece (Bullpen bullpen, PieceContainer piece);
+	Boolean removePiece (Bullpen bullpen, PieceContainer piece);
 }
