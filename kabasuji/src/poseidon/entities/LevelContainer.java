@@ -2,13 +2,13 @@ package poseidon.entities;
 
 public class LevelContainer {
 	String levelFileName;  // For file reading
-	int inGame;  // TODO What was this again?
+	int inGame;  // TODO If it is one of the original 15, custom, or not in the game but saved
 	int levelNumber;  // Level for placement in level select screen and for game progress
 	LevelModel level;  // The level associated with this container
 	Boolean isChanged;  // If the level has been modified (for Level Builder)
 	int score;  // Added here to simplify LevelSelect display
 	
-	LevelContainer (String levelFileName, int inGame, int lvlnum, LevelModel level, int score) {
+	public LevelContainer (String levelFileName, int inGame, int lvlnum, LevelModel level, int score) {
 		this.levelFileName = levelFileName;
 		this.inGame = inGame;
 		this.levelNumber = lvlnum;
