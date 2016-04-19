@@ -26,7 +26,7 @@ public class LevelBuilderView implements IBuilderScreen{
 	JButton aboutButton;  // To see information about Level Builder (AboutBuilderView)
 	JButton exitButton;  // To exit the application
 	IBuilderScreen currentScreen;  // The current screen displayed in the frame
-	LevelBuilderModel levelBuilderModel;
+	LevelBuilderModel model;
 
 	/**
 	 * Creates the frame and initializes the frame, model, and other variables.
@@ -48,15 +48,16 @@ public class LevelBuilderView implements IBuilderScreen{
 		return builder;
 	}
 	
-	public IBuilderScreen getCurrentScreen()
-	{
-		return currentScreen;
-	}
-	
 	public void setCurrentScreen(IBuilderScreen newScreen)
 	{
 		currentScreen = newScreen;
 	}
+	
+	public IBuilderScreen getCurrentScreen()
+	{
+		return currentScreen;
+	}
+
 	
 	
 	/**
@@ -78,25 +79,25 @@ public class LevelBuilderView implements IBuilderScreen{
 		 aboutButton = new JButton("About");
 		 aboutButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		 aboutButton.setBounds(262, 141, 145, 52);
-		 aboutButton.addActionListener(new AboutBuilderController(this));
+		 aboutButton.addActionListener(new AboutBuilderController(model, this));
 		 mainMenu.add(aboutButton);
 		 
 		 newLevelButton = new JButton("New Level");
 		 newLevelButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		 newLevelButton.setBounds(262, 235, 145, 52);
-		 newLevelButton.addActionListener(new NewLevelController(levelBuilderModel, this));
+		 newLevelButton.addActionListener(new NewLevelController(model, this));
 		 mainMenu.add(newLevelButton);
 			
 		 editLevelButton = new JButton("Edit Level");
 		 editLevelButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		 editLevelButton.setBounds(255, 334, 159, 52);
-		 editLevelButton.addActionListener(new EditLevelController(this));
+		 editLevelButton.addActionListener(new EditLevelController(model, this));
 		 mainMenu.add(editLevelButton);
 			
 		 exitButton = new JButton("Quit ");
 		 exitButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		 exitButton.setBounds(264, 441, 141, 57);
-		 exitButton.addActionListener(new ExitBuilderController(this));
+		 exitButton.addActionListener(new ExitBuilderController(model, this));
 		 mainMenu.add(exitButton);
 			
 		 builder.setContentPane(mainMenu);
@@ -109,4 +110,24 @@ public class LevelBuilderView implements IBuilderScreen{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public JButton getAbout(){
+		return aboutButton;
+	}
+	
+	public JButton getNewLevel(){
+		return newLevelButton;
+	}
+	
+	public JButton getEditLvl(){
+		return editLevelButton;
+	}
+	
+	public JButton getExit(){
+		return exitButton;
+	}
+
+	
+	
+	
 }

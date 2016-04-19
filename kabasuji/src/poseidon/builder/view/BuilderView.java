@@ -138,7 +138,7 @@ public class BuilderView extends JPanel implements IBuilderScreen
 		quitButton = new JButton("Quit");
 		quitButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		quitButton.setBounds(10, 405, 110, 55);
-		quitButton.addActionListener(new BackBuilderController(application));
+		quitButton.addActionListener(new BackBuilderController(model, application));
 		add(quitButton);
 		
 		saveButton = new JButton("Save");

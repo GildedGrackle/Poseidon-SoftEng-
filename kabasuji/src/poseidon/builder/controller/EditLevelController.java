@@ -6,10 +6,11 @@ import java.awt.event.ActionListener;
 import poseidon.builder.view.AboutBuilderView;
 import poseidon.builder.view.EditLevelView;
 import poseidon.builder.view.LevelBuilderView;
+import poseidon.entities.LevelBuilderModel;
 
 public class EditLevelController implements ActionListener
 {
-//	LevelBuilderModel model;  // The top-level entity object, representing the application's state
+	LevelBuilderModel model;  // The top-level entity object, representing the application's state
 	LevelBuilderView application;  // The top-level GUI object
 
 	
@@ -17,9 +18,9 @@ public class EditLevelController implements ActionListener
 	 *  Constructor
 	 * @param view
 	 */
-	public EditLevelController(/* LevelBuilderModel model, */ LevelBuilderView view)
+	public EditLevelController(LevelBuilderModel model,  LevelBuilderView view)
 	{
-//		this.model = model;
+		this.model = model;
 		this.application = view;
 	}
 

@@ -21,6 +21,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	LevelView currentlyPlaying;  // The GUI of the Level being played
 	StarView levels[][];  // The selectable level icons
 	LevelContainer selectedLevel;  // The level selected to play by the player
+	JButton btnPlay;
 
 	
 	/**
@@ -74,7 +75,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		backButton.addActionListener(new BackPlayerController(model, game));
 		add(backButton);
 		
-		JButton btnPlay = new JButton("Play");
+		btnPlay = new JButton("Play");
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnPlay.setBounds(470, 550, 180, 50);
 		btnPlay.addActionListener(new PlaySelectedController(model, this, game));
@@ -138,5 +139,9 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	public void setSelectedLevel(LevelContainer selected)
 	{
 		selectedLevel = selected;
+	}
+	
+	public JButton getPlay(){
+		return btnPlay;
 	}
 }
