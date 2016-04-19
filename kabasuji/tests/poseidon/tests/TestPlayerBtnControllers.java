@@ -39,7 +39,7 @@ public class TestPlayerBtnControllers extends TestCase{
 	public void setUp(){
 		view = new LevelPlayerView(model);
 		current = new int[3];
-		level = new LevelModel(null, null, 0, getName(), null);
+		level = new LevelModel(null, null, 0, getName(), null);  // TODO sorry, I made it abstract, now you have to choose what kind
 		model = new LevelPlayerModel(current, level);
 		controller = new AboutPlayerController(model, view);
 		back = new BackPlayerController(model, view);

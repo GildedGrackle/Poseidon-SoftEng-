@@ -9,8 +9,8 @@ import poseidon.entities.Square;
 
 public class ReleaseLevel extends LevelModel{
 	int allottedPieces, piecesUsed;
-	Set redNumbers, greenNumbers, yellownumbers;
-	ReleaseLevel(int allottedPieces, Board board, Bullpen bullpen, String name, Boolean isCustom){
+	Set<Integer> redNumbers, greenNumbers, yellownumbers;
+	ReleaseLevel(int allottedPieces, String name, Bullpen bullpen, Board board, Boolean isCustom){
 		super(bullpen, board, RELEASE, name, isCustom);
 		this.allottedPieces = allottedPieces;
 	}
@@ -37,5 +37,11 @@ public class ReleaseLevel extends LevelModel{
 	
 	void reset() {
 		//TODO: Change return value
+	}
+
+	@Override
+	public int getLimit()
+	{
+		return allottedPieces;
 	}
 }

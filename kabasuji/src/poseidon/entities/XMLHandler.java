@@ -216,15 +216,15 @@ public class XMLHandler {
 										Boolean.parseBoolean(isCustomElement.getText()));
 		} else if (loadGameMode == 2) {
 			loadLevel =  new LightningLevel(Integer.parseInt(countdownElement.getText()),
-										   loadBoard,
+										   nameElement.getText(),  // TODO I switched this with loadBoard to meet new constructor param order
 										   loadBullpen,
-										   nameElement.getText(),
+										   loadBoard,  // TODO hope that didn't break anything
 										   Boolean.parseBoolean(isCustomElement.getText()));
 		} else if (loadGameMode == 3) {
 			loadLevel =  new ReleaseLevel(Integer.parseInt(countdownElement.getText()),
-										 loadBoard,
+										 nameElement.getText(),  // TODO I switched this with loadBoard to meet new constructor param order
 										 loadBullpen,
-										 nameElement.getText(),
+										 loadBoard,  // TODO hope that didn't break anything
 										 Boolean.parseBoolean(isCustomElement.getText()));
 		} else {
 			return null; // Invalid gameMode, can't load
