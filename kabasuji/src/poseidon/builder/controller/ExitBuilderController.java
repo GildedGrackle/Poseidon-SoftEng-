@@ -4,19 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import poseidon.builder.view.LevelBuilderView;
+import poseidon.entities.LevelBuilderModel;
+import poseidon.entities.LevelPlayerModel;
 
 public class ExitBuilderController implements ActionListener
 {
 	LevelBuilderView view;
-//	LevelPlayerModel model;
+	LevelBuilderModel model;
 
 	/**
 	 *  Constructor
 	 * @param game
 	 */
-	public ExitBuilderController(/* LevelPlayerModel model, */LevelBuilderView game)
+	public ExitBuilderController( LevelBuilderModel model, LevelBuilderView game)
 	{
-//		model = model;
+		model = model;
 		view = game;
 	}
 	
