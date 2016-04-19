@@ -140,4 +140,8 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	{
 		selectedLevel = selected;
 	}
+	
+	public JButton getPlay(){
+		return btnPlay;
+	}
 }
