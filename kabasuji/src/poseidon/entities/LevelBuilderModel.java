@@ -3,7 +3,7 @@ package poseidon.entities;
 public class LevelBuilderModel {
 	LevelContainer buildingLevel;
 	
-	LevelBuilderModel (LevelContainer level) {
+	public LevelBuilderModel (LevelContainer level) {
 		this.buildingLevel = level;
 	}
 
