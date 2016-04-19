@@ -55,8 +55,7 @@ public class TestBuilderBtnControllers extends TestCase{
 		
 		
 		public void tearDown(){
-			if (view != null){
-				view.getBuilder().dispose();}
+				view.getBuilder().dispose();
 		}
 		
 		public void testAboutBtn(){
@@ -86,6 +85,14 @@ public class TestBuilderBtnControllers extends TestCase{
 			
 			assertNull(view.getCurrentScreen());
 			
+		}
+		
+		public void testEditBtn(){
+			button = view.getEditLvl();
+			ActionEvent editPress = buttonPress(button);
+			editLvlSelect.actionPerformed(editPress);
+			
+			assertEquals(view.getCurrentScreen().getClass(), EditLevelView.class);
 		}
 		
 }

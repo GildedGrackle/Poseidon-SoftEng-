@@ -39,7 +39,7 @@ public class ContinueController implements ActionListener
 		int gameMode = 0;
 		for(int i = 1; i < 3; i++)  // Compare the progress on the Puzzle levels to other modes
 		{
-			// If the current lowest level unlocked is furthrer along than
+			// If the current lowest level unlocked is further along than
 			// the level unlocked at game mode i
 			if(lowestLevel > model.getCurrentLevel()[i])
 			{
