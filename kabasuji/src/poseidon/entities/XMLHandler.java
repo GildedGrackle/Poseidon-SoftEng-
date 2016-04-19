@@ -15,9 +15,11 @@ public class XMLHandler {
 	XMLHandler () {}
 
 	// Generate a new XML doc representing the given LevelModel at the specified location
-	// !!!  Should this use a boolean return confirmation OR exception(s)?
+	// !!! Should this use a boolean return confirmation or exception(s)?
 	// !!! Input File or just a String path, either way will work
-	boolean saveXML (LevelModel level, File file) {
+	boolean saveXML (LevelModel level, String filePath) {
+		// Turn filePath into an actual File object
+		File file = new File(filePath);
 
 		// --- level (root) ---
 		Element levelElement = new Element("level");
@@ -116,12 +118,17 @@ public class XMLHandler {
 	}
 
 	// Return a LevelModel based on the XML document at the specified location
-	LevelModel loadXML (File file, boolean inBuilder) {
+	// !!! Should this use a null return or exception(s)?
+	LevelModel loadXML (String filePath, boolean inBuilder) {
+		// Turn filePath into an actual File object
+		File file = new File(filePath);
+		
+		// Check if the file actually exists
 		if (!file.exists()) {
-			return null; // Can't load a level that doesn't exist
+			return null;
 		}
 
-		// Turn file into a JDOM tree thing
+		// Turn file into a JDOM tree
 		SAXBuilder saxBuilder = new SAXBuilder();
 		Document doc;
 		try {
@@ -130,13 +137,13 @@ public class XMLHandler {
 			return null; // Can't load level as a valid XML JDOM tree
 		}
 
-		// Get all of the elements out of the tree
+		// Get all of the elements out of the tree, sort of the reverse of creating the XML
 		Element levelElement = doc.getRootElement();
 		int loadGameMode = Integer.parseInt(levelElement.getAttributeValue("gameMode"));
 
 		Element nameElement = levelElement.getChild("name");
 
-		Element countdownElement = levelElement.getChild("countdown");
+		int countdown = Integer.parseInt(levelElement.getChild("countdown").getText());
 
 		Element playableBullpenElement = levelElement.getChild("playableBullpen");
 		Element [] pieceElement = new Element[(playableBullpenElement.getContentSize() - 1) / 2]; // Compensate for reading '/n' as element
@@ -179,7 +186,7 @@ public class XMLHandler {
 			if (type.equals("nonplayable")) {
 				loadSquares[index] = new NonplayableSquare();
 			} else if (type.equals("puzzle")) {
-				loadSquares[index] = new PuzzleSquare(false); // !!! isHint?
+				loadSquares[index] = new PuzzleSquare(false);
 			} else if (type.equals("lightning")) {
 				loadSquares[index] = new LightningSquare(false);
 			} else if (type.equals("release")) {
@@ -204,36 +211,39 @@ public class XMLHandler {
 			return null; // Invalid gameMode
 		}
 
-		Element isCustomElement = levelElement.getChild("isCustom");
+		Boolean isCustom = Boolean.parseBoolean(levelElement.getChild("isCustom").getText());
 
 		// Construct level object
 		LevelModel loadLevel;
 		if (loadGameMode == 1) {
-			loadLevel =  new PuzzleLevel(Integer.parseInt(countdownElement.getText()),
+			loadLevel =  new PuzzleLevel(countdown,
 										nameElement.getText(),
 										loadBullpen,
 										loadBoard,
-										Boolean.parseBoolean(isCustomElement.getText()));
+										isCustom);
 		} else if (loadGameMode == 2) {
-			loadLevel =  new LightningLevel(Integer.parseInt(countdownElement.getText()),
-										   nameElement.getText(),  // TODO I switched this with loadBoard to meet new constructor param order
+			loadLevel =  new LightningLevel(countdown,
+										   nameElement.getText(),
 										   loadBullpen,
-										   loadBoard,  // TODO hope that didn't break anything
-										   Boolean.parseBoolean(isCustomElement.getText()));
+										   loadBoard,
+										   isCustom);
 		} else if (loadGameMode == 3) {
-			loadLevel =  new ReleaseLevel(Integer.parseInt(countdownElement.getText()),
-										 nameElement.getText(),  // TODO I switched this with loadBoard to meet new constructor param order
+			loadLevel =  new ReleaseLevel(countdown,
+										 nameElement.getText(),
 										 loadBullpen,
-										 loadBoard,  // TODO hope that didn't break anything
-										 Boolean.parseBoolean(isCustomElement.getText()));
+										 loadBoard,
+										 isCustom);
 		} else {
 			return null; // Invalid gameMode, can't load
 		}
+		
+		// All done!
 		return loadLevel;
 	}
 	
-	void test() {
-		File testFile = new File("testXML.xml"); // !!! Relative path, need to figure out how final exe will work
+	// Generate an example level xml file named "exampleLevelXML.xml"
+	void exampleLevelSave() {
+		String testPath = "exampleLevelXML.xml"; // !!! Relative path, need to figure out how final exe will work
 		
 		Point [] testPoints0 = new Point[6]; // Should be a 'T' looking thing?
 		testPoints0[0] = new Point(0,0);
@@ -273,13 +283,11 @@ public class XMLHandler {
 		
 		Board testBoard = new Board(testSquares, new PuzzleBoardLogic());
 		
-		PuzzleLevel testLevel = new PuzzleLevel(42, "testLevel", testBullpen, testBoard, true);
-		
-		
+		PuzzleLevel testLevel = new PuzzleLevel(42, "exampleLevel", testBullpen, testBoard, true);
 		
 		// Test saveXML() and loadXML()
 		XMLHandler testXMLHandler = new XMLHandler();
-		testXMLHandler.saveXML(testLevel, testFile);
-		testXMLHandler.loadXML(testFile, false);
+		testXMLHandler.saveXML(testLevel, testPath);
+		testXMLHandler.loadXML(testPath, false);
 	}
 }
