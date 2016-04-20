@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level gameMode="3">
+  <name>release2</name>
+  <countdown>10</countdown>
+  <playableBullpen>
+    <piece0>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece0>
+    <piece1>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece1>
+    <piece2>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece2>
+    <piece3>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece3>
+    <piece4>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece4>
+    <piece5>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece5>
+    <piece6>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece6>
+    <piece7>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece7>
+    <piece8>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece8>
+    <piece9>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>0</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>0</row>
+        <column>2</column>
+      </point4>
+      <point5>
+        <row>1</row>
+        <column>1</column>
+      </point5>
+    </piece9>
+  </playableBullpen>
+  <board>
+    <square0 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square0>
+    <square1 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square1>
+    <square2 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square2>
+    <square3 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square3>
+    <square4 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square4>
+    <square5 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square5>
+    <square6 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square6>
+    <square7 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square7>
+    <square8 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square8>
+    <square9 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square9>
+    <square10 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square10>
+    <square11 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square11>
+    <square12 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square12>
+    <square13 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square13>
+    <square14 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square14>
+    <square15 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square15>
+    <square16 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square16>
+    <square17 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square17>
+    <square18 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square18>
+    <square19 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square19>
+    <square20 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square20>
+    <square21 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square21>
+    <square22 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square22>
+    <square23 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square23>
+    <square24 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square24>
+    <square25 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square25>
+    <square26 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square26>
+    <square27 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square27>
+    <square28 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square28>
+    <square29 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square29>
+    <square30 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square30>
+    <square31 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square31>
+    <square32 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square32>
+    <square33 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square33>
+    <square34 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square34>
+    <square35 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square35>
+    <square36 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square36>
+    <square37 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square37>
+    <square38 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square38>
+    <square39 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square39>
+    <square40 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square40>
+    <square41 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square41>
+    <square42 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square42>
+    <square43 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square43>
+    <square44 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square44>
+    <square45 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square45>
+    <square46 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square46>
+    <square47 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square47>
+    <square48 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square48>
+    <square49 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square49>
+    <square50 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square50>
+    <square51 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square51>
+    <square52 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square52>
+    <square53 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square53>
+    <square54 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square54>
+    <square55 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square55>
+    <square56 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square56>
+    <square57 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square57>
+    <square58 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square58>
+    <square59 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square59>
+    <square60 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square60>
+    <square61 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square61>
+    <square62 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square62>
+    <square63 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square63>
+    <square64 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square64>
+    <square65 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square65>
+    <square66 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square66>
+    <square67 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square67>
+    <square68 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square68>
+    <square69 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square69>
+    <square70 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square70>
+    <square71 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square71>
+    <square72 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square72>
+    <square73 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square73>
+    <square74 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square74>
+    <square75 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square75>
+    <square76 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square76>
+    <square77 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square77>
+    <square78 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square78>
+    <square79 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square79>
+    <square80 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square80>
+    <square81 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square81>
+    <square82 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square82>
+    <square83 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square83>
+    <square84 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square84>
+    <square85 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square85>
+    <square86 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square86>
+    <square87 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square87>
+    <square88 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square88>
+    <square89 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square89>
+    <square90 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square90>
+    <square91 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square91>
+    <square92 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square92>
+    <square93 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square93>
+    <square94 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square94>
+    <square95 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square95>
+    <square96 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square96>
+    <square97 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square97>
+    <square98 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square98>
+    <square99 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square99>
+    <square100 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square100>
+    <square101 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square101>
+    <square102 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square102>
+    <square103 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square103>
+    <square104 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square104>
+    <square105 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square105>
+    <square106 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square106>
+    <square107 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square107>
+    <square108 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square108>
+    <square109 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square109>
+    <square110 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square110>
+    <square111 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square111>
+    <square112 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square112>
+    <square113 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square113>
+    <square114 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square114>
+    <square115 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square115>
+    <square116 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square116>
+    <square117 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square117>
+    <square118 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square118>
+    <square119 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square119>
+    <square120 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square120>
+    <square121 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square121>
+    <square122 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square122>
+    <square123 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square123>
+    <square124 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square124>
+    <square125 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square125>
+    <square126 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square126>
+    <square127 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square127>
+    <square128 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square128>
+    <square129 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square129>
+    <square130 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square130>
+    <square131 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square131>
+    <square132 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square132>
+    <square133 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square133>
+    <square134 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square134>
+    <square135 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square135>
+    <square136 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square136>
+    <square137 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square137>
+    <square138 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square138>
+    <square139 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square139>
+    <square140 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square140>
+    <square141 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square141>
+    <square142 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square142>
+    <square143 type="release">
+      <isHint>false</isHint>
+      <isNumber>1</isNumber>
+      <isColor>2</isColor>
+    </square143>
+  </board>
+  <isCustom>false</isCustom>
+</level>

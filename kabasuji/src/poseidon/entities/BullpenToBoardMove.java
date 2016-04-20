@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+/**
+ * Moving a piece from bullpen to board.
+ * @author Natalia
+ *
+ */
 public class BullpenToBoardMove implements IMove{
 	PieceContainer piece;
 	Point location;

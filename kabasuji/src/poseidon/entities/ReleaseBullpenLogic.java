@@ -1,11 +1,25 @@
 package poseidon.entities;
 
+/**
+ * Handles the actions on the bullpen in the release game mode.
+ * 
+ * Note: Not finished. will be finished after clarification.
+ * @author Natalia
+ *
+ */
 public class ReleaseBullpenLogic implements IBullpenLogic{
 	ReleaseBullpenLogic() {
-		//TODO: Change return value
+		
 	}
 	
-	public Boolean removePiece(Point location) {
-		return false;							//TODO: Change return value
+	
+	public Boolean addPiece(Bullpen bullpen, PieceContainer piece) {
+		return false;										//Impossible to move items to bullpen in release
+	}
+
+	
+	public Boolean removePiece(Bullpen bullpen, PieceContainer piece) {
+		bullpen.removePieceFromList(piece);
+		return true;
 	}
 }

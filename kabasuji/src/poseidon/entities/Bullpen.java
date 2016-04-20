@@ -3,9 +3,23 @@ import java.util.ArrayList;
 
 import poseidon.entities.PieceContainer;
 
+/**
+ * Bullpen in all variations.
+ * 
+ * Note: In builder, the bullpen refers to the bullpen the user is accessing, not the playable bullpen that 
+ * he constructs on his own.
+ * 
+ * @author Natalia
+ *
+ */
 public class Bullpen {
+	/** List of all the pieces that are located on the bullpen at the moment.*/
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
+	
+	/** The piece that is currently selected to perform actions on */
 	PieceContainer pieceSelected;
+	
+	/**The logic of the bullpen - game mode/builder*/
 	IBullpenLogic logic;
 	
 	public Bullpen(ArrayList <PieceContainer> pieces, IBullpenLogic logic) {
@@ -13,12 +27,22 @@ public class Bullpen {
 		this.logic = logic;
 	}
 	
-	Boolean removePiece (Point location) {		//UML says "int location". Point?
-		return false;							//TODO: change return value
+	boolean removePiece (PieceContainer piece) {	
+		return logic.removePiece(this, piece);
 	}
 	
-	Boolean addPiece (PieceContainer piece) {
-		return false;							//TODO: Change return value
+	boolean addPiece (PieceContainer piece) {
+		return logic.addPiece(this, piece);
+	}
+	
+	void addPieceToList (PieceContainer piece) {
+		pieces.add(piece);
+	}
+	
+	boolean removePieceFromList (PieceContainer piece) {
+		if(pieces.indexOf(piece) == -1) { return false; }
+		pieces.remove(piece);
+		return true;
 	}
 
 	
@@ -37,6 +61,12 @@ public class Bullpen {
 	{
 		return logic;
 	}
+	public PieceContainer getPiece(int location) {
+		return pieces.get(location);
+	}
+	public int getLocation(PieceContainer piece){
+		return pieces.indexOf(piece);
+	}
 	public void setPieces(ArrayList<PieceContainer> pieces)
 	{
 		this.pieces = pieces;
@@ -44,6 +74,9 @@ public class Bullpen {
 	public void setPieceSelected(PieceContainer pieceSelected)
 	{
 		this.pieceSelected = pieceSelected;
+	}
+	public void setPiece(int location, PieceContainer piece){
+		pieces.set(location, piece);
 	}
 	public void setLogic(IBullpenLogic logic)
 	{

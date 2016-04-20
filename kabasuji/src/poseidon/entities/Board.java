@@ -3,36 +3,155 @@ import java.util.ArrayList;
 
 import poseidon.entities.PieceContainer;
 
+/**
+ * Playable board in all variations. 
+ * @author Natalia
+ *
+ */
 public class Board {
-	Square [] playArea = new Square [144];			
+	/**Largest amount of rows and columns, set for convinience and optional future modification.*/
+	static final int MAXROWS = 12;
+	static final int MAXCOLS = 12;
+	
+	/**Initial playArea. Changes when constructor is called. */
+	Square [][] playArea = new Square [MAXROWS][MAXCOLS];	
+	
+	/**A list of all the pieces that are currently positioned on the board*/
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
+	
+	/**Piece that is currently selected*/ 
+	//MIGHT NEED TO CHANGE
 	PieceContainer activeDragged;
-	IBoardLogic logic;						
+	
+	/**The functioning of the board, game mode/builder*/
+	IBoardLogic logic;	
 	
 	
-	Board (Square [] playArea, IBoardLogic logic) {
+	Board (Square [][] playArea, IBoardLogic logic) {
 		this.playArea = playArea;
 		pieces = new ArrayList<PieceContainer>();
 		this.logic = logic;
 	}
 	
+	/**
+	 * Finds the piece container that is located on a selected square and returns it
+	 * 
+	 * @param row
+	 * @param col
+	 * @return PieceContainer 
+	 */
 	PieceContainer findPiece (int row, int col) {
-		return null;							//TODO: Change return value
+		for (int i=0; i<pieces.size(); i++) {							//Iterates through all the pieces on a board
+			Point pivot = pieces.get(i).getLocation();
+			for (Point p : pieces.get(i).getPiece().getPiece() ) {
+				if (p.getRow() + pivot.getRow() == row && p.getCol() + pivot.getCol() == col){
+																		//checks if a point on the piece is located at 
+																		// given point
+					return pieces.get(i);
+				}
+			}
+		}
+		return null;													//No piece found
 	}
 	
-	Boolean addPiece (int row, int col, PieceContainer piece) {
-		return false;							//TODO: Change return value
+	/**
+	 * Adds piece to a specific pivot point on the board depending on the type of board.
+	 * 
+	 * @param row, col - The location on the board where the pivot of the piece should be. 
+	 * @param piece - The piece that needs to be placed on the board.
+	 * @return Boolean - Indicates whether the addition was successful.
+	 */
+	Boolean addPiece (int row, int col, Piece piece) {
+		return logic.addPiece(this, piece.getContainer(), row, col);
 	}
 	
+	/**
+	 * Removes a piece from the board depending on the type of board.
+	 * 
+	 * @param piece - The piece that needs to be removed from the board. 
+	 * @return Boolean - Indicates whether the removal was successful.
+	 */
 	Boolean removePiece (Piece piece) {
-		return false;							//TODO: Change return value
+		return logic.removePiece(this, piece.getContainer());							
 	}
 	
-	Boolean intersects (PieceContainer piece, Point location) {
-		return false;							//TODO: Change return value
-	}
-	
+	/**
+	 * Displays the hint that was chosen for the board.
+	 */
 	void showHint () {
 		//TODO: Change return value
+	}
+	
+	/**
+	 * Adds piece to the ArrayList of pieces.
+	 * 
+	 * @param piece - The piece container of the piece that needs to be added.
+	 */
+	void addPieceToList (PieceContainer piece) {
+		pieces.add(piece);
+	}
+	
+	/**
+	 * Deals with selected squares depending on the type.
+	 * 
+	 * Note:	If builder, selects/deselcts the square.
+	 * 			If puzzle, selects the piece that is on the square.
+	 * 			If lightning/release, doesn't perform any action.
+	 * 
+	 * @param row
+	 * @param col - parameters that indicate the square on the board that was selected
+	 * @return
+	 */
+	Boolean selectSquare (int row, int col) {
+		if (logic instanceof BuilderBoardLogic) {
+			//TODO toggle squares on/off
+			return true;
+		}
+		PieceContainer piece = findPiece(row,col);
+		if(piece != null) {
+			if(logic.selectPiece(this, piece)) {
+				activeDragged.setIsSelected(false);
+				activeDragged = piece;
+				piece.setIsSelected(true);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	Square [] [] getPlayArea (){
+		return this.playArea;
+	}
+	
+	int getRows () {
+		return this.playArea.length;
+	}
+	
+	int getCols () {
+		return this.playArea[0].length;
+	}
+	
+	int getMaxRows() {
+		return MAXROWS;
+	}
+	
+	int getMaxCols() {
+		return MAXCOLS;
+	}
+	
+	Square getSquare(int row, int col) {
+		return playArea[row][col];
+	}
+	
+
+	
+	/**
+	 * Removes piece from the ArrayList of pieces.
+	 * 
+	 * @param piece - The piece container of the piece that needs to be removed.
+	 */
+	void removePieceFromList (PieceContainer piece) {
+		pieces.remove(piece);
 	}
 }

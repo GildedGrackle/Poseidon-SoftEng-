@@ -1,9 +1,15 @@
 package poseidon.entities;
 
-public class FlipMove implements IMove{
+
+/**
+ * Flipping piece horizontally.
+ * @author Natalia
+ *
+ */
+public class HorizontalFlipMove implements IMove{
 	PieceContainer piece;
 	
-	FlipMove(PieceContainer piece) {
+	HorizontalFlipMove(PieceContainer piece) {
 		this.piece = piece; 
 	}
 	

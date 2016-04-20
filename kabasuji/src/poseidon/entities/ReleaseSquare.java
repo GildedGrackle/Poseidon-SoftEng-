@@ -1,14 +1,29 @@
 package poseidon.entities;
 
+/**
+ * Manages squares in the release level.
+ * @author Natalia
+ *
+ */
 public class ReleaseSquare extends Square{
-	ReleaseNumber isNumber;
+	ReleaseNumber number;					//type release number. consists of number and color
 	Boolean isHint;
 	
 	
 	// TODO need a way to indicate no number
-	ReleaseSquare(Boolean isFilled, ReleaseNumber isNumber) {
+	ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
 		super(isFilled);
-		this.isNumber = isNumber;
+		this.number = number;
 		isHint = false;						//Set to false as default
 	}
+	
+	void fillSquare() {
+		this.isFilled = true;
+		
+	}
+	
+	void makeHint() {
+		this.isHint = true;
+	}
+
 }

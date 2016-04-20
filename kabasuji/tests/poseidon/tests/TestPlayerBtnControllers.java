@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 
+import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.AboutPlayerController;
@@ -37,6 +38,7 @@ public class TestPlayerBtnControllers extends TestCase{
 	PlaySelectedController playSelect;
 	LevelSelectView lvlSelectView;
 	SelectLevelController selectLevel;
+	LevelContainer lvlContainer; 
 	
 	private ActionEvent buttonPress(Component button) {
 		return new ActionEvent(button, 0, getName());
@@ -54,6 +56,7 @@ public class TestPlayerBtnControllers extends TestCase{
 		lvlSelect = new LevelSelectController(model, view);
 		playSelect = new PlaySelectedController(model, lvlSelectView, view);
 		selectLevel = new SelectLevelController(lvlSelectView);
+		//lvlContainer = new LevelContainer(name, 0, 0, level, 0);
 	}
 	
 	
@@ -99,9 +102,14 @@ public class TestPlayerBtnControllers extends TestCase{
 		assertEquals(view.getCurrentView().getCurrentlyPlaying().getClass(), LevelView.class);
 	}
 	
-//	public void testPlaySelectLevel(){
-//		button = lvlSelectView 
-//	}
+	public void testPlaySelectLevel(){
+//		setSelectedView(lvlContainer);
+		button = lvlSelectView.getPlay();
+		ActionEvent	playPress = buttonPress(button);
+		playSelect.actionPerformed(playPress);
+		
+		
+	}
 	
 	
 //	public void testExit(){

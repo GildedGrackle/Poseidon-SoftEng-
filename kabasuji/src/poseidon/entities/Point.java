@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+/**
+ * Handles points, which are the elements pieces are constructed out of.
+ * @author Natalia
+ *
+ */
 public class Point {
 	int row, col;
 	
@@ -8,7 +13,7 @@ public class Point {
 		this.col = col;
 	}
 
-	/*
+	/**
 	 * Flips the axis of the point
 	 */
 	void flip () {
@@ -18,7 +23,18 @@ public class Point {
 		this.col = temp;
 	}
 	
-	
+	@Override
+	/**
+	 * Overrides the standard equals() method for point.
+	 * 
+	 * Note: Checks if the point has the same value, not if it's pointing to the same exact point.
+	 */
+	public boolean equals(Object o){
+		if (!(o instanceof Point)) { return false; }
+		Point point = (Point) o;
+		if(this.row == point.getRow() && this.col == point.getCol()) { return true; }
+		return false;
+	}
 	/***********************
 	 *  Getters & Setters  *
 	 ***********************/
