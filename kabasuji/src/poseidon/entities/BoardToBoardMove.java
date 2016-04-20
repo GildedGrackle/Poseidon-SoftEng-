@@ -3,6 +3,12 @@ package poseidon.entities;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 
+/**
+ * Moving piece from one part of the board to another.
+ * Only applicable for puzzle mode.
+ * @author Natalia
+ *
+ */
 public class BoardToBoardMove implements IMove{
 	Point from, to;
 	PieceContainer piece;

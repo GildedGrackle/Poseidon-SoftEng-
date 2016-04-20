@@ -3,6 +3,12 @@ package poseidon.entities;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 
+/**
+ * Moving piece from the board to the bullpen.
+ * Only applicable for puzzle mode.
+ * @author Natalia
+ *
+ */
 public class BoardToBullpenMove implements IMove{
 	Point from, to;
 	PieceContainer piece;

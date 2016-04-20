@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+/**
+ * Manages unplayable squares.
+ * @author Natalia
+ *
+ */
 public class NonplayableSquare extends Square{
 
 	public NonplayableSquare() {
