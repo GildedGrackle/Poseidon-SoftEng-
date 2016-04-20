@@ -112,14 +112,6 @@ public class TestPlayerBtnControllers extends TestCase{
 	}
 	
 	
-//	public void testExit(){
-//		button = view.getExit();
-//		ActionEvent exitPress = buttonPress(button);
-//		exit.actionPerformed(exitPress);
-//		
-//		assertEquals(view, null);
-//	}
-	
 	
 
 }
