@@ -71,11 +71,11 @@ public class BuilderView extends JPanel implements IBuilderScreen
 		rotateCWButton.setBounds(621, 160, 45, 45);
 		add(rotateCWButton);
 		
-		board = new BoardView(model.getBuildingLevel().getLevel().getBoard(), this);
+		board = new BoardView(model.getBuildingLevel().getLevel().getBoard());
 		board.setBounds(160, 250, 361, 361);
 		add(board);
 		
-		bullpen = new BullpenView(model.getBuildingLevel().getLevel().getBullpen(), this);
+		bullpen = new BullpenView(model.getBuildingLevel().getLevel().getInfiniteBullpen());
 		bullpenContainer = new JScrollPane(bullpen);
 		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		bullpenContainer.setBounds(160, 80, 360, 70);
@@ -138,7 +138,7 @@ public class BuilderView extends JPanel implements IBuilderScreen
 		quitButton = new JButton("Quit");
 		quitButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		quitButton.setBounds(10, 405, 110, 55);
-		quitButton.addActionListener(new BackBuilderController(application));
+		quitButton.addActionListener(new BackBuilderController(model, application));
 		add(quitButton);
 		
 		saveButton = new JButton("Save");

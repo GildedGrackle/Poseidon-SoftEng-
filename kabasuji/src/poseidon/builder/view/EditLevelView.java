@@ -8,15 +8,18 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 import poseidon.builder.controller.BackBuilderController;
+import poseidon.entities.LevelBuilderModel;
 
 public class EditLevelView extends JPanel implements IBuilderScreen
 {
 //	LevelBuilderModel model;  // The top-level entity object, representing the application's state
 	LevelBuilderView application;  // The top-level GUI object
+	LevelBuilderModel model;
 	JButton deleteButton;  // To delete selected Level
 	JButton editButton;  // To edit selected Level
 	JButton addButton;  // To add selected Level to game
 	JButton backButton;  // To return to the main menu (LevelBuilderView)
+	
 //	... addedLevels;  // Custom Levels added to the game
 //	... savedLevels;  // Custom Levels saved but not added to the game
 
@@ -90,7 +93,7 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		backButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		backButton.setBounds(25, 530, 120, 80);
 		backButton.addActionListener(
-				new BackBuilderController(application));
+				new BackBuilderController(model, application));
 		add(backButton);
 		
 		addButton = new JButton("Add to Game");

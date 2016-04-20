@@ -32,8 +32,8 @@ public class LevelPlayerView
 	/**
 	 * Create the application.
 	 */
-	public LevelPlayerView(LevelPlayerModel model)
-	{
+	public LevelPlayerView(LevelPlayerModel model){
+		
 		this.model = model;
 		kabasuji = new JFrame();
 		initialize();
@@ -55,7 +55,7 @@ public class LevelPlayerView
 	
 	public IGameScreen getCurrentView()
 	{
-		return currentView;
+		return currentView; 
 	}
 	
 	

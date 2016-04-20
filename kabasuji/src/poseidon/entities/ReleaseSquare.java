@@ -6,9 +6,11 @@ package poseidon.entities;
  *
  */
 public class ReleaseSquare extends Square{
-	ReleaseNumber number;					//type releasenumber. consists of number and color
+	ReleaseNumber number;					//type release number. consists of number and color
 	Boolean isHint;
 	
+	
+	// TODO need a way to indicate no number
 	ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
 		super(isFilled);
 		this.number = number;

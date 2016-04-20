@@ -13,8 +13,8 @@ import poseidon.builder.controller.MakePuzzleController;
 import poseidon.builder.controller.MakeReleaseController;
 import poseidon.entities.LevelBuilderModel;
 
-public class NewLevelView extends JPanel implements IBuilderScreen
-{
+public class NewLevelView extends JPanel implements IBuilderScreen{
+	
 	LevelBuilderModel model;  // The top-level state object
 	LevelBuilderView application;  // The top-level GUI object
 	JButton newPuzzleButton;  // To create a new Puzzle Level
@@ -25,8 +25,7 @@ public class NewLevelView extends JPanel implements IBuilderScreen
 	/**
 	 * Create the panel.
 	 */
-	public NewLevelView(LevelBuilderModel model, LevelBuilderView view)
-	{
+	public NewLevelView(LevelBuilderModel model, LevelBuilderView view){
 		this.model = model;
 		application = view;
 		
@@ -67,7 +66,7 @@ public class NewLevelView extends JPanel implements IBuilderScreen
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		backButton.setBounds(25, 530, 120, 84);
-		backButton.addActionListener(new BackBuilderController(application));
+		backButton.addActionListener(new BackBuilderController(model, application));
 		add(backButton);
 	}
 	/**
@@ -80,4 +79,8 @@ public class NewLevelView extends JPanel implements IBuilderScreen
 		
 	}
 
+	public JButton getNewPuzzle(){
+		return newPuzzleButton;
+	}
+	
 }

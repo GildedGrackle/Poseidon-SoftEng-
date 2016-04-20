@@ -1,6 +1,6 @@
 package poseidon.entities;
 
-public class LevelModel {
+public abstract class LevelModel {
 	public static final int PUZZLE = 1;
 	public static final int LIGHTNING = 2;
 	public static final int RELEASE = 3;
@@ -15,7 +15,7 @@ public class LevelModel {
 	
 	public LevelModel (Bullpen bullpen, Board board, int gameMode, String levelName, Boolean isCustom) {
 		this.levelName = levelName;
-		this.playableBullpen = bullpen; //Not sure, should playable/infinite to be set as the passed bullpen?
+		this.playableBullpen = bullpen; // Correct, should be playable bullpen, infinite can be easily constructed separately
 		this.gameMode = gameMode;
 		this.board = board;
 		this.isCustom = isCustom;
@@ -44,6 +44,10 @@ public class LevelModel {
 	/***********************
 	 *  Getters & Setters  *
 	 ***********************/
+	public Bullpen getInfiniteBullpen()
+	{
+		return infiniteBullpen;
+	}
 	public Bullpen getPlayableBullpen()
 	{
 		return playableBullpen;
@@ -61,13 +65,7 @@ public class LevelModel {
 		return board;
 	}
 
-	public String getAllotedTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getAllotedMoves() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	// Override this in level subclasses to provided the maximum move or time limit
+	public abstract int getLimit();
 }

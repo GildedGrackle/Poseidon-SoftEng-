@@ -1,17 +1,20 @@
 package poseidon.entities;
 
 public class LevelContainer {
-	String levelFileName;
-	int inGame, levelNumber;
-	LevelModel level;
-	Boolean isChanged;
+	String levelFileName;  // For file reading
+	int inGame;  // TODO If it is one of the original 15, custom, or not in the game but saved
+	int levelNumber;  // Level for placement in level select screen and for game progress
+	LevelModel level;  // The level associated with this container
+	Boolean isChanged;  // If the level has been modified (for Level Builder)
+	int score;  // Added here to simplify LevelSelect display
 	
-	LevelContainer (String levelFileName, int inGame, int lvlnum, LevelModel level) {
+	public LevelContainer (String levelFileName, int inGame, int lvlnum, LevelModel level, int score) {
 		this.levelFileName = levelFileName;
 		this.inGame = inGame;
 		this.levelNumber = lvlnum;
 		this.level = level;
 		this.isChanged = false;				//Set to false by default
+		this.score = score;
 	}
 
 	
@@ -38,6 +41,10 @@ public class LevelContainer {
 	{
 		return isChanged;
 	}
+	public int getScore()
+	{
+		return score;
+	}
 	public void setLevelFileName(String levelFileName)
 	{
 		this.levelFileName = levelFileName;
@@ -57,5 +64,9 @@ public class LevelContainer {
 	public void setIsChanged(Boolean isChanged)
 	{
 		this.isChanged = isChanged;
+	}
+	public void setScore(int score)
+	{
+		this.score = score;
 	}
 }

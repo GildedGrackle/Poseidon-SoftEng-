@@ -3,6 +3,7 @@ package poseidon.player.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
@@ -33,6 +34,23 @@ public class ContinueController implements ActionListener
 	{
 		/** TODO Find most recently unlocked level
 		 *  and create it instead of making a new one here */
+		// Find the lowest number of the modes
+		int lowestLevel = 0;
+		int gameMode = 0;
+		for(int i = 1; i < 3; i++)  // Compare the progress on the Puzzle levels to other modes
+		{
+			// If the current lowest level unlocked is further along than
+			// the level unlocked at game mode i
+			if(lowestLevel > model.getCurrentLevel()[i])
+			{
+				// Then set new lowest mode
+				lowestLevel = model.getCurrentLevel()[i];
+				gameMode = i;
+			}
+		}
+		
+		// Now set currently playing in LevelPlayerModel to the level determined above
+		model.setPlayingLevel(model.getLevels()[gameMode][lowestLevel].getLevel());
 		LevelView newScreen = new LevelView(model, game);
 		
 		// Set new screen

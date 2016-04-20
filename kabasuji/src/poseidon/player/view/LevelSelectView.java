@@ -8,15 +8,20 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
+import poseidon.player.controller.PlaySelectedController;
+import poseidon.player.controller.SelectLevelController;
 
 public class LevelSelectView extends JPanel implements IGameScreen
 {
 	LevelPlayerModel model;  // The top-level entity object, representing the game
 	LevelPlayerView game;  // The top-level GUI object
 	LevelView currentlyPlaying;  // The GUI of the Level being played
-	ScoreView levels[][];
+	StarView levels[][];  // The selectable level icons
+	LevelContainer selectedLevel;  // The level selected to play by the player
+	JButton btnPlay;
 
 	
 	/**
@@ -70,87 +75,36 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		backButton.addActionListener(new BackPlayerController(model, game));
 		add(backButton);
 		
-		JButton btnPlay = new JButton("Play");
+		btnPlay = new JButton("Play");
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnPlay.setBounds(470, 550, 180, 50);
+		btnPlay.addActionListener(new PlaySelectedController(model, this, game));
 		add(btnPlay);
 		
-		// TODO using what was determined to be unlocked levels,
-		// create different selectable levels and make them selectable
-		JButton pzl1 = new JButton("1");
-		pzl1.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		pzl1.setBounds(175, 170, 50, 50);
-		add(pzl1);
-		
-		JButton pzl2 = new JButton("2");
-		pzl2.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		pzl2.setBounds(260, 170, 50, 50);
-		add(pzl2);
-		
-		JButton pzl3 = new JButton("3");
-		pzl3.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		pzl3.setBounds(345, 170, 50, 50);
-		add(pzl3);
-		
-		JButton pzl4 = new JButton("4");
-		pzl4.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		pzl4.setBounds(430, 170, 50, 50);
-		add(pzl4);
-		
-		JButton pzl5 = new JButton("5");
-		pzl5.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		pzl5.setBounds(515, 170, 50, 50);
-		add(pzl5);
-		
-		JButton lgt1 = new JButton("1");
-		lgt1.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lgt1.setBounds(175, 260, 50, 50);
-		add(lgt1);
-		
-		JButton lgt2 = new JButton("2");
-		lgt2.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lgt2.setBounds(260, 260, 50, 50);
-		add(lgt2);
-		
-		JButton lgt3 = new JButton("3");
-		lgt3.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lgt3.setBounds(345, 260, 50, 50);
-		add(lgt3);
-		
-		JButton lgt4 = new JButton("4");
-		lgt4.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lgt4.setBounds(430, 260, 50, 50);
-		add(lgt4);
-		
-		JButton lgt5 = new JButton("5");
-		lgt5.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lgt5.setBounds(515, 260, 50, 50);
-		add(lgt5);
-		
-		JButton rls1 = new JButton("1");
-		rls1.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		rls1.setBounds(175, 350, 50, 50);
-		add(rls1);
-		
-		JButton rls2 = new JButton("2");
-		rls2.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		rls2.setBounds(260, 350, 50, 50);
-		add(rls2);
-		
-		JButton rls3 = new JButton("3");
-		rls3.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		rls3.setBounds(345, 350, 50, 50);
-		add(rls3);
-		
-		JButton rls4 = new JButton("4");
-		rls4.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		rls4.setBounds(430, 350, 50, 50);
-		add(rls4);
-		
-		JButton rls5 = new JButton("5");
-		rls5.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		rls5.setBounds(515, 350, 50, 50);
-		add(rls5);
+
+		for(int i = 0; i < 3; i++)
+		{
+			for(int j = 0; j < 5; j++)
+			{
+				// If the level is unlocked
+				if(j <= model.getCurrentLevel()[i])
+				{
+					// Then create a selectable icon
+					StarView levelButton = new StarView(model.getLevels()[i][j]);
+					levelButton.setBounds(175 + 95 * j, 170 + 90 * i, 60, 80);
+					levelButton.addActionListener(new SelectLevelController(this));
+					add(levelButton);
+				}
+				else  // Level is locked
+				{
+					// Then create a nonselectable "level locked" icon
+					StarView lockButton = new StarView();
+					lockButton.setBounds(175 + 95 * j, 170 + 90 * i, 60, 80);
+					lockButton.setEnabled(false);
+					add(lockButton);
+				}
+			}
+		}
 	}
 
 
@@ -172,5 +126,22 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	{
 		this.currentlyPlaying = newGame;
 		return true;
+	}
+	
+	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	public LevelContainer getSelectedLevel()
+	{
+		return selectedLevel;
+	}
+	public void setSelectedLevel(LevelContainer selected)
+	{
+		selectedLevel = selected;
+	}
+	
+	public JButton getPlay(){
+		return btnPlay;
 	}
 }

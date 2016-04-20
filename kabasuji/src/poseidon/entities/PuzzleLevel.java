@@ -27,4 +27,10 @@ public class PuzzleLevel extends LevelModel {
 	void reset() {
 		//TODO: Change return value
 	}
+
+	@Override
+	public int getLimit()
+	{
+		return allottedMoves;
+	}
 }
