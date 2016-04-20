@@ -9,17 +9,37 @@ import org.jdom2.output.XMLOutputter;
 import java.io.*;
 import java.util.ArrayList;
 
-// Class to contain the save and load methods for level <-> XML
+/**
+ * Class to contain the methods for saving and loading XML files
+ * 
+ * @author Jacob
+ *
+ */
 public class XMLHandler {
+	
+	/**
+	 * This is what the filenames are appended onto for saving and loading.
+	 */
+	String directory = "StockLevels/";
 
-	XMLHandler () {}
+	/**
+	 * Constructor, no parameters, just a method holder.
+	 * 
+	 */
+	public XMLHandler() {};
 
-	// Generate a new XML doc representing the given LevelModel at the specified location
-	// !!! Should this use a boolean return confirmation or exception(s)?
-	// !!! Input File or just a String path, either way will work
-	boolean saveXML (LevelModel level, String filePath) {
-		// Turn filePath into an actual File object
-		File file = new File(filePath);
+	/**
+	 * Generate a new XML doc representing the given LevelModel at the specified location.
+	 * 
+	 * @param 	level 		LevelModel representing the level to be saved.
+	 * @param 	filePath 	String specifying where to save the file to.
+	 * @return 				True if saved, false is failed.
+	 */
+	// TODO Should this use a boolean return confirmation or exception(s)?
+	public boolean saveXML(LevelModel level, String filePath) {
+		// Turn filePath into an actual File object and create directory
+		File file = new File(directory + filePath);
+		file.getParentFile().mkdirs();
 
 		// --- level (root) ---
 		Element levelElement = new Element("level");
@@ -117,11 +137,17 @@ public class XMLHandler {
 		}
 	}
 
-	// Return a LevelModel based on the XML document at the specified location
-	// !!! Should this use a null return or exception(s)?
-	LevelModel loadXML (String filePath, boolean inBuilder) {
+	/**
+	 * Create a LevelModel from the specified XML file
+	 * 
+	 * @param 	filePath 	String specifying where to load the file from.
+	 * @param 	inBuilder 	Boolean to indicate if loading into the builder.
+	 * @return 				LevelModel if successful, null if file doesn't exist or isn't valid.
+	 */
+	// TODO Should this use a null return or exception(s)?
+	public LevelModel loadXML(String filePath, boolean inBuilder) {
 		// Turn filePath into an actual File object
-		File file = new File(filePath);
+		File file = new File(directory + directory + filePath);
 		
 		// Check if the file actually exists
 		if (!file.exists()) {
@@ -160,7 +186,7 @@ public class XMLHandler {
 												 Integer.parseInt(pntE.getChildText("column")));
 				subIndex++;
 			}
-			loadPieces.add(index, new PieceContainer(new Piece(loadPoints), null, false)); // !!! Location?
+			loadPieces.add(index, new PieceContainer(new Piece(loadPoints), null, false)); // TODO Location?
 			index++;
 		}
 		Bullpen loadBullpen;
@@ -217,22 +243,22 @@ public class XMLHandler {
 		LevelModel loadLevel;
 		if (loadGameMode == 1) {
 			loadLevel =  new PuzzleLevel(countdown,
-										nameElement.getText(),
-										loadBullpen,
-										loadBoard,
-										isCustom);
-		} else if (loadGameMode == 2) {
-			loadLevel =  new LightningLevel(countdown,
-										   nameElement.getText(),
-										   loadBullpen,
-										   loadBoard,
-										   isCustom);
-		} else if (loadGameMode == 3) {
-			loadLevel =  new ReleaseLevel(countdown,
 										 nameElement.getText(),
 										 loadBullpen,
 										 loadBoard,
 										 isCustom);
+		} else if (loadGameMode == 2) {
+			loadLevel =  new LightningLevel(countdown,
+										    nameElement.getText(),
+										    loadBullpen,
+										    loadBoard,
+										    isCustom);
+		} else if (loadGameMode == 3) {
+			loadLevel =  new ReleaseLevel(countdown,
+										  nameElement.getText(),
+										  loadBullpen,
+										  loadBoard,
+										  isCustom);
 		} else {
 			return null; // Invalid gameMode, can't load
 		}
@@ -241,9 +267,12 @@ public class XMLHandler {
 		return loadLevel;
 	}
 	
-	// Generate an example level xml file named "exampleLevelXML.xml"
-	void exampleLevelSave() {
-		String testPath = "exampleLevelXML.xml"; // !!! Relative path, need to figure out how final exe will work
+	/**
+	 * Generate an example level xml file named "exampleLevelXML.xml" for testing.
+	 * @deprecated Use makeExampleLevels() instead
+	 */
+	public void exampleLevelSave() {
+		String testPath = "exampleLevelXML.xml"; // TODO Relative path, need to figure out how final exe will work
 		
 		Point [] testPoints0 = new Point[6]; // Should be a 'T' looking thing?
 		testPoints0[0] = new Point(0,0);
@@ -289,5 +318,159 @@ public class XMLHandler {
 		XMLHandler testXMLHandler = new XMLHandler();
 		testXMLHandler.saveXML(testLevel, testPath);
 		testXMLHandler.loadXML(testPath, false);
+	}
+
+	/**
+	 * Generate fifteen example level xml files for loading.
+	 * 
+	 * WARNING: Watch out for overwriting, these use the standard naming convention.
+	 */
+	public void makeExampleLevels() {
+		LevelModel[][] levels = new LevelModel[3][5];
+		
+		Point[] piecePoints = {new Point(0,0), new Point(1,0), new Point(2,0), 
+							   new Point(0,1), new Point(0,2), new Point(1,1)};
+		Piece p = new Piece(piecePoints);
+		
+		ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
+		for(int i = 0; i < 10; i++) {
+			pieces.add(new PieceContainer(p, new Point(-1, -1), false));
+		}
+		
+		PuzzleBullpenLogic pbullLog = new PuzzleBullpenLogic();
+		LightningBullpenLogic lbullLog = new LightningBullpenLogic();
+		ReleaseBullpenLogic rbullLog = new ReleaseBullpenLogic();
+		
+		Bullpen pbull = new Bullpen(pieces, pbullLog);
+		Bullpen lbull = new Bullpen(pieces, lbullLog);
+		Bullpen rbull = new Bullpen(pieces, rbullLog);
+		
+		Square[] pPlayArea = new Square[144];
+		Square[] lPlayArea = new Square[144];
+		Square[] rPlayArea = new Square[144];
+		for(int i = 0; i < 144; i++) {
+			pPlayArea[i] = new PuzzleSquare(true);
+			lPlayArea[i] = new LightningSquare(true);
+			rPlayArea[i] = new ReleaseSquare(true, new ReleaseNumber(1, ReleaseNumber.GREEN));
+		}
+		
+		PuzzleBoardLogic pborLog = new PuzzleBoardLogic();
+		LightningBoardLogic lborLog = new LightningBoardLogic();
+		ReleaseBoardLogic rborLog = new ReleaseBoardLogic();
+		
+		Board pbor = new Board(pPlayArea, pborLog);
+		Board lbor = new Board(lPlayArea, lborLog);
+		Board rbor = new Board(rPlayArea, rborLog);
+
+		// Fill the levels matrix with identical levels of each gamemode
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 5; j++) {
+				switch(i) {
+				case 0:  // Puzzle levels
+					levels[i][j] = new PuzzleLevel(15,
+												   "puzzle" + String.valueOf(j),
+												   pbull,
+												   pbor,
+												   false);
+					break;
+				case 1:  // Lightning levels
+					levels[i][j] = new LightningLevel(60,
+												   "lightning" + String.valueOf(j),
+												   lbull,
+												   lbor,
+												   false);
+					break;
+				case 2:  // Release levels
+					levels[i][j] = new ReleaseLevel(10,
+												   "release" + String.valueOf(j),
+												   rbull,
+												   rbor,
+												   false);
+					break;
+				}
+				
+				// Save the new level as xml
+				saveXML(levels[i][j], directory + levels[i][j].levelName + ".xml");
+			}
+		}
+	}
+	
+	/**
+	 * Save a simple xml file for storing the progress variables
+	 * 
+	 * @param 	progress 	int[3] of the progress variables, from the LevelPlayerModel.
+	 * @param 	filePath 	String specifying where to save the file to.
+	 * @return 				True if saved, false is failed.
+	 */
+	public boolean saveProgressXML(int[] progress, String filePath) {
+		// Turn filePath into an actual File object and create directory
+		File file = new File(directory + filePath);
+		file.getParentFile().mkdirs();
+
+		// Root element
+		Element progressElement = new Element("progress");
+
+		// The three values, zero-based (should be 0-4)
+		Element puzzleElement = new Element("puzzle");
+		puzzleElement.setText(String.valueOf(progress[0]));
+		progressElement.addContent(puzzleElement);
+		
+		Element lightningElement = new Element("lightning");
+		lightningElement.setText(String.valueOf(progress[1]));
+		progressElement.addContent(lightningElement);
+		
+		Element releaseElement = new Element("release");
+		releaseElement.setText(String.valueOf(progress[2]));
+		progressElement.addContent(releaseElement);
+		
+		// Generate new XML file at specified location
+		Document doc = new Document(progressElement);
+		XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+		try {
+			xmlOutput.output(doc, new FileWriter(file));
+			return true; // Success (probably)
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Create an int[3] from the specified xml file.
+	 * 
+	 * @param 	filePath 	String specifying where to load the file from.
+	 * @return				int[3] if successful, null if file doesn't exist or isn't valid.
+	 */
+	public int[] loadProgressXML(String filePath) {
+		// Turn filePath into an actual File object
+		File file = new File(directory + directory + filePath);
+
+		// Check if the file actually exists
+		if (!file.exists()) {
+			return null;
+		}
+
+		// Turn file into a JDOM tree
+		SAXBuilder saxBuilder = new SAXBuilder();
+		Document doc;
+		try {
+			doc = saxBuilder.build(file);
+		} catch (Exception e) {
+			return null; // Can't load level as a valid XML JDOM tree
+		}
+
+		// Get all of the elements out of the tree, sort of the reverse of creating the XML
+		Element progressElement = doc.getRootElement();
+		int puzzle = Integer.parseInt(progressElement.getChildText("puzzle"));
+		int lightning = Integer.parseInt(progressElement.getChildText("lightning"));
+		int release = Integer.parseInt(progressElement.getChildText("release"));
+		
+		// Prevent impossible progress
+		puzzle = (puzzle > 4)? 4 : puzzle;
+		lightning = (lightning > 4)? 4 : lightning;
+		release = (release > 4)? 4 : release;
+		
+		int[] progress = new int[]{puzzle, lightning, release};
+		
+		return progress;
 	}
 }

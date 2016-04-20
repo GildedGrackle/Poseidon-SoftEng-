@@ -2,7 +2,7 @@ package poseidon.entities;
 
 public class LevelContainer {
 	String levelFileName;  // For file reading
-	int inGame;  // TODO What was this again?
+	int inGame;  // TODO What was this again? Yeah really what?
 	int levelNumber;  // Level for placement in level select screen and for game progress
 	LevelModel level;  // The level associated with this container
 	Boolean isChanged;  // If the level has been modified (for Level Builder)
