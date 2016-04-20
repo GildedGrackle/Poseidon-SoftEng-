@@ -102,14 +102,14 @@ public class TestPlayerBtnControllers extends TestCase{
 		assertEquals(view.getCurrentView().getCurrentlyPlaying().getClass(), LevelView.class);
 	}
 	
-	public void testPlaySelectLevel(){
-//		setSelectedView(lvlContainer);
-		button = lvlSelectView.getPlay();
-		ActionEvent	playPress = buttonPress(button);
-		playSelect.actionPerformed(playPress);
-		
-		
-	}
+//	public void testPlaySelectLevel(){
+////		setSelectedView(lvlContainer);
+//		button = lvlSelectView.getPlay();
+//		ActionEvent	playPress = buttonPress(button);
+//		playSelect.actionPerformed(playPress);
+//		
+//		
+//	}
 	
 	
 	

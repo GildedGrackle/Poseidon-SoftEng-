@@ -48,5 +48,9 @@ public class TestEntities extends TestCase{
 		
 	}
 	
+	public void testPiece(){
+		
+	}
+	
 	
 }
