@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+/**
+ * Manages squares in the puzzle level.
+ * @author Natalia
+ *
+ */
 public class PuzzleSquare extends Square {
 	Boolean isHint;
 	

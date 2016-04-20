@@ -1,16 +1,30 @@
 package poseidon.entities;
-
+/**
+ * Handles Pieces that are placed on the board/bullpen.
+ * @author Natalia
+ */
 public class Piece {
+	/** The 6 points that construct a piece*/
 	Point [] piece = new Point[6];
+	
+	/** The container that handles the moving and positioning the piece*/
 	PieceContainer container;
 	
 	Piece(Point[] piece) {
 		this.piece = piece;
 		this.container = new PieceContainer (this, null, false);
 	}
+	
+	/**Constructor for random pieces*/
+	Piece() {
+		//TODO figure out how to generate a random pieces
+	}
 
-	/*
-	 * Finds the Bottom left point of the piece (even if isn't a part of it) and returns it
+	/**
+	 * Finds the Bottom left point of the piece (even if isn't a part of it) and returns it.
+	 * 
+	 * Note: Private function that helps with rotating the pieces.
+	 * @return Point - The Bottom left point of the piece.
 	 */
 	private Point findBotLeft() {
 		
@@ -27,8 +41,11 @@ public class Piece {
 		return botLeft;
 	}
 	
-	/*
-	 * Finds the top right point of the piece (even if isn't a part of it) and returns it
+	/**
+	 * Finds the top right point of the piece (even if isn't a part of it) and returns it.
+	 * 
+	 * Note: Private function that helps with rotating the pieces.
+	 * @return Point - The top right point of the piece.
 	 */
 	private Point findTopRight() {
 		
@@ -44,7 +61,8 @@ public class Piece {
 		Point topRight = new Point(0, rightCol);			//Returns the point in the 0 row with the highest col
 		return topRight;
 	}
-	/*
+	
+	/**
 	 * Rotates the piece Clockwise
 	 */
 	void rotateCW() {
@@ -63,7 +81,7 @@ public class Piece {
 		
 	}
 	
-	/*
+	/**
 	 * Rotates the piece counter Clockwise
 	 */
 	void rotateCCW() {
@@ -82,7 +100,7 @@ public class Piece {
 		
 	}
 
-	/*
+	/**
 	 * Horizontally flips the piece
 	 */
 	void flipHorizontal() {
@@ -97,7 +115,7 @@ public class Piece {
 		}
 	}
 	
-	/*
+	/**
 	 *  Vertically flips the piece
 	 */
 	void flipVertical() {
@@ -110,6 +128,27 @@ public class Piece {
 			row = newPivotPoint.getRow() - piece[i].getRow();
 			piece[i].setRow(row);
 		}
+	}
+	
+	
+	@Override
+	/**
+	 * Overrides the standard equals() method for Pieces.
+	 * 
+	 * Note: Works on the premise that equal pieces have an equal order of points. 
+	 * Also, disregards the container. Thus, comparing two pieces that are in different locations but "look" the same
+	 * would produce true as the answer.
+	 */
+	public boolean equals(Object o) {
+		if(!(o instanceof Piece)) { return false; }
+		Piece newPiece = (Piece) o;
+		Point[] newArray = newPiece.getPiece();
+		for(int i=0; i<6; i++) {
+			if (!this.piece[i].equals(newArray[i])){
+				return false;
+			}
+		}
+		return true;
 	}
 
 				/*********************

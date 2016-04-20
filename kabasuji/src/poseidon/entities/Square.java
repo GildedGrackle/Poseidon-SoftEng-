@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+/**
+ * Manages general squares. Includes puzzle, lightning, release and builder.
+ * @author Natalia
+ *
+ */
 public class Square {
 	Boolean isFilled;
 	
@@ -18,4 +23,5 @@ public class Square {
 	boolean isFilled () {
 		return this.isFilled;
 	}
+	
 }

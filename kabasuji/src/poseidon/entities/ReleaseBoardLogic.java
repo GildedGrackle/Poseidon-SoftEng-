@@ -1,10 +1,23 @@
 package poseidon.entities;
 
+
+/**
+ * Handles the actions on the board in the release game mode.
+ * @author Natalia
+ *
+ */
 public class ReleaseBoardLogic implements IBoardLogic{
 	ReleaseBoardLogic() {
 		
 	}
-	
+	/**
+	 * Adds given piece to the board and returns whether the addition was successful.
+	 * 
+	 * @param board - The board the addition is performed on.
+	 * @param piece - The piece container of the piece that needs to be added.
+	 * @param row, col - The location on the board where the pivot of the piece should be.
+	 * @return Boolean - Indicates whether the addition was successful
+	 */
 	public Boolean addPiece(Board board, PieceContainer piece, int row, int col) {
 		Point [] pieceArray = piece.getPiece().getPiece();
 		Square [] [] playArea = board.getPlayArea();
@@ -30,7 +43,23 @@ public class ReleaseBoardLogic implements IBoardLogic{
 		return true;
 	}
 	
+	/**
+	 * Meant to remove piece from the board, however there is no way to remove pieces from a release board.
+	 * In addition, the undo option doesn't apply to release level, so there is no need to create the function
+	 * for that purpose.
+	 * 
+	 * @return Boolean - Always false.
+	 */
 	public Boolean removePiece(Board board, PieceContainer piece) {
 		return false;											//Cannot remove pieces from release boards
+	}
+	
+	/**
+	 * Meant to check whether a piece can be selected, but there is no way to select a piece in lightning mode.
+	 * 
+	 * @return Boolean - Always false.
+	 */
+	public Boolean selectPiece (Board board, PieceContainer piece){
+		return false;
 	}
 }

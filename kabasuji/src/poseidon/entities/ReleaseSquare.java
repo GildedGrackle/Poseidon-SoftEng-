@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+/**
+ * Manages squares in the release level.
+ * @author Natalia
+ *
+ */
 public class ReleaseSquare extends Square{
 	ReleaseNumber number;					//type releasenumber. consists of number and color
 	Boolean isHint;

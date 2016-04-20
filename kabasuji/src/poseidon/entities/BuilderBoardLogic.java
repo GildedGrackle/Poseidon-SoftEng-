@@ -1,11 +1,23 @@
 package poseidon.entities;
-
+/**
+ * Handles the actions on the board in Builder mode.
+ * @author Natalia
+ *
+ */
 public class BuilderBoardLogic implements IBoardLogic {
 
 	BuilderBoardLogic() {
 		
 	}
 	
+	/**
+	 * Adds given piece to the board and returns whether the addition was successful.
+	 * 
+	 * @param board - The board the addition is performed on.
+	 * @param piece - The piece container of the piece that needs to be added.
+	 * @param row, col - The location on the board where the pivot of the piece should be.
+	 * @return Boolean - Indicates whether the addition was successful
+	 */
 	public Boolean addPiece(Board board, PieceContainer piece, int row, int col) {
 		Point [] pieceArray = piece.getPiece().getPiece();
 		Square [] [] playArea = board.getPlayArea();
@@ -31,7 +43,20 @@ public class BuilderBoardLogic implements IBoardLogic {
 		return true;
 }
 	
+	/**
+	 * Removes a piece from the board.
+	 * 
+	 * Note: Removing pieces from the board in builder shouldn't be possible, however this function is created
+	 * in order to make the Undo action possible. Shouldn't be called in any case except undo.
+	 * 
+	 * @param board - The board the piece is removed from
+	 * @param piece - The container of the piece that needs to be removed
+	 */
 	public Boolean removePiece (Board board, PieceContainer piece){
-		return false;											//Cannot remove pieces in builder
+		return false;											//TODO change return value
+
+	}
+	public Boolean selectPiece (Board board, PieceContainer piece){
+		return false;
 	}
 }
