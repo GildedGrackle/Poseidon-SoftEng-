@@ -42,7 +42,7 @@ public class Board {
 	 */
 	PieceContainer findPiece (int row, int col) {
 		for (int i=0; i<pieces.size(); i++) {							//Iterates through all the pieces on a board
-			Point pivot = pieces.get(i).getLocation();
+			Point pivot = pieces.get(i).getLocation();  // TODO need to check if this returns null
 			for (Point p : pieces.get(i).getPiece().getPiece() ) {
 				if (p.getRow() + pivot.getRow() == row && p.getCol() + pivot.getCol() == col){
 																		//checks if a point on the piece is located at 

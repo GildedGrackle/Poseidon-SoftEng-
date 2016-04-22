@@ -77,8 +77,16 @@ public class BoardView extends JPanel
 		for(PieceView pv : pieces)
 		{
 			Piece p = pv.getModel().getPiece();
-			int row = pv.getModel().getLocation().getRow();
-			int col = pv.getModel().getLocation().getCol();
+			Point location = pv.getModel().getLocation();
+			if(location == null)
+			{
+				// Then we have a problem
+				System.err.println("BoardView: Unexpectedly encountered Piece with no location while painting.");
+				return ;
+			}
+			// Else everything is fine (it should be)
+			int row = location.getRow();
+			int col = location.getCol();
 			for(Point pt : p.getPiece())
 			{
 				int pieceOffsetX = SQUARE_SIZE * pt.getRow();
