@@ -48,7 +48,7 @@ public class LightningLevel extends LevelModel{
 	/**
 	 *  Doesn't do anything; no moves to decrement.
 	 */
-	public void decrementMoves()
+	public void decrementLimit()
 	{
 		return;
 	}

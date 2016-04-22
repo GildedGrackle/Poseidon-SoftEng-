@@ -8,7 +8,7 @@ public class PieceContainer {
 	/** The piece that is contained */
 	Piece piece;
 	
-	/** Where the piece is located on the board (if is on board)*/
+	/** Where the piece is located on the board (if not on board is Point(-1, -1))*/
 	Point location;
 	
 	/** Indicates whether the piece is the selected piece on the board.bullpen*/
@@ -31,8 +31,13 @@ public class PieceContainer {
 	public boolean equals(Object o) {
 		if (!(o instanceof PieceContainer)) { return false; }
 		PieceContainer newPiece = (PieceContainer) o;
-		// TODO need to check if getLocation() returns null
-		if(this.piece.equals(newPiece.getPiece())&&this.location.equals(newPiece.getLocation())) { return true; }
+
+		if(this.location == null || newPiece.getLocation() == null)
+		{
+			return false;
+		}
+		if(this.piece.equals(newPiece.getPiece()) && this.location.equals(newPiece.getLocation()))
+		{ return true; }
 		return false;
 	}
 	

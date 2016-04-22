@@ -79,9 +79,6 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated
 	 */
 	public Boolean modelUpdated()
 	{
-		// Refresh pieces
-		createPieces();
-
 		// Resize so that if the number of Pieces changed the
 		// panel will extend or contract to accomodate them
 		setPreferredSize(new Dimension(BullpenView.PIECE_SIZE * pieces.size(),
@@ -133,6 +130,17 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated
 				drawer.drawRect(offsetX + 1, 1, PIECE_SIZE - 3, PIECE_SIZE - 3);
 			}
 		}
+	}
+	
+	
+	/**
+	 *  Removes given PieceView from the list of PieceViews.
+	 *  
+	 * @param piece  the PieceView to remove
+	 */
+	public void removePiece(PieceView piece)
+	{
+		pieces.remove(piece);
 	}
 	
 

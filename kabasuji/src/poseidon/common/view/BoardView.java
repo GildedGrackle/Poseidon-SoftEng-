@@ -30,6 +30,8 @@ public class BoardView extends JPanel implements IModelUpdated
 	PieceView activeDragging;
 	/** Location of the top-left corner (anchor) of activeDragging */
 	java.awt.Point activeLocation;
+	/** The coordinates of the originating Square of a drag event. */
+	Point activeSource;
 	/** The size (height or width) of a Square when displayed on the Board */
 	public static final int SQUARE_SIZE = 30;
 	public static final int PIECE_SIZE = 180;
@@ -51,7 +53,7 @@ public class BoardView extends JPanel implements IModelUpdated
 		super.paintComponent(g);
 		
 		// Draw playable Squares
-		drawPlayable(g);
+		drawBoard(g);
 		
 		// Now draw Pieces
 		drawPieces(g);
@@ -64,7 +66,7 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
-	void drawPlayable(Graphics g)
+	void drawBoard(Graphics g)
 	{
 		Graphics drawer = g.create();
 		
@@ -77,13 +79,19 @@ public class BoardView extends JPanel implements IModelUpdated
 				if(playArea[i][j].getType() > 0)
 				{
 					// Then at least draw a square for it
-					drawer.drawRect(SQUARE_SIZE * i, SQUARE_SIZE * j, SQUARE_SIZE, SQUARE_SIZE);
+					drawer.drawRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
 					
 					// If the Square is a ReleaseSquare
 					if(playArea[i][j].getType() == LevelModel.RELEASE)
 					{
 						// Then draw the number in its color
 						drawNumber(drawer, playArea[i][j].getReleaseNumber(), i, j);
+					}
+					
+					// If the Square is filled
+					if(playArea[i][j].isFilled())
+					{
+						drawer.fillRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
 					}
 				}
 			}
@@ -99,7 +107,7 @@ public class BoardView extends JPanel implements IModelUpdated
 		{
 			Piece p = pv.getModel().getPiece();
 			Point location = pv.getModel().getLocation();
-			if(location == null)
+			if(location == null || location == new Point(-1, -1))
 			{
 				// Then we have a problem
 				System.err.println("BoardView: Unexpectedly encountered Piece with no location while painting.");
@@ -110,15 +118,15 @@ public class BoardView extends JPanel implements IModelUpdated
 			int col = location.getCol();
 			for(Point pt : p.getPiece())
 			{
-				int pieceOffsetX = SQUARE_SIZE * pt.getRow();
-				int pieceOffsetY = SQUARE_SIZE * pt.getCol();
+				int pieceOffsetY = SQUARE_SIZE * pt.getRow();
+				int pieceOffsetX = SQUARE_SIZE * pt.getCol();
 				drawer.setColor(pv.getPieceColor());
-				drawer.fillRoundRect(pieceOffsetX + row * SQUARE_SIZE,
-						pieceOffsetY + col * SQUARE_SIZE,
+				drawer.fillRoundRect(pieceOffsetX + col * SQUARE_SIZE,
+						pieceOffsetY + row * SQUARE_SIZE,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 				drawer.setColor(pv.getPieceBorder());
-				drawer.drawRoundRect(pieceOffsetX + row * SQUARE_SIZE,
-						pieceOffsetY + col * SQUARE_SIZE,
+				drawer.drawRoundRect(pieceOffsetX + col * SQUARE_SIZE,
+						pieceOffsetY + row * SQUARE_SIZE,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 			}
 		}
@@ -169,7 +177,7 @@ public class BoardView extends JPanel implements IModelUpdated
 		}
 		
 		// Draw number
-		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * row + 10, SQUARE_SIZE * col + 10);
+		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * col + 10, SQUARE_SIZE * row + 10);
 	}
 	
 	
@@ -186,9 +194,9 @@ public class BoardView extends JPanel implements IModelUpdated
 				// If the Square is a hint space
 				if(playArea[i][j].getIsHint())
 				{
-					drawer.drawRoundRect(SQUARE_SIZE * i + 1, SQUARE_SIZE * j + 1,
+					drawer.drawRoundRect(SQUARE_SIZE * j + 1, SQUARE_SIZE * i + 1,
 							SQUARE_SIZE - 3, SQUARE_SIZE - 3, 3, 3);
-					drawer.drawRoundRect(SQUARE_SIZE * i + 2, SQUARE_SIZE * j + 2,
+					drawer.drawRoundRect(SQUARE_SIZE * j + 2, SQUARE_SIZE * i + 2,
 							SQUARE_SIZE - 5, SQUARE_SIZE - 5, 3, 3);
 				}
 			}
@@ -199,22 +207,56 @@ public class BoardView extends JPanel implements IModelUpdated
 	@Override
 	public Boolean modelUpdated()
 	{
-		// Update displayed Pieces
-		pieces = new ArrayList<PieceView>(board.getPieces().size());
-		
-		for(PieceContainer p : board.getPieces())
-		{
-			pieces.add(new PieceView(p, null));
-		}
-		
 		// Update display
 		repaint();
 		
 		return true;
 	}
+	
+	
+	/**
+	 *  Adds the given PieceView to the list of PieceViews.
+	 *  
+	 * @param piece  PieceView to add
+	 */
+	public void addPiece(PieceView piece)
+	{
+		pieces.add(piece);
+	}
+	
+	
+	/**
+	 *  Sets the Piece at (row, col) as the active dragging Piece.
+	 *  
+	 * @param row  row on Board that Piece should cover
+	 * @param col  col on Board that Piece should cover
+	 */
+	public void selectPiece(int row, int col)
+	{
+		// Search through all Pieces on Board
+		for(PieceView pv : pieces)
+		{
+			PieceContainer pc = pv.getModel();
+			for(Point pt : pc.getPiece().getPiece())
+			{
+				// If this Piece is present at (row, col)
+				if((pc.getLocation().getRow() + pt.getRow()) == row &&
+						(pc.getLocation().getCol() + pt.getCol()) == col)
+				{
+					// Then set it as the active dragging
+					activeDragging = pv;
+					return ;
+				}
+			}
+		}
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	public Board getBoard()
+	{
+		return board;
+	}
 	public ArrayList<PieceView> getPieces()
 	{
 		return pieces;
@@ -227,6 +269,10 @@ public class BoardView extends JPanel implements IModelUpdated
 	{
 		return activeLocation;
 	}
+	public Point getActiveSource()
+	{
+		return activeSource;
+	}
 	public void setPieces(ArrayList<PieceView> pieces)
 	{
 		this.pieces = pieces;
@@ -238,5 +284,9 @@ public class BoardView extends JPanel implements IModelUpdated
 	public void setActiveLocation(java.awt.Point activeLocation)
 	{
 		this.activeLocation = activeLocation;
+	}
+	public void setActiveSource(Point activeSource)
+	{
+		this.activeSource = activeSource;
 	}
 }

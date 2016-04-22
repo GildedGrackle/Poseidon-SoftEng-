@@ -33,7 +33,7 @@ public class ReleaseLevel extends LevelModel{
 	/**
 	 *  Decreases the number of moves remaining by 1.
 	 */
-	public void decrementMoves() {
+	public void decrementLimit() {
 		//TODO: Change return value
 		movesRemaining--;
 	}

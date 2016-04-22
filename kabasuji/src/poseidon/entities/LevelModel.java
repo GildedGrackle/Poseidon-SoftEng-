@@ -59,18 +59,20 @@ public abstract class LevelModel {
 	
 	abstract void reset();
 	
+
 	/** 
 	 *  Provides the game-type-specific limit for play.
 	 *  
 	 *  Override this in level subclasses to provide the maximum move or time limit. */
 	public abstract int getLimit();
 	
+	
 	/**
 	 *  Decreases the moves remaining by 1, if applicable.
 	 *  
 	 *  Override this in level subclasses to decrease the move limit, if it exists.
 	 */
-	public abstract void decrementMoves();
+	public abstract void decrementLimit();
 	
 	
 				/***********************
