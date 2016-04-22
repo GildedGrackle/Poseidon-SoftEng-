@@ -5,13 +5,13 @@ import poseidon.entities.PieceContainer;
 
 /**
  * Playable board in all variations. 
+ * 
  * @author Natalia
- *
  */
 public class Board {
 	/**Largest amount of rows and columns, set for convinience and optional future modification.*/
-	static final int MAXROWS = 12;
-	static final int MAXCOLS = 12;
+	public static final int MAXROWS = 12;
+	public static final int MAXCOLS = 12;
 	
 	/**Initial playArea. Changes when constructor is called. */
 	Square [][] playArea = new Square [MAXROWS][MAXCOLS];	
@@ -34,7 +34,7 @@ public class Board {
 	}
 	
 	/**
-	 * Finds the piece container that is located on a selected square and returns it
+	 * Finds the piece container that is located on a selected square and returns it.
 	 * 
 	 * @param row
 	 * @param col
@@ -61,8 +61,8 @@ public class Board {
 	 * @param piece - The piece that needs to be placed on the board.
 	 * @return Boolean - Indicates whether the addition was successful.
 	 */
-	Boolean addPiece (int row, int col, Piece piece) {
-		return logic.addPiece(this, piece.getContainer(), row, col);
+	public Boolean addPiece (PieceContainer piece) {
+		return logic.addPiece(this, piece);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class Board {
 	 * @param piece - The piece that needs to be removed from the board. 
 	 * @return Boolean - Indicates whether the removal was successful.
 	 */
-	Boolean removePiece (Piece piece) {
+	public Boolean removePiece (Piece piece) {
 		return logic.removePiece(this, piece.getContainer());							
 	}
 	
@@ -120,7 +120,7 @@ public class Board {
 		return false;
 	}
 	
-	Square [] [] getPlayArea (){
+	public Square [] [] getPlayArea (){
 		return this.playArea;
 	}
 	
@@ -140,7 +140,7 @@ public class Board {
 		return MAXCOLS;
 	}
 	
-	Square getSquare(int row, int col) {
+	public Square getSquare(int row, int col) {
 		return playArea[row][col];
 	}
 	

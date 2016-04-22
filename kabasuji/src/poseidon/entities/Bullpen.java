@@ -10,6 +10,7 @@ import poseidon.entities.PieceContainer;
  * he constructs on his own.
  * 
  * @author Natalia
+ * @author Alex Titus
  *
  */
 public class Bullpen {
@@ -25,13 +26,14 @@ public class Bullpen {
 	public Bullpen(ArrayList <PieceContainer> pieces, IBullpenLogic logic) {
 		this.pieces = pieces;
 		this.logic = logic;
+		this.pieceSelected = null;
 	}
 	
-	boolean removePiece (PieceContainer piece) {	
+	public boolean removePiece (PieceContainer piece) {	
 		return logic.removePiece(this, piece);
 	}
 	
-	boolean addPiece (PieceContainer piece) {
+	public boolean addPiece (PieceContainer piece) {
 		return logic.addPiece(this, piece);
 	}
 	
@@ -45,7 +47,11 @@ public class Bullpen {
 		return true;
 	}
 
-	
+	/** Returns the size of ArrayList pieces */
+	public int getSize()
+	{
+		return pieces.size();
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
@@ -73,6 +79,34 @@ public class Bullpen {
 	}
 	public void setPieceSelected(PieceContainer pieceSelected)
 	{
+		// If selecting Piece
+		if(pieceSelected != null)
+		{
+			// If have a selected Piece already
+			if(this.pieceSelected != null)
+			{
+				// Then deselect that first and select the new one
+				this.pieceSelected.setIsSelected(false);
+				pieceSelected.setIsSelected(true);
+			}
+			else  // No prior selected Piece
+			{
+				// Then select new one
+				pieceSelected.setIsSelected(true);
+			}
+		}
+		else // Deselecting Piece
+		{
+			// If have a selected Piece already
+			if(this.pieceSelected != null)
+			{
+				// Then deselect it
+				this.pieceSelected.setIsSelected(false);
+			}
+			// Else nothing
+		}
+		
+		// Set selected Piece as such
 		this.pieceSelected = pieceSelected;
 	}
 	public void setPiece(int location, PieceContainer piece){
