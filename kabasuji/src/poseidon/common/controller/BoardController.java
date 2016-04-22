@@ -7,6 +7,7 @@ import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.common.view.PieceView;
 import poseidon.entities.Board;
+import poseidon.entities.BoardToBoardMove;
 import poseidon.entities.Bullpen;
 import poseidon.entities.BullpenToBoardMove;
 import poseidon.entities.LevelModel;
@@ -144,13 +145,13 @@ public class BoardController extends MouseAdapter
 		PieceView pv = bullpenView.getSelectedPiece();
 		
 		// Determine row and column of click
-		int row = me.getX() / BoardView.SQUARE_SIZE;
-		int col = me.getY() / BoardView.SQUARE_SIZE;
+		int col = me.getX() / BoardView.SQUARE_SIZE;
+		int row = me.getY() / BoardView.SQUARE_SIZE;
 		
 		// If nothing is selected
 		if(piece == null || pv == null)
 		{
-			// Then try to set a Playable Squarw
+			// Then try to set a Playable Square
 			
 			// Figure out whether to try a Mark Playable or Unplayable Move
 			if(boardModel.getSquare(row, col).getType() < 0)
@@ -182,24 +183,20 @@ public class BoardController extends MouseAdapter
 				}
 			}
 			
+			view.modelUpdated();
 			return ;
 		}
 		
 		// Else attempt to add Piece to Board
-		
-		// Add Piece to Board
-		BullpenToBoardMove move = new BullpenToBoardMove(piece, new Point(row, col));
+		BullpenToBoardMove move = new BullpenToBoardMove(game, view, piece, new Point(row, col));
 		if(move.doMove())  // If move is successful
 		{
-			// Then record it
+			// Then record it and reset Board and Bullpen's active/selection
+			boardView.setActiveDragging(null);
+			boardView.setActiveLocation(null);
+			bullpenView.setSelectedPiece(null);
 			UndoManager.instance().recordMove(move);
-			boardView.repaint();
-			bullpenView.repaint();
-		}
-		else  // Move was unsuccessful
-		{
-			// Reset Piece's location
-			piece.setLocation(null);
+			view.modelUpdated();
 		}
 	}
 	
@@ -207,7 +204,7 @@ public class BoardController extends MouseAdapter
 	/**
 	 *  Used to select a Piece for moving.
 	 *  
-	 *  Only used in Puzzle Levels.
+	 *  Only used in Puzzle Levels and sometimes in the Builder.
 	 *  
 	 *  @param me  the initiating MouseEvent
 	 */
@@ -215,24 +212,33 @@ public class BoardController extends MouseAdapter
 	public void mousePressed(MouseEvent me)
 	{
 		// Get row and column coordinates
-		int row = me.getX() / BoardView.SQUARE_SIZE;
-		int col = me.getY() / BoardView.SQUARE_SIZE;
+		int col = me.getX() / BoardView.SQUARE_SIZE;
+		int row = me.getY() / BoardView.SQUARE_SIZE;
 		
 		// Selects Piece at Square (row, col) if possible, else false
-		if(boardModel.selectSquare(row, col))
+		if(boardModel.canSelect(row, col))
 		{
+			boardView.selectPiece(row, col);
+			boardView.setActiveSource(new Point(row, col));
 			PieceView pv = boardView.getActiveDragging();
-			PieceContainer pc = pv.getModel();
+			PieceContainer piece = pv.getModel();
+			boardModel.setActiveDragged(piece);
 			
-			// If either dragging objects don't exist
-			if(pv == null || pc == null)
+			// If nothing is selected, release any dragged objects and leave
+			if(piece == null || pv == null)
 			{
-				// Then bail now, can't do anything here
+				boardView.setActiveSource(null);
+				boardView.setActiveDragging(null);
+				boardModel.setActiveDragged(null);
 				return ;
 			}
 			
+			// Notify Board that there is a Piece on it
+			boardView.setActiveLocation(me.getPoint());
 			
+			boardView.repaint();
 		}
+		// Else nothing
 	}
 	
 	
@@ -247,7 +253,31 @@ public class BoardController extends MouseAdapter
 	@Override
 	public void mouseReleased(MouseEvent me)
 	{
+		PieceContainer piece = boardModel.getActiveDragged();
 		
+		// Determine row and column of click
+		int col = me.getX() / BoardView.SQUARE_SIZE;
+		int row = me.getY() / BoardView.SQUARE_SIZE;
+		
+		// If there is no actively dragged piece
+		if(piece == null)
+		{
+			// Then bail
+			return ;
+		}
+		
+		// Attempt to add Piece to Board
+		BoardToBoardMove move = new BoardToBoardMove(view, piece,
+				boardView.getActiveSource(), new Point(row, col));
+		if(move.doMove())  // If move is successful
+		{
+			// Then record it and reset Board and Bullpen's active/selection
+			boardView.setActiveDragging(null);
+			boardView.setActiveLocation(null);
+			bullpenView.setSelectedPiece(null);
+			UndoManager.instance().recordMove(move);
+			view.modelUpdated();
+		}
 	}
 	
 	
@@ -259,6 +289,20 @@ public class BoardController extends MouseAdapter
 	@Override
 	public void mouseDragged(MouseEvent me)
 	{
+		PieceView pv = boardView.getActiveDragging();
 		
+		// If nothing is selected, leave
+		if(pv == null)
+		{
+			return ;
+		}
+		
+		// Notify Board that the Piece has changed locations
+		java.awt.Point newLocation = me.getPoint();
+		newLocation.x = newLocation.x - 14;
+		newLocation.y = newLocation.y - 14;
+		boardView.setActiveLocation(newLocation);
+		
+		boardView.repaint();
 	}
 }

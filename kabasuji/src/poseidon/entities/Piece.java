@@ -12,7 +12,7 @@ public class Piece {
 	
 	Piece(Point[] piece) {
 		this.piece = piece;
-		this.container = new PieceContainer (this, null, false);
+		this.container = new PieceContainer (this, new Point(-1, -1), false);
 	}
 	
 	/**Constructor for random pieces*/

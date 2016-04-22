@@ -10,7 +10,8 @@ public class PuzzleLevel extends LevelModel {
 
 	PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Board board, Boolean isCustom) {
 		super(bullpen, board, PUZZLE, levelName, isCustom);
-		this.allottedMoves = allottedMoves;			
+		this.allottedMoves = allottedMoves;
+		initialize();
 	}
 
 	void resetMoves() {
@@ -22,8 +23,7 @@ public class PuzzleLevel extends LevelModel {
 	 *  Decreases the number of moves remaining by 1.
 	 */
 	@Override
-	public void decrementMoves() {
-		//TODO: Change return value
+	public void decrementLimit() {
 		remainingMoves--;
 	}
 	
@@ -44,6 +44,6 @@ public class PuzzleLevel extends LevelModel {
 	@Override
 	public int getLimit()
 	{
-		return allottedMoves;
+		return remainingMoves;
 	}
 }

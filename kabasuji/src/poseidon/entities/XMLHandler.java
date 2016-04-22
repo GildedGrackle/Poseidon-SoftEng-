@@ -186,7 +186,7 @@ public class XMLHandler {
 												 Integer.parseInt(pntE.getChildText("column")));
 				subIndex++;
 			}
-			loadPieces.add(index, new PieceContainer(new Piece(loadPoints), null, false)); // TODO Location?
+			loadPieces.add(index, new PieceContainer(new Piece(loadPoints), new Point(-1, -1), false));
 			index++;
 		}
 		Bullpen loadBullpen;

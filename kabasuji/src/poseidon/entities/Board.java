@@ -122,6 +122,30 @@ public class Board {
 		return false;
 	}
 	
+	
+	/**
+	 *  Determines if the given Piece can be played at the given location.
+	 *  
+	 * @return  indicator if the placement is valid
+	 */
+	public boolean isValid(PieceContainer piece, Point location)
+	{
+		return logic.isValid(this, piece, location);
+	}
+	
+	
+	/**
+	 *  Determines if a Piece with part at (row, col) can be selected.
+	 *  
+	 * @param row  the row of the Square the Piece would contain
+	 * @param col  the column of the Square the Piece would contain
+	 * @return  indicator if there is a Piece that can be selected at (row, col)
+	 */
+	public boolean canSelect(int row, int col)
+	{
+		return logic.canSelect(this, row, col);
+	}
+	
 	public Square [] [] getPlayArea (){
 		return this.playArea;
 	}
@@ -149,6 +173,17 @@ public class Board {
 	
 	public Square getSquare(int row, int col) {
 		return playArea[row][col];
+	}
+	
+	public PieceContainer getActiveDragged()
+	{
+		return activeDragged;
+	}
+	
+	public void setActiveDragged(PieceContainer piece)
+	{
+		logic.removePiece(this, piece);
+		activeDragged = piece;
 	}
 	
 

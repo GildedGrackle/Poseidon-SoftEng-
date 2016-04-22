@@ -21,6 +21,7 @@ import poseidon.common.controller.RotateCWController;
 import poseidon.common.controller.VerticalFlipController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
+import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.LevelSelectController;
@@ -30,7 +31,7 @@ import poseidon.player.controller.LevelSelectController;
  *  
  * @author Alex Titus
  */
-public class LevelView extends JPanel
+public class LevelView extends JPanel implements IModelUpdated
 {
 	LevelPlayerModel topModel;  // The top-level representation of the game
 	LevelModel model;  // The state of the Level
@@ -178,11 +179,46 @@ public class LevelView extends JPanel
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		}
 	}
+	
+	
+	/**
+	 *  Updates display when underlying model changes.
+	 *  
+	 *  Passes updates down to bullpen, board, score, and updates the limit.
+	 */
+	@Override
+	public Boolean modelUpdated()
+	{
+		bullpen.modelUpdated();
+		board.modelUpdated();
+		scoreView.modelUpdated();
+		
+		switch(model.getGameMode())
+		{
+		case LevelModel.PUZZLE:
+			limitView.setText("<html>Moves:<br><center>" + model.getLimit() + "</center></html>");
+			break;
+		case LevelModel.LIGHTNING:
+			limitView.setText("<html>Time:<br><center>" + model.getLimit() + "</center></html>");
+			break;
+		case LevelModel.RELEASE:
+			limitView.setText("<html>Moves:<br><center>" + model.getLimit() + "</center></html>");
+			break;
+		}
+		
+		repaint();
+		
+		return true;
+	}
 
 	
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	public LevelModel getModel()
+	{
+		return model;
+	}
 	public BullpenView getBullpen()
 	{
 		return bullpen;

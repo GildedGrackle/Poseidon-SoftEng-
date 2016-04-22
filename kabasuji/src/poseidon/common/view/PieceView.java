@@ -62,7 +62,7 @@ public class PieceView extends JPanel
 			break;
 		}
 		
-		setPreferredSize(new Dimension(BullpenView.PIECE_SIZE,BullpenView.PIECE_SIZE));
+		setPreferredSize(new Dimension(BullpenView.PIECE_SIZE, BullpenView.PIECE_SIZE));
 	}
 	
 	

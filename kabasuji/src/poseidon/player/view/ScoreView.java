@@ -4,9 +4,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 
-public class ScoreView extends JPanel {
+public class ScoreView extends JPanel implements IModelUpdated{
 	LevelView game;  // The GUI object StarViewer belongs to
 	LevelModel model;  // The state of the Level
 	JLabel firstStar;  // The left-most star in the score
@@ -41,9 +42,10 @@ public class ScoreView extends JPanel {
 	
 	
 	/**
-	 *  Updates the display when the score changes
+	 *  Updates the display when the score changes.
 	 */
-	public Boolean update()
+	@Override
+	public Boolean modelUpdated()
 	{
 		ImageIcon emptyStar = new ImageIcon("images/emptyStar.gif");  // TODO Filename subject to change
 		ImageIcon filledStar = new ImageIcon("images/filledStar.gif");
@@ -71,7 +73,7 @@ public class ScoreView extends JPanel {
 			firstStar.setIcon(emptyStar);
 		}
 		
-		this.repaint();  // TODO Figure out how this works with double-buffering
+		this.repaint();
 		
 		return true;
 	}
