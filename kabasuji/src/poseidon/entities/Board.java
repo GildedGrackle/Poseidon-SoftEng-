@@ -7,6 +7,7 @@ import poseidon.entities.PieceContainer;
  * Playable board in all variations. 
  * 
  * @author Natalia
+ * @author Alex Titus
  */
 public class Board {
 	/**Largest amount of rows and columns, set for convinience and optional future modification.*/
@@ -91,6 +92,7 @@ public class Board {
 		pieces.add(piece);
 	}
 	
+	
 	/**
 	 * Deals with selected squares depending on the type.
 	 * 
@@ -102,7 +104,7 @@ public class Board {
 	 * @param col - parameters that indicate the square on the board that was selected
 	 * @return
 	 */
-	Boolean selectSquare (int row, int col) {
+	public Boolean selectSquare (int row, int col) {
 		if (logic instanceof BuilderBoardLogic) {
 			//TODO toggle squares on/off
 			return true;
@@ -122,6 +124,11 @@ public class Board {
 	
 	public Square [] [] getPlayArea (){
 		return this.playArea;
+	}
+	
+	public ArrayList<PieceContainer> getPieces()
+	{
+		return pieces;
 	}
 	
 	int getRows () {

@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+/**
+ *  Implementation of LevelModel for Puzzle Levels in Kabasuji.
+ *  
+ * @author Alex Titus
+ */
 public class PuzzleLevel extends LevelModel {
 	int allottedMoves, remainingMoves;
 
@@ -12,12 +17,19 @@ public class PuzzleLevel extends LevelModel {
 		//TODO: Change return value
 	}
 	
-	void decrementMoves () {
+	
+	/**
+	 *  Decreases the number of moves remaining by 1.
+	 */
+	@Override
+	public void decrementMoves() {
 		//TODO: Change return value
+		remainingMoves--;
 	}
 	
 	void initialize() {
 		//TODO: Change return value
+		remainingMoves = allottedMoves;
 	}
 	
 	Boolean hasWon() {
@@ -27,6 +39,7 @@ public class PuzzleLevel extends LevelModel {
 	void reset() {
 		//TODO: Change return value
 	}
+
 
 	@Override
 	public int getLimit()

@@ -20,7 +20,7 @@ import poseidon.entities.Point;
  *  
  *  @author Alex Titus
  */
-public class BullpenView extends JPanel implements Scrollable
+public class BullpenView extends JPanel implements Scrollable, IModelUpdated
 {
 	/** The state of the Bullpen. */
 	Bullpen model;
@@ -77,22 +77,17 @@ public class BullpenView extends JPanel implements Scrollable
 	 *  
 	 *  @return whether operation completed successfully
 	 */
-	public Boolean update()
+	public Boolean modelUpdated()
 	{
-		// Check if number of Pieces in the Bullpen has changed
-		if(pieces.size() != model.getPieces().size())
-		{
-			// Refresh pieces
-			createPieces();
+		// Refresh pieces
+		createPieces();
 
-			// Resize so that if the number of Pieces changed the
-			// panel will extend or contract to accomodate them
-			setPreferredSize(new Dimension(BullpenView.PIECE_SIZE * pieces.size(),
-					BullpenView.PIECE_SIZE));
-		}
-		
-		
-		repaint();  // TODO figure out if this is the correct method to call here		
+		// Resize so that if the number of Pieces changed the
+		// panel will extend or contract to accomodate them
+		setPreferredSize(new Dimension(BullpenView.PIECE_SIZE * pieces.size(),
+				BullpenView.PIECE_SIZE));
+
+		repaint();
 		
 		return true;
 	}
@@ -138,10 +133,8 @@ public class BullpenView extends JPanel implements Scrollable
 				drawer.drawRect(offsetX + 1, 1, PIECE_SIZE - 3, PIECE_SIZE - 3);
 			}
 		}
-		
-		
 	}
-
+	
 
 	/**
 	 *  Determines how much of this panel will be displayed in the containing scroll pane.
@@ -216,18 +209,5 @@ public class BullpenView extends JPanel implements Scrollable
 	public void setSelectedPiece(PieceView piece)
 	{
 		selectedPiece = piece;
-	}
-	public boolean removePiece(PieceView piece)
-	{
-		// If requested Piece isn't on the list
-		if(pieces.indexOf(piece) == -1)
-		{
-			return false;
-		}
-		else  // Piece exists
-		{
-			pieces.remove(piece);
-			return true;
-		}
 	}
 }

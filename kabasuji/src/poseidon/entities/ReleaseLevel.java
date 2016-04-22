@@ -7,8 +7,14 @@ import poseidon.entities.Bullpen;
 import poseidon.entities.LevelModel;
 import poseidon.entities.Square;
 
+/**
+ *  Implementation of LevelModel for Release Levels in Kabasuji.
+ *  
+ *  
+ * @author Alex Titus
+ */
 public class ReleaseLevel extends LevelModel{
-	int allottedPieces, piecesUsed;
+	int allottedPieces, movesRemaining;
 	Set<Integer> redNumbers, greenNumbers, yellownumbers;
 	ReleaseLevel(int allottedPieces, String name, Bullpen bullpen, Board board, Boolean isCustom){
 		super(bullpen, board, RELEASE, name, isCustom);
@@ -23,8 +29,13 @@ public class ReleaseLevel extends LevelModel{
 		//TODO: Change return value
 	}
 	
-	void decrementPieces() {
+	
+	/**
+	 *  Decreases the number of moves remaining by 1.
+	 */
+	public void decrementMoves() {
 		//TODO: Change return value
+		movesRemaining--;
 	}
 	
 	void initialize() {
