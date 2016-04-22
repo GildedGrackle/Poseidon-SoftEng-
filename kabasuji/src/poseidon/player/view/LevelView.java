@@ -13,12 +13,19 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import poseidon.common.controller.BullpenController;
+import poseidon.common.controller.PuzzleBoardController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.LevelSelectController;
 
+/**
+ *  Renders the Kabasuji game Level.
+ *  
+ * @author Alex Titus
+ */
 public class LevelView extends JPanel
 {
 	LevelPlayerModel topModel;  // The top-level representation of the game
@@ -44,11 +51,11 @@ public class LevelView extends JPanel
 	public LevelView(LevelPlayerModel model, LevelPlayerView view)
 	{
 		topModel = model;
-		this.model = topModel.getPlayingLevel();  // TODO use correct methods
+		this.model = topModel.getPlayingLevel();
 		game = view;
 		setLayout(null);
 		
-		levelTitle = new JLabel("<Level Name>");
+		levelTitle = new JLabel(this.model.getLevelName());
 		levelTitle.setOpaque(true);
 		levelTitle.setFocusable(false);
 		levelTitle.setBackground(new Color(0, 191, 255));
@@ -108,8 +115,23 @@ public class LevelView extends JPanel
 		scoreView.setBounds(10, 280, 115, 35);
 		rightPanel.add(scoreView);
 		
+		bullpen = new BullpenView(this.model.getPlayableBullpen());
+		bullpenContainer = new JScrollPane();
+		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		bullpenContainer.setViewportView(bullpen);
+		bullpenContainer.setBounds(160, 85, 360, 78);
+		add(bullpenContainer);
+		
+		board = new BoardView(this.model.getBoard());
+		board.setBounds(160, 195, 361, 361);
+		add(board);
+		
+		// Add Bullpen controllers
+		bullpen.addMouseListener(new BullpenController(this.model.getPlayableBullpen(), bullpen));
+		
 		if(this.model.getGameMode() == LevelModel.PUZZLE)  // If Puzzle Level
 		{
+			// Then label limit as Moves remaining and add appropriate Board controller
 			String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
@@ -117,6 +139,9 @@ public class LevelView extends JPanel
 			rightPanel.add(limitView);
 			limitView.setHorizontalAlignment(SwingConstants.LEFT);
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			
+			board.addMouseListener(new PuzzleBoardController(this.model.getBoard(), this.board,
+					this.model.getPlayableBullpen(), this.bullpen));
 		}
 		else if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning Level
 		{
@@ -127,6 +152,8 @@ public class LevelView extends JPanel
 			rightPanel.add(limitView);
 			limitView.setHorizontalAlignment(SwingConstants.LEFT);
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			
+//			board.addMouseListener(new LightningBoardController(this.model, board));
 		}
 		else if(this.model.getGameMode() == LevelModel.RELEASE)  // If Release Level
 		{
@@ -137,16 +164,34 @@ public class LevelView extends JPanel
 			rightPanel.add(limitView);
 			limitView.setHorizontalAlignment(SwingConstants.LEFT);
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			
+//			board.addMouseListener(new ReleaseBoardController(this.model, board));
 		}
-		
-		bullpen = new BullpenView(this.model.getPlayableBullpen());
-		bullpenContainer = new JScrollPane(bullpen);
-		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		bullpenContainer.setBounds(160, 85, 360, 70);
-		add(bullpenContainer);
-
-		board = new BoardView(this.model.getBoard());
-		board.setBounds(160, 195, 361, 361);
-		add(board);
 	}
+
+	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	public BullpenView getBullpen()
+	{
+		return bullpen;
+	}
+
+	public BoardView getBoard()
+	{
+		return board;
+	}
+
+	public void setBullpen(BullpenView bullpen)
+	{
+		this.bullpen = bullpen;
+	}
+
+	public void setBoard(BoardView board)
+	{
+		this.board = board;
+	}
+	
+	
 }
