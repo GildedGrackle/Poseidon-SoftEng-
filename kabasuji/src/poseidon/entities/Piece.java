@@ -65,7 +65,7 @@ public class Piece {
 	/**
 	 * Rotates the piece Clockwise
 	 */
-	void rotateCW() {
+	public void rotateCW() {
 		Point newPivotPoint;
 		int row, col;		
 		newPivotPoint = findBotLeft();				//Finding the bottom left piece as the new pivot
@@ -84,7 +84,7 @@ public class Piece {
 	/**
 	 * Rotates the piece counter Clockwise
 	 */
-	void rotateCCW() {
+	public void rotateCCW() {
 		Point newPivotPoint;
 		int row, col;		
 		newPivotPoint = findTopRight();				//Finding the top right piece as the new pivot
@@ -103,7 +103,7 @@ public class Piece {
 	/**
 	 * Horizontally flips the piece
 	 */
-	void flipHorizontal() {
+	public void flipHorizontal() {
 		Point newPivotPoint;
 		int col;
 		
@@ -118,7 +118,7 @@ public class Piece {
 	/**
 	 *  Vertically flips the piece
 	 */
-	void flipVertical() {
+	public void flipVertical() {
 		Point newPivotPoint;
 		int row;
 		

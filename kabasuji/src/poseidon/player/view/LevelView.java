@@ -13,12 +13,23 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import poseidon.common.controller.BullpenController;
+import poseidon.common.controller.BoardController;
+import poseidon.common.controller.HorizontalFlipController;
+import poseidon.common.controller.RotateCCWController;
+import poseidon.common.controller.RotateCWController;
+import poseidon.common.controller.VerticalFlipController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.LevelSelectController;
 
+/**
+ *  Renders the Kabasuji game Level.
+ *  
+ * @author Alex Titus
+ */
 public class LevelView extends JPanel
 {
 	LevelPlayerModel topModel;  // The top-level representation of the game
@@ -31,7 +42,8 @@ public class LevelView extends JPanel
 	JButton finishButton;  // To prematurely end a Level
 	JButton rotateCWButton;  // To rotate a Piece clockwise
 	JButton rotateCCWButton;  // To rotate a Piece counter-clockwise
-	JButton flipButton;  // To flip a Piece
+	JButton flipHButton;  // To flip a Piece horizontally
+	JButton flipVButton;  // To flip a Piece vertically
 	JScrollPane bullpenContainer;  // Allows Bullpen to be scrolled if more than 7 Pieces
 	JLabel levelTitle;  // Name of the Level
 	JLabel scoreLabel;  // The label for the star-based score
@@ -44,11 +56,11 @@ public class LevelView extends JPanel
 	public LevelView(LevelPlayerModel model, LevelPlayerView view)
 	{
 		topModel = model;
-		this.model = topModel.getPlayingLevel();  // TODO use correct methods
+		this.model = topModel.getPlayingLevel();
 		game = view;
 		setLayout(null);
 		
-		levelTitle = new JLabel("<Level Name>");
+		levelTitle = new JLabel(this.model.getLevelName());
 		levelTitle.setOpaque(true);
 		levelTitle.setFocusable(false);
 		levelTitle.setBackground(new Color(0, 191, 255));
@@ -56,6 +68,24 @@ public class LevelView extends JPanel
 		levelTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		levelTitle.setBounds(150, 0, 380, 75);
 		add(levelTitle);
+		
+		bullpen = new BullpenView(this.model.getPlayableBullpen());
+		bullpenContainer = new JScrollPane();
+		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		bullpenContainer.setViewportView(bullpen);
+		bullpenContainer.setBounds(160, 85, 360, 78);
+		add(bullpenContainer);
+		
+		board = new BoardView(this.model.getBoard());
+		board.setBounds(160, 195, 361, 361);
+		add(board);
+		
+		// Add Bullpen and Board controllers
+		bullpen.addMouseListener(new BullpenController(this.model.getPlayableBullpen(), bullpen));
+		BoardController boardController = new BoardController(this.model.getBoard(), this.board,
+				this.model.getPlayableBullpen(), this.bullpen);
+		board.addMouseListener(boardController);
+		board.addMouseMotionListener(boardController);
 		
 		JPanel leftPanel = new JPanel();
 		leftPanel.setBackground(new Color(0, 191, 255));
@@ -87,17 +117,26 @@ public class LevelView extends JPanel
 		rightPanel.setLayout(null);
 		
 		rotateCCWButton = new JButton("<");
-		rotateCCWButton.setBounds(10, 125, 45, 45);
+		rotateCCWButton.setBounds(10, 160, 45, 45);
+		rotateCCWButton.addActionListener(new RotateCCWController(bullpen));
 		rightPanel.add(rotateCCWButton);
 		
 		rotateCWButton = new JButton(">");
-		rotateCWButton.setBounds(93, 125, 45, 45);
+		rotateCWButton.setBounds(93, 160, 45, 45);
+		rotateCWButton.addActionListener(new RotateCWController(bullpen));
 		rightPanel.add(rotateCWButton);
 		
-		flipButton = new JButton("Flip");
-		flipButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		flipButton.setBounds(10, 75, 130, 40);
-		rightPanel.add(flipButton);
+		flipHButton = new JButton("<html><center>Horizontal<br>Flip</center></html>");
+		flipHButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		flipHButton.setBounds(10, 100, 130, 50);
+		flipHButton.addActionListener(new HorizontalFlipController(bullpen));
+		rightPanel.add(flipHButton);
+		
+		flipVButton = new JButton("<html><center>Vertical<br>Flip</center></html>");
+		flipVButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		flipVButton.setBounds(10, 40, 130, 50);
+		flipVButton.addActionListener(new VerticalFlipController(bullpen));
+		rightPanel.add(flipVButton);
 		
 		scoreLabel = new JLabel("Score:");
 		scoreLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -110,6 +149,7 @@ public class LevelView extends JPanel
 		
 		if(this.model.getGameMode() == LevelModel.PUZZLE)  // If Puzzle Level
 		{
+			// Then label limit as Moves remaining
 			String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
 			limitView = new JLabel(limitDisplay);
 			limitView.setBackground(Color.WHITE);
@@ -138,15 +178,31 @@ public class LevelView extends JPanel
 			limitView.setHorizontalAlignment(SwingConstants.LEFT);
 			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		}
-		
-		bullpen = new BullpenView(this.model.getPlayableBullpen());
-		bullpenContainer = new JScrollPane(bullpen);
-		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		bullpenContainer.setBounds(160, 85, 360, 70);
-		add(bullpenContainer);
-
-		board = new BoardView(this.model.getBoard());
-		board.setBounds(160, 195, 361, 361);
-		add(board);
 	}
+
+	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	public BullpenView getBullpen()
+	{
+		return bullpen;
+	}
+
+	public BoardView getBoard()
+	{
+		return board;
+	}
+
+	public void setBullpen(BullpenView bullpen)
+	{
+		this.bullpen = bullpen;
+	}
+
+	public void setBoard(BoardView board)
+	{
+		this.board = board;
+	}
+	
+	
 }
