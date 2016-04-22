@@ -21,7 +21,7 @@ import poseidon.player.view.LevelView;
  *  
  * @author Alex Titus
  */
-public class PuzzleBoardController extends MouseAdapter
+public class BoardController extends MouseAdapter
 {
 	/** The Board state. */
 	Board boardModel;
@@ -38,7 +38,7 @@ public class PuzzleBoardController extends MouseAdapter
 	 * @param model  the Level that contains the Board
 	 * @param view  the represenation of the Board
 	 */
-	public PuzzleBoardController(Board boardModel, BoardView boardView,
+	public BoardController(Board boardModel, BoardView boardView,
 			Bullpen bullpenModel, BullpenView bullpenView)
 	{
 		this.boardModel = boardModel;
@@ -108,7 +108,10 @@ public class PuzzleBoardController extends MouseAdapter
 		}
 		
 		// Notify Board that the Piece has changed locations
-		boardView.setActiveLocation(me.getPoint());
+		java.awt.Point newLocation = me.getPoint();
+		newLocation.x = newLocation.x - 14;
+		newLocation.y = newLocation.y - 14;
+		boardView.setActiveLocation(newLocation);
 		
 		boardView.repaint();
 	}
@@ -139,15 +142,21 @@ public class PuzzleBoardController extends MouseAdapter
 		piece.setLocation(new Point(row, col));
 		
 		// Add Piece to Board
-		boardModel.addPiece(piece);
-		boardView.addPiece(pv);
-		bullpenModel.removePiece(piece);
-		bullpenView.removePiece(pv);
-		boardView.setActiveDragging(null);
-		boardView.setActiveLocation(null);
-		bullpenView.setSelectedPiece(null);
-		pv.setOnBoard(true);
-		
+		if(boardModel.addPiece(piece))  // If add is successful
+		{
+			boardView.addPiece(pv);
+			bullpenModel.removePiece(piece);
+			bullpenView.removePiece(pv);
+			boardView.setActiveDragging(null);
+			boardView.setActiveLocation(null);
+			bullpenView.setSelectedPiece(null);
+			pv.setOnBoard(true);
+		}
+		else  // Add failed
+		{
+			piece.setLocation(null);
+		}
+
 		boardView.repaint();
 		bullpenView.repaint();
 	}

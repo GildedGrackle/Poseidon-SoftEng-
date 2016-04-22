@@ -31,6 +31,7 @@ public class PieceContainer {
 	public boolean equals(Object o) {
 		if (!(o instanceof PieceContainer)) { return false; }
 		PieceContainer newPiece = (PieceContainer) o;
+		// TODO need to check if getLocation() returns null
 		if(this.piece.equals(newPiece.getPiece())&&this.location.equals(newPiece.getLocation())) { return true; }
 		return false;
 	}

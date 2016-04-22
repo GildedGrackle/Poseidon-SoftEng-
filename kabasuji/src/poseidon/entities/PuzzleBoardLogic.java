@@ -18,7 +18,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	 * @return Boolean - Indicates whether the addition was successful
 	 */
 	public Boolean addPiece(Board board, PieceContainer piece) {
-		Point location = piece.getLocation();
+		Point location = piece.getLocation();  //TODO need to check if this returns null
 		Point [] pieceArray = piece.getPiece().getPiece();
 		Square [] [] playArea = board.getPlayArea();
 		int i;
