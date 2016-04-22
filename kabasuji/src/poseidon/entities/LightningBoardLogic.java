@@ -53,7 +53,7 @@ public class LightningBoardLogic implements IBoardLogic {
 	 * @return Boolean - Always false.
 	 */
 	public Boolean removePiece(Board board, PieceContainer piece) {
-		return false;							
+		return false;
 	}
 	
 	

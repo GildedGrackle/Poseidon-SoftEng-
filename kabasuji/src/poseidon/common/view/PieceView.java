@@ -23,8 +23,6 @@ public class PieceView extends JPanel
 	Color pieceColor;
 	/** The color of the edges of the constituent squares of this Piece. */
 	Color pieceBorder;
-	/** Indicates if this is being rendered on the Board or in the Bullpen. */
-	boolean onBoard;
 	
 
 	/**
@@ -38,7 +36,6 @@ public class PieceView extends JPanel
 		setOpaque(false);
 		this.model = model;
 		this.view = view;
-		onBoard = false;
 		
 		// Pick a random color for the Piece
 		switch(new Random().nextInt(5))
@@ -83,9 +80,5 @@ public class PieceView extends JPanel
 	public Color getPieceBorder()
 	{
 		return pieceBorder;
-	}
-	public void setOnBoard(boolean onBoard)
-	{
-		this.onBoard = onBoard;
 	}
 }

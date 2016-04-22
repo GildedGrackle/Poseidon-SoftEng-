@@ -74,6 +74,6 @@ public class BullpenController extends MouseAdapter
 		}
 		
 		// Change view to reflect change
-		view.update();
+		view.modelUpdated();
 	}
 }

@@ -8,9 +8,13 @@ import poseidon.common.view.BullpenView;
 import poseidon.common.view.PieceView;
 import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
+import poseidon.entities.BullpenToBoardMove;
 import poseidon.entities.LevelModel;
+import poseidon.entities.MarkPlayableSquareMove;
+import poseidon.entities.MarkUnplayableSquareMove;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
+import poseidon.entities.UndoManager;
 import poseidon.player.view.LevelView;
 
 /**
@@ -23,13 +27,17 @@ import poseidon.player.view.LevelView;
  */
 public class BoardController extends MouseAdapter
 {
+	/** The Level (Kabasuji game) state. */
+	LevelModel game;
+	/** The visual representation of the Level. */
+	LevelView view;
 	/** The Board state. */
 	Board boardModel;
-	/** The visual representation of the Board */
+	/** The visual representation of the Board. */
 	BoardView boardView;
 	/** The Bullpen state. */
 	Bullpen bullpenModel;
-	/** The visual representation of the Bullpen */
+	/** The visual representation of the Bullpen. */
 	BullpenView bullpenView;
 
 	
@@ -38,18 +46,21 @@ public class BoardController extends MouseAdapter
 	 * @param model  the Level that contains the Board
 	 * @param view  the represenation of the Board
 	 */
-	public BoardController(Board boardModel, BoardView boardView,
-			Bullpen bullpenModel, BullpenView bullpenView)
+	public BoardController(LevelModel game, LevelView view)
 	{
-		this.boardModel = boardModel;
-		this.boardView = boardView;
-		this.bullpenModel = bullpenModel;
-		this.bullpenView = bullpenView;
+		this.game = game;
+		this.view = view;
+		this.boardModel = game.getBoard();
+		this.boardView = view.getBoard();
+		this.bullpenModel = game.getPlayableBullpen();
+		this.bullpenView = view.getBullpen();
 	}
 	
 	
 	/**
 	 *  Draws the Piece selected in the Bullpen onto the Board.
+	 *  
+	 *  @param me  the initiating MouseEvent
 	 */
 	@Override
 	public void mouseEntered(MouseEvent me)
@@ -66,7 +77,6 @@ public class BoardController extends MouseAdapter
 		// Notify Board that there is a Piece on it
 		boardView.setActiveDragging(pv);
 		boardView.setActiveLocation(me.getPoint());
-		pv.setOnBoard(true);
 		
 		boardView.repaint();
 	}
@@ -74,6 +84,8 @@ public class BoardController extends MouseAdapter
 	
 	/**
 	 *  Removes the active dragging Piece from the Board.
+	 *  
+	 *  @param me  the initiating MouseEvent
 	 */
 	@Override
 	public void mouseExited(MouseEvent me)
@@ -90,7 +102,6 @@ public class BoardController extends MouseAdapter
 		// Notify Board that there is a Piece on it
 		boardView.setActiveDragging(null);
 		boardView.setActiveLocation(null);
-		pv.setOnBoard(false);
 		
 		boardView.repaint();
 	}
@@ -123,6 +134,8 @@ public class BoardController extends MouseAdapter
 	 *  Places the selected Piece in the Bullpen, removing it from the Bullpen,
 	 *  adding it to the Board, and updating the PieceContainer's location with
 	 *  its (row, column) coordinates on the Board.
+	 *  
+	 *  @param me  the initiating MouseEvent
 	 */
 	@Override
 	public void mouseClicked(MouseEvent me)
@@ -130,44 +143,107 @@ public class BoardController extends MouseAdapter
 		PieceContainer piece = bullpenModel.getPieceSelected();
 		PieceView pv = bullpenView.getSelectedPiece();
 		
-		// If nothing is selected, leave
-		if(piece == null || pv == null)
-		{
-			return ;
-		}
-		
 		// Determine row and column of click
 		int row = me.getX() / BoardView.SQUARE_SIZE;
 		int col = me.getY() / BoardView.SQUARE_SIZE;
-		piece.setLocation(new Point(row, col));
+		
+		// If nothing is selected
+		if(piece == null || pv == null)
+		{
+			// Then try to set a Playable Squarw
+			
+			// Figure out whether to try a Mark Playable or Unplayable Move
+			if(boardModel.getSquare(row, col).getType() < 0)
+			{
+				// Is UnplayableSquare, try to mark as Playable
+				MarkPlayableSquareMove move =
+						new MarkPlayableSquareMove(boardModel, new Point(row, col));
+				
+				// Attempt move
+				if(move.doMove())  // If successful
+				{
+					// Then record the move
+					UndoManager.instance().recordMove(move);
+				}
+				
+				// Now finished
+			}
+			else  // Is Playable Square
+			{
+				// Try to mark as Unplayable
+				MarkUnplayableSquareMove move =
+						new MarkUnplayableSquareMove(boardModel, new Point(row, col));
+				
+				// Attempt move
+				if(move.doMove())  // If successful
+				{
+					// Then record the move
+					UndoManager.instance().recordMove(move);
+				}
+			}
+			
+			return ;
+		}
+		
+		// Else attempt to add Piece to Board
 		
 		// Add Piece to Board
-		if(boardModel.addPiece(piece))  // If add is successful
+		BullpenToBoardMove move = new BullpenToBoardMove(piece, new Point(row, col));
+		if(move.doMove())  // If move is successful
 		{
-			boardView.addPiece(pv);
-			bullpenModel.removePiece(piece);
-			bullpenView.removePiece(pv);
-			boardView.setActiveDragging(null);
-			boardView.setActiveLocation(null);
-			bullpenView.setSelectedPiece(null);
-			pv.setOnBoard(true);
+			// Then record it
+			UndoManager.instance().recordMove(move);
+			boardView.repaint();
+			bullpenView.repaint();
 		}
-		else  // Add failed
+		else  // Move was unsuccessful
 		{
+			// Reset Piece's location
 			piece.setLocation(null);
 		}
-
-		boardView.repaint();
-		bullpenView.repaint();
 	}
 	
+	
+	/**
+	 *  Used to select a Piece for moving.
+	 *  
+	 *  Only used in Puzzle Levels.
+	 *  
+	 *  @param me  the initiating MouseEvent
+	 */
 	@Override
 	public void mousePressed(MouseEvent me)
 	{
+		// Get row and column coordinates
+		int row = me.getX() / BoardView.SQUARE_SIZE;
+		int col = me.getY() / BoardView.SQUARE_SIZE;
 		
+		// Selects Piece at Square (row, col) if possible, else false
+		if(boardModel.selectSquare(row, col))
+		{
+			PieceView pv = boardView.getActiveDragging();
+			PieceContainer pc = pv.getModel();
+			
+			// If either dragging objects don't exist
+			if(pv == null || pc == null)
+			{
+				// Then bail now, can't do anything here
+				return ;
+			}
+			
+			
+		}
 	}
 	
 	
+	/**
+	 *  Used to place a Piece from the Board.
+	 *  
+	 *  Handles either a Board-to-Board move or a Board-to-Bullpen move
+	 *  TODO determine if Board2Bullpen is actually on mouseExited
+	 * 
+	 *  @param me  the initiating MouseEvent
+	 */
 	@Override
 	public void mouseReleased(MouseEvent me)
 	{
@@ -175,6 +251,11 @@ public class BoardController extends MouseAdapter
 	}
 	
 	
+	/**
+	 *  Used to move a Piece selected from the Board.
+	 * 
+	 *  @param me  the initiating MouseEvent
+	 */
 	@Override
 	public void mouseDragged(MouseEvent me)
 	{

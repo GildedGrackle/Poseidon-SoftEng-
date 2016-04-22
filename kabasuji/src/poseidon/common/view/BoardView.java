@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import poseidon.entities.Board;
 import poseidon.entities.LevelModel;
 import poseidon.entities.Piece;
+import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.entities.ReleaseNumber;
 import poseidon.entities.Square;
@@ -19,7 +20,7 @@ import poseidon.entities.Square;
  *  
  *  @author Alex Titus
  */
-public class BoardView extends JPanel
+public class BoardView extends JPanel implements IModelUpdated
 {
 	/** The model of the Board */
 	Board board;
@@ -49,9 +50,24 @@ public class BoardView extends JPanel
 	{
 		super.paintComponent(g);
 		
+		// Draw playable Squares
+		drawPlayable(g);
+		
+		// Now draw Pieces
+		drawPieces(g);
+		
+		// Now draw active dragging Piece
+		drawActiveDragging(g);
+		
+		// Now draw hints
+		drawHints(g);
+	}
+	
+	
+	void drawPlayable(Graphics g)
+	{
 		Graphics drawer = g.create();
 		
-		// Draw playable Squares
 		Square[][] playArea = board.getPlayArea();
 		for(int i = 0; i < 12; i++)
 		{
@@ -72,8 +88,13 @@ public class BoardView extends JPanel
 				}
 			}
 		}
+	}
+	
+	
+	void drawPieces(Graphics g)
+	{
+		Graphics drawer = g.create();
 		
-		// Now draw Pieces
 		for(PieceView pv : pieces)
 		{
 			Piece p = pv.getModel().getPiece();
@@ -101,8 +122,13 @@ public class BoardView extends JPanel
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 			}
 		}
+	}
+	
+	
+	void drawActiveDragging(Graphics g)
+	{
+		Graphics drawer = g.create();
 		
-		// Now draw active dragging Piece
 		if(activeDragging != null)  // If there is one
 		{
 			Piece p = activeDragging.getModel().getPiece();
@@ -118,23 +144,6 @@ public class BoardView extends JPanel
 				drawer.setColor(activeDragging.getPieceBorder());
 				drawer.drawRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
-			}
-		}
-		
-		// Now draw hints
-		drawer.setColor(Color.yellow);
-		for(int i = 0; i < Board.MAXROWS; i++)
-		{
-			for(int j = 0; j < Board.MAXCOLS; j++)
-			{
-				// If the Square is a hint space
-				if(playArea[i][j].getIsHint())
-				{
-					drawer.drawRoundRect(SQUARE_SIZE * i + 1, SQUARE_SIZE * j + 1,
-							SQUARE_SIZE - 3, SQUARE_SIZE - 3, 3, 3);
-					drawer.drawRoundRect(SQUARE_SIZE * i + 2, SQUARE_SIZE * j + 2,
-							SQUARE_SIZE - 5, SQUARE_SIZE - 5, 3, 3);
-				}
 			}
 		}
 	}
@@ -162,6 +171,47 @@ public class BoardView extends JPanel
 		// Draw number
 		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * row + 10, SQUARE_SIZE * col + 10);
 	}
+	
+	
+	void drawHints(Graphics g)
+	{
+		Graphics drawer = g.create();
+		Square[][] playArea = board.getPlayArea();
+		
+		drawer.setColor(Color.yellow);
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				// If the Square is a hint space
+				if(playArea[i][j].getIsHint())
+				{
+					drawer.drawRoundRect(SQUARE_SIZE * i + 1, SQUARE_SIZE * j + 1,
+							SQUARE_SIZE - 3, SQUARE_SIZE - 3, 3, 3);
+					drawer.drawRoundRect(SQUARE_SIZE * i + 2, SQUARE_SIZE * j + 2,
+							SQUARE_SIZE - 5, SQUARE_SIZE - 5, 3, 3);
+				}
+			}
+		}
+	}
+	
+	
+	@Override
+	public Boolean modelUpdated()
+	{
+		// Update displayed Pieces
+		pieces = new ArrayList<PieceView>(board.getPieces().size());
+		
+		for(PieceContainer p : board.getPieces())
+		{
+			pieces.add(new PieceView(p, null));
+		}
+		
+		// Update display
+		repaint();
+		
+		return true;
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
@@ -180,10 +230,6 @@ public class BoardView extends JPanel
 	public void setPieces(ArrayList<PieceView> pieces)
 	{
 		this.pieces = pieces;
-	}
-	public void addPiece(PieceView piece)
-	{
-		pieces.add(piece);
 	}
 	public void setActiveDragging(PieceView activeDragging)
 	{
