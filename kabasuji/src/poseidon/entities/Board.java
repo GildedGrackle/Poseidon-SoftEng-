@@ -21,8 +21,10 @@ public class Board {
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
 	
 	/**Piece that is currently selected*/ 
-	//MIGHT NEED TO CHANGE
 	PieceContainer activeDragged;
+	
+	/** The coordinates of the origin of the active dragging Piece. */
+	Point activeSource;
 	
 	/**The functioning of the board, game mode/builder*/
 	IBoardLogic logic;	
@@ -67,13 +69,13 @@ public class Board {
 	}
 	
 	/**
-	 * Removes a piece from the board depending on the type of board.
+	 * Removes a Piece from the board depending on the type of board.
 	 * 
-	 * @param piece - The piece that needs to be removed from the board. 
+	 * @param piece - The Piece that needs to be removed from the board. 
 	 * @return Boolean - Indicates whether the removal was successful.
 	 */
-	public Boolean removePiece (Piece piece) {
-		return logic.removePiece(this, piece.getContainer());							
+	public Boolean removePiece (PieceContainer piece) {
+		return logic.removePiece(this, piece);
 	}
 	
 	/**
@@ -146,6 +148,16 @@ public class Board {
 		return logic.canSelect(this, row, col);
 	}
 	
+	
+	/**
+	 *  Returns the active dragging Piece to its source.
+	 */
+	public void returnPiece()
+	{
+		activeDragged.setLocation(activeSource);
+		addPiece(activeDragged);
+	}
+	
 	public Square [] [] getPlayArea (){
 		return this.playArea;
 	}
@@ -180,10 +192,32 @@ public class Board {
 		return activeDragged;
 	}
 	
+	public Point getActiveSource()
+	{
+		return activeSource;
+	}
+	
+	
+	/**
+	 *  Sets the specified Piece as the active dragging Piece.
+	 *  
+	 *  Empties the Squares occupied by the Piece.
+	 * @param piece  a Piece that is on the Board
+	 */
 	public void setActiveDragged(PieceContainer piece)
 	{
-		logic.removePiece(this, piece);
+		// If not resetting activeDragged
+		if(piece != null && activeSource.getCol() != -1 && activeSource.getRow() != -1)
+		{
+			// Then remove new active dragging Piece from Board
+			logic.removePiece(this, piece);
+		}
 		activeDragged = piece;
+	}
+	
+	public void setActiveSource(Point activeSource)
+	{
+		this.activeSource = activeSource;
 	}
 	
 

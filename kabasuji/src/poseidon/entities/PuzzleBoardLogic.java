@@ -89,7 +89,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 		for (Point pt : piece.getPiece().getPiece()) {
 			int pointRow = pt.getRow() + location.getRow();		//finds the theoretical row of the square
 			int pointCol = pt.getCol() + location.getCol();		//finds the theoretical col of the square
-			if (pointRow >= board.getRows() || pointCol>=board.getCols() ||
+			if (pointRow >= board.getRows() || pointCol>=board.getCols() || pointRow < 0 || pointCol < 0 ||
 					playArea[pointRow][pointCol].isFilled() || (board.getSquare(pointRow, pointCol).getType() < 0)) {
 								//Checks that the piece isn't covering an existing one, isn't outside the border
 								//and isn't on top of a non-playable square.

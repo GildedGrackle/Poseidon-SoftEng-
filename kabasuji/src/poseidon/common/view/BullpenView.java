@@ -104,9 +104,9 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated
 		Graphics drawer = g.create();
 		
 		// Draw Pieces
-		for(int i = 0; i < pieces.size(); i++)
+		int i = 0;
+		for(PieceView pv : pieces)
 		{
-			PieceView pv = pieces.get(i);
 			Piece p = pv.getModel().getPiece();
 			int offsetX = PIECE_SIZE * i;
 			for(Point pt : p.getPiece())
@@ -129,7 +129,21 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated
 				drawer.drawRect(offsetX + 0, 0, PIECE_SIZE - 1, PIECE_SIZE - 1);
 				drawer.drawRect(offsetX + 1, 1, PIECE_SIZE - 3, PIECE_SIZE - 3);
 			}
+			
+			i++;
 		}
+	}
+	
+	
+	/**
+	 *  Adds given PieceView to the list of PieceViews.
+	 *  
+	 * @param piece  PieceView to add
+	 * @return  indicator of operation's success
+	 */
+	public boolean addPiece(PieceView piece)
+	{
+		return pieces.add(piece);
 	}
 	
 	
@@ -137,10 +151,11 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated
 	 *  Removes given PieceView from the list of PieceViews.
 	 *  
 	 * @param piece  the PieceView to remove
+	 * @return  indicator of if operation changed list
 	 */
-	public void removePiece(PieceView piece)
+	public boolean removePiece(PieceView piece)
 	{
-		pieces.remove(piece);
+		return pieces.remove(piece);
 	}
 	
 

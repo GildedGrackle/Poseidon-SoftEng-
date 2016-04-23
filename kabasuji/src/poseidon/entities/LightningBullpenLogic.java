@@ -2,8 +2,9 @@ package poseidon.entities;
 
 /**
  * Handles the actions on the bullpen in the lightning mode.
+ * 
  * @author Natalia
- *
+ * @author Alex Titus
  */
 public class LightningBullpenLogic implements IBullpenLogic {
 	LightningBullpenLogic() {
@@ -18,7 +19,14 @@ public class LightningBullpenLogic implements IBullpenLogic {
 	 * @return Boolean - Returns false in any case.
 	 */
 	public Boolean addPiece(Bullpen bullpen, PieceContainer piece) {
-		return false;										
+		if(bullpen.getPieces().add(piece))
+		{
+			return true;
+		}
+		else  // Operation failed
+		{
+			return false;
+		}
 	}
 	
 	
@@ -29,17 +37,15 @@ public class LightningBullpenLogic implements IBullpenLogic {
 	 * @param piece - The container of the piece that needs to be added to the bullpen.
 	 */
 	Boolean addRandomPiece(Bullpen bullpen, PieceContainer piece) {
-		//TODO figure out how to randomly generate pieces
-		return false;
-	}
-	
-	Boolean addRandomPiece(Bullpen bullpen, PieceContainer piece, int location) {
-		if(bullpen.getPieces().get(location) != null) {
-			Piece newPiece = new Piece();					//Generates a new, random piece
-			bullpen.setPiece(location, newPiece.getContainer());
+		PieceContainer pc = new PieceContainer(new Point(-1, -1), false);
+		if(bullpen.getPieces().add(pc))
+		{
 			return true;
 		}
-		return false;
+		else  // Operation failed
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -52,9 +58,8 @@ public class LightningBullpenLogic implements IBullpenLogic {
 	 * @return Boolean - true if piece is removed and replaced, false if piece isn't found
 	 */
 	public Boolean removePiece(Bullpen bullpen, PieceContainer piece) {
-		int pieceLocation = bullpen.getLocation(piece);
-		if(pieceLocation == -1) {return false;}				//A case where the piece isn't found on the bullpen
-		addRandomPiece(bullpen, piece, pieceLocation);
+		if(!bullpen.getPieces().remove(piece)) {return false;}				//A case where the piece isn't found on the bullpen
+		addRandomPiece(bullpen, piece);
 		return true; 	
 	}
 }

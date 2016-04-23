@@ -33,6 +33,11 @@ public class Bullpen {
 		return logic.removePiece(this, piece);
 	}
 	
+	/**
+	 *  Adds given Piece to the Bullpen.
+	 * @param piece  the Piece to add
+	 * @return indication if the operation completed successfully
+	 */
 	public boolean addPiece (PieceContainer piece) {
 		return logic.addPiece(this, piece);
 	}

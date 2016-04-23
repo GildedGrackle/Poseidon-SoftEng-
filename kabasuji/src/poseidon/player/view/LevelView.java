@@ -33,23 +33,40 @@ import poseidon.player.controller.LevelSelectController;
  */
 public class LevelView extends JPanel implements IModelUpdated
 {
-	LevelPlayerModel topModel;  // The top-level representation of the game
-	LevelModel model;  // The state of the Level
-	LevelPlayerView game;  // The top-level GUI object
-	BullpenView bullpen;  // The graphical representation of the Bullpen
-	BoardView board;  // The graphical representation of the Board
-	JButton resetButton;  // To return the board to its initial state
-	JButton quitButton;  // To return to the Level Select screen (LevelSelectView)
-	JButton finishButton;  // To prematurely end a Level
-	JButton rotateCWButton;  // To rotate a Piece clockwise
-	JButton rotateCCWButton;  // To rotate a Piece counter-clockwise
-	JButton flipHButton;  // To flip a Piece horizontally
-	JButton flipVButton;  // To flip a Piece vertically
-	JScrollPane bullpenContainer;  // Allows Bullpen to be scrolled if more than 7 Pieces
-	JLabel levelTitle;  // Name of the Level
-	JLabel scoreLabel;  // The label for the star-based score
-	ScoreView scoreView;  // The score for the Level, in stars
-	JLabel limitView;  // The current move/time limit for the Level
+	/** The top-level representation of the game. */
+	LevelPlayerModel topModel;
+	/** The state of the Level. */
+	LevelModel model;
+	/** The top-level GUI object. */
+	LevelPlayerView game;
+	/** The graphical representation of the Bullpen. */
+	BullpenView bullpen;
+	/** The graphical representation of the Board. */
+	BoardView board;
+	/** To return the board to its initial state. */
+	JButton resetButton;
+	/** To return to the Level Select screen (LevelSelectView). */
+	JButton quitButton;
+	/** To prematurely end a Level. */
+	JButton finishButton;
+	/** To rotate a Piece clockwise. */
+	JButton rotateCWButton;
+	/** To rotate a Piece counter-clockwise. */
+	JButton rotateCCWButton;
+	/** To flip a Piece horizontally. */
+	JButton flipHButton;
+	/** To flip a Piece vertically. */
+	JButton flipVButton;
+	/** Allows Bullpen to be scrolled if more than 7 Pieces. */
+	JScrollPane bullpenContainer;
+	/** Name of the Level. */
+	JLabel levelTitle;
+	/** The label for the star-based score. */
+	JLabel scoreLabel;
+	/** The score for the Level, in stars. */
+	ScoreView scoreView;
+	/** The current move/time limit for the Level. */
+	JLabel limitView;
 
 	/**
 	 * Create the panel.
@@ -82,7 +99,7 @@ public class LevelView extends JPanel implements IModelUpdated
 		add(board);
 		
 		// Add Bullpen and Board controllers
-		bullpen.addMouseListener(new BullpenController(this.model.getPlayableBullpen(), bullpen));
+		bullpen.addMouseListener(new BullpenController(this.model.getPlayableBullpen(), bullpen, board));
 		BoardController boardController = new BoardController(this.model, this);
 		board.addMouseListener(boardController);
 		board.addMouseMotionListener(boardController);

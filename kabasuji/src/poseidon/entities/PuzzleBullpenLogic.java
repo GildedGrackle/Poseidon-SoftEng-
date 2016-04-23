@@ -23,7 +23,7 @@ public class PuzzleBullpenLogic implements IBullpenLogic{
 	 */
 	public Boolean addPiece(Bullpen bullpen, PieceContainer piece) {
 		bullpen.addPieceToList(piece);
-		return null;
+		return true;
 	}
 	
 	/**

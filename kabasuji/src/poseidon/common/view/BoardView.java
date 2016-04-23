@@ -30,8 +30,6 @@ public class BoardView extends JPanel implements IModelUpdated
 	PieceView activeDragging;
 	/** Location of the top-left corner (anchor) of activeDragging */
 	java.awt.Point activeLocation;
-	/** The coordinates of the originating Square of a drag event. */
-	Point activeSource;
 	/** The size (height or width) of a Square when displayed on the Board */
 	public static final int SQUARE_SIZE = 30;
 	public static final int PIECE_SIZE = 180;
@@ -59,7 +57,10 @@ public class BoardView extends JPanel implements IModelUpdated
 		drawPieces(g);
 		
 		// Now draw active dragging Piece
-		drawActiveDragging(g);
+		if(activeDragging != null)  // If there is one
+		{
+			drawActiveDragging(g);
+		}
 		
 		// Now draw hints
 		drawHints(g);
@@ -136,23 +137,20 @@ public class BoardView extends JPanel implements IModelUpdated
 	void drawActiveDragging(Graphics g)
 	{
 		Graphics drawer = g.create();
-		
-		if(activeDragging != null)  // If there is one
+
+		Piece p = activeDragging.getModel().getPiece();
+		int boardOffsetX = activeLocation.x;
+		int boardOffsetY = activeLocation.y;
+		for(Point pt : p.getPiece())
 		{
-			Piece p = activeDragging.getModel().getPiece();
-			int boardOffsetX = activeLocation.x;
-			int boardOffsetY = activeLocation.y;
-			for(Point pt : p.getPiece())
-			{
-				int pieceOffsetX = 2 + SQUARE_SIZE * pt.getRow();
-				int pieceOffsetY = 2 + SQUARE_SIZE * pt.getCol();
-				drawer.setColor(activeDragging.getPieceColor());
-				drawer.fillRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
-						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
-				drawer.setColor(activeDragging.getPieceBorder());
-				drawer.drawRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
-						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
-			}
+			int pieceOffsetX = 2 + SQUARE_SIZE * pt.getRow();
+			int pieceOffsetY = 2 + SQUARE_SIZE * pt.getCol();
+			drawer.setColor(activeDragging.getPieceColor());
+			drawer.fillRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
+					SQUARE_SIZE, SQUARE_SIZE, 3, 3);
+			drawer.setColor(activeDragging.getPieceBorder());
+			drawer.drawRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
+					SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 		}
 	}
 	
@@ -218,10 +216,23 @@ public class BoardView extends JPanel implements IModelUpdated
 	 *  Adds the given PieceView to the list of PieceViews.
 	 *  
 	 * @param piece  PieceView to add
+	 * @return  indicator of operation's success
 	 */
-	public void addPiece(PieceView piece)
+	public boolean addPiece(PieceView piece)
 	{
-		pieces.add(piece);
+		return pieces.add(piece);
+	}
+	
+	
+	/**
+	 *  Removes the given PieceView from the list of PieceViews.
+	 *  
+	 *  @param piece  PieceView to remove
+	 *  @return  indicator of if operation modified the list
+	 */
+	public boolean removePiece(PieceView piece)
+	{
+		return pieces.remove(piece);
 	}
 	
 	
@@ -244,11 +255,21 @@ public class BoardView extends JPanel implements IModelUpdated
 						(pc.getLocation().getCol() + pt.getCol()) == col)
 				{
 					// Then set it as the active dragging
+					pieces.remove(pv);  // Remove it from the Board, is floating now
 					activeDragging = pv;
 					return ;
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 *  Returns the active dragging Piece to its source.
+	 */
+	public void returnPiece()
+	{
+		pieces.add(activeDragging);
 	}
 				/***********************
 				 *  Getters & Setters  *
@@ -269,10 +290,6 @@ public class BoardView extends JPanel implements IModelUpdated
 	{
 		return activeLocation;
 	}
-	public Point getActiveSource()
-	{
-		return activeSource;
-	}
 	public void setPieces(ArrayList<PieceView> pieces)
 	{
 		this.pieces = pieces;
@@ -284,9 +301,5 @@ public class BoardView extends JPanel implements IModelUpdated
 	public void setActiveLocation(java.awt.Point activeLocation)
 	{
 		this.activeLocation = activeLocation;
-	}
-	public void setActiveSource(Point activeSource)
-	{
-		this.activeSource = activeSource;
 	}
 }

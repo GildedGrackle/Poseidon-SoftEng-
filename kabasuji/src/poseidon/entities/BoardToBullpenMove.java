@@ -2,31 +2,83 @@ package poseidon.entities;
 
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
+import poseidon.player.view.LevelView;
 
 /**
  * Moving piece from the board to the bullpen.
  * Only applicable for puzzle mode.
+ * 
  * @author Natalia
- *
+ * @author Alex Titus
  */
 public class BoardToBullpenMove implements IMove{
-	Point from, to;
+	/** The Level. */
+	LevelModel game;
+	/** The GUI representation of the Level. */
+	LevelView view;
+	/** Location of the Piece on the Board. */
+	Point from;
+	/** The Piece to move. */
 	PieceContainer piece;
 	
-	BoardToBullpenMove(PieceContainer piece, Point from, Point to) {
-		this.from = from;
-		this.to = to;
+	
+	/**
+	 *  Constructor.
+	 * @param game  model of the Level
+	 * @param view  the GUI representation of the Level
+	 * @param piece  the Piece to move, must have a valid location on the Board
+	 * @param from  the location of the Piece on the Board
+	 */
+	public BoardToBullpenMove(LevelModel game, LevelView view, PieceContainer piece) {
+		this.game = game;
+		this.view = view;
+		this.from = piece.getLocation();
 		this.piece = piece;
 	}
 	
+	
+	/**
+	 *  Move is valid always.
+	 *  
+	 *  The only way this can be called is if there is an actual Piece being
+	 *  dragged off of the Board, due to checks at BoardController.mouseClicked
+	 *  and BoardController.mouseReleased
+	 */
 	public Boolean isValid() {
-		return false;						//TODO: change return value
+		return true;
 	}
 	
+	
+	/**
+	 *  Removes the Piece from the Board and adds it to the Bullpen.
+	 */
 	public Boolean doMove() {
-		return false;						//TODO: change return value
+		
+		if(isValid())
+		{
+			piece.setLocation(new Point(-1, -1));  // Piece is "Nowhere"
+			// Now in Bullpen  
+			game.getPlayableBullpen().addPiece(piece);
+			view.getBullpen().addPiece(view.getBoard().getActiveDragging());
+			// Not on Board anymore (was removed during BoardController.mousePressed)
+			game.getBoard().setActiveDragged(null);
+			view.getBoard().setActiveDragging(null);
+			
+			
+			// Decrease the number of moves remaining
+			game.decrementLimit();
+			
+			return true;
+		}
+		
+		
+		return false;
 	}
 	
+	
+	/**
+	 *  Returns the Piece to the Board from the Bullpen.
+	 */
 	public Boolean undoMove() {
 		return false;						//TODO: change return value
 	}
