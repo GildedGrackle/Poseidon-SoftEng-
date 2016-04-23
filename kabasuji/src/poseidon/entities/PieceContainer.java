@@ -22,7 +22,7 @@ public class PieceContainer {
 	 * @param location  initial location of this Piece, usually Point(-1, -1)
 	 * @param isSelected  indicates whether the Piece is the selected Piece in the Bullpen/Board
 	 */
-	PieceContainer (Piece piece, Point location, Boolean isSelected) {
+	public PieceContainer (Piece piece, Point location, Boolean isSelected) {
 		this.piece = piece;
 		this.location = location;
 		this.isSelected = isSelected;

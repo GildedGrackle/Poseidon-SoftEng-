@@ -61,8 +61,7 @@ public class TestPlayerBtnControllers extends TestCase{
 	
 	
 	public void tearDown(){
-		if (view != null){
-			view.getfrmKabasuji().dispose();}
+			view.getfrmKabasuji().dispose();
 	}
 	
 	public void testAboutBtn(){
@@ -102,23 +101,15 @@ public class TestPlayerBtnControllers extends TestCase{
 		assertEquals(view.getCurrentView().getCurrentlyPlaying().getClass(), LevelView.class);
 	}
 	
-	public void testPlaySelectLevel(){
-//		setSelectedView(lvlContainer);
-		button = lvlSelectView.getPlay();
-		ActionEvent	playPress = buttonPress(button);
-		playSelect.actionPerformed(playPress);
-		
-		
-	}
-	
-	
-//	public void testExit(){
-//		button = view.getExit();
-//		ActionEvent exitPress = buttonPress(button);
-//		exit.actionPerformed(exitPress);
+//	public void testPlaySelectLevel(){
+////		setSelectedView(lvlContainer);
+//		button = lvlSelectView.getPlay();
+//		ActionEvent	playPress = buttonPress(button);
+//		playSelect.actionPerformed(playPress);
 //		
-//		assertEquals(view, null);
+//		
 //	}
+	
 	
 	
 

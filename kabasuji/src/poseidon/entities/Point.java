@@ -24,17 +24,21 @@ public class Point {
 		this.col = temp;
 	}
 	
-	@Override
 	/**
 	 * Overrides the standard equals() method for point.
 	 * 
 	 * Note: Checks if the point has the same value, not if it's pointing to the same exact point.
 	 */
+	@Override
 	public boolean equals(Object o){
 		if (!(o instanceof Point)) { return false; }
 		Point point = (Point) o;
-		if(this.row == point.getRow() && this.col == point.getCol()) { return true; }
-		return false;
+		return (this.row == point.getRow() && this.col == point.getCol());
+	}
+	
+	@Override
+	public int hashCode() {
+		return row + col * 31;
 	}
 	
 	
@@ -51,11 +55,11 @@ public class Point {
 	 ***********************/
 	public int getRow()
 	{
-		return row;
+		return this.row;
 	}
 	public int getCol()
 	{
-		return col;
+		return this.col;
 	}
 	public void setRow(int row)
 	{
