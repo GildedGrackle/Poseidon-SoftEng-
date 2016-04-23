@@ -155,6 +155,15 @@ public class Piece {
 		
 		return myPoints.equals(otherPoints);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i=0; i<piece.length; i++) {
+			sb.append(String.format("(%d, %d):", piece[i].getRow(), piece[i].getCol()));
+		}
+		return sb.toString();
+	}
 
 				/*********************
 				 *  Getter & Setter  *

@@ -20,8 +20,7 @@ import poseidon.entities.Point;
  *  
  *  @author Alex Titus
  */
-public class BullpenView extends JPanel implements Scrollable, IModelUpdated
-{
+public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/** The state of the Bullpen. */
 	Bullpen model;
 	/** The Pieces in the Bullpen. */
