@@ -27,7 +27,7 @@ import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.LevelSelectController;
 
 /**
- *  Renders the Kabasuji game Level.
+ *  Renders the Kabasuji game Level for playing Levels.
  *  
  * @author Alex Titus
  */
@@ -69,7 +69,10 @@ public class LevelView extends JPanel implements IModelUpdated
 	JLabel limitView;
 
 	/**
-	 * Create the panel.
+	 *  Constructor.
+	 *  
+	 *  @param model  the overall model of the game
+	 *  @param view  the base GUI object
 	 */
 	public LevelView(LevelPlayerModel model, LevelPlayerView view)
 	{
@@ -232,25 +235,27 @@ public class LevelView extends JPanel implements IModelUpdated
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	/** Returns the model of the Level. */
 	public LevelModel getModel()
 	{
 		return model;
 	}
+	/** Returns the GUI representation of the Bullpen. */
 	public BullpenView getBullpen()
 	{
 		return bullpen;
 	}
-
+	/** Returns the GUI representation of the Board. */
 	public BoardView getBoard()
 	{
 		return board;
 	}
-
+	/** Sets the GUI representation of the Bullpen. */
 	public void setBullpen(BullpenView bullpen)
 	{
 		this.bullpen = bullpen;
 	}
-
+	/** Sets the GUI representation of the Board. */
 	public void setBoard(BoardView board)
 	{
 		this.board = board;

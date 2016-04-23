@@ -2,12 +2,27 @@ package poseidon.entities;
 
 import java.util.ArrayList;
 
+/**
+ *  The top-level model for the Level Player.
+ *  
+ *  Contains the player's progress on unlocking Levels, the Level currently
+ *  being played, and all Levels currently part of the game (including
+ *  player-made ones).
+ *  
+ *  @author Natalia Kononenko
+ *  @author Alex Titus
+ */
 public class LevelPlayerModel {
-	// Where the player is on each mode: 1 - Puzzle, 2 - Lightning, 3 - Release
-	// Zero-based (0 means level 1 is unlocked but not others)
-	int[] currentLevel = new int[3];
-	LevelModel playingLevel;  // The level being currently played
-	LevelContainer[][] levels;  // The containers for the levels ([gamemode][levelNumber])
+	/** The number of game modes */
+	public static final int NUM_GAMEMODES = 3;
+	/** The containers for the levels ([gamemode][levelNumber]). */
+	ArrayList<ArrayList<LevelContainer>> levels;
+	/** Where the player is on each mode: 1 - Puzzle, 2 - Lightning, 3 - Release .
+	 *  Zero-based (0 means level 1 is unlocked but not others) */
+	int[] currentLevel = new int[NUM_GAMEMODES];
+	/** The level being currently played. */
+	LevelModel playingLevel;
+	
 	
 	
 	/**
@@ -28,7 +43,11 @@ public class LevelPlayerModel {
 	 */
 	public void initializeContainers()
 	{
-		levels = new LevelContainer[3][5];
+		levels = new ArrayList<ArrayList<LevelContainer>>(NUM_GAMEMODES);  // Gamemodes
+		for(int i = 0; i < NUM_GAMEMODES; i++)  // Levels
+		{
+			levels.add(new ArrayList<LevelContainer>());  // Default size of 10
+		}
 		XMLHandler xmlHandler = new XMLHandler();
 		
 		// TODO Probably change the file path, like level folder instead of just root
@@ -41,9 +60,9 @@ public class LevelPlayerModel {
 			PuzzleLevel levelTemp = (PuzzleLevel) xmlHandler.loadXML(filePath, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
-				levels[0][i] = new LevelContainer(null, 0, i, null, 0);
+				levels.get(0).add(new LevelContainer(null, 0, i, null, 0));
 			} else {
-				levels[0][i] = new LevelContainer(filePath, 0, i, levelTemp, 0);
+				levels.get(0).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
 			}
 		}
 		
@@ -53,9 +72,9 @@ public class LevelPlayerModel {
 			LightningLevel levelTemp = (LightningLevel) xmlHandler.loadXML(filePath, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
-				levels[1][i] = new LevelContainer(null, 0, i, null, 0);
+				levels.get(1).add(new LevelContainer(null, 0, i, null, 0));
 			} else {
-				levels[1][i] = new LevelContainer(filePath, 0, i, levelTemp, 0);
+				levels.get(1).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
 			}
 		}
 		
@@ -65,9 +84,9 @@ public class LevelPlayerModel {
 			ReleaseLevel levelTemp = (ReleaseLevel) xmlHandler.loadXML(filePath, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
-				levels[2][i] = new LevelContainer(null, 0, i, null, 0);
+				levels.get(2).add(new LevelContainer(null, 0, i, null, 0));
 			} else {
-				levels[2][i] = new LevelContainer(filePath, 0, i, levelTemp, 0);
+				levels.get(2).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
 			}
 		}
 		
@@ -135,7 +154,7 @@ public class LevelPlayerModel {
 	{
 		return currentLevel;
 	}
-	public LevelContainer[][] getLevels()
+	public ArrayList<ArrayList<LevelContainer>> getLevels()
 	{
 		return levels;
 	}

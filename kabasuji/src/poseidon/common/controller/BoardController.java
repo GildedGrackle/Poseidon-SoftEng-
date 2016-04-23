@@ -46,6 +46,7 @@ public class BoardController extends MouseAdapter
 	
 	/**
 	 *  Constructor.
+	 *  
 	 * @param model  the Level that contains the Board
 	 * @param view  the represenation of the Board
 	 */
@@ -63,7 +64,7 @@ public class BoardController extends MouseAdapter
 	/**
 	 *  Draws the Piece selected in the Bullpen onto the Board.
 	 *  
-	 *  @param me  the initiating MouseEvent
+	 *  @param me  the initiating mouse event
 	 */
 	@Override
 	public void mouseEntered(MouseEvent me)
@@ -88,7 +89,7 @@ public class BoardController extends MouseAdapter
 	/**
 	 *  Removes the active dragging Piece from the Board.
 	 *  
-	 *  @param me  the initiating MouseEvent
+	 *  @param me  the initiating mouse event
 	 */
 	@Override
 	public void mouseExited(MouseEvent me)
@@ -110,6 +111,11 @@ public class BoardController extends MouseAdapter
 	}
 	
 	
+	/**
+	 *  Notifies Board of cursor's new location to render the active dragging Piece.
+	 *  
+	 *  @param me  the initiating move event
+	 */
 	@Override
 	public void mouseMoved(MouseEvent me)
 	{
@@ -132,13 +138,9 @@ public class BoardController extends MouseAdapter
 	
 	
 	/**
-	 *  Places a Piece on the Board.
+	 *  Toggles Square from playable to nonplayable on double click (or higher).
 	 *  
-	 *  Places the selected Piece in the Bullpen, removing it from the Bullpen,
-	 *  adding it to the Board, and updating the PieceContainer's location with
-	 *  its (row, column) coordinates on the Board.
-	 *  
-	 *  @param me  the initiating MouseEvent
+	 *  @param me  the initiating mouse click
 	 */
 	@Override
 	public void mouseClicked(MouseEvent me)
@@ -190,7 +192,7 @@ public class BoardController extends MouseAdapter
 	 *  
 	 *  Only used in Puzzle Levels and sometimes in the Builder.
 	 *  
-	 *  @param me  the initiating MouseEvent
+	 *  @param me  the initiating mouse press
 	 */
 	@Override
 	public void mousePressed(MouseEvent me)
@@ -253,7 +255,7 @@ public class BoardController extends MouseAdapter
 	 *  
 	 *  Handles either a Board-to-Board move or a Board-to-Bullpen move
 	 * 
-	 *  @param me  the initiating MouseEvent
+	 *  @param me  the initiating mouse release
 	 */
 	@Override
 	public void mouseReleased(MouseEvent me)
@@ -311,7 +313,7 @@ public class BoardController extends MouseAdapter
 	/**
 	 *  Used to move a Piece selected from the Board.
 	 * 
-	 *  @param me  the initiating MouseEvent
+	 *  @param me  the initiating drag event
 	 */
 	@Override
 	public void mouseDragged(MouseEvent me)

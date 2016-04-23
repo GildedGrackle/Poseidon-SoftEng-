@@ -28,6 +28,7 @@ public class BullpenController extends MouseAdapter
 	
 	/**
 	 *  Constructor.
+	 *  
 	 * @param game  the top level model entity
 	 * @param view  the object displaying the bullpen
 	 */
@@ -42,7 +43,7 @@ public class BullpenController extends MouseAdapter
 	/**
 	 *  Selects or deselects the Piece that was clicked on.
 	 *  
-	 *  @param me  the click starting this event
+	 *  @param me  the mouse press starting this event
 	 */
 	@Override
 	public void mousePressed(MouseEvent me)
