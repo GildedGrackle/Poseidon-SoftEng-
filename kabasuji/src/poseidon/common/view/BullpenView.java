@@ -20,7 +20,7 @@ import poseidon.entities.Point;
  *  
  *  @author Alex Titus
  */
-public class BullpenView extends JPanel implements Scrollable
+public class BullpenView extends JPanel implements Scrollable, IModelUpdated
 {
 	/** The state of the Bullpen. */
 	Bullpen model;
@@ -77,22 +77,14 @@ public class BullpenView extends JPanel implements Scrollable
 	 *  
 	 *  @return whether operation completed successfully
 	 */
-	public Boolean update()
+	public Boolean modelUpdated()
 	{
-		// Check if number of Pieces in the Bullpen has changed
-		if(pieces.size() != model.getPieces().size())
-		{
-			// Refresh pieces
-			createPieces();
+		// Resize so that if the number of Pieces changed the
+		// panel will extend or contract to accomodate them
+		setPreferredSize(new Dimension(BullpenView.PIECE_SIZE * pieces.size(),
+				BullpenView.PIECE_SIZE));
 
-			// Resize so that if the number of Pieces changed the
-			// panel will extend or contract to accomodate them
-			setPreferredSize(new Dimension(BullpenView.PIECE_SIZE * pieces.size(),
-					BullpenView.PIECE_SIZE));
-		}
-		
-		
-		repaint();  // TODO figure out if this is the correct method to call here		
+		repaint();
 		
 		return true;
 	}
@@ -112,9 +104,9 @@ public class BullpenView extends JPanel implements Scrollable
 		Graphics drawer = g.create();
 		
 		// Draw Pieces
-		for(int i = 0; i < pieces.size(); i++)
+		int i = 0;
+		for(PieceView pv : pieces)
 		{
-			PieceView pv = pieces.get(i);
 			Piece p = pv.getModel().getPiece();
 			int offsetX = PIECE_SIZE * i;
 			for(Point pt : p.getPiece())
@@ -137,11 +129,35 @@ public class BullpenView extends JPanel implements Scrollable
 				drawer.drawRect(offsetX + 0, 0, PIECE_SIZE - 1, PIECE_SIZE - 1);
 				drawer.drawRect(offsetX + 1, 1, PIECE_SIZE - 3, PIECE_SIZE - 3);
 			}
+			
+			i++;
 		}
-		
-		
 	}
-
+	
+	
+	/**
+	 *  Adds given PieceView to the list of PieceViews.
+	 *  
+	 * @param piece  PieceView to add
+	 * @return  indicator of operation's success
+	 */
+	public boolean addPiece(PieceView piece)
+	{
+		return pieces.add(piece);
+	}
+	
+	
+	/**
+	 *  Removes given PieceView from the list of PieceViews.
+	 *  
+	 * @param piece  the PieceView to remove
+	 * @return  indicator of if operation changed list
+	 */
+	public boolean removePiece(PieceView piece)
+	{
+		return pieces.remove(piece);
+	}
+	
 
 	/**
 	 *  Determines how much of this panel will be displayed in the containing scroll pane.
@@ -216,18 +232,5 @@ public class BullpenView extends JPanel implements Scrollable
 	public void setSelectedPiece(PieceView piece)
 	{
 		selectedPiece = piece;
-	}
-	public boolean removePiece(PieceView piece)
-	{
-		// If requested Piece isn't on the list
-		if(pieces.indexOf(piece) == -1)
-		{
-			return false;
-		}
-		else  // Piece exists
-		{
-			pieces.remove(piece);
-			return true;
-		}
 	}
 }

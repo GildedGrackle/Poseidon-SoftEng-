@@ -44,7 +44,8 @@ public class TestBuilderBtnControllers extends TestCase{
 			view = new LevelBuilderView();
 			current = new int[3];
 			// level = new LevelModel(null, null, 0, getName(), null);  // TODO sorry, I made it abstract, now you have to choose what kind
-			model = new LevelBuilderModel(lvlContainer);
+			model = new LevelBuilderModel();
+			model.setBuildingLevel(lvlContainer);
 			aboutController = new AboutBuilderController(model, view);
 			back = new BackBuilderController(model, view);
 			newLevelControl = new NewLevelController(model, view);

@@ -9,12 +9,17 @@ import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
 import poseidon.player.view.LevelView;
 
+/**
+ *  Finds lowest-numbered of the most recently unlocked Levels and starts it.
+ *  
+ *  @author Alex Titus
+ */
 public class ContinueController implements ActionListener
 {
 	LevelPlayerModel model;
 	LevelPlayerView game;
 	
-	
+	// TODO ContinueController documentation
 	public ContinueController(LevelPlayerModel model, LevelPlayerView view)
 	{
 		this.model = model;
@@ -30,10 +35,13 @@ public class ContinueController implements ActionListener
 	}
 	
 	
+	/**
+	 *  Finds lowest-numbered of the most recently unlocked Levels and starts it.
+	 *  
+	 *  @return indicator of whether operation was successful
+	 */
 	public Boolean beginGame()
 	{
-		/** TODO Find most recently unlocked level
-		 *  and create it instead of making a new one here */
 		// Find the lowest number of the modes
 		int lowestLevel = 0;
 		int gameMode = 0;
@@ -50,7 +58,7 @@ public class ContinueController implements ActionListener
 		}
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
-		model.setPlayingLevel(model.getLevels()[gameMode][lowestLevel].getLevel());
+		model.setPlayingLevel(model.getLevels().get(gameMode).get(lowestLevel).getLevel());
 		LevelView newScreen = new LevelView(model, game);
 		
 		// Set new screen

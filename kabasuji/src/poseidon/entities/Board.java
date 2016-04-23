@@ -7,6 +7,7 @@ import poseidon.entities.PieceContainer;
  * Playable board in all variations. 
  * 
  * @author Natalia
+ * @author Alex Titus
  */
 public class Board {
 	/**Largest amount of rows and columns, set for convinience and optional future modification.*/
@@ -20,8 +21,10 @@ public class Board {
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
 	
 	/**Piece that is currently selected*/ 
-	//MIGHT NEED TO CHANGE
 	PieceContainer activeDragged;
+	
+	/** The coordinates of the origin of the active dragging Piece. */
+	Point activeSource;
 	
 	/**The functioning of the board, game mode/builder*/
 	IBoardLogic logic;	
@@ -66,13 +69,13 @@ public class Board {
 	}
 	
 	/**
-	 * Removes a piece from the board depending on the type of board.
+	 * Removes a Piece from the board depending on the type of board.
 	 * 
-	 * @param piece - The piece that needs to be removed from the board. 
+	 * @param piece - The Piece that needs to be removed from the board. 
 	 * @return Boolean - Indicates whether the removal was successful.
 	 */
-	public Boolean removePiece (Piece piece) {
-		return logic.removePiece(this, piece.getContainer());							
+	public Boolean removePiece (PieceContainer piece) {
+		return logic.removePiece(this, piece);
 	}
 	
 	/**
@@ -91,6 +94,7 @@ public class Board {
 		pieces.add(piece);
 	}
 	
+	
 	/**
 	 * Deals with selected squares depending on the type.
 	 * 
@@ -102,7 +106,7 @@ public class Board {
 	 * @param col - parameters that indicate the square on the board that was selected
 	 * @return
 	 */
-	Boolean selectSquare (int row, int col) {
+	public Boolean selectSquare (int row, int col) {
 		if (logic instanceof BuilderBoardLogic) {
 			//TODO toggle squares on/off
 			return true;
@@ -120,8 +124,47 @@ public class Board {
 		return false;
 	}
 	
+	
+	/**
+	 *  Determines if the given Piece can be played at the given location.
+	 *  
+	 * @return  indicator if the placement is valid
+	 */
+	public boolean isValid(PieceContainer piece, Point location)
+	{
+		return logic.isValid(this, piece, location);
+	}
+	
+	
+	/**
+	 *  Determines if a Piece with part at (row, col) can be selected.
+	 *  
+	 * @param row  the row of the Square the Piece would contain
+	 * @param col  the column of the Square the Piece would contain
+	 * @return  indicator if there is a Piece that can be selected at (row, col)
+	 */
+	public boolean canSelect(int row, int col)
+	{
+		return logic.canSelect(this, row, col);
+	}
+	
+	
+	/**
+	 *  Returns the active dragging Piece to its source.
+	 */
+	public void returnPiece()
+	{
+		activeDragged.setLocation(activeSource);
+		addPiece(activeDragged);
+	}
+	
 	public Square [] [] getPlayArea (){
 		return this.playArea;
+	}
+	
+	public ArrayList<PieceContainer> getPieces()
+	{
+		return pieces;
 	}
 	
 	int getRows () {
@@ -142,6 +185,39 @@ public class Board {
 	
 	public Square getSquare(int row, int col) {
 		return playArea[row][col];
+	}
+	
+	public PieceContainer getActiveDragged()
+	{
+		return activeDragged;
+	}
+	
+	public Point getActiveSource()
+	{
+		return activeSource;
+	}
+	
+	
+	/**
+	 *  Sets the specified Piece as the active dragging Piece.
+	 *  
+	 *  Empties the Squares occupied by the Piece.
+	 * @param piece  a Piece that is on the Board
+	 */
+	public void setActiveDragged(PieceContainer piece)
+	{
+		// If not resetting activeDragged
+		if(piece != null && activeSource.getCol() != -1 && activeSource.getRow() != -1)
+		{
+			// Then remove new active dragging Piece from Board
+			logic.removePiece(this, piece);
+		}
+		activeDragged = piece;
+	}
+	
+	public void setActiveSource(Point activeSource)
+	{
+		this.activeSource = activeSource;
 	}
 	
 

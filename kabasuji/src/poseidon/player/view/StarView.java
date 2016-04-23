@@ -24,7 +24,14 @@ public class StarView extends JButton
 		
 		
 		JLabel levelNumLabel = new JLabel();
-		levelNumLabel.setText("" + lc.getLevelNumber());
+		if(lc.getLevel() != null)
+		{
+			levelNumLabel.setText("" + lc.getLevelNumber());
+		}
+		else
+		{
+			levelNumLabel.setText("File Not Found");
+		}
 		levelNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		levelNumLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		levelNumLabel.setBounds(0, 0, 60, 60);

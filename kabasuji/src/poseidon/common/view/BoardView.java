@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import poseidon.entities.Board;
 import poseidon.entities.LevelModel;
 import poseidon.entities.Piece;
+import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.entities.ReleaseNumber;
 import poseidon.entities.Square;
@@ -19,7 +20,7 @@ import poseidon.entities.Square;
  *  
  *  @author Alex Titus
  */
-public class BoardView extends JPanel
+public class BoardView extends JPanel implements IModelUpdated
 {
 	/** The model of the Board */
 	Board board;
@@ -49,9 +50,27 @@ public class BoardView extends JPanel
 	{
 		super.paintComponent(g);
 		
+		// Draw playable Squares
+		drawBoard(g);
+		
+		// Now draw Pieces
+		drawPieces(g);
+		
+		// Now draw active dragging Piece
+		if(activeDragging != null)  // If there is one
+		{
+			drawActiveDragging(g);
+		}
+		
+		// Now draw hints
+		drawHints(g);
+	}
+	
+	
+	void drawBoard(Graphics g)
+	{
 		Graphics drawer = g.create();
 		
-		// Draw playable Squares
 		Square[][] playArea = board.getPlayArea();
 		for(int i = 0; i < 12; i++)
 		{
@@ -61,7 +80,7 @@ public class BoardView extends JPanel
 				if(playArea[i][j].getType() > 0)
 				{
 					// Then at least draw a square for it
-					drawer.drawRect(SQUARE_SIZE * i, SQUARE_SIZE * j, SQUARE_SIZE, SQUARE_SIZE);
+					drawer.drawRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
 					
 					// If the Square is a ReleaseSquare
 					if(playArea[i][j].getType() == LevelModel.RELEASE)
@@ -69,16 +88,27 @@ public class BoardView extends JPanel
 						// Then draw the number in its color
 						drawNumber(drawer, playArea[i][j].getReleaseNumber(), i, j);
 					}
+					
+					// If the Square is filled
+					if(playArea[i][j].isFilled())
+					{
+						drawer.fillRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
+					}
 				}
 			}
 		}
+	}
+	
+	
+	void drawPieces(Graphics g)
+	{
+		Graphics drawer = g.create();
 		
-		// Now draw Pieces
 		for(PieceView pv : pieces)
 		{
 			Piece p = pv.getModel().getPiece();
 			Point location = pv.getModel().getLocation();
-			if(location == null)
+			if(location == null || location == new Point(-1, -1))
 			{
 				// Then we have a problem
 				System.err.println("BoardView: Unexpectedly encountered Piece with no location while painting.");
@@ -89,53 +119,38 @@ public class BoardView extends JPanel
 			int col = location.getCol();
 			for(Point pt : p.getPiece())
 			{
-				int pieceOffsetX = SQUARE_SIZE * pt.getRow();
-				int pieceOffsetY = SQUARE_SIZE * pt.getCol();
+				int pieceOffsetY = SQUARE_SIZE * pt.getRow();
+				int pieceOffsetX = SQUARE_SIZE * pt.getCol();
 				drawer.setColor(pv.getPieceColor());
-				drawer.fillRoundRect(pieceOffsetX + row * SQUARE_SIZE,
-						pieceOffsetY + col * SQUARE_SIZE,
+				drawer.fillRoundRect(pieceOffsetX + col * SQUARE_SIZE,
+						pieceOffsetY + row * SQUARE_SIZE,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 				drawer.setColor(pv.getPieceBorder());
-				drawer.drawRoundRect(pieceOffsetX + row * SQUARE_SIZE,
-						pieceOffsetY + col * SQUARE_SIZE,
+				drawer.drawRoundRect(pieceOffsetX + col * SQUARE_SIZE,
+						pieceOffsetY + row * SQUARE_SIZE,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 			}
 		}
-		
-		// Now draw active dragging Piece
-		if(activeDragging != null)  // If there is one
+	}
+	
+	
+	void drawActiveDragging(Graphics g)
+	{
+		Graphics drawer = g.create();
+
+		Piece p = activeDragging.getModel().getPiece();
+		int boardOffsetX = activeLocation.x;
+		int boardOffsetY = activeLocation.y;
+		for(Point pt : p.getPiece())
 		{
-			Piece p = activeDragging.getModel().getPiece();
-			int boardOffsetX = activeLocation.x;
-			int boardOffsetY = activeLocation.y;
-			for(Point pt : p.getPiece())
-			{
-				int pieceOffsetX = 2 + SQUARE_SIZE * pt.getRow();
-				int pieceOffsetY = 2 + SQUARE_SIZE * pt.getCol();
-				drawer.setColor(activeDragging.getPieceColor());
-				drawer.fillRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
-						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
-				drawer.setColor(activeDragging.getPieceBorder());
-				drawer.drawRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
-						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
-			}
-		}
-		
-		// Now draw hints
-		drawer.setColor(Color.yellow);
-		for(int i = 0; i < Board.MAXROWS; i++)
-		{
-			for(int j = 0; j < Board.MAXCOLS; j++)
-			{
-				// If the Square is a hint space
-				if(playArea[i][j].getIsHint())
-				{
-					drawer.drawRoundRect(SQUARE_SIZE * i + 1, SQUARE_SIZE * j + 1,
-							SQUARE_SIZE - 3, SQUARE_SIZE - 3, 3, 3);
-					drawer.drawRoundRect(SQUARE_SIZE * i + 2, SQUARE_SIZE * j + 2,
-							SQUARE_SIZE - 5, SQUARE_SIZE - 5, 3, 3);
-				}
-			}
+			int pieceOffsetX = 2 + SQUARE_SIZE * pt.getRow();
+			int pieceOffsetY = 2 + SQUARE_SIZE * pt.getCol();
+			drawer.setColor(activeDragging.getPieceColor());
+			drawer.fillRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
+					SQUARE_SIZE, SQUARE_SIZE, 3, 3);
+			drawer.setColor(activeDragging.getPieceBorder());
+			drawer.drawRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
+					SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 		}
 	}
 	
@@ -160,11 +175,109 @@ public class BoardView extends JPanel
 		}
 		
 		// Draw number
-		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * row + 10, SQUARE_SIZE * col + 10);
+		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * col + 10, SQUARE_SIZE * row + 10);
+	}
+	
+	
+	void drawHints(Graphics g)
+	{
+		Graphics drawer = g.create();
+		Square[][] playArea = board.getPlayArea();
+		
+		drawer.setColor(Color.yellow);
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				// If the Square is a hint space
+				if(playArea[i][j].getIsHint())
+				{
+					drawer.drawRoundRect(SQUARE_SIZE * j + 1, SQUARE_SIZE * i + 1,
+							SQUARE_SIZE - 3, SQUARE_SIZE - 3, 3, 3);
+					drawer.drawRoundRect(SQUARE_SIZE * j + 2, SQUARE_SIZE * i + 2,
+							SQUARE_SIZE - 5, SQUARE_SIZE - 5, 3, 3);
+				}
+			}
+		}
+	}
+	
+	
+	@Override
+	public Boolean modelUpdated()
+	{
+		// Update display
+		repaint();
+		
+		return true;
+	}
+	
+	
+	/**
+	 *  Adds the given PieceView to the list of PieceViews.
+	 *  
+	 * @param piece  PieceView to add
+	 * @return  indicator of operation's success
+	 */
+	public boolean addPiece(PieceView piece)
+	{
+		return pieces.add(piece);
+	}
+	
+	
+	/**
+	 *  Removes the given PieceView from the list of PieceViews.
+	 *  
+	 *  @param piece  PieceView to remove
+	 *  @return  indicator of if operation modified the list
+	 */
+	public boolean removePiece(PieceView piece)
+	{
+		return pieces.remove(piece);
+	}
+	
+	
+	/**
+	 *  Sets the Piece at (row, col) as the active dragging Piece.
+	 *  
+	 * @param row  row on Board that Piece should cover
+	 * @param col  col on Board that Piece should cover
+	 */
+	public void selectPiece(int row, int col)
+	{
+		// Search through all Pieces on Board
+		for(PieceView pv : pieces)
+		{
+			PieceContainer pc = pv.getModel();
+			for(Point pt : pc.getPiece().getPiece())
+			{
+				// If this Piece is present at (row, col)
+				if((pc.getLocation().getRow() + pt.getRow()) == row &&
+						(pc.getLocation().getCol() + pt.getCol()) == col)
+				{
+					// Then set it as the active dragging
+					pieces.remove(pv);  // Remove it from the Board, is floating now
+					activeDragging = pv;
+					return ;
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 *  Returns the active dragging Piece to its source.
+	 */
+	public void returnPiece()
+	{
+		pieces.add(activeDragging);
 	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	public Board getBoard()
+	{
+		return board;
+	}
 	public ArrayList<PieceView> getPieces()
 	{
 		return pieces;
@@ -180,10 +293,6 @@ public class BoardView extends JPanel
 	public void setPieces(ArrayList<PieceView> pieces)
 	{
 		this.pieces = pieces;
-	}
-	public void addPiece(PieceView piece)
-	{
-		pieces.add(piece);
 	}
 	public void setActiveDragging(PieceView activeDragging)
 	{

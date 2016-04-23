@@ -3,9 +3,10 @@ package poseidon.common.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.entities.Bullpen;
-import poseidon.entities.PieceContainer;
+import poseidon.entities.Point;
 
 /**
  *  Handles click events on the Bullpen.
@@ -21,27 +22,31 @@ public class BullpenController extends MouseAdapter
 	Bullpen model;
 	/** The GUI object representing the model. */
 	BullpenView view;
+	/** The GUI object representing the Board. */
+	BoardView boardView;
 	
 	
 	/**
 	 *  Constructor.
+	 *  
 	 * @param game  the top level model entity
 	 * @param view  the object displaying the bullpen
 	 */
-	public BullpenController(Bullpen model, BullpenView view)
+	public BullpenController(Bullpen model, BullpenView view, BoardView boardView)
 	{
 		this.model = model;
 		this.view = view;
+		this.boardView = boardView;
 	}
 	
 
 	/**
 	 *  Selects or deselects the Piece that was clicked on.
 	 *  
-	 *  @param me  the click starting this event
+	 *  @param me  the mouse press starting this event
 	 */
 	@Override
-	public void mouseClicked(MouseEvent me)
+	public void mousePressed(MouseEvent me)
 	{
 		// Calculate which piece was selected using
 		// the coordinates of the MouseEvent and the
@@ -74,6 +79,7 @@ public class BullpenController extends MouseAdapter
 		}
 		
 		// Change view to reflect change
-		view.update();
+		view.modelUpdated();
 	}
+	
 }

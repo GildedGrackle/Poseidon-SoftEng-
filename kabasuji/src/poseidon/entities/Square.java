@@ -20,7 +20,7 @@ public abstract class Square {
 		this.isFilled = false;
 	}
 	
-	boolean isFilled () {
+	public boolean isFilled () {
 		return this.isFilled;
 	}
 	

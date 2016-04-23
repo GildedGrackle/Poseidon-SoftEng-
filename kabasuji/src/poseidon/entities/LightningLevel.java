@@ -5,6 +5,11 @@ import javax.swing.Timer;
 import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 
+/**
+ *  Implementation of LevelModel for Lightning Levels in Kabasuji.
+ *  
+ * @author Alex Titus
+ */
 public class LightningLevel extends LevelModel{
 	int allottedTime, usedTime;
 	Timer timer;
@@ -40,6 +45,13 @@ public class LightningLevel extends LevelModel{
 	}
 	
 	
+	/**
+	 *  Doesn't do anything; no moves to decrement.
+	 */
+	public void decrementLimit()
+	{
+		return;
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/

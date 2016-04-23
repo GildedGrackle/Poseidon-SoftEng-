@@ -2,8 +2,9 @@ package poseidon.entities;
 
 /**
  * Handles points, which are the elements pieces are constructed out of.
+ * 
  * @author Natalia
- *
+ * @author Alex Titus
  */
 public class Point {
 	int row, col;
@@ -34,6 +35,16 @@ public class Point {
 		Point point = (Point) o;
 		if(this.row == point.getRow() && this.col == point.getCol()) { return true; }
 		return false;
+	}
+	
+	
+	/**
+	 *  Overrides the standard toString() method for Point.
+	 */
+	@Override
+	public String toString()
+	{
+		return "(" + row + ", " + col + ")";
 	}
 	/***********************
 	 *  Getters & Setters  *
