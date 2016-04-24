@@ -147,7 +147,7 @@ public class XMLHandler {
 	// TODO Should this use a null return or exception(s)?
 	public LevelModel loadXML(String filePath, boolean inBuilder) {
 		// Turn filePath into an actual File object
-		File file = new File(directory + directory + filePath);
+		File file = new File(directory + filePath);
 		
 		// Check if the file actually exists
 		if (!file.exists()) {
@@ -196,7 +196,7 @@ public class XMLHandler {
 			loadBullpen = new Bullpen(loadPieces, new PuzzleBullpenLogic());
 		} else if (loadGameMode == 2) {
 			loadBullpen = new Bullpen(loadPieces, new LightningBullpenLogic());
-		} else if (loadGameMode == 2) {
+		} else if (loadGameMode == 3) {
 			loadBullpen = new Bullpen(loadPieces, new ReleaseBullpenLogic());
 		} else {
 			return null; // Invalid gameMode
@@ -296,9 +296,9 @@ public class XMLHandler {
 		Square[][] lPlayArea = new Square[12][12];
 		Square[][] rPlayArea = new Square[12][12];
 		for(int i = 0; i < 144; i++) {
-			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(true);
-			lPlayArea[(int)(i/12)][i%12] = new LightningSquare(true);
-			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(true, new ReleaseNumber(1, ReleaseNumber.GREEN));
+			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false);
+			lPlayArea[(int)(i/12)][i%12] = new LightningSquare(false);
+			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, new ReleaseNumber(1, ReleaseNumber.GREEN));
 		}
 		
 		PuzzleBoardLogic pborLog = new PuzzleBoardLogic();
@@ -337,9 +337,79 @@ public class XMLHandler {
 				}
 				
 				// Save the new level as xml
-				saveXML(levels[i][j], directory + levels[i][j].levelName + ".xml");
+				saveXML(levels[i][j], levels[i][j].levelName + ".xml");
 			}
 		}
+	}
+	
+	/**
+	 * Return three test levels, identical to the first three example levels, for JUnit testing
+	 */
+	public LevelModel[] getTestLevels() {
+		LevelModel[] testLevels = new LevelModel[3];
+		
+		Point[] piecePoints = {new Point(0,0), new Point(1,0), new Point(2,0), 
+							   new Point(0,1), new Point(0,2), new Point(1,1)};
+		Piece p = new Piece(piecePoints);
+		
+		ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
+		for(int i = 0; i < 10; i++) {
+			pieces.add(new PieceContainer(p, new Point(-1, -1)));
+		}
+		
+		PuzzleBullpenLogic pbullLog = new PuzzleBullpenLogic();
+		LightningBullpenLogic lbullLog = new LightningBullpenLogic();
+		ReleaseBullpenLogic rbullLog = new ReleaseBullpenLogic();
+		
+		Bullpen pbull = new Bullpen(pieces, pbullLog);
+		Bullpen lbull = new Bullpen(pieces, lbullLog);
+		Bullpen rbull = new Bullpen(pieces, rbullLog);
+		
+		Square[][] pPlayArea = new Square[12][12];
+		Square[][] lPlayArea = new Square[12][12];
+		Square[][] rPlayArea = new Square[12][12];
+		for(int i = 0; i < 144; i++) {
+			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false);
+			lPlayArea[(int)(i/12)][i%12] = new LightningSquare(false);
+			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, new ReleaseNumber(1, ReleaseNumber.GREEN));
+		}
+		
+		PuzzleBoardLogic pborLog = new PuzzleBoardLogic();
+		LightningBoardLogic lborLog = new LightningBoardLogic();
+		ReleaseBoardLogic rborLog = new ReleaseBoardLogic();
+		
+		Board pbor = new Board(pPlayArea, pborLog);
+		Board lbor = new Board(lPlayArea, lborLog);
+		Board rbor = new Board(rPlayArea, rborLog);
+
+		// Fill the levels array
+		for(int i = 0; i < 3; i++) {
+			switch(i) {
+			case 0:  // Puzzle levels
+				testLevels[i] = new PuzzleLevel(15,
+						"puzzle1",
+						pbull,
+						pbor,
+						false);
+				break;
+			case 1:  // Lightning levels
+				testLevels[i] = new LightningLevel(60,
+						"lightning1",
+						lbull,
+						lbor,
+						false);
+				break;
+			case 2:  // Release levels
+				testLevels[i] = new ReleaseLevel(10,
+						"release1",
+						rbull,
+						rbor,
+						false);
+				break;
+			}
+		}
+		
+		return testLevels;
 	}
 	
 	/**
@@ -389,7 +459,7 @@ public class XMLHandler {
 	 */
 	public int[] loadProgressXML(String filePath) {
 		// Turn filePath into an actual File object
-		File file = new File(directory + directory + filePath);
+		File file = new File(directory + filePath);
 
 		// Check if the file actually exists
 		if (!file.exists()) {

@@ -4,12 +4,21 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import junit.framework.TestCase;
+import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 import poseidon.entities.IBullpenLogic;
+import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.entities.LightningSquare;
 import poseidon.entities.Piece;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
+import poseidon.entities.PuzzleBullpenLogic;
+import poseidon.entities.PuzzleSquare;
+import poseidon.entities.ReleaseNumber;
+import poseidon.entities.ReleaseSquare;
+import poseidon.entities.Square;
+import poseidon.entities.XMLHandler;
 import poseidon.player.view.LevelPlayerView;
 
 public class TestEntities extends TestCase{
@@ -280,5 +289,62 @@ public class TestEntities extends TestCase{
 		
 		assertEquals(null, bullpen.getPieceSelected());
 		
+	}
+
+	public void testXMLHandler() {
+		XMLHandler testXML = new XMLHandler();
+		testXML.makeExampleLevels();
+		
+		LevelModel[] testLevelsWrite = testXML.getTestLevels();
+		LevelModel[] testLevelsRead = new LevelModel[3];
+		
+		// Ensure that the levels save successfully
+		assertTrue(testXML.saveXML(testLevelsWrite[0], "puzzle0.xml"));
+		assertTrue(testXML.saveXML(testLevelsWrite[1], "lightning0.xml"));
+		assertTrue(testXML.saveXML(testLevelsWrite[2], "release0.xml"));
+		
+		// Load the levels back in for comparison
+		testLevelsRead[0] = testXML.loadXML("puzzle0.xml", false);
+		testLevelsRead[1] = testXML.loadXML("lightning0.xml", false);
+		testLevelsRead[2] = testXML.loadXML("release0.xml", false);
+		
+		// Dig into the first level of each type and compare all of the values
+		for (int i=0; i<3; i++) {
+			assertTrue(testLevelsWrite[i].getLevelName().equals(testLevelsRead[i].getLevelName()));
+			assertEquals(testLevelsWrite[i].getGameMode(), testLevelsRead[i].getGameMode());
+			
+			Bullpen testBullpenWrite = testLevelsWrite[i].getPlayableBullpen();
+			Bullpen testBullpenRead = testLevelsRead[i].getPlayableBullpen();
+			assertEquals(testBullpenWrite.getSize(), testBullpenRead.getSize());
+			for (int j=0; j<testBullpenWrite.getSize(); j++) {
+				Point[] testPieceWrite = testBullpenWrite.getPiece(j).getPiece().getPiece();
+				Point[] testPieceRead = testBullpenRead.getPiece(j).getPiece().getPiece();
+				for (int k=0; k<6; k++) {
+					assertEquals(testPieceWrite[k].getRow(), testPieceRead[k].getRow());
+					assertEquals(testPieceWrite[k].getCol(), testPieceRead[k].getCol());
+				}
+			}
+			
+			Square[][] testBoardWrite = testLevelsWrite[i].getBoard().getPlayArea();
+			Square[][] testBoardRead = testLevelsRead[i].getBoard().getPlayArea();
+			for (int j=0; j<12; j++) {
+				for (int k=0; k<12; k++) {
+					assertEquals(testBoardWrite[j][k].isFilled(), testBoardRead[j][k].isFilled());
+					assertEquals(testBoardWrite[j][k].getType(), testBoardRead[j][k].getType());
+					if (i == 2) {
+						assertEquals(testBoardWrite[j][k].getReleaseNumber().getColor(), testBoardRead[j][k].getReleaseNumber().getColor());
+						assertEquals(testBoardWrite[j][k].getReleaseNumber().getNumber(), testBoardRead[j][k].getReleaseNumber().getNumber());
+					}
+				}
+			}
+		}
+		
+		// Test progress saving as well
+		int[] testProgressWrite = new int[]{0,1,2};
+		assertTrue(testXML.saveProgressXML(testProgressWrite, "testProgress.xml"));
+		int[] testProgressRead = testXML.loadProgressXML("testProgress.xml");
+		assertEquals(testProgressWrite[0], testProgressRead[0]);
+		assertEquals(testProgressWrite[1], testProgressRead[1]);
+		assertEquals(testProgressWrite[2], testProgressRead[2]);
 	}
 }
