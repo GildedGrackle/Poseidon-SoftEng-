@@ -186,7 +186,7 @@ public class XMLHandler {
 												 Integer.parseInt(pntE.getChildText("column")));
 				subIndex++;
 			}
-			loadPieces.add(index, new PieceContainer(new Piece(loadPoints), new Point(-1, -1), false));
+			loadPieces.add(index, new PieceContainer(new Piece(loadPoints), new Point(-1, -1)));
 			index++;
 		}
 		Bullpen loadBullpen;
@@ -281,7 +281,7 @@ public class XMLHandler {
 		
 		ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
 		for(int i = 0; i < 10; i++) {
-			pieces.add(new PieceContainer(p, new Point(-1, -1), false));
+			pieces.add(new PieceContainer(p, new Point(-1, -1)));
 		}
 		
 		PuzzleBullpenLogic pbullLog = new PuzzleBullpenLogic();

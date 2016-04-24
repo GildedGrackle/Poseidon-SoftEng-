@@ -1,6 +1,7 @@
 package poseidon.tests;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import junit.framework.TestCase;
 import poseidon.entities.Bullpen;
@@ -203,25 +204,40 @@ public class TestEntities extends TestCase{
 		
 		Point location = new Point(0,0);
 		
-		pieceCont = new PieceContainer(piece, location, false);
+		pieceCont = new PieceContainer(piece, location);
 		
-		assertEquals(new PieceContainer((new Piece(points)), location, false), pieceCont);
+		assertEquals(new PieceContainer((new Piece(points)), location), pieceCont);
+		
+	}
+	
+	public class TestBullpenLogic extends IBullpenLogic{
+
+		@Override
+		public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
+			return true;
+		}
+
+		@Override
+		public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
+			return true;
+		}
 		
 	}
 	
 	public void testBullpen(){
 		Point squiggleLoc = new Point(0,0);
 		Point lineLoc = new Point(0,6);
-		squiggleCont = new PieceContainer(squigglePiece, squiggleLoc ,false);
-		lineCont = new PieceContainer(linePiece, lineLoc, false);
+		squiggleCont = new PieceContainer(squigglePiece, squiggleLoc);
+		lineCont = new PieceContainer(linePiece, lineLoc);
 		
 		
 		pieces = new ArrayList<PieceContainer>();
 		pieces.add(squiggleCont);
 		pieces.add(lineCont);
 		
-		bullpen = new Bullpen(pieces, logic);
+		bullpen = new Bullpen(pieces, new TestBullpenLogic());
 		
+		assertEquals(bullpen.getLocation(lineCont), 1);
 		assertEquals(bullpen.getSize(), 2);
 		assertEquals(bullpen.getPieces(), pieces);
 		
@@ -234,8 +250,35 @@ public class TestEntities extends TestCase{
 		bullpen.addPiece(squiggleCont);
 		
 		assertEquals(bullpen.getSize(), 2);
-		assertEquals(bullpen.getPieces(), pieces);
+		assertEquals(new HashSet<>(bullpen.getPieces()), 
+					 new HashSet<>(pieces));
 		
 	}
 	
+	public void testSelectBullpenPeice(){
+		Point squiggleLoc = new Point(0,0);
+		Point lineLoc = new Point(0,6);
+		squiggleCont = new PieceContainer(squigglePiece, squiggleLoc );
+		lineCont = new PieceContainer(linePiece, lineLoc);
+		
+		
+		pieces = new ArrayList<PieceContainer>();
+		pieces.add(squiggleCont);
+		pieces.add(lineCont);
+		
+		bullpen = new Bullpen(pieces, new TestBullpenLogic());
+		
+		bullpen.setPieceSelected(squiggleCont);
+		
+		assertEquals(squiggleCont, bullpen.getPieceSelected());
+		
+		bullpen.setPieceSelected(lineCont);
+		
+		assertEquals(lineCont, bullpen.getPieceSelected());
+		
+		bullpen.setPieceSelected(lineCont);
+		
+		assertEquals(null, bullpen.getPieceSelected());
+		
+	}
 }

@@ -40,7 +40,7 @@ public class TestCommonControllers extends TestCase{
 		};
 		piece = new Piece(points);
 		location = new Point(0,0);
-		pieceCont = new PieceContainer (piece, location, true);
+		pieceCont = new PieceContainer (piece, location);
 		//bullpenView = new BullpenView(bullpen);
 		
 		

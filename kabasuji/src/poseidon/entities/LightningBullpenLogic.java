@@ -26,7 +26,7 @@ public class LightningBullpenLogic extends IBullpenLogic {
 	 * @param piece - The container of the piece that needs to be added to the bullpen.
 	 */
 	Boolean addRandomPiece(Bullpen bullpen) {
-		PieceContainer pc = new PieceContainer(new Point(-1, -1), false);
+		PieceContainer pc = new PieceContainer(new Point(-1, -1));
 		return bullpen.getPieces().add(pc);
 	}
 

@@ -88,11 +88,7 @@ public class Bullpen {
 	{
 		return pieceSelected;
 	}
-	/** Returns the game-mode-specfic logic object associated with the Bullpen. */
-	public IBullpenLogic getLogic()
-	{
-		return logic;
-	}
+	
 	/** Returns the Piece contained at index. */
 	public PieceContainer getPiece(int index) {
 		return pieces.get(index);
@@ -101,11 +97,7 @@ public class Bullpen {
 	public int getLocation(PieceContainer piece){
 		return pieces.indexOf(piece);
 	}
-	/** Sets the list of Pieces in the Bullpen to given list. */
-	public void setPieces(ArrayList<PieceContainer> pieces)
-	{
-		this.pieces = pieces;
-	}
+	
 	/** 
 	 *  Sets the given Piece as the currently selected Piece.
 	 *  
@@ -114,43 +106,11 @@ public class Bullpen {
 	 */
 	public void setPieceSelected(PieceContainer pieceSelected)
 	{
-		// If selecting Piece
-		if(pieceSelected != null)
-		{
-			// If have a selected Piece already
-			if(this.pieceSelected != null)
-			{
-				// Then deselect that first and select the new one
-				this.pieceSelected.setIsSelected(false);
-				pieceSelected.setIsSelected(true);
-			}
-			else  // No prior selected Piece
-			{
-				// Then select new one
-				pieceSelected.setIsSelected(true);
-			}
+		if (this.pieceSelected != null && this.pieceSelected.equals(pieceSelected)) {
+			this.pieceSelected = null;
+		} else {
+			this.pieceSelected = pieceSelected;
 		}
-		else // Deselecting Piece
-		{
-			// If have a selected Piece already
-			if(this.pieceSelected != null)
-			{
-				// Then deselect it
-				this.pieceSelected.setIsSelected(false);
-			}
-			// Else nothing
-		}
-		
-		// Set selected Piece as such
-		this.pieceSelected = pieceSelected;
 	}
-	/** Replaces the Piece at location in the list of Pieces with the given Piece. */
-	public void setPiece(int location, PieceContainer piece){
-		pieces.set(location, piece);
-	}
-	/** Sets the game-mode-specfic logic object associated with the Bullpen. */
-	public void setLogic(IBullpenLogic logic)
-	{
-		this.logic = logic;
-	}
+	
 }

@@ -20,7 +20,7 @@ public class Piece {
 			throw new IllegalArgumentException("Piece must have 6 points");
 		}
 		this.piece = piece;
-		this.container = new PieceContainer (this, new Point(-1, -1), false);
+		this.container = new PieceContainer (this, new Point(-1, -1));
 	}
 	
 	/**Constructor for random pieces

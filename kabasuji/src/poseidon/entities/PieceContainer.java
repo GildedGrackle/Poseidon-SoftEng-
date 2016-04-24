@@ -22,10 +22,10 @@ public class PieceContainer {
 	 * @param location  initial location of this Piece, usually Point(-1, -1)
 	 * @param isSelected  indicates whether the Piece is the selected Piece in the Bullpen/Board
 	 */
-	public PieceContainer (Piece piece, Point location, Boolean isSelected) {
+	public PieceContainer (Piece piece, Point location) {
 		this.piece = piece;
 		this.location = location;
-		this.isSelected = isSelected;
+	
 	}
 	
 	
@@ -37,11 +37,11 @@ public class PieceContainer {
 	 *  @param location  initial location of this Piece, usually Point(-1, -1)
 	 *  @param isSelected  indicates whether the Piece is the selected Piece in the Bullpen/Board
 	 */
-	PieceContainer(Point location, Boolean isSelected)
+	PieceContainer(Point location)
 	{
 		this.piece = new Piece();
 		this.location = location;
-		this.isSelected = isSelected;
+		
 	}
 
 	
@@ -66,7 +66,14 @@ public class PieceContainer {
 		return false;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		int hash = piece.hashCode();
+		if (location != null) {
+			hash += location.getCol() + 31 * location.getRow();
+		}
+		return hash;
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
@@ -80,11 +87,7 @@ public class PieceContainer {
 		return location;
 	}
 
-	public Boolean getIsSelected()
-	{
-		return isSelected;
-	}
-
+	
 	public void setPiece(Piece piece)
 	{
 		this.piece = piece;

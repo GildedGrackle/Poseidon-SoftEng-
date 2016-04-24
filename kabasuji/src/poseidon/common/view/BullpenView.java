@@ -121,7 +121,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 			}
 			
 			// If the Piece Container is currently selected in the Bullpen
-			if(pv.getModel().getIsSelected())
+			if(pv.getModel() == model.getPieceSelected())
 			{
 				// Then indicate that it is selected (with a border right now)
 				drawer.setColor(Color.CYAN);
