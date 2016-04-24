@@ -6,27 +6,16 @@ package poseidon.entities;
  * @author Natalia
  * @author Alex Titus
  */
-public class LightningBullpenLogic implements IBullpenLogic {
+public class LightningBullpenLogic extends IBullpenLogic {
 	LightningBullpenLogic() {
 
 	}
 
 	/**
-	 * Should add a piece to the bullpen, however there is no way to add pieces to the bullpen after the game has started.
-	 * 
-	 * @param bullpen - The bullpen that the piece gets added to.
-	 * @param piece - The container of the piece that needs to be added to the bullpen.
-	 * @return Boolean - Returns false in any case.
+	 * Returns False because you should not be able to add a piece once the level has started
 	 */
-	public Boolean addPiece(Bullpen bullpen, PieceContainer piece) {
-		if(bullpen.getPieces().add(piece))
-		{
-			return true;
-		}
-		else  // Operation failed
-		{
-			return false;
-		}
+	public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
+		return false;
 	}
 	
 	
@@ -36,16 +25,9 @@ public class LightningBullpenLogic implements IBullpenLogic {
 	 * @param bullpen - The bullpen that the piece gets added to.
 	 * @param piece - The container of the piece that needs to be added to the bullpen.
 	 */
-	Boolean addRandomPiece(Bullpen bullpen, PieceContainer piece) {
+	Boolean addRandomPiece(Bullpen bullpen) {
 		PieceContainer pc = new PieceContainer(new Point(-1, -1), false);
-		if(bullpen.getPieces().add(pc))
-		{
-			return true;
-		}
-		else  // Operation failed
-		{
-			return false;
-		}
+		return bullpen.getPieces().add(pc);
 	}
 
 	/**
@@ -57,9 +39,11 @@ public class LightningBullpenLogic implements IBullpenLogic {
 	 * 
 	 * @return Boolean - true if piece is removed and replaced, false if piece isn't found
 	 */
-	public Boolean removePiece(Bullpen bullpen, PieceContainer piece) {
-		if(!bullpen.getPieces().remove(piece)) {return false;}				//A case where the piece isn't found on the bullpen
-		addRandomPiece(bullpen, piece);
-		return true; 	
+	public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
+		return bullpen.pieces.contains(piece);
+	}
+	
+	public void afterPieceRemoved(Bullpen bullpen) {
+		addRandomPiece(bullpen);
 	}
 }
