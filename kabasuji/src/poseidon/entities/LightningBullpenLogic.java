@@ -40,7 +40,7 @@ public class LightningBullpenLogic extends IBullpenLogic {
 	 * @return Boolean - true if piece is removed and replaced, false if piece isn't found
 	 */
 	public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
-		return bullpen.pieces.contains(piece);
+		return true;
 	}
 	
 	public void afterPieceRemoved(Bullpen bullpen) {
