@@ -6,7 +6,8 @@ package poseidon.entities;
  * @author Natalia
  *
  */
-public interface IBullpenLogic {
-	Boolean addPiece (Bullpen bullpen, PieceContainer piece);
-	Boolean removePiece (Bullpen bullpen, PieceContainer piece);
+public abstract class IBullpenLogic {
+	abstract Boolean shouldAddPiece (Bullpen bullpen, PieceContainer piece);
+	abstract Boolean shouldRemovePiece (Bullpen bullpen, PieceContainer piece);
+	void afterPiece(Bullpen bullpen) {};
 }

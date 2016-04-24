@@ -7,19 +7,18 @@ package poseidon.entities;
  * @author Natalia
  *
  */
-public class ReleaseBullpenLogic implements IBullpenLogic{
+public class ReleaseBullpenLogic extends IBullpenLogic{
 	ReleaseBullpenLogic() {
 		
 	}
 	
 	
-	public Boolean addPiece(Bullpen bullpen, PieceContainer piece) {
+	public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
 		return false;										//Impossible to move items to bullpen in release
 	}
 
 	
-	public Boolean removePiece(Bullpen bullpen, PieceContainer piece) {
-		bullpen.removePieceFromList(piece);
+	public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
 		return true;
 	}
 }

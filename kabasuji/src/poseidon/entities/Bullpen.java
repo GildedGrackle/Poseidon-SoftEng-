@@ -30,7 +30,7 @@ public class Bullpen {
 	 * @param logic  the game-mode-specific logic associated with the Bullpen
 	 */
 	public Bullpen(ArrayList <PieceContainer> pieces, IBullpenLogic logic) {
-		this.pieces = pieces;
+		this.pieces = new ArrayList<>(pieces);
 		this.logic = logic;
 		this.pieceSelected = null;
 	}
@@ -46,7 +46,13 @@ public class Bullpen {
 	 * @return an indicator of whether the operation completed successfully
 	 */
 	public boolean removePiece (PieceContainer piece) {	
-		return logic.removePiece(this, piece);
+		boolean shouldRemove = logic.shouldRemovePiece(this, piece) 
+				&& pieces.contains(piece);
+		if (shouldRemove) {
+			pieces.remove(piece);
+			logic.afterPiece(this);
+		}
+		return shouldRemove;
 	}
 	
 	/**
@@ -56,23 +62,13 @@ public class Bullpen {
 	 * @return an indicator of whether the operation completed successfully
 	 */
 	public boolean addPiece (PieceContainer piece) {
-		return logic.addPiece(this, piece);
+		 boolean shouldAdd = logic.shouldAddPiece(this, piece);
+		 if (shouldAdd) {
+			 pieces.add(piece);
+		 }
+		 return shouldAdd;
 	}
 	
-	void addPieceToList (PieceContainer piece) {
-		pieces.add(piece);
-	}
-	
-	/**
-	 *  Removes the given Piece from the Bullpen.
-	 *  
-	 * @param piece  the Piece to remove
-	 * @return an indicator of whether the operation modified the list of Pieces
-	 */
-	boolean removePieceFromList (PieceContainer piece) {
-		if(pieces.indexOf(piece) == -1) { return false; }
-		return pieces.remove(piece);
-	}
 
 	/** Returns the number of Pieces in the Bullpen. */
 	public int getSize()
