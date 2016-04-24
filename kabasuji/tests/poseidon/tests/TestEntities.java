@@ -1,6 +1,10 @@
 package poseidon.tests;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
+import poseidon.entities.Bullpen;
+import poseidon.entities.IBullpenLogic;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.entities.Piece;
 import poseidon.entities.PieceContainer;
@@ -13,10 +17,38 @@ public class TestEntities extends TestCase{
 	LevelPlayerModel model;
 	Piece piece; 
 	PieceContainer pieceCont; 
-	
+	Piece squigglePiece;
+	Piece linePiece;
+	PieceContainer squiggleCont;
+	PieceContainer lineCont;
+	Point location1; 
+	Point location2; 
+	ArrayList<PieceContainer> pieces;
+	Bullpen bullpen; 
+	IBullpenLogic logic; 
 	
 	public void setUp(){
 		view = new LevelPlayerView(model);
+		Point[] piece1Points = new Point[] {
+				new Point(0, 0),
+				new Point(0, 1),
+				new Point(0, 2),
+				new Point(1, 2),
+				new Point(2, 2),
+				new Point(2, 3)
+		};
+		squigglePiece = new Piece(piece1Points);
+		
+		Point[] piece2Points = new Point[] {
+				new Point(0, 0),
+				new Point(0, 1),
+				new Point(0, 2),
+				new Point(0, 3),
+				new Point(0, 4),
+				new Point(0, 5)
+		};
+		linePiece = new Piece(piece2Points);
+
 
 	}
 	
@@ -177,5 +209,33 @@ public class TestEntities extends TestCase{
 		
 	}
 	
+	public void testBullpen(){
+		Point squiggleLoc = new Point(0,0);
+		Point lineLoc = new Point(0,6);
+		squiggleCont = new PieceContainer(squigglePiece, squiggleLoc ,false);
+		lineCont = new PieceContainer(linePiece, lineLoc, false);
+		
+		
+		pieces = new ArrayList<PieceContainer>();
+		pieces.add(squiggleCont);
+		pieces.add(lineCont);
+		
+		bullpen = new Bullpen(pieces, logic);
+		
+		assertEquals(bullpen.getSize(), 2);
+		assertEquals(bullpen.getPieces(), pieces);
+		
+		
+		bullpen.removePiece(squiggleCont);
+		
+		assertEquals(bullpen.getSize(), 1);
+		assertEquals(bullpen.getPiece(0), lineCont);
+		
+		bullpen.addPiece(squiggleCont);
+		
+		assertEquals(bullpen.getSize(), 2);
+		assertEquals(bullpen.getPieces(), pieces);
+		
+	}
 	
 }
