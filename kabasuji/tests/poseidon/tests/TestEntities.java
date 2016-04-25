@@ -6,6 +6,7 @@ import java.util.HashSet;
 import junit.framework.TestCase;
 import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
+import poseidon.entities.IBoardLogic;
 import poseidon.entities.IBullpenLogic;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
@@ -36,6 +37,8 @@ public class TestEntities extends TestCase{
 	ArrayList<PieceContainer> pieces;
 	Bullpen bullpen; 
 	IBullpenLogic logic; 
+	Board board;
+	Square[][] playArea;
 	
 	public void setUp(){
 		view = new LevelPlayerView(model);
@@ -58,8 +61,12 @@ public class TestEntities extends TestCase{
 				new Point(0, 5)
 		};
 		linePiece = new Piece(piece2Points);
-
-
+		
+		playArea = new Square[][]{
+			for (int row =0  , row<= 11, row++) {
+				
+			}
+		}
 	}
 	
 	public void tearDown(){
@@ -291,6 +298,47 @@ public class TestEntities extends TestCase{
 		
 	}
 
+	public class TestBoardLogic implements IBoardLogic{
+
+		public Boolean shouldAddPiece (Board board, PieceContainer piece){
+			return true;
+		}
+		
+		public Boolean shouldRemovePiece (Board board, PieceContainer piece){
+			return true;
+		}
+		public Boolean selectPiece (Board board, PieceContainer piece){
+			return true;
+		}
+		
+		public Boolean isValid(Board board, PieceContainer piece, Point location){
+			return true;
+		}
+		public Boolean canSelect(Board board, int row, int col){
+			return true;
+		}
+	}
+	
+	public void testBoard(){
+		// Set up the bullpen
+		Point squiggleLoc = new Point(0,0);
+		Point lineLoc = new Point(0,6);
+		squiggleCont = new PieceContainer(squigglePiece, squiggleLoc );
+		lineCont = new PieceContainer(linePiece, lineLoc);
+		pieces = new ArrayList<PieceContainer>();
+		pieces.add(squiggleCont);
+		pieces.add(lineCont);
+		bullpen = new Bullpen(pieces, new TestBullpenLogic());
+		
+		// set up board
+		board = new Board(playArea, new TestBoardLogic());
+		
+		board.addPiece(lineCont);
+		
+		
+		
+	}
+
 	public void testXMLHandler() {
 		XMLHandler testXML = new XMLHandler();
 		testXML.makeExampleLevels();
@@ -347,7 +395,7 @@ public class TestEntities extends TestCase{
 		assertEquals(testProgressWrite[1], testProgressRead[1]);
 		assertEquals(testProgressWrite[2], testProgressRead[2]);
 	}
-	
+
 	
 
 }
