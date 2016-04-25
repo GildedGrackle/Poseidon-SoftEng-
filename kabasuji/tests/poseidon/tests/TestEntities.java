@@ -290,6 +290,7 @@ public class TestEntities extends TestCase{
 		assertEquals(null, bullpen.getPieceSelected());
 		
 	}
+<<<<<<< Updated upstream
 
 	public void testXMLHandler() {
 		XMLHandler testXML = new XMLHandler();
@@ -347,4 +348,11 @@ public class TestEntities extends TestCase{
 		assertEquals(testProgressWrite[1], testProgressRead[1]);
 		assertEquals(testProgressWrite[2], testProgressRead[2]);
 	}
+=======
+	
+	public void testBoard(){
+		
+	}
+	
+>>>>>>> Stashed changes
 }
