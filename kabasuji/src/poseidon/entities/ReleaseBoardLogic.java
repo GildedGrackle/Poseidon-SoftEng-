@@ -19,21 +19,7 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	 * @param row, col - The location on the board where the pivot of the piece should be.
 	 * @return Boolean - Indicates whether the addition was successful
 	 */
-	public Boolean addPiece(Board board, PieceContainer piece) {
-		Point location = piece.getLocation();
-		Square[][] playArea = board.getPlayArea();
-		
-		// Add to Board's list of Pieces
-		board.addPieceToList(piece);
-		
-		//fills the squares with the piece points
-		for (Point pt : piece.getPiece().getPiece()) {
-			int pointRow = pt.getRow() + location.getRow();
-			int pointCol = pt.getCol() + location.getCol();
-			playArea[pointRow][pointCol].fill();
-		}
-		
-		// Indicate success
+	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;
 	}
 	
@@ -44,7 +30,7 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	 * 
 	 * @return Boolean - Always false.
 	 */
-	public Boolean removePiece(Board board, PieceContainer piece) {
+	public Boolean shouldRemovePiece(Board board, PieceContainer piece) {
 		return false;											//Cannot remove pieces from release boards
 	}
 	

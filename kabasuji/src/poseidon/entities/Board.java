@@ -57,6 +57,19 @@ public class Board {
 		return null;													//No piece found
 	}
 	
+	private void placePiece(PieceContainer piece){
+		Point location = piece.getLocation();
+		Square[][] playArea = this.getPlayArea();
+		
+		//fills the squares with the piece points
+		for (Point pt : piece.getPiece().getPiece()) {
+			int pointRow = pt.getRow() + location.getRow();
+			int pointCol = pt.getCol() + location.getCol();
+			playArea[pointRow][pointCol].fill();
+		}
+
+		}
+	
 	/**
 	 * Adds piece to a specific pivot point on the board depending on the type of board.
 	 * 
@@ -65,9 +78,16 @@ public class Board {
 	 * @return Boolean - Indicates whether the addition was successful.
 	 */
 	public Boolean addPiece (PieceContainer piece) {
-		return logic.addPiece(this, piece);
+		boolean shouldAdd = logic.shouldAddPiece(this, piece);
+		if (shouldAdd){
+		pieces.add(piece);	
+		placePiece(piece);
+		}
+		
+		return shouldAdd;
 	}
 	
+
 	/**
 	 * Removes a Piece from the board depending on the type of board.
 	 * 
@@ -75,23 +95,24 @@ public class Board {
 	 * @return Boolean - Indicates whether the removal was successful.
 	 */
 	public Boolean removePiece (PieceContainer piece) {
-		return logic.removePiece(this, piece);
+		boolean shouldRemove = logic.shouldRemovePiece(this, piece) 
+				&& pieces.contains(piece);
+		if (shouldRemove) {
+			pieces.remove(piece);
+		
+		}
+		return shouldRemove;
+		
 	}
+	
+
+	
 	
 	/**
 	 * Displays the hint that was chosen for the board.
 	 */
 	void showHint () {
 		//TODO: Change return value
-	}
-	
-	/**
-	 * Adds piece to the ArrayList of pieces.
-	 * 
-	 * @param piece - The piece container of the piece that needs to be added.
-	 */
-	void addPieceToList (PieceContainer piece) {
-		pieces.add(piece);
 	}
 	
 	
@@ -210,7 +231,7 @@ public class Board {
 		if(piece != null && activeSource.getCol() != -1 && activeSource.getRow() != -1)
 		{
 			// Then remove new active dragging Piece from Board
-			logic.removePiece(this, piece);
+			logic.shouldRemovePiece(this, piece);
 		}
 		activeDragged = piece;
 	}
@@ -221,13 +242,4 @@ public class Board {
 	}
 	
 
-	
-	/**
-	 * Removes piece from the ArrayList of pieces.
-	 * 
-	 * @param piece - The piece container of the piece that needs to be removed.
-	 */
-	void removePieceFromList (PieceContainer piece) {
-		pieces.remove(piece);
-	}
 }

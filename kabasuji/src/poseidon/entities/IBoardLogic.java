@@ -13,8 +13,8 @@ public interface IBoardLogic {
 	 * @param piece  Piece being added, must have valid location set
 	 * @return
 	 */
-	Boolean addPiece (Board board, PieceContainer piece);
-	Boolean removePiece (Board board, PieceContainer piece);
+	Boolean shouldAddPiece (Board board, PieceContainer piece);
+	Boolean shouldRemovePiece (Board board, PieceContainer piece);
 	Boolean selectPiece (Board board, PieceContainer piece);
 	Boolean isValid(Board board, PieceContainer piece, Point location);
 	Boolean canSelect(Board board, int row, int col);
