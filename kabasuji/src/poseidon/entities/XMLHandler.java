@@ -387,21 +387,21 @@ public class XMLHandler {
 			switch(i) {
 			case 0:  // Puzzle levels
 				testLevels[i] = new PuzzleLevel(15,
-						"puzzle1",
+						"puzzle0",
 						pbull,
 						pbor,
 						false);
 				break;
 			case 1:  // Lightning levels
 				testLevels[i] = new LightningLevel(60,
-						"lightning1",
+						"lightning0",
 						lbull,
 						lbor,
 						false);
 				break;
 			case 2:  // Release levels
 				testLevels[i] = new ReleaseLevel(10,
-						"release1",
+						"release0",
 						rbull,
 						rbor,
 						false);
