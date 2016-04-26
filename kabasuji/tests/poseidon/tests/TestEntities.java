@@ -14,6 +14,7 @@ import poseidon.entities.LevelPlayerModel;
 import poseidon.entities.LightningSquare;
 import poseidon.entities.Piece;
 import poseidon.entities.PieceContainer;
+import poseidon.entities.PieceFactory;
 import poseidon.entities.Point;
 import poseidon.entities.PuzzleBullpenLogic;
 import poseidon.entities.PuzzleSquare;
@@ -415,4 +416,11 @@ public class TestEntities extends TestCase{
 		assertEquals(testLevel.getLevel(), testPlayer.getPlayingLevel());
 	}
 
+	public void testPieceFactory(){
+		PieceFactory pieceFactory = new PieceFactory();
+		
+		assertEquals(pieceFactory.getPiece(19), squigglePiece);
+		assertEquals(pieceFactory.getRandomPiece().getClass(), squigglePiece.getClass());
+		
+	}
 }
