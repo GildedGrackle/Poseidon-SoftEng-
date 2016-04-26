@@ -143,8 +143,8 @@ public class BoardView extends JPanel implements IModelUpdated
 		int boardOffsetY = activeLocation.y;
 		for(Point pt : p.getPiece())
 		{
-			int pieceOffsetX = 2 + SQUARE_SIZE * pt.getRow();
-			int pieceOffsetY = 2 + SQUARE_SIZE * pt.getCol();
+			int pieceOffsetY = 2 + SQUARE_SIZE * pt.getRow();
+			int pieceOffsetX = 2 + SQUARE_SIZE * pt.getCol();
 			drawer.setColor(activeDragging.getPieceColor());
 			drawer.fillRoundRect(pieceOffsetX + boardOffsetX, pieceOffsetY + boardOffsetY,
 					SQUARE_SIZE, SQUARE_SIZE, 3, 3);

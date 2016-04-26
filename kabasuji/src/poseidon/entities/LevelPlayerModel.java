@@ -22,6 +22,7 @@ public class LevelPlayerModel {
 	int[] currentLevel = new int[NUM_GAMEMODES];
 	/** The level being currently played. */
 	LevelModel playingLevel;
+	XMLHandler xmlHandler;
 	
 	
 	
@@ -48,7 +49,7 @@ public class LevelPlayerModel {
 		{
 			levels.add(new ArrayList<LevelContainer>());  // Default size of 10
 		}
-		XMLHandler xmlHandler = new XMLHandler();
+		xmlHandler = new XMLHandler();
 		
 		// TODO Probably change the file path, like level folder instead of just root
 		
@@ -107,9 +108,15 @@ public class LevelPlayerModel {
 	{
 		return levels;
 	}
+	public XMLHandler getXMLHandler(){
+		return xmlHandler;
+	}
+	
 	public void setPlayingLevel(LevelModel newLevel)
 	{
 		playingLevel = newLevel;
 	}
+	
+
 
 }

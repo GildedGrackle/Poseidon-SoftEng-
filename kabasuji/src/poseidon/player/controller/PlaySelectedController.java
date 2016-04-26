@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.entities.XMLHandler;
 import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
 import poseidon.player.view.LevelView;
@@ -48,6 +49,8 @@ public class PlaySelectedController implements ActionListener
 	{
 		// Get selected level container
 		LevelContainer lvlCon = select.getSelectedLevel();
+		XMLHandler levelHandler = model.getXMLHandler();
+		lvlCon.setLevel(levelHandler.loadXML(lvlCon.getLevelFileName() + ".xml", false));
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
 		model.setPlayingLevel(lvlCon.getLevel());

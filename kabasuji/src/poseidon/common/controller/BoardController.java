@@ -48,7 +48,7 @@ public class BoardController extends MouseAdapter
 	 *  Constructor.
 	 *  
 	 * @param model  the Level that contains the Board
-	 * @param view  the represenation of the Board
+	 * @param view  the representation of the Board
 	 */
 	public BoardController(LevelModel game, LevelView view)
 	{
@@ -212,7 +212,7 @@ public class BoardController extends MouseAdapter
 			if(boardModel.canSelect(row, col))
 			{
 				boardView.selectPiece(row, col);
-				boardModel.setActiveSource(new Point(row, col));
+				boardModel.setActiveSource(boardView.getActiveDragging().getModel().getLocation());
 				pv = boardView.getActiveDragging();
 				piece = pv.getModel();
 				boardModel.setActiveDragged(piece);

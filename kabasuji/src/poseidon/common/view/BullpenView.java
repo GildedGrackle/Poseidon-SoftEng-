@@ -110,8 +110,8 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 			int offsetX = PIECE_SIZE * i;
 			for(Point pt : p.getPiece())
 			{
-				int pieceOffsetX = 2 + SQUARE_SIZE * pt.getRow();
-				int pieceOffsetY = 2 + SQUARE_SIZE * pt.getCol();
+				int pieceOffsetY = 2 + SQUARE_SIZE * pt.getRow();
+				int pieceOffsetX = 2 + SQUARE_SIZE * pt.getCol();
 				drawer.setColor(pv.getPieceColor());
 				drawer.fillRoundRect(pieceOffsetX + offsetX, pieceOffsetY,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
