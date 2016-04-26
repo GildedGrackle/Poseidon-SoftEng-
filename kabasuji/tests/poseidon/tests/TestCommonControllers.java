@@ -6,7 +6,9 @@ import java.awt.event.MouseEvent;
 
 import junit.framework.TestCase;
 import poseidon.common.controller.BoardController;
+import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
+import poseidon.common.view.PieceView;
 import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 import poseidon.entities.LevelBuilderModel;
@@ -18,6 +20,7 @@ import poseidon.entities.Point;
 import poseidon.entities.XMLHandler;
 import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelView;
+import poseidon.tests.TestMouseEvents;
 
 public class TestCommonControllers extends TestMouseEvents{
 
@@ -34,6 +37,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	PieceContainer testPiece;
 	Point testLocation;
 	LevelBuilderModel builderModel;
+	BoardView board;
 	
 	private ActionEvent buttonPress(Component button) {
 		return new ActionEvent(button, 0, getName());
@@ -49,6 +53,7 @@ public class TestCommonControllers extends TestMouseEvents{
 		testLocation = new Point(1,1);
 		model = new LevelPlayerModel(null, testLevel);
 		builderModel = new LevelBuilderModel();
+		board = new BoardView(testBoard);
 		
 		view = new LevelPlayerView(model);
 		Point[] points = new Point[] {
@@ -62,7 +67,7 @@ public class TestCommonControllers extends TestMouseEvents{
 		piece = new Piece(points);
 		location = new Point(0,0);
 		pieceCont = new PieceContainer (piece, location);
-		//bullpenView = new BullpenView(bullpen);
+		bullpenView = new BullpenView(bullpen);
 		
 		
 	}
@@ -95,8 +100,11 @@ public class TestCommonControllers extends TestMouseEvents{
 
 		testPiece.setIsSelected(true);
 		LevelView lvlView = new LevelView(model, view); 
+		PieceView testPieceView = new PieceView(pieceCont, bullpenView);
 		
-		// BoardController boardCont = new BoardController(testLevel, lvlView);
+		MouseEvent enterBoard = createEntered(lvlView, board, 0, 0);
+		board.getMouseManager().handleMouseEvents();
+		
 		
 		
 	}

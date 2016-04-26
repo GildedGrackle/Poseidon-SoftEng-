@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 import junit.framework.TestCase;
 import poseidon.common.view.BoardView;
+import poseidon.common.view.PieceView;
 import poseidon.player.view.LevelView;
 
 public class TestMouseEvents extends TestCase{
