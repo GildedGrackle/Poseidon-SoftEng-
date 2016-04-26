@@ -172,13 +172,4 @@ public class Piece {
 	{
 		return piece;
 	}
-
-	public void setPiece(Point[] piece)
-	{
-		this.piece = piece;
-	}
-	
-	public PieceContainer getContainer() {
-		return this.container;
-	}
 }

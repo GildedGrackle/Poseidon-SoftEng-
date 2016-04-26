@@ -69,7 +69,7 @@ public class BoardController extends MouseAdapter
 	@Override
 	public void mouseEntered(MouseEvent me)
 	{
-		PieceContainer piece = bullpenModel.getPieceSelected();
+		PieceContainer piece = bullpenModel.getPieceSelected(); 
 		PieceView pv = bullpenView.getSelectedPiece();
 		
 		// If nothing is selected, leave

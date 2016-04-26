@@ -63,11 +63,6 @@ public class TestEntities extends TestCase{
 		};
 		linePiece = new Piece(piece2Points);
 		
-//		playArea = new Square[][]{
-//			for (int row =0  , row<= 11, row++) {
-//				
-//			}
-//		}
 	}
 	
 	public void tearDown(){
@@ -320,20 +315,6 @@ public class TestEntities extends TestCase{
 	}
 	
 	public void testBoard(){
-//		// Set up the bullpen
-//		Point squiggleLoc = new Point(0,0);
-//		Point lineLoc = new Point(0,6);
-//		squiggleCont = new PieceContainer(squigglePiece, squiggleLoc );
-//		lineCont = new PieceContainer(linePiece, lineLoc);
-//		pieces = new ArrayList<PieceContainer>();
-//		pieces.add(squiggleCont);
-//		pieces.add(lineCont);
-//		bullpen = new Bullpen(pieces, new TestBullpenLogic());
-//		
-//		// set up board
-//		board = new Board(playArea, new TestBoardLogic());
-//		
-//		board.addPiece(lineCont);
 		
 		// Just pulling one test level, easier than making a new one from scratch
 		XMLHandler testXML = new XMLHandler();
@@ -347,7 +328,7 @@ public class TestEntities extends TestCase{
 		testPiece.setLocation(testLocation);
 		assertTrue(testBoard.addPiece(testPiece));
 
-		testBoard.setActiveSource(testLocation);
+		testBoard.setActiveSource(testLocation); 
 		testBoard.setActiveDragged(testPiece);
 		testBoard.returnPiece();
 

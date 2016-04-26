@@ -50,7 +50,7 @@ public class TestBuilderBtnControllers extends TestCase{
 			back = new BackBuilderController(model, view);
 			newLevelControl = new NewLevelController(model, view);
 			exit = new ExitBuilderController(model, view);
-			editLvlSelect = new EditLevelController(model, view);
+			editLvlSelect = new EditLevelController(model, view); 
 			
 		}
 		

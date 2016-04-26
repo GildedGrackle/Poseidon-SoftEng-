@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.entities.XMLHandler;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.ContinueController;
@@ -77,7 +78,9 @@ public class TestPlayerBtnControllers extends TestCase{
 		ActionEvent lvlSelectPress = buttonPress(button);
 		lvlSelect.actionPerformed(lvlSelectPress);
 		
-		assertEquals(view.getCurrentView().getClass(), LevelSelectView.class );
+		assertEquals(view.getCurrentView().getClass(), LevelSelectView.class ); 
+		
+		
 	}
 	
 	public void testAboutBack(){

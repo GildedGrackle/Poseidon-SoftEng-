@@ -2,17 +2,24 @@ package poseidon.tests;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 
 import junit.framework.TestCase;
+import poseidon.common.controller.BoardController;
 import poseidon.common.view.BullpenView;
+import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
+import poseidon.entities.LevelBuilderModel;
+import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.entities.Piece;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
+import poseidon.entities.XMLHandler;
 import poseidon.player.view.LevelPlayerView;
+import poseidon.player.view.LevelView;
 
-public class TestCommonControllers extends TestCase{
+public class TestCommonControllers extends TestMouseEvents{
 
 	LevelPlayerView view;
 	LevelPlayerModel model;
@@ -21,13 +28,27 @@ public class TestCommonControllers extends TestCase{
 	Point location;
 	BullpenView bullpenView;
 	Bullpen bullpen;
-	
+	XMLHandler testXML;
+	LevelModel testLevel;
+	Board testBoard;
+	PieceContainer testPiece;
+	Point testLocation;
+	LevelBuilderModel builderModel;
 	
 	private ActionEvent buttonPress(Component button) {
 		return new ActionEvent(button, 0, getName());
 	}
 	
 	public void setUp(){
+		
+		testXML = new XMLHandler();
+		testLevel = testXML.getTestLevels()[0];
+
+		testBoard = testLevel.getBoard();
+		testPiece = testLevel.getPlayableBullpen().getPiece(0);
+		testLocation = new Point(1,1);
+		model = new LevelPlayerModel(null, testLevel);
+		builderModel = new LevelBuilderModel();
 		
 		view = new LevelPlayerView(model);
 		Point[] points = new Point[] {
@@ -67,6 +88,16 @@ public class TestCommonControllers extends TestCase{
 	}
 	
 	public void testRotateCW(){
+		
+	}
+	
+	public void testBoardCont(){
+
+		testPiece.setIsSelected(true);
+		LevelView lvlView = new LevelView(model, view); 
+		
+		// BoardController boardCont = new BoardController(testLevel, lvlView);
+		
 		
 	}
 	
