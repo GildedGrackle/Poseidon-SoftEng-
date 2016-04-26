@@ -25,8 +25,10 @@ public class Piece {
 	
 	/**Constructor for random pieces
 	 * @return */
-	Piece() {
-		//TODO figure out how to generate a random pieces
+	public Piece() {
+		PieceFactory factory = new PieceFactory();
+		this.piece = factory.getRandomPiece().getPiece();
+		this.container = new PieceContainer (this, new Point(-1, -1));
 	}
 
 	/**
