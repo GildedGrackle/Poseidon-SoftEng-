@@ -312,6 +312,11 @@ public class TestEntities extends TestCase{
 		public Boolean canSelect(Board board, int row, int col){
 			return true;
 		}
+
+		@Override
+		public Boolean canEdit(Board board) {
+			return false;
+		}
 	}
 	
 	public void testBoard(){
@@ -391,7 +396,7 @@ public class TestEntities extends TestCase{
 		// Test progress saving as well
 		int[] testProgressWrite = new int[]{0,1,2};
 		assertTrue(testXML.saveProgressXML(testProgressWrite, "testProgress.xml"));
-		int[] testProgressRead = testXML.loadProgressXML("testProgress.xml");
+		int[] testProgressRead = testXML.loadProgressXML("testProgress.xml"); 
 		assertEquals(testProgressWrite[0], testProgressRead[0]);
 		assertEquals(testProgressWrite[1], testProgressRead[1]);
 		assertEquals(testProgressWrite[2], testProgressRead[2]);

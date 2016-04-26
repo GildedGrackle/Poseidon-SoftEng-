@@ -156,6 +156,11 @@ public class Board {
 		return logic.isValid(this, piece, location);
 	}
 	
+	public boolean canEdit(){
+		Boolean editBoard = logic.canEdit(this);
+		return editBoard;
+	}
+	
 	
 	/**
 	 *  Determines if a Piece with part at (row, col) can be selected.

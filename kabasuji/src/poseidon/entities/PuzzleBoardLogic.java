@@ -116,4 +116,10 @@ public class PuzzleBoardLogic implements IBoardLogic{
 		
 		return false;
 	}
+
+
+	@Override
+	public Boolean canEdit(Board board) {
+		return false;
+	}
 }

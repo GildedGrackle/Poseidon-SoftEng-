@@ -95,4 +95,9 @@ public class BuilderBoardLogic implements IBoardLogic {
 		// Probably won't get down here, but it keeps the compiler happy.
 		return false;
 	}
+
+	@Override
+	public Boolean canEdit(Board board) {
+		return true;
+	}
 }

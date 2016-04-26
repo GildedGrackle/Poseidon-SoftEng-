@@ -58,5 +58,6 @@ public class UndoManager {
 	public IMove getLastMove() {
 		return movesMade.pop();
 	}
+
 	
 }

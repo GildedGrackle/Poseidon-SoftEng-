@@ -72,6 +72,14 @@ public class TestMouseEvents extends TestCase{
 		return me;
 	}
 	
+	/** (dx,dy) are offsets into the widget space. Feel Free to Use as Is. */
+	public MouseEvent createMoved(LevelView lvlView, BoardView view, int dx, int dy) {
+		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_MOVED, 
+				System.currentTimeMillis(), 0, 
+				view.getX()+dx, view.getY()+dy, 0, false);
+		return me;
+	}
+	
 	public void testEmpty(){
 		
 	}
