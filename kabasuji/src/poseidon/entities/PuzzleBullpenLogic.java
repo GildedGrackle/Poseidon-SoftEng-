@@ -5,7 +5,7 @@ package poseidon.entities;
  * @author Natalia
  *
  */
-public class PuzzleBullpenLogic implements IBullpenLogic{
+public class PuzzleBullpenLogic extends IBullpenLogic {
 	PuzzleBullpenLogic(){
 		//TODO: Change return value
 	}
@@ -15,15 +15,14 @@ public class PuzzleBullpenLogic implements IBullpenLogic{
 	 * 
 	 * Note: would add the piece to the end of the list of pieces on bullpen. 
 	 * Since there is no undo in puzzle, the function would be called when moving a piece from 
-	 * the board to the bullpen, so there is no "harm".
+	 * the board to the bullpen
 	 * 
 	 * @param bullpen - The bullpen that the piece gets added to.
 	 * @param piece - The container of the piece that needs to be added to the bullpen.
 	 * @return Boolean - Returns false in any case.
 	 */
-	public Boolean addPiece(Bullpen bullpen, PieceContainer piece) {
-		bullpen.addPieceToList(piece);
-		return null;
+	public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
+		return true;
 	}
 	
 	/**
@@ -36,8 +35,8 @@ public class PuzzleBullpenLogic implements IBullpenLogic{
 	 * 
 	 * @return Boolean - Indicates whether the removal was successful
 	 */
-	public Boolean removePiece(Bullpen bullpen, PieceContainer piece) {
-		return bullpen.removePieceFromList(piece);
+	public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
+		return true;
 	}
 
 

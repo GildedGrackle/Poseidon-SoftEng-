@@ -19,21 +19,7 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	 * @param row, col - The location on the board where the pivot of the piece should be.
 	 * @return Boolean - Indicates whether the addition was successful
 	 */
-	public Boolean addPiece(Board board, PieceContainer piece) {
-		Point location = piece.getLocation();
-		Square[][] playArea = board.getPlayArea();
-		
-		// Add to Board's list of Pieces
-		board.addPieceToList(piece);
-		
-		//fills the squares with the piece points
-		for (Point pt : piece.getPiece().getPiece()) {
-			int pointRow = pt.getRow() + location.getRow();
-			int pointCol = pt.getCol() + location.getCol();
-			playArea[pointRow][pointCol].fill();
-		}
-		
-		// Indicate success
+	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;
 	}
 	
@@ -44,7 +30,7 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	 * 
 	 * @return Boolean - Always false.
 	 */
-	public Boolean removePiece(Board board, PieceContainer piece) {
+	public Boolean shouldRemovePiece(Board board, PieceContainer piece) {
 		return false;											//Cannot remove pieces from release boards
 	}
 	
@@ -70,8 +56,8 @@ public class ReleaseBoardLogic implements IBoardLogic{
 		for (Point pt : piece.getPiece().getPiece()) {
 			int pointRow = pt.getRow() + location.getRow();		//finds the theoretical row of the square
 			int pointCol = pt.getCol() + location.getCol();		//finds the theoretical col of the square
-			if (pointRow>=board.getRows() || pointCol>=board.getCols() ||
-					board.getSquare(pointRow, pointCol).getType() < 0) {
+			if (pointRow>=board.getRows() || pointCol>=board.getCols() || pointRow < 0 || pointCol < 0
+					|| board.getSquare(pointRow, pointCol).getType() < 0) {
 								//Checks that the piece isn't outside the border or on nonplayble Squares
 				return false;
 			}

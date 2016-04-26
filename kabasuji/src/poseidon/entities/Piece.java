@@ -1,4 +1,9 @@
 package poseidon.entities;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Handles Pieces that are placed on the board/bullpen.
  * @author Natalia
@@ -10,14 +15,20 @@ public class Piece {
 	/** The container that handles the moving and positioning the piece*/
 	PieceContainer container;
 	
-	Piece(Point[] piece) {
+	public Piece(Point[] piece) {
+		if (piece.length != 6) {
+			throw new IllegalArgumentException("Piece must have 6 points");
+		}
 		this.piece = piece;
-		this.container = new PieceContainer (this, new Point(-1, -1), false);
+		this.container = new PieceContainer (this, new Point(-1, -1));
 	}
 	
-	/**Constructor for random pieces*/
-	Piece() {
-		//TODO figure out how to generate a random pieces
+	/**Constructor for random pieces
+	 * @return */
+	public Piece() {
+		PieceFactory factory = new PieceFactory();
+		this.piece = factory.getRandomPiece().getPiece();
+		this.container = new PieceContainer (this, new Point(-1, -1));
 	}
 
 	/**
@@ -134,21 +145,26 @@ public class Piece {
 	@Override
 	/**
 	 * Overrides the standard equals() method for Pieces.
-	 * 
-	 * Note: Works on the premise that equal pieces have an equal order of points. 
-	 * Also, disregards the container. Thus, comparing two pieces that are in different locations but "look" the same
+	 *  
+	 * Disregards the container. Thus, comparing two pieces that are in different locations but "look" the same
 	 * would produce true as the answer.
 	 */
 	public boolean equals(Object o) {
 		if(!(o instanceof Piece)) { return false; }
-		Piece newPiece = (Piece) o;
-		Point[] newArray = newPiece.getPiece();
-		for(int i=0; i<6; i++) {
-			if (!this.piece[i].equals(newArray[i])){
-				return false;
-			}
+		Piece otherPiece = (Piece) o;
+		Set<Point> myPoints = new HashSet<>(Arrays.asList(this.piece));
+		Set<Point> otherPoints = new HashSet<>(Arrays.asList(otherPiece.getPiece()));
+		
+		return myPoints.equals(otherPoints);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i=0; i<piece.length; i++) {
+			sb.append(String.format("(%d, %d):", piece[i].getRow(), piece[i].getCol()));
 		}
-		return true;
+		return sb.toString();
 	}
 
 				/*********************
@@ -157,14 +173,5 @@ public class Piece {
 	public Point[] getPiece()
 	{
 		return piece;
-	}
-
-	public void setPiece(Point[] piece)
-	{
-		this.piece = piece;
-	}
-	
-	public PieceContainer getContainer() {
-		return this.container;
 	}
 }

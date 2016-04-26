@@ -21,14 +21,16 @@ public class Board {
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
 	
 	/**Piece that is currently selected*/ 
-	//MIGHT NEED TO CHANGE
 	PieceContainer activeDragged;
+	
+	/** The coordinates of the origin of the active dragging Piece. */
+	Point activeSource;
 	
 	/**The functioning of the board, game mode/builder*/
 	IBoardLogic logic;	
 	
 	
-	Board (Square [][] playArea, IBoardLogic logic) {
+	public Board (Square [][] playArea, IBoardLogic logic) {
 		this.playArea = playArea;
 		pieces = new ArrayList<PieceContainer>();
 		this.logic = logic;
@@ -55,6 +57,19 @@ public class Board {
 		return null;													//No piece found
 	}
 	
+	private void placePiece(PieceContainer piece){
+		Point location = piece.getLocation();
+		Square[][] playArea = this.getPlayArea();
+		
+		//fills the squares with the piece points
+		for (Point pt : piece.getPiece().getPiece()) {
+			int pointRow = pt.getRow() + location.getRow();
+			int pointCol = pt.getCol() + location.getCol();
+			playArea[pointRow][pointCol].fill();
+		}
+
+		}
+	
 	/**
 	 * Adds piece to a specific pivot point on the board depending on the type of board.
 	 * 
@@ -63,33 +78,41 @@ public class Board {
 	 * @return Boolean - Indicates whether the addition was successful.
 	 */
 	public Boolean addPiece (PieceContainer piece) {
-		return logic.addPiece(this, piece);
+		boolean shouldAdd = logic.shouldAddPiece(this, piece);
+		if (shouldAdd){
+		pieces.add(piece);	
+		placePiece(piece);
+		}
+		
+		return shouldAdd;
 	}
 	
+
 	/**
-	 * Removes a piece from the board depending on the type of board.
+	 * Removes a Piece from the board depending on the type of board.
 	 * 
-	 * @param piece - The piece that needs to be removed from the board. 
+	 * @param piece - The Piece that needs to be removed from the board. 
 	 * @return Boolean - Indicates whether the removal was successful.
 	 */
-	public Boolean removePiece (Piece piece) {
-		return logic.removePiece(this, piece.getContainer());							
+	public Boolean removePiece (PieceContainer piece) {
+		boolean shouldRemove = logic.shouldRemovePiece(this, piece) 
+				&& pieces.contains(piece);
+		if (shouldRemove) {
+			pieces.remove(piece);
+		
+		}
+		return shouldRemove;
+		
 	}
+	
+
+	
 	
 	/**
 	 * Displays the hint that was chosen for the board.
 	 */
 	void showHint () {
 		//TODO: Change return value
-	}
-	
-	/**
-	 * Adds piece to the ArrayList of pieces.
-	 * 
-	 * @param piece - The piece container of the piece that needs to be added.
-	 */
-	void addPieceToList (PieceContainer piece) {
-		pieces.add(piece);
 	}
 	
 	
@@ -146,6 +169,16 @@ public class Board {
 		return logic.canSelect(this, row, col);
 	}
 	
+	
+	/**
+	 *  Returns the active dragging Piece to its source.
+	 */
+	public void returnPiece()
+	{
+		activeDragged.setLocation(activeSource);
+		addPiece(activeDragged);
+	}
+	
 	public Square [] [] getPlayArea (){
 		return this.playArea;
 	}
@@ -180,20 +213,33 @@ public class Board {
 		return activeDragged;
 	}
 	
+	public Point getActiveSource()
+	{
+		return activeSource;
+	}
+	
+	
+	/**
+	 *  Sets the specified Piece as the active dragging Piece.
+	 *  
+	 *  Empties the Squares occupied by the Piece.
+	 * @param piece  a Piece that is on the Board
+	 */
 	public void setActiveDragged(PieceContainer piece)
 	{
-		logic.removePiece(this, piece);
+		// If not resetting activeDragged
+		if(piece != null && activeSource.getCol() != -1 && activeSource.getRow() != -1)
+		{
+			// Then remove new active dragging Piece from Board
+			logic.shouldRemovePiece(this, piece);
+		}
 		activeDragged = piece;
 	}
 	
-
-	
-	/**
-	 * Removes piece from the ArrayList of pieces.
-	 * 
-	 * @param piece - The piece container of the piece that needs to be removed.
-	 */
-	void removePieceFromList (PieceContainer piece) {
-		pieces.remove(piece);
+	public void setActiveSource(Point activeSource)
+	{
+		this.activeSource = activeSource;
 	}
+	
+
 }

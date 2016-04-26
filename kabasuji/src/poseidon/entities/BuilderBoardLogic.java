@@ -18,19 +18,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 	 * @param row, col - The location on the board where the pivot of the piece should be.
 	 * @return Boolean - Indicates whether the addition was successful
 	 */
-	public Boolean addPiece(Board board, PieceContainer piece) {
-		Point location = piece.getLocation();
-		Square[][] playArea = board.getPlayArea();
-		
-		// Add to Board's list of placed Pieces
-		board.addPieceToList(piece);
-		
-		//fills the squares with the piece points
-		for (Point pt : piece.getPiece().getPiece()) {
-			int pointRow = pt.getRow() + location.getRow();
-			int pointCol = pt.getCol() + location.getCol();
-			playArea[pointRow][pointCol].fill();
-		}
+	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;
 }
 	
@@ -43,7 +31,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 	 * @param board - The board the piece is removed from
 	 * @param piece - The container of the piece that needs to be removed
 	 */
-	public Boolean removePiece (Board board, PieceContainer piece){
+	public Boolean shouldRemovePiece (Board board, PieceContainer piece){
 		return false;											//TODO change return value
 
 	}
@@ -62,7 +50,8 @@ public class BuilderBoardLogic implements IBoardLogic {
 		for (Point pt : piece.getPiece().getPiece()) {
 			int pointRow = pt.getRow() + location.getRow();		//finds the theoretical row of the square
 			int pointCol = pt.getCol() + location.getCol();		//finds the theoretical col of the square
-			if (pointRow>=board.getMaxRows() || pointCol>=board.getMaxCols()) {
+			if (pointRow >= board.getMaxRows() || pointCol >= board.getMaxCols()
+					|| pointRow < 0 || pointCol < 0) {
 				//Compares it to 11, since it's the largest number
 				//Checks that the piece isn't outside the border
 				return false;

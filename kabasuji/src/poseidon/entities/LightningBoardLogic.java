@@ -15,7 +15,7 @@ public class LightningBoardLogic implements IBoardLogic {
 	}
 	
 	/**
-	 * Adds given piece to the board and returns whether the addition was successful.
+	 * Adds given piece to the board.
 	 * 
 	 * @param board - The board the addition is performed on.
 	 * @param piece - The piece container of the piece that needs to be added, location must be set.
@@ -23,18 +23,7 @@ public class LightningBoardLogic implements IBoardLogic {
 	 * @return Boolean - Indicates whether the addition was successful
 	 */
 	@Override
-	public Boolean addPiece(Board board, PieceContainer piece) {
-		Point location = piece.getLocation();
-		Square [] [] playArea = board.getPlayArea();
-		
-					//if we got this far, the placement is valid
-		board.addPieceToList(piece);
-		
-		for (Point pt : piece.getPiece().getPiece()) {
-			int pointRow = pt.getRow() + location.getRow();
-			int pointCol = pt.getCol() + location.getCol();
-			playArea[pointRow][pointCol].fill();				//fills the squares with the piece points
-		}
+	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;
 	}
 	
@@ -46,7 +35,7 @@ public class LightningBoardLogic implements IBoardLogic {
 	 * @return Boolean - Always false.
 	 */
 	@Override
-	public Boolean removePiece(Board board, PieceContainer piece) {
+	public Boolean shouldRemovePiece(Board board, PieceContainer piece) {
 		return false;
 	}
 	
@@ -74,7 +63,8 @@ public class LightningBoardLogic implements IBoardLogic {
 			int pointRow = pt.getRow() + location.getRow();		//finds the theoretical row of the square
 			int pointCol = pt.getCol() + location.getCol();		//finds the theoretical col of the square
 			if (pointRow >= board.getRows() || pointCol >= board.getCols() ||
-					(board.getSquare(pointRow, pointCol) instanceof NonplayableSquare)) {
+					pointRow < 0 || pointCol < 0 ||
+					(board.getSquare(pointRow, pointCol).getType() < 0)) {
 								//Checks that the piece isn't outside the border and is put on playable squares
 				return false;
 			}

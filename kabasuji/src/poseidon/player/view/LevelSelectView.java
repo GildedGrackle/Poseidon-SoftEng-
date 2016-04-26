@@ -14,19 +14,44 @@ import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.PlaySelectedController;
 import poseidon.player.controller.SelectLevelController;
 
+/**
+ *  Creates the Level Select screen.
+ *  
+ *  Allows player to select all Levels that have been added to the game.
+ *  TODO figure out if player-made levels are always unlocked
+ *  
+ *  @author Alex Titus
+ */
 public class LevelSelectView extends JPanel implements IGameScreen
 {
-	LevelPlayerModel model;  // The top-level entity object, representing the game
-	LevelPlayerView game;  // The top-level GUI object
-	LevelView currentlyPlaying;  // The GUI of the Level being played
-	StarView levels[][];  // The selectable level icons
-	LevelContainer selectedLevel;  // The level selected to play by the player
+	/** The top-level entity object, representing the game. */
+	LevelPlayerModel model;
+	/** The base GUI object. */
+	LevelPlayerView game;
+	/** The GUI of the Level being played. */
+	LevelView currentlyPlaying;
+	/** The selectable level icons. */
+	StarView levels[][];
+	/** The level selected to play by the player. */
+	LevelContainer selectedLevel;
+	/** The "Play Level" button. */
 	JButton btnPlay;
+	/** The panel holding the Puzzle Levels. */
+	JPanel puzzlePanel;
+	/** The panel holding the Lightning Levels. */
+	JPanel lightningPanel;
+	/** The panel holding the Release Levels. */
+	JPanel releasePanel;
 
 	
 	/**
-	 *  Create the panel. Does some work to figure out which levels are
+	 *  Constructor.
+	 *  
+	 *  Does some work to figure out which levels are
 	 *  available for play
+	 *  
+	 *  @param model  the top-level model, with references to the Levels
+	 *  @param view  the base GUI object
 	 */
 	public LevelSelectView(LevelPlayerModel model, LevelPlayerView view)
 	{
@@ -44,7 +69,8 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	
 	/**
 	 *  Creates and fills the screen with selectable levels
-	 *  and buttons
+	 *  and buttons 
+	 *  TODO use panels and scrollpanes here
 	 */
 	private void initialize()
 	{
@@ -82,7 +108,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		add(btnPlay);
 		
 
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < LevelPlayerModel.NUM_GAMEMODES; i++)
 		{
 			for(int j = 0; j < 5; j++)
 			{
@@ -90,7 +116,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 				if(j <= model.getCurrentLevel()[i])
 				{
 					// Then create a selectable icon
-					StarView levelButton = new StarView(model.getLevels()[i][j]);
+					StarView levelButton = new StarView(model.getLevels().get(i).get(j));
 					levelButton.setBounds(175 + 95 * j, 170 + 90 * i, 60, 80);
 					levelButton.addActionListener(new SelectLevelController(this));
 					add(levelButton);

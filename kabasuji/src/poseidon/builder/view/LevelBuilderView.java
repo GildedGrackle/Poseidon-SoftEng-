@@ -16,26 +16,44 @@ import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.NewLevelController;
 import poseidon.entities.LevelBuilderModel;
 
+/**
+ *  The base GUI class, containing both the application frame and the main menu.
+ *  
+ *  Also has a reference to the current screen being displayed in the frame.
+ *  
+ *  @author Morgan Hopeman
+ *  @author Alex Titus
+ *
+ */
 public class LevelBuilderView implements IBuilderScreen{
 
-//	LevelBuilderModel model;  // The top-level entity object, representing the application's state
-	JFrame builder;  // The frame containing the screens
-	JPanel mainMenu;  // The main menu, with buttons
-	JButton newLevelButton;  // To create a new level (NewLevelView)
-	JButton editLevelButton;  // To edit a new level (EditLevelView)
-	JButton aboutButton;  // To see information about Level Builder (AboutBuilderView)
-	JButton exitButton;  // To exit the application
-	IBuilderScreen currentScreen;  // The current screen displayed in the frame
+	/** The top-level entity object, representing the application's state. */
 	LevelBuilderModel model;
+	/** The frame containing the screens. */
+	JFrame builder;
+	/** The main menu, with buttons. */
+	JPanel mainMenu;
+	/** To create a new level (NewLevelView). */
+	JButton newLevelButton;
+	/** To edit a new level (EditLevelView). */
+	JButton editLevelButton;
+	/** To see information about Level Builder (AboutBuilderView). */
+	JButton aboutButton;
+	/** To exit the application. */
+	JButton exitButton;
+	/** The current screen displayed in the frame. */
+	IBuilderScreen currentScreen;
 
 	/**
-	 * Creates the frame and initializes the frame, model, and other variables.
+	 *  Constructor.
+	 *  
+	 *  Creates the frame and initializes the frame, model, and other variables.
 	 */
 	public LevelBuilderView()
 	{
 		builder = new JFrame("Kabasuji Level Builder");
 		initialize();
-//		model = new LevelBuilderModel();
+		model = new LevelBuilderModel();
 		currentScreen = null;
 	}
 	

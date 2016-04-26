@@ -10,31 +10,12 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	PuzzleBoardLogic() {
 	}
 	
-	/**
-	 * Adds given piece to the board and returns whether the addition was successful.
-	 * 
-	 * @param board - The board the addition is performed on.
-	 * @param piece - The piece container of the piece that needs to be added.
-	 * @return Boolean - Indicates whether the addition was successful
-	 */
+
 	@Override
-	public Boolean addPiece(Board board, PieceContainer piece) {
-		Point location = piece.getLocation();
-		Square[][] playArea = board.getPlayArea();
-		
-		// Add Piece to Board's list of Pieces
-		board.addPieceToList(piece);
-		
-		//fills the squares with the piece points
-		for (Point pt : piece.getPiece().getPiece()) {
-			int pointRow = pt.getRow() + location.getRow();
-			int pointCol = pt.getCol() + location.getCol();
-			playArea[pointRow][pointCol].fill();
-		}
-		
-		// Indicate success
+	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;
 	}
+	
 	
 	/**
 	 * Removes a piece from the board.
@@ -44,7 +25,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	 * @return Boolean - Indicates whether the removal was successful
 	 */
 	@Override
-	public Boolean removePiece(Board board, PieceContainer piece){
+	public Boolean shouldRemovePiece(Board board, PieceContainer piece){
 		Square [] [] playArea = board.getPlayArea();
 		for (Point pt : piece.getPiece().getPiece()) {
 			int pointRow = pt.getRow() + piece.getLocation().getRow();		
@@ -52,10 +33,10 @@ public class PuzzleBoardLogic implements IBoardLogic{
 			if (!(playArea[pointRow][pointCol].isFilled())) {
 				return false;									//the square isn't filled. Piece isn't on the board
 			}
+			
 		}
 		
 		//emptying the squares that the piece used to be on
-		board.removePieceFromList(piece);
 		for (Point pt : piece.getPiece().getPiece()) {
 			int pointRow = pt.getRow() + piece.getLocation().getRow();		
 			int pointCol = pt.getCol() + piece.getLocation().getCol();
@@ -64,6 +45,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 		
 		// Set location as nowhere
 		piece.setLocation(new Point(-1, -1));
+	
 		return true;
 	}
 	
@@ -89,7 +71,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 		for (Point pt : piece.getPiece().getPiece()) {
 			int pointRow = pt.getRow() + location.getRow();		//finds the theoretical row of the square
 			int pointCol = pt.getCol() + location.getCol();		//finds the theoretical col of the square
-			if (pointRow >= board.getRows() || pointCol>=board.getCols() ||
+			if (pointRow >= board.getRows() || pointCol>=board.getCols() || pointRow < 0 || pointCol < 0 ||
 					playArea[pointRow][pointCol].isFilled() || (board.getSquare(pointRow, pointCol).getType() < 0)) {
 								//Checks that the piece isn't covering an existing one, isn't outside the border
 								//and isn't on top of a non-playable square.
@@ -131,7 +113,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 			}
 		}
 		
-		// Probably won't get down here, but it keeps the compiler happy.
+		
 		return false;
 	}
 }

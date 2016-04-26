@@ -2,6 +2,7 @@ package poseidon.entities;
 /**
  * Handles PieceContainers that are placed on the board/bullpen.
  * @author Natalia
+ * @author Alex Titus
  */
 public class PieceContainer {
 	
@@ -14,12 +15,36 @@ public class PieceContainer {
 	/** Indicates whether the piece is the selected piece on the board.bullpen*/
 	Boolean isSelected;
 	
-	PieceContainer (Piece piece, Point location, Boolean isSelected) {
+	
+	/**
+	 *  Constructor.
+	 * @param piece  Piece being contained
+	 * @param location  initial location of this Piece, usually Point(-1, -1)
+	 * @param isSelected  indicates whether the Piece is the selected Piece in the Bullpen/Board
+	 */
+	public PieceContainer (Piece piece, Point location) {
 		this.piece = piece;
 		this.location = location;
-		this.isSelected = isSelected;
+	
+	}
+	
+	
+	/**
+	 *  Constructor for random Piece.
+	 *  
+	 *  The contained Piece is randomly chosen from among the 35 Pieces.
+	 *  
+	 *  @param location  initial location of this Piece, usually Point(-1, -1)
+	 *  @param isSelected  indicates whether the Piece is the selected Piece in the Bullpen/Board
+	 */
+	PieceContainer(Point location)
+	{
+		this.piece = new Piece();
+		this.location = location;
+		
 	}
 
+	
 	@Override
 	/**
 	 * Overrides the standard equals() method for PiecesContainers.
@@ -41,6 +66,14 @@ public class PieceContainer {
 		return false;
 	}
 	
+	@Override
+	public int hashCode() {
+		int hash = piece.hashCode();
+		if (location != null) {
+			hash += location.getCol() + 31 * location.getRow();
+		}
+		return hash;
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
@@ -54,11 +87,7 @@ public class PieceContainer {
 		return location;
 	}
 
-	public Boolean getIsSelected()
-	{
-		return isSelected;
-	}
-
+	
 	public void setPiece(Piece piece)
 	{
 		this.piece = piece;

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.entities.XMLHandler;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.ContinueController;
@@ -61,8 +62,7 @@ public class TestPlayerBtnControllers extends TestCase{
 	
 	
 	public void tearDown(){
-		if (view != null){
-			view.getfrmKabasuji().dispose();}
+			view.getfrmKabasuji().dispose();
 	}
 	
 	public void testAboutBtn(){
@@ -78,7 +78,9 @@ public class TestPlayerBtnControllers extends TestCase{
 		ActionEvent lvlSelectPress = buttonPress(button);
 		lvlSelect.actionPerformed(lvlSelectPress);
 		
-		assertEquals(view.getCurrentView().getClass(), LevelSelectView.class );
+		assertEquals(view.getCurrentView().getClass(), LevelSelectView.class ); 
+		
+		
 	}
 	
 	public void testAboutBack(){
@@ -102,23 +104,15 @@ public class TestPlayerBtnControllers extends TestCase{
 		assertEquals(view.getCurrentView().getCurrentlyPlaying().getClass(), LevelView.class);
 	}
 	
-	public void testPlaySelectLevel(){
-//		setSelectedView(lvlContainer);
-		button = lvlSelectView.getPlay();
-		ActionEvent	playPress = buttonPress(button);
-		playSelect.actionPerformed(playPress);
-		
-		
-	}
-	
-	
-//	public void testExit(){
-//		button = view.getExit();
-//		ActionEvent exitPress = buttonPress(button);
-//		exit.actionPerformed(exitPress);
+//	public void testPlaySelectLevel(){
+//		setSelectedLevel(lvlContainer);
+//		button = lvlSelectView.getPlay();
+//		ActionEvent	playPress = buttonPress(button);
+//		playSelect.actionPerformed(playPress);
 //		
-//		assertEquals(view, null);
+//		
 //	}
+	
 	
 	
 
