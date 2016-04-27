@@ -11,8 +11,10 @@ import junit.framework.TestCase;
 import poseidon.builder.controller.AboutBuilderController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
+import poseidon.common.controller.HorizontalFlipController;
 import poseidon.common.controller.RotateCCWController;
 import poseidon.common.controller.RotateCWController;
+import poseidon.common.controller.VerticalFlipController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.common.view.PieceView;
@@ -306,7 +308,56 @@ public class TestCommonControllers extends TestMouseEvents{
 
 		
 	}
-	
-	
+	public void testFlipHController(){
+		LevelView lvlView = new LevelView(model, view); 
+		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		bullpenView = lvlView.getBullpen();
+		board = lvlView.getBoard();
+		testBullpen.setPieceSelected(squiggleCont);
+		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
+		
+		HorizontalFlipController flipHController = new HorizontalFlipController(bullpenView);
+		
+		button = lvlView.getHFlip();
+		ActionEvent hFlip = buttonPress(button);
+		flipHController.actionPerformed(hFlip);	
+		
+		Point[] flipHPoints = new Point[] {
+				new Point(2, 0),
+				new Point(2, 1),
+				new Point(1, 1),
+				new Point(0, 1),
+				new Point(0, 2),
+				new Point(0, 3)
+		};
+		
+		assertEquals(new Piece(flipHPoints), squiggleCont.getPiece());
+	}
+
+	public void testFlipVController(){
+		LevelView lvlView = new LevelView(model, view); 
+		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		bullpenView = lvlView.getBullpen();
+		board = lvlView.getBoard();
+		testBullpen.setPieceSelected(squiggleCont);
+		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
+		
+		VerticalFlipController flipVController = new VerticalFlipController(bullpenView);
+		
+		button = lvlView.getVFlip();
+		ActionEvent vFlip = buttonPress(button);
+		flipVController.actionPerformed(vFlip);	
+		
+		Point[] flipVPoints = new Point[] {
+				new Point(2, 0),
+				new Point(2, 1),
+				new Point(2, 2),
+				new Point(1, 2),
+				new Point(0, 2),
+				new Point(0, 3)
+		};
+		
+		assertEquals(new Piece(flipVPoints), squiggleCont.getPiece());
+	}
 	
 }
