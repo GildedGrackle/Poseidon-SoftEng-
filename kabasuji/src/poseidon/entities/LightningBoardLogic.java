@@ -84,4 +84,9 @@ public class LightningBoardLogic implements IBoardLogic {
 	{
 		return false;
 	}
+
+	@Override
+	public Boolean canEdit(Board board) {
+		return false;
+	}
 }

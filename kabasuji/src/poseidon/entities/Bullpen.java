@@ -106,10 +106,30 @@ public class Bullpen {
 	 */
 	public void setPieceSelected(PieceContainer pieceSelected)
 	{
-		if (this.pieceSelected != null && this.pieceSelected.equals(pieceSelected)) {
+		// Deselect if select same Piece
+		if (this.pieceSelected != null && pieceSelected.getIsSelected()) {
+			this.pieceSelected.setIsSelected(false);
 			this.pieceSelected = null;
-		} else {
-			this.pieceSelected = pieceSelected;
+		} else {  // Set new selected Piece
+			if(pieceSelected != null)  // If passing actual Piece
+			{
+				// Deselect previous Piece, if applicable
+				if(this.pieceSelected != null)
+				{
+					this.pieceSelected.setIsSelected(false);
+				}
+				this.pieceSelected = pieceSelected;
+				this.pieceSelected.setIsSelected(true);
+			}
+			else  // Setting to no selected Piece
+			{
+				// Deselect previous Piece, if applicable
+				if(this.pieceSelected != null)
+				{
+					this.pieceSelected.setIsSelected(false);
+				}
+				this.pieceSelected = null;
+			}
 		}
 	}
 	

@@ -5,7 +5,7 @@ package poseidon.entities;
  *  
  *  Actual Levels are implemented as subclasses of this class.
  *  
- * @author Natasha Kononenko
+ * @author Natalia
  * @author Alex Titus
  */
 public abstract class LevelModel {
@@ -55,7 +55,11 @@ public abstract class LevelModel {
 	
 	abstract void initialize();
 	
-	abstract Boolean hasWon();
+	abstract Boolean hasWon(); //Checks whether the player reached 3 stars
+	
+	abstract Boolean hasPassed(); //Checks whether the player can move to the next level
+	
+	abstract int calculateScore();
 	
 	abstract void reset();
 	
@@ -101,6 +105,10 @@ public abstract class LevelModel {
 	public Board getBoard()
 	{
 		return board;
+	}
+	
+	public Boolean isCustom() {
+		return isCustom;
 	}
 
 }

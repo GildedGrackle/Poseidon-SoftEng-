@@ -18,4 +18,5 @@ public interface IBoardLogic {
 	Boolean selectPiece (Board board, PieceContainer piece);
 	Boolean isValid(Board board, PieceContainer piece, Point location);
 	Boolean canSelect(Board board, int row, int col);
+	Boolean canEdit(Board board);
 }

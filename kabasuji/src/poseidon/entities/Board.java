@@ -8,6 +8,7 @@ import poseidon.entities.PieceContainer;
  * 
  * @author Natalia
  * @author Alex Titus
+ * @author Jacob Wennersten
  */
 public class Board {
 	/**Largest amount of rows and columns, set for convinience and optional future modification.*/
@@ -73,7 +74,6 @@ public class Board {
 	/**
 	 * Adds piece to a specific pivot point on the board depending on the type of board.
 	 * 
-	 * @param row, col - The location on the board where the pivot of the piece should be. 
 	 * @param piece - The piece that needs to be placed on the board.
 	 * @return Boolean - Indicates whether the addition was successful.
 	 */
@@ -154,6 +154,11 @@ public class Board {
 	public boolean isValid(PieceContainer piece, Point location)
 	{
 		return logic.isValid(this, piece, location);
+	}
+	
+	public boolean canEdit(){
+		Boolean editBoard = logic.canEdit(this);
+		return editBoard;
 	}
 	
 	

@@ -22,8 +22,8 @@ public class MarkPlayableSquareMove implements IMove{
 	 *  Move is valid if the Square is unplayable and in Builder.
 	 */
 	public Boolean isValid() {
-		boolean valid = board.getSquare(location.getRow(), location.getCol()).getType() < 0;
-//		valid = valid && isBuilder
+		boolean valid = board.getSquare(location.getRow(), location.getCol()).getType() < 0
+				&& board.canEdit();
 		
 		return valid;
 	}

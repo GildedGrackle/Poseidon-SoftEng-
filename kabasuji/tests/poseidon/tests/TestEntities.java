@@ -11,14 +11,10 @@ import poseidon.entities.IBullpenLogic;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
-import poseidon.entities.LightningSquare;
 import poseidon.entities.Piece;
 import poseidon.entities.PieceContainer;
+import poseidon.entities.PieceFactory;
 import poseidon.entities.Point;
-import poseidon.entities.PuzzleBullpenLogic;
-import poseidon.entities.PuzzleSquare;
-import poseidon.entities.ReleaseNumber;
-import poseidon.entities.ReleaseSquare;
 import poseidon.entities.Square;
 import poseidon.entities.XMLHandler;
 import poseidon.player.view.LevelPlayerView;
@@ -312,13 +308,16 @@ public class TestEntities extends TestCase{
 		public Boolean canSelect(Board board, int row, int col){
 			return true;
 		}
+
+		@Override
+		public Boolean canEdit(Board board) {
+			return false;
+		}
 	}
 	
 	public void testBoard(){
-		
 		// Just pulling one test level, easier than making a new one from scratch
-		XMLHandler testXML = new XMLHandler();
-		LevelModel testLevel = testXML.getTestLevels()[0];
+		LevelModel testLevel = XMLHandler.getTestLevels()[0];
 
 		Board testBoard = testLevel.getBoard();
 		PieceContainer testPiece = testLevel.getPlayableBullpen().getPiece(0);
@@ -341,21 +340,20 @@ public class TestEntities extends TestCase{
 	}
 
 	public void testXMLHandler() {
-		XMLHandler testXML = new XMLHandler();
-		testXML.makeExampleLevels();
+		XMLHandler.makeExampleLevels();
 		
-		LevelModel[] testLevelsWrite = testXML.getTestLevels();
+		LevelModel[] testLevelsWrite = XMLHandler.getTestLevels();
 		LevelModel[] testLevelsRead = new LevelModel[3];
 		
 		// Ensure that the levels save successfully
-		assertTrue(testXML.saveXML(testLevelsWrite[0], "puzzle0.xml"));
-		assertTrue(testXML.saveXML(testLevelsWrite[1], "lightning0.xml"));
-		assertTrue(testXML.saveXML(testLevelsWrite[2], "release0.xml"));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[0], "puzzle0.xml"));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[1], "lightning0.xml"));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[2], "release0.xml"));
 		
 		// Load the levels back in for comparison
-		testLevelsRead[0] = testXML.loadXML("puzzle0.xml", false);
-		testLevelsRead[1] = testXML.loadXML("lightning0.xml", false);
-		testLevelsRead[2] = testXML.loadXML("release0.xml", false);
+		testLevelsRead[0] = XMLHandler.loadXML("puzzle0.xml", false);
+		testLevelsRead[1] = XMLHandler.loadXML("lightning0.xml", false);
+		testLevelsRead[2] = XMLHandler.loadXML("release0.xml", false);
 		
 		// Dig into the first level of each type and compare all of the values
 		for (int i=0; i<3; i++) {
@@ -390,8 +388,8 @@ public class TestEntities extends TestCase{
 		
 		// Test progress saving as well
 		int[] testProgressWrite = new int[]{0,1,2};
-		assertTrue(testXML.saveProgressXML(testProgressWrite, "testProgress.xml"));
-		int[] testProgressRead = testXML.loadProgressXML("testProgress.xml");
+		assertTrue(XMLHandler.saveProgressXML(testProgressWrite, "testProgress.xml"));
+		int[] testProgressRead = XMLHandler.loadProgressXML("testProgress.xml"); 
 		assertEquals(testProgressWrite[0], testProgressRead[0]);
 		assertEquals(testProgressWrite[1], testProgressRead[1]);
 		assertEquals(testProgressWrite[2], testProgressRead[2]);
@@ -410,4 +408,11 @@ public class TestEntities extends TestCase{
 		assertEquals(testLevel.getLevel(), testPlayer.getPlayingLevel());
 	}
 
+	public void testPieceFactory(){
+		PieceFactory pieceFactory = new PieceFactory();
+		
+		assertEquals(pieceFactory.getPiece(19), squigglePiece);
+		assertEquals(pieceFactory.getRandomPiece().getClass(), squigglePiece.getClass());
+		
+	}
 }

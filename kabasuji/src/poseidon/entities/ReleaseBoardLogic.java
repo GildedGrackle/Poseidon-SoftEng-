@@ -6,6 +6,7 @@ package poseidon.entities;
  * 
  * @author Natalia
  * @author Alex Titus
+ * @author Morgan Hopeman
  */
 public class ReleaseBoardLogic implements IBoardLogic{
 	ReleaseBoardLogic() {
@@ -76,6 +77,10 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	@Override
 	public Boolean canSelect(Board board, int row, int col)
 	{
+		return false;
+	}
+	@Override
+	public Boolean canEdit(Board board) {
 		return false;
 	}
 }

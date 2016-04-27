@@ -56,7 +56,7 @@ public class PieceFactory {
 	}
 	
 	/**
-	 * returns the piece whos number was passed to the function.
+	 * returns the piece whose number was passed to the function.
 	 * 
 	 * NOTE: To avoid confusion, the pieces are numbered exactly in the way that was shown in the class slides.
 	 * That means that the numbers go 1-35 instead of 0-34 as they actually do in the array.
@@ -64,7 +64,7 @@ public class PieceFactory {
 	 * @param pieceNum
 	 * @return Piece
 	 */
-	Piece getPiece(int pieceNum) {
+	public Piece getPiece(int pieceNum) {
 		return pieces[pieceNum-1];
 	}
 	
@@ -72,7 +72,7 @@ public class PieceFactory {
 	 * Returns a random piece.
 	 * @return Piece
 	 */
-	Piece getRandomPiece() {
+	public Piece getRandomPiece() {
 		Random rand = new Random();
 		int randomNum = rand.nextInt(35);
 		return pieces[randomNum];

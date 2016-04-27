@@ -1,5 +1,6 @@
 package poseidon.entities;
 
+import poseidon.common.view.PieceView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.player.view.LevelView;
@@ -21,6 +22,8 @@ public class BoardToBullpenMove implements IMove{
 	/** The Piece to move. */
 	PieceContainer piece;
 	
+	PieceView draggedPiece;
+	
 	
 	/**
 	 *  Constructor.
@@ -38,13 +41,17 @@ public class BoardToBullpenMove implements IMove{
 	
 	
 	/**
-	 *  Move is valid always.
+	 *  Move is valid unless limit has been reached.
 	 *  
 	 *  The only way this can be called is if there is an actual Piece being
 	 *  dragged off of the Board, due to checks at BoardController.mouseClicked
 	 *  and BoardController.mouseReleased
 	 */
 	public Boolean isValid() {
+		if(game.getLimit() <= 0) {
+			return false;
+		}
+		
 		return true;
 	}
 	
@@ -59,7 +66,8 @@ public class BoardToBullpenMove implements IMove{
 			piece.setLocation(new Point(-1, -1));  // Piece is "Nowhere"
 			// Now in Bullpen  
 			game.getPlayableBullpen().addPiece(piece);
-			view.getBullpen().addPiece(view.getBoard().getActiveDragging());
+			draggedPiece = view.getBoard().getActiveDragging();
+			view.getBullpen().addPiece(draggedPiece);
 			// Not on Board anymore (was removed during BoardController.mousePressed)
 			game.getBoard().setActiveDragged(null);
 			view.getBoard().setActiveDragging(null);
@@ -77,9 +85,9 @@ public class BoardToBullpenMove implements IMove{
 	
 	
 	/**
-	 *  Returns the Piece to the Board from the Bullpen.
+	 * Returns false since board to bullpen moves are only possible in puzzle, where moves are un-undoable.
 	 */
 	public Boolean undoMove() {
-		return false;						//TODO: change return value
+		return false;
 	}
 }
