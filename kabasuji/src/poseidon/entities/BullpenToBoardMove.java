@@ -1,5 +1,6 @@
 package poseidon.entities;
 
+import poseidon.common.view.PieceView;
 import poseidon.player.view.LevelView;
 
 /**
@@ -13,6 +14,7 @@ public class BullpenToBoardMove implements IMove{
 	PieceContainer piece;
 	Point location;
 	LevelView view;
+	PieceView draggedPiece;
 	
 	
 	/**
@@ -64,9 +66,11 @@ public class BullpenToBoardMove implements IMove{
 		{
 			piece.setLocation(location);
 			game.getBoard().addPiece(piece);
-			view.getBoard().addPiece(view.getBullpen().getSelectedPiece());
+			
+			draggedPiece = view.getBullpen().getSelectedPiece();
+			view.getBoard().addPiece(draggedPiece);
 			game.getPlayableBullpen().removePiece(piece);
-			view.getBullpen().removePiece(view.getBullpen().getSelectedPiece());
+			view.getBullpen().removePiece(draggedPiece);
 			view.getBullpen().setSelectedPiece(null);
 
 			// Decrease moves remaining by 1 (if applicable)
@@ -78,7 +82,19 @@ public class BullpenToBoardMove implements IMove{
 		return false;
 	}
 	
+	/**
+	 * returns the piece to it's original location.
+	 */
 	public Boolean undoMove() {
-		return false;						//TODO: change return value
+		if (draggedPiece!=null && game.getBoard().canEdit()) {
+			piece.setLocation(new Point(-1, -1));
+			game.getBoard().removePiece(piece);
+			view.getBoard().removePiece(draggedPiece);
+			game.getPlayableBullpen().addPiece(piece);
+			view.getBullpen().addPiece(draggedPiece);
+			view.getBullpen().setSelectedPiece(draggedPiece);
+			return true;
+		}
+		return false;
 	}
 }

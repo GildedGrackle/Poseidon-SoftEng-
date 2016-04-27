@@ -73,7 +73,6 @@ public class Board {
 	/**
 	 * Adds piece to a specific pivot point on the board depending on the type of board.
 	 * 
-	 * @param row, col - The location on the board where the pivot of the piece should be. 
 	 * @param piece - The piece that needs to be placed on the board.
 	 * @return Boolean - Indicates whether the addition was successful.
 	 */

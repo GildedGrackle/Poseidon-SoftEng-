@@ -1,6 +1,7 @@
 package poseidon.entities;
 
 import poseidon.common.view.BoardView;
+import poseidon.common.view.PieceView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.player.view.LevelView;
@@ -21,6 +22,9 @@ public class BoardToBoardMove implements IMove{
 	Point to;
 	/** Piece being moved. */
 	PieceContainer piece;
+	
+	PieceView draggedPiece;
+	
 	
 	public BoardToBoardMove(LevelView view, PieceContainer piece, Point from, Point to) {
 		this.from = from;
@@ -57,7 +61,8 @@ public class BoardToBoardMove implements IMove{
 		{
 			piece.setLocation(to);
 			view.getBoard().getBoard().addPiece(piece);
-			view.getBoard().addPiece(view.getBoard().getActiveDragging());
+			draggedPiece = view.getBoard().getActiveDragging();
+			view.getBoard().addPiece(draggedPiece);
 
 			// Decrease moves remaining by 1 (if applicable)
 			view.getModel().decrementLimit();
@@ -68,7 +73,11 @@ public class BoardToBoardMove implements IMove{
 		return false;
 	}
 	
+	/**
+	 * Returns false since board to board moves are only possible in puzzle, where moves are un-undoable.
+	 * 
+	 */
 	public Boolean undoMove() {
-		return false;						//TODO: change return value
+		return false;
 	}
 }
