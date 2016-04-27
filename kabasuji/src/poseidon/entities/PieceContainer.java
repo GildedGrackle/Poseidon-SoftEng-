@@ -25,6 +25,7 @@ public class PieceContainer {
 	public PieceContainer (Piece piece, Point location) {
 		this.piece = piece;
 		this.location = location;
+		this.isSelected = false;
 	
 	}
 	
@@ -87,7 +88,10 @@ public class PieceContainer {
 		return location;
 	}
 
-	
+	public boolean getIsSelected()
+	{
+		return isSelected;
+	}
 	public void setPiece(Piece piece)
 	{
 		this.piece = piece;
