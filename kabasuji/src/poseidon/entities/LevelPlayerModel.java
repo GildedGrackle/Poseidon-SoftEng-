@@ -11,6 +11,7 @@ import java.util.ArrayList;
  *  
  *  @author Natalia Kononenko
  *  @author Alex Titus
+ *  @author Jacob Wennersten
  */
 public class LevelPlayerModel {
 	/** The number of game modes */
@@ -50,8 +51,6 @@ public class LevelPlayerModel {
 			levels.add(new ArrayList<LevelContainer>());  // Default size of 10
 		}
 		xmlHandler = new XMLHandler();
-		
-		// TODO Probably change the file path, like level folder instead of just root
 		
 		// Assuming naming convention of gamemode1, gamemode2, ... gamemode5
 		

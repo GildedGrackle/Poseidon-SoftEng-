@@ -8,6 +8,7 @@ import poseidon.entities.PieceContainer;
  * 
  * @author Natalia
  * @author Alex Titus
+ * @author Jacob Wennersten
  */
 public class Board {
 	/**Largest amount of rows and columns, set for convinience and optional future modification.*/

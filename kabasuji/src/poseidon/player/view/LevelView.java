@@ -16,6 +16,7 @@ import javax.swing.ScrollPaneConstants;
 import poseidon.common.controller.BullpenController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.HorizontalFlipController;
+import poseidon.common.controller.ResetController;
 import poseidon.common.controller.RotateCCWController;
 import poseidon.common.controller.RotateCWController;
 import poseidon.common.controller.VerticalFlipController;
@@ -114,6 +115,7 @@ public class LevelView extends JPanel implements IModelUpdated
 		leftPanel.setLayout(null);
 		
 		resetButton = new JButton("Reset");
+		resetButton.addActionListener(new ResetController(topModel, game));
 		resetButton.setBounds(10, 290, 130, 40);
 		leftPanel.add(resetButton);
 		resetButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
