@@ -13,6 +13,7 @@ import poseidon.player.view.LevelView;
  *  Handles resetting a Level back to its initial state.
  *  
  *  @author Alex Titus
+ *  @author Jacob Wennersten
  */
 public class ResetController implements ActionListener
 {
@@ -52,11 +53,9 @@ public class ResetController implements ActionListener
 	 * @return true if successful
 	 */
 	boolean resetLevel() {
-		XMLHandler levelHandler = model.getXMLHandler();
-		
 		// Reload the current level
 		LevelModel currentLevel = model.getPlayingLevel();
-		LevelModel resetLevel = levelHandler.loadXML(currentLevel.getLevelName() + ".xml", currentLevel.isCustom());
+		LevelModel resetLevel = XMLHandler.loadXML(currentLevel.getLevelName() + ".xml", currentLevel.isCustom());
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
 		model.setPlayingLevel(resetLevel);

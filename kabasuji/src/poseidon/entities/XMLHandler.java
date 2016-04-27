@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * Class to contain the methods for saving and loading XML files
+ * Class to contain the static methods for saving and loading XML files
  * 
  * @author Jacob
  *
@@ -20,10 +20,10 @@ public class XMLHandler {
 	/**
 	 * This is what the filenames are appended onto for saving and loading.
 	 */
-	String directory = "StockLevels/";
+	static String directory = "StockLevels/";
 
 	/**
-	 * Constructor, no parameters, just a method holder.
+	 * Unnecessary, should just call the static methods directly.
 	 * 
 	 */
 	public XMLHandler() {};
@@ -36,7 +36,7 @@ public class XMLHandler {
 	 * @return 				True if saved, false is failed.
 	 */
 	// TODO Should this use a boolean return confirmation or exception(s)?
-	public boolean saveXML(LevelModel level, String filePath) {
+	public static boolean saveXML(LevelModel level, String filePath) {
 		// Turn filePath into an actual File object and create directory
 		File file = new File(directory + filePath);
 		file.getParentFile().mkdirs();
@@ -145,7 +145,7 @@ public class XMLHandler {
 	 * @return 				LevelModel if successful, null if file doesn't exist or isn't valid.
 	 */
 	// TODO Should this use a null return or exception(s)?
-	public LevelModel loadXML(String filePath, boolean inBuilder) {
+	public static LevelModel loadXML(String filePath, boolean inBuilder) {
 		// Turn filePath into an actual File object
 		File file = new File(directory + filePath);
 		
@@ -272,7 +272,7 @@ public class XMLHandler {
 	 * 
 	 * WARNING: Watch out for overwriting, these use the standard naming convention.
 	 */
-	public void makeExampleLevels() {
+	public static void makeExampleLevels() {
 		LevelModel[][] levels = new LevelModel[3][5];
 		
 		Point[] piecePoints = {new Point(0,0), new Point(1,0), new Point(2,0), 
@@ -345,7 +345,7 @@ public class XMLHandler {
 	/**
 	 * Return three test levels, identical to the first three example levels, for JUnit testing
 	 */
-	public LevelModel[] getTestLevels() {
+	public static LevelModel[] getTestLevels() {
 		LevelModel[] testLevels = new LevelModel[3];
 		
 		Point[] piecePoints = {new Point(0,0), new Point(1,0), new Point(2,0), 
@@ -419,7 +419,7 @@ public class XMLHandler {
 	 * @param 	filePath 	String specifying where to save the file to.
 	 * @return 				True if saved, false is failed.
 	 */
-	public boolean saveProgressXML(int[] progress, String filePath) {
+	public static boolean saveProgressXML(int[] progress, String filePath) {
 		// Turn filePath into an actual File object and create directory
 		File file = new File(directory + filePath);
 		file.getParentFile().mkdirs();
@@ -457,7 +457,7 @@ public class XMLHandler {
 	 * @param 	filePath 	String specifying where to load the file from.
 	 * @return				int[3] if successful, null if file doesn't exist or isn't valid.
 	 */
-	public int[] loadProgressXML(String filePath) {
+	public static int[] loadProgressXML(String filePath) {
 		// Turn filePath into an actual File object
 		File file = new File(directory + filePath);
 

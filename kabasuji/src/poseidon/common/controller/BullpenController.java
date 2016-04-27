@@ -2,11 +2,9 @@ package poseidon.common.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.entities.Bullpen;
-import poseidon.entities.Point;
 
 /**
  *  Handles click events on the Bullpen.
