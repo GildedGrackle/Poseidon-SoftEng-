@@ -16,7 +16,8 @@ public class Piece {
 	PieceContainer container;
 	
 	public Piece(Point[] piece) {
-		if (piece.length != 6) {
+		Set<Point> myPoints = new HashSet<>(Arrays.asList(piece));
+		if (myPoints.size() != 6) {
 			throw new IllegalArgumentException("Piece must have 6 points");
 		}
 		this.piece = piece;

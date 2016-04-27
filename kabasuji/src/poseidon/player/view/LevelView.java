@@ -263,5 +263,31 @@ public class LevelView extends JPanel implements IModelUpdated
 		this.board = board;
 	}
 	
+	public JButton getCCW(){
+		return rotateCCWButton;
+	}
 	
+	public JButton getCW(){
+		return rotateCWButton;
+	}
+	
+	public JButton getHFlip(){
+		return flipHButton;
+	}
+	
+	public JButton getVFlip(){
+		return flipVButton;
+	}
+	
+	public JButton getReset(){
+		return resetButton;
+	}
+	
+	public JButton getQuit(){
+		return quitButton;
+	}
+	
+	public JButton getFinish(){
+		return finishButton;
+	}
 }
