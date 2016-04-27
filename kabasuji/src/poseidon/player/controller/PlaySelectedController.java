@@ -50,7 +50,7 @@ public class PlaySelectedController implements ActionListener
 		// Get selected level container
 		LevelContainer lvlCon = select.getSelectedLevel();
 		XMLHandler levelHandler = model.getXMLHandler();
-		lvlCon.setLevel(levelHandler.loadXML(lvlCon.getLevelFileName() + ".xml", false));
+		lvlCon.setLevel(levelHandler.loadXML(lvlCon.getLevelFileName(), false));
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
 		model.setPlayingLevel(lvlCon.getLevel());

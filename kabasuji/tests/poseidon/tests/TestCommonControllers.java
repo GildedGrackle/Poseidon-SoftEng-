@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 import poseidon.common.controller.BoardController;
+import poseidon.common.controller.BullpenController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.common.view.PieceView;
@@ -162,7 +163,7 @@ public class TestCommonControllers extends TestMouseEvents{
 		
 		assertNotSame(lvlView.getBoard().getActiveLocation(), oldLocation);
 		
-		MouseEvent pressed = createPressed(lvlView, lvlView.getBoard(), 4, 5);
+		MouseEvent pressed = createBoardPressed(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mousePressed(pressed);
 		
 		assertFalse(testBullpen.getPieces().contains(squiggleCont));
@@ -188,7 +189,7 @@ public class TestCommonControllers extends TestMouseEvents{
 		assertEquals(lvlView.getBoard().getActiveDragging(), null);
 		assertNotSame(location2, squigglePieceView.getLocation());
 		
-		pressed = createPressed(lvlView, lvlView.getBoard(), 2, 2);
+		pressed = createBoardPressed(lvlView, lvlView.getBoard(), 2, 2);
 		controller.mousePressed(pressed);
 		dragPiece = createDragged(lvlView, lvlView.getBoard(), -300, -300);
 		controller.mouseDragged(dragPiece);
@@ -210,8 +211,31 @@ public class TestCommonControllers extends TestMouseEvents{
 		MouseEvent removePiece = createExited(lvlView, lvlView.getBoard(), 0, 0);
 		controller.mouseExited(removePiece);
 		
-		assertNull(lvlView.getBoard().getActiveDragging());
+		assertNull(lvlView.getBoard().getActiveDragging());	
+	}
+		
+	public void testBullpenControllerPuzzle(){
+		LevelView lvlView = new LevelView(model, view); 
+		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		PieceView linePieceView = new PieceView(lineCont, lvlView.getBullpen());
+		bullpenView = lvlView.getBullpen();
+		board = lvlView.getBoard();
+		
+		BullpenController bullpenController = new BullpenController(testBullpen, bullpenView, board);
+		MouseEvent selectPiece = createBullpenPressed(lvlView, bullpenView, 0, 0);
+		
+		bullpenController.mousePressed(selectPiece);
+		
+		assertEquals(testBullpen.getPieceSelected(), testBullpen.getPiece(0));
+		
+		selectPiece = createBullpenPressed(lvlView, bullpenView, 200, 0);
+		bullpenController.mousePressed(selectPiece);
+		
+		assertFalse(testBullpen.getPieceSelected() == testBullpen.getPiece(0));
+		assertEquals(testBullpen.getPieceSelected(), testBullpen.getPiece(4));
+		
 		
 	}
+	
 	
 }

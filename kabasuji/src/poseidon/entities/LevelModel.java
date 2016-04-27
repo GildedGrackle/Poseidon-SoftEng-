@@ -102,5 +102,9 @@ public abstract class LevelModel {
 	{
 		return board;
 	}
+	
+	public Boolean isCustom() {
+		return isCustom;
+	}
 
 }
