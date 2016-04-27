@@ -110,6 +110,7 @@ public class Bullpen {
 			this.pieceSelected = null;
 		} else {
 			this.pieceSelected = pieceSelected;
+			this.pieceSelected.setIsSelected(true);
 		}
 	}
 	

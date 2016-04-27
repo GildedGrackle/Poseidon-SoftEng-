@@ -4,12 +4,13 @@ import java.awt.event.MouseEvent;
 
 import junit.framework.TestCase;
 import poseidon.common.view.BoardView;
+import poseidon.common.view.BullpenView;
 import poseidon.common.view.PieceView;
 import poseidon.player.view.LevelView;
 
 public class TestMouseEvents extends TestCase{
 	/** (dx,dy) are offsets into the widget space. Feel Free to Use as Is. */
-	public MouseEvent createPressed (LevelView lvlView, BoardView view, int dx, int dy) {
+	public MouseEvent createBoardPressed (LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_PRESSED, 
 				System.currentTimeMillis(), 0, 
 				view.getX()+dx, view.getY()+dy, 0, false);
@@ -75,6 +76,13 @@ public class TestMouseEvents extends TestCase{
 	/** (dx,dy) are offsets into the widget space. Feel Free to Use as Is. */
 	public MouseEvent createMoved(LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_MOVED, 
+				System.currentTimeMillis(), 0, 
+				view.getX()+dx, view.getY()+dy, 0, false);
+		return me;
+	}
+	
+	public MouseEvent createBullpenPressed (LevelView lvlView, BullpenView view, int dx, int dy) {
+		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_PRESSED, 
 				System.currentTimeMillis(), 0, 
 				view.getX()+dx, view.getY()+dy, 0, false);
 		return me;
