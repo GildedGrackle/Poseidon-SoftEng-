@@ -195,6 +195,25 @@ public class TestEntities extends TestCase{
 		} catch (Exception e) {
 			fail("Expected IllegalArgumentException");
 		}
+		
+		try {
+			Point[] points = new Point[] {
+					new Point(0, 0),
+					new Point(0, 1),
+					new Point(0, 2),
+					new Point(1, 2),
+					new Point(2, 2),
+					new Point(0, 2)
+			};
+			
+			piece = new Piece(points);
+			
+			fail("Expected IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+		} catch (Exception e) {
+			fail("Expected IllegalArgumentException");
+		}
 	}
 	
 	public void testPieceContainer(){
@@ -342,21 +361,42 @@ public class TestEntities extends TestCase{
 	public void testXMLHandler() {
 		XMLHandler.makeExampleLevels();
 		
-		LevelModel[] testLevelsWrite = XMLHandler.getTestLevels();
-		LevelModel[] testLevelsRead = new LevelModel[3];
+		LevelModel[] testLevels = XMLHandler.getTestLevels();
+		LevelModel testLevelCustom = XMLHandler.getTestLevels()[1];
+		LevelModel[] testLevelsWrite = new LevelModel[]{testLevels[0],
+														testLevels[1],
+														testLevels[2],
+														testLevelCustom};
+		LevelModel[] testLevelsRead = new LevelModel[4];
+		
+		// Test filename list saving and loading
+		String[] testStockNamesWrite = new String[]{"testPuzzle0.xml",
+											   		"testLightning0.xml",
+											   		"testRelease0.xml"};
+		String[] testCustomNamesWrite = new String[]{"testCustom0.xml"};
+		assertTrue(XMLHandler.saveFilenames(testStockNamesWrite, "testStockNames.xml", false));
+		assertTrue(XMLHandler.saveFilenames(testCustomNamesWrite, "testCustomNames.xml", true));
+		String[] testStockNamesRead = XMLHandler.loadFilenames("testStockNames.xml", false);
+		String[] testCustomNamesRead = XMLHandler.loadFilenames("testCustomNames.xml", true);
+		assertEquals(testStockNamesWrite[0], testStockNamesRead[0]);
+		assertEquals(testStockNamesWrite[1], testStockNamesRead[1]);
+		assertEquals(testStockNamesWrite[2], testStockNamesRead[2]);
+		assertEquals(testCustomNamesWrite[0], testCustomNamesRead[0]);
 		
 		// Ensure that the levels save successfully
-		assertTrue(XMLHandler.saveXML(testLevelsWrite[0], "puzzle0.xml"));
-		assertTrue(XMLHandler.saveXML(testLevelsWrite[1], "lightning0.xml"));
-		assertTrue(XMLHandler.saveXML(testLevelsWrite[2], "release0.xml"));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[0], testStockNamesRead[0], false));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[1], testStockNamesRead[1], false));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[2], testStockNamesRead[2], false));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[3], testCustomNamesRead[0], true));
 		
 		// Load the levels back in for comparison
-		testLevelsRead[0] = XMLHandler.loadXML("puzzle0.xml", false);
-		testLevelsRead[1] = XMLHandler.loadXML("lightning0.xml", false);
-		testLevelsRead[2] = XMLHandler.loadXML("release0.xml", false);
+		testLevelsRead[0] = XMLHandler.loadXML("testPuzzle0.xml", false, false);
+		testLevelsRead[1] = XMLHandler.loadXML("testLightning0.xml", false, false);
+		testLevelsRead[2] = XMLHandler.loadXML("testRelease0.xml", false, false);
+		testLevelsRead[3] = XMLHandler.loadXML("testCustom0.xml", false, true);
 		
 		// Dig into the first level of each type and compare all of the values
-		for (int i=0; i<3; i++) {
+		for (int i=0; i<4; i++) {
 			assertTrue(testLevelsWrite[i].getLevelName().equals(testLevelsRead[i].getLevelName()));
 			assertEquals(testLevelsWrite[i].getGameMode(), testLevelsRead[i].getGameMode());
 			
@@ -386,7 +426,7 @@ public class TestEntities extends TestCase{
 			}
 		}
 		
-		// Test progress saving as well
+		// Test progress saving and loading as well
 		int[] testProgressWrite = new int[]{0,1,2};
 		assertTrue(XMLHandler.saveProgressXML(testProgressWrite, "testProgress.xml"));
 		int[] testProgressRead = XMLHandler.loadProgressXML("testProgress.xml"); 

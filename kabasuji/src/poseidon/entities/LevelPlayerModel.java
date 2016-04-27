@@ -55,7 +55,7 @@ public class LevelPlayerModel {
 		// Puzzle levels
 		for (int i=0; i<5; i++) {
 			String filePath = "puzzle"+String.valueOf(i)+".xml";
-			PuzzleLevel levelTemp = (PuzzleLevel) XMLHandler.loadXML(filePath, false);
+			PuzzleLevel levelTemp = (PuzzleLevel) XMLHandler.loadXML(filePath, false, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
 				levels.get(0).add(new LevelContainer(null, 0, i, null, 0));
@@ -67,7 +67,7 @@ public class LevelPlayerModel {
 		// Lightning Levels, same process
 		for (int i=0; i<5; i++) {
 			String filePath = "lightning"+String.valueOf(i)+".xml";
-			LightningLevel levelTemp = (LightningLevel) XMLHandler.loadXML(filePath, false);
+			LightningLevel levelTemp = (LightningLevel) XMLHandler.loadXML(filePath, false, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
 				levels.get(1).add(new LevelContainer(null, 0, i, null, 0));
@@ -79,7 +79,7 @@ public class LevelPlayerModel {
 		// Release Levels, same process again
 		for (int i=0; i<5; i++) {
 			String filePath = "release"+String.valueOf(i)+".xml";
-			ReleaseLevel levelTemp = (ReleaseLevel) XMLHandler.loadXML(filePath, false);
+			ReleaseLevel levelTemp = (ReleaseLevel) XMLHandler.loadXML(filePath, false, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
 				levels.get(2).add(new LevelContainer(null, 0, i, null, 0));

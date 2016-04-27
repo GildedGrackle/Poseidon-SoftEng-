@@ -12,10 +12,9 @@ public class Main
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
 					// Try to load progress from file
 					// If file not present/valid then make new one {0,0,0}
-					int[] progress =  XMLHandler.loadProgressXML("progressXML.xml");
+					int[] progress =  XMLHandler.loadProgressXML("progress.xml");
 					progress = (progress == null)? (new int[]{0,0,0}) : (progress);
 					
 					// TODO Make actual levels, until then use this to generate examples

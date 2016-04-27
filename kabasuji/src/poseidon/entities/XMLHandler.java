@@ -10,22 +10,18 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * Class to contain the static methods for saving and loading XML files
+ * Class to contain the static methods for saving and loading XML files.
  * 
  * @author Jacob
  *
  */
 public class XMLHandler {
 	
-	/**
-	 * This is what the filenames are appended onto for saving and loading.
-	 */
-	static String directory = "StockLevels/";
+	/** These are what the filenames are appended onto for saving and loading. */
+	static String stockDirectory = "StockLevels/";
+	static String customDirectory = "CustomLevels/";
 
-	/**
-	 * Unnecessary, should just call the static methods directly.
-	 * 
-	 */
+	/** Unnecessary, should just call the static methods directly. */
 	public XMLHandler() {};
 
 	/**
@@ -33,12 +29,18 @@ public class XMLHandler {
 	 * 
 	 * @param 	level 		LevelModel representing the level to be saved.
 	 * @param 	filePath 	String specifying where to save the file to.
+	 * @param 	isCustom	Boolean to indicate if the level is custom.
 	 * @return 				True if saved, false is failed.
 	 */
 	// TODO Should this use a boolean return confirmation or exception(s)?
-	public static boolean saveXML(LevelModel level, String filePath) {
-		// Turn filePath into an actual File object and create directory
-		File file = new File(directory + filePath);
+	public static boolean saveXML(LevelModel level, String filePath, boolean isCustom) {
+		// Turn filePath into an actual File object and create directory if necessary
+		File file;
+		if (isCustom) {
+			file = new File(customDirectory + filePath);
+		} else {
+			file = new File(stockDirectory + filePath);
+		}
 		file.getParentFile().mkdirs();
 
 		// --- level (root) ---
@@ -138,16 +140,22 @@ public class XMLHandler {
 	}
 
 	/**
-	 * Create a LevelModel from the specified XML file
+	 * Create a LevelModel from the specified XML file.
 	 * 
 	 * @param 	filePath 	String specifying where to load the file from.
 	 * @param 	inBuilder 	Boolean to indicate if loading into the builder.
+	 * @param 	isCustom	Boolean to indicate if the level is custom.
 	 * @return 				LevelModel if successful, null if file doesn't exist or isn't valid.
 	 */
 	// TODO Should this use a null return or exception(s)?
-	public static LevelModel loadXML(String filePath, boolean inBuilder) {
+	public static LevelModel loadXML(String filePath, boolean inBuilder, boolean isCustom) {
 		// Turn filePath into an actual File object
-		File file = new File(directory + filePath);
+		File file;
+		if (isCustom) {
+			file = new File(customDirectory + filePath);
+		} else {
+			file = new File(stockDirectory + filePath);
+		}
 		
 		// Check if the file actually exists
 		if (!file.exists()) {
@@ -237,7 +245,7 @@ public class XMLHandler {
 			return null; // Invalid gameMode
 		}
 
-		Boolean isCustom = Boolean.parseBoolean(levelElement.getChild("isCustom").getText());
+		Boolean levelIsCustom = Boolean.parseBoolean(levelElement.getChild("isCustom").getText());
 
 		// Construct level object
 		LevelModel loadLevel;
@@ -246,19 +254,19 @@ public class XMLHandler {
 										 nameElement.getText(),
 										 loadBullpen,
 										 loadBoard,
-										 isCustom);
+										 levelIsCustom);
 		} else if (loadGameMode == 2) {
 			loadLevel =  new LightningLevel(countdown,
 										    nameElement.getText(),
 										    loadBullpen,
 										    loadBoard,
-										    isCustom);
+										    levelIsCustom);
 		} else if (loadGameMode == 3) {
 			loadLevel =  new ReleaseLevel(countdown,
 										  nameElement.getText(),
 										  loadBullpen,
 										  loadBoard,
-										  isCustom);
+										  levelIsCustom);
 		} else {
 			return null; // Invalid gameMode, can't load
 		}
@@ -337,13 +345,13 @@ public class XMLHandler {
 				}
 				
 				// Save the new level as xml
-				saveXML(levels[i][j], levels[i][j].levelName + ".xml");
+				saveXML(levels[i][j], levels[i][j].levelName + ".xml", false);
 			}
 		}
 	}
 	
 	/**
-	 * Return three test levels, identical to the first three example levels, for JUnit testing
+	 * Return three test levels, identical to the first three example levels, for JUnit testing.
 	 */
 	public static LevelModel[] getTestLevels() {
 		LevelModel[] testLevels = new LevelModel[3];
@@ -413,15 +421,15 @@ public class XMLHandler {
 	}
 	
 	/**
-	 * Save a simple xml file for storing the progress variables
+	 * Save a simple xml file for storing the progress variables.
 	 * 
 	 * @param 	progress 	int[3] of the progress variables, from the LevelPlayerModel.
-	 * @param 	filePath 	String specifying where to save the file to.
+	 * @param	fileName	String of where to save the file.
 	 * @return 				True if saved, false is failed.
 	 */
-	public static boolean saveProgressXML(int[] progress, String filePath) {
-		// Turn filePath into an actual File object and create directory
-		File file = new File(directory + filePath);
+	public static boolean saveProgressXML(int[] progress, String fileName) {
+		// Turn filePath into an actual File object and create directory if necessary
+		File file = new File(stockDirectory + fileName);
 		file.getParentFile().mkdirs();
 
 		// Root element
@@ -452,14 +460,14 @@ public class XMLHandler {
 	}
 
 	/**
-	 * Create an int[3] from the specified xml file.
+	 * Create an int[3] from the saved progress file.
 	 * 
-	 * @param 	filePath 	String specifying where to load the file from.
+	 * @param	fileName	String of the target file name.
 	 * @return				int[3] if successful, null if file doesn't exist or isn't valid.
 	 */
-	public static int[] loadProgressXML(String filePath) {
+	public static int[] loadProgressXML(String fileName) {
 		// Turn filePath into an actual File object
-		File file = new File(directory + filePath);
+		File file = new File(stockDirectory + fileName);
 
 		// Check if the file actually exists
 		if (!file.exists()) {
@@ -489,5 +497,86 @@ public class XMLHandler {
 		int[] progress = new int[]{puzzle, lightning, release};
 		
 		return progress;
+	}
+
+	/**
+	 * Save a simple xml file for storing a list of filenames.
+	 * 
+	 * @param 	names 		String array of the filenames to be saved.
+	 * @param	fileName	String of where to save the file.
+	 * @param 	isCustom	Boolean to indicate if the list is of custom levels.
+	 * @return 				True if successful.
+	 */
+	public static boolean saveFilenames(String[] names, String fileName, boolean isCustom) {
+		// Turn filePath into an actual File object and create directory if necessary
+		File file;
+		if (isCustom) {
+			file = new File(customDirectory + fileName);
+		} else {
+			file = new File(stockDirectory + fileName);
+		}
+		file.getParentFile().mkdirs();
+		
+		// Root element
+		Element namesElement = new Element("names");
+
+		// Go through the list and create elements from the names
+		for (int i=0; i<names.length; i++) {
+			Element nameElement = new Element("name"+String.valueOf(i));
+			nameElement.setText(String.valueOf(names[i]));
+			namesElement.addContent(nameElement);
+		}
+		
+		// Generate new XML file at specified location
+		Document doc = new Document(namesElement);
+		XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+		try {
+			xmlOutput.output(doc, new FileWriter(file));
+			return true; // Success (probably)
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Create a list of filenames from a saved xml file.
+	 * 
+	 * @param 	fileName	String name of the target file.
+	 * @param 	isCustom	Boolean to indicate if the list is of custom levels.
+	 * @return				String array loaded from the file.
+	 */
+	public static String[] loadFilenames(String fileName, boolean isCustom) {
+		// Turn filePath into an actual File object
+		File file;
+		if (isCustom) {
+			file = new File(customDirectory + fileName);
+		} else {
+			file = new File(stockDirectory + fileName);
+		}
+		
+		// Check if the file actually exists
+		if (!file.exists()) {
+			return null;
+		}
+
+		// Turn file into a JDOM tree
+		SAXBuilder saxBuilder = new SAXBuilder();
+		Document doc;
+		try {
+			doc = saxBuilder.build(file);
+		} catch (Exception e) {
+			return null; // Can't load level as a valid XML JDOM tree
+		}
+
+		// Get all of the elements out of the tree, sort of the reverse of creating the XML
+		Element namesElement = doc.getRootElement();
+		
+		int size = (namesElement.getContentSize() - 1) / 2;
+		String[] names = new String[size];
+		for (int i=0; i<size; i++) {
+			names[i] = namesElement.getChildText("name" + String.valueOf(i));
+		}
+		
+		return names;
 	}
 }
