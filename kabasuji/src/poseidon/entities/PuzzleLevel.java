@@ -4,6 +4,7 @@ package poseidon.entities;
  *  Implementation of LevelModel for Puzzle Levels in Kabasuji.
  *  
  * @author Alex Titus
+ * @author Natalia
  */
 public class PuzzleLevel extends LevelModel {
 	int allottedMoves, remainingMoves;
@@ -32,15 +33,42 @@ public class PuzzleLevel extends LevelModel {
 		remainingMoves = allottedMoves;
 	}
 	
+	/**
+	 * Checks whether the player has achieved a perfect score.
+	 */
 	Boolean hasWon() {
-		return false;							//TODO: Change return value
+		if (calculateScore() == 3) {return true;}
+		return false;
+	}
+	
+	/**
+	 * Checks whether the player is eligible to move to the next level.
+	 */
+	Boolean hasPassed() {
+		if(calculateScore() > 0) { return true; }
+		return false;
 	}
 	
 	void reset() {
 		//TODO: Change return value
 	}
 
-
+	/**
+	 * Checks the amount of stars the player has reached in the game.
+	 * 
+	 * The check is performed according to amount of pieces on bullpen, 
+	 * and also based on whether there is a piece being dragged.
+	 */
+	int calculateScore() {
+		int stars = 0;
+		if (board.getActiveDragged()!=null) {stars-=1;}
+		if(playableBullpen.getSize() == 2) { stars+=1; }
+		else if (playableBullpen.getSize() == 1) { stars+=2; }
+		else if(playableBullpen.getSize() == 0) { stars+=3; }
+		
+		if (stars <=0) {return 0;}
+		else return stars;
+	}
 	@Override
 	public int getLimit()
 	{
