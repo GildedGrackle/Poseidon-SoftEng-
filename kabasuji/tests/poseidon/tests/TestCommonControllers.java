@@ -5,9 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+
 import junit.framework.TestCase;
+import poseidon.builder.controller.AboutBuilderController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
+import poseidon.common.controller.RotateCCWController;
+import poseidon.common.controller.RotateCWController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.common.view.PieceView;
@@ -43,6 +48,8 @@ public class TestCommonControllers extends TestMouseEvents{
 	LevelBuilderModel builderModel;
 	BoardView board;
 	ArrayList<PieceContainer> pieces;
+	JButton button;
+
 
 	
 	private ActionEvent buttonPress(Component button) {
@@ -234,13 +241,72 @@ public class TestCommonControllers extends TestMouseEvents{
 		assertFalse(testBullpen.getPieceSelected() == testBullpen.getPiece(0));
 		assertEquals(testBullpen.getPieceSelected(), testBullpen.getPiece(4));
 		
-		selectPiece = createBullpenPressed(lvlView, bullpenView, 40000 , 0);
-		bullpenController.mousePressed(selectPiece);
+//		selectPiece = createBullpenPressed(lvlView, bullpenView, 40000 , 0);
+//		bullpenController.mousePressed(selectPiece);
+//		
+//		assertNull(testBullpen.getPieceSelected());
+			
+	}
+	
+	public void testRotateCWController(){
 		
-		assertNull(testBullpen.getPieceSelected());
+		LevelView lvlView = new LevelView(model, view); 
+		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		bullpenView = lvlView.getBullpen();
+		board = lvlView.getBoard();
+		testBullpen.setPieceSelected(squiggleCont);
+		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
 		
+		RotateCWController rotateCWController = new RotateCWController(bullpenView);
+		
+		button = lvlView.getCW();
+		ActionEvent cwPress = buttonPress(button);
+		rotateCWController.actionPerformed(cwPress);
+		
+		Point[] rotatePoints = new Point[] {
+				new Point(0, 2),
+				new Point(1, 2),
+				new Point(2, 2),
+				new Point(2, 1),
+				new Point(2, 0),
+				new Point(3, 0)
+		};
+		
+		
+		assertEquals(new Piece(rotatePoints), squiggleCont.getPiece());
 		
 	}
+	
+
+	public void testRotateCCWController(){
+		
+		LevelView lvlView = new LevelView(model, view); 
+		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		bullpenView = lvlView.getBullpen();
+		board = lvlView.getBoard();
+		testBullpen.setPieceSelected(squiggleCont);
+		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
+		
+		RotateCCWController rotateCCWController = new RotateCCWController(bullpenView);
+		
+		button = lvlView.getCCW();
+		ActionEvent ccwPress = buttonPress(button);
+		rotateCCWController.actionPerformed(ccwPress);
+		
+		Point[] originalPoints = new Point[] {
+				new Point(0, 2),
+				new Point(1, 2),
+				new Point(1, 1),
+				new Point(1, 0),
+				new Point(2, 0),
+				new Point(3, 0) 
+				};
+		
+		assertEquals(new Piece(originalPoints), squiggleCont.getPiece());
+
+		
+	}
+	
 	
 	
 }
