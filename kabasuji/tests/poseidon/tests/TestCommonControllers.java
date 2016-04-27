@@ -37,7 +37,6 @@ public class TestCommonControllers extends TestMouseEvents{
 	Point location;
 	BullpenView bullpenView;
 	Bullpen testBullpen;
-	XMLHandler testXML;
 	LevelModel testLevel;
 	Board testBoard;
 	Point testLocation;
@@ -65,9 +64,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	}
 	
 	public void setUp(){
-		
-		testXML = new XMLHandler();
-		testLevel = testXML.getTestLevels()[0];
+		testLevel = XMLHandler.getTestLevels()[0];
 		int[] currentLvl = new int[]{
 				1, 1, 1
 		};

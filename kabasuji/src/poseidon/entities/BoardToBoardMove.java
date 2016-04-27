@@ -1,6 +1,5 @@
 package poseidon.entities;
 
-import poseidon.common.view.BoardView;
 import poseidon.common.view.PieceView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;

@@ -2,11 +2,9 @@ package poseidon.common.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.entities.Bullpen;
-import poseidon.entities.Point;
 
 /**
  *  Handles click events on the Bullpen.
@@ -63,19 +61,9 @@ public class BullpenController extends MouseAdapter
 		}
 		else  // Safe to access using index
 		{
-			// If the Piece was already selected
-			if(model.getPiece(index) == model.getPieceSelected())
-			{
-				// Then deselect that Piece
-				model.setPieceSelected(null);
-				view.setSelectedPiece(null);
-			}
-			else  // Piece not already selected
-			{
-				// Then select that Piece
-				model.setPieceSelected(model.getPiece(index));
-				view.setSelectedPiece(view.getPieceView(index));
-			}
+			// Then select that Piece
+			model.setPieceSelected(model.getPiece(index));
+			view.setSelectedPiece(view.getPieceView(index));
 		}
 		
 		// Change view to reflect change

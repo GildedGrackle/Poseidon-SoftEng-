@@ -41,13 +41,17 @@ public class BoardToBullpenMove implements IMove{
 	
 	
 	/**
-	 *  Move is valid always.
+	 *  Move is valid unless limit has been reached.
 	 *  
 	 *  The only way this can be called is if there is an actual Piece being
 	 *  dragged off of the Board, due to checks at BoardController.mouseClicked
 	 *  and BoardController.mouseReleased
 	 */
 	public Boolean isValid() {
+		if(game.getLimit() <= 0) {
+			return false;
+		}
+		
 		return true;
 	}
 	
