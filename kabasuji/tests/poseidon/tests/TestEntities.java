@@ -195,6 +195,25 @@ public class TestEntities extends TestCase{
 		} catch (Exception e) {
 			fail("Expected IllegalArgumentException");
 		}
+		
+		try {
+			Point[] points = new Point[] {
+					new Point(0, 0),
+					new Point(0, 1),
+					new Point(0, 2),
+					new Point(1, 2),
+					new Point(2, 2),
+					new Point(0, 2)
+			};
+			
+			piece = new Piece(points);
+			
+			fail("Expected IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+		} catch (Exception e) {
+			fail("Expected IllegalArgumentException");
+		}
 	}
 	
 	public void testPieceContainer(){
