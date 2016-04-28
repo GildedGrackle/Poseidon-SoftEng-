@@ -374,10 +374,13 @@ public class TestEntities extends TestCase{
 											   		"testLightning0.xml",
 											   		"testRelease0.xml"};
 		String[] testCustomNamesWrite = new String[]{"testCustom0.xml"};
+		
 		assertTrue(XMLHandler.saveFilenames(testStockNamesWrite, "testStockNames.xml", false));
 		assertTrue(XMLHandler.saveFilenames(testCustomNamesWrite, "testCustomNames.xml", true));
+		
 		String[] testStockNamesRead = XMLHandler.loadFilenames("testStockNames.xml", false);
 		String[] testCustomNamesRead = XMLHandler.loadFilenames("testCustomNames.xml", true);
+		
 		assertEquals(testStockNamesWrite[0], testStockNamesRead[0]);
 		assertEquals(testStockNamesWrite[1], testStockNamesRead[1]);
 		assertEquals(testStockNamesWrite[2], testStockNamesRead[2]);
