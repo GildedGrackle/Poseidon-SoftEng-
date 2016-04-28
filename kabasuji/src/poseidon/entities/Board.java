@@ -239,6 +239,7 @@ public class Board {
 	 */
 	public void setActiveDragged(PieceContainer piece)
 	{
+		
 		// If not resetting activeDragged
 		if(piece != null && activeSource.getCol() != -1 && activeSource.getRow() != -1)
 		{

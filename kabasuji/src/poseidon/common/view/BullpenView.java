@@ -230,6 +230,11 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	}
 	public void setSelectedPiece(PieceView piece)
 	{
-		selectedPiece = piece;
+		if(piece == selectedPiece){
+			selectedPiece = null;
+		}
+		else{
+			selectedPiece = piece;
+		}
 	}
 }

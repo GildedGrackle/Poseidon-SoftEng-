@@ -52,6 +52,7 @@ public class BullpenController extends MouseAdapter
 		int index = me.getX() / BullpenView.PIECE_SIZE;
 		
 		// Need to check that index is within the number of Pieces in Bullpen
+		// TODO Wipe away if unneeded @Alex 
 		if(index >= model.getSize())  // >= because 0-based indexing
 		{
 			// Then index invalid, but deselect any selected Piece
@@ -69,5 +70,7 @@ public class BullpenController extends MouseAdapter
 		// Change view to reflect change
 		view.modelUpdated();
 	}
+	
+
 	
 }
