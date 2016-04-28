@@ -69,14 +69,16 @@ public class NewLevelView extends JPanel implements IBuilderScreen{
 		backButton.addActionListener(new BackBuilderController(model, application));
 		add(backButton);
 	}
+	
+	
 	/**
 	 *  Updates the display when the model changes
 	 */
 	@Override
-	public void update()
+	public Boolean modelUpdated()
 	{
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	public JButton getNewPuzzle(){

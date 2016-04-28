@@ -1,9 +1,9 @@
 package poseidon.entities;
 
+import poseidon.common.view.ILevelView;
 import poseidon.common.view.PieceView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
-import poseidon.player.view.LevelView;
 
 /**
  * Moving piece from the board to the bullpen.
@@ -16,7 +16,7 @@ public class BoardToBullpenMove implements IMove{
 	/** The Level. */
 	LevelModel game;
 	/** The GUI representation of the Level. */
-	LevelView view;
+	ILevelView view;
 	/** Location of the Piece on the Board. */
 	Point from;
 	/** The Piece to move. */
@@ -32,7 +32,7 @@ public class BoardToBullpenMove implements IMove{
 	 * @param piece  the Piece to move, must have a valid location on the Board
 	 * @param from  the location of the Piece on the Board
 	 */
-	public BoardToBullpenMove(LevelModel game, LevelView view, PieceContainer piece) {
+	public BoardToBullpenMove(LevelModel game, ILevelView view, PieceContainer piece) {
 		this.game = game;
 		this.view = view;
 		this.from = piece.getLocation();

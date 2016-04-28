@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
+import poseidon.common.view.ILevelView;
 import poseidon.common.view.PieceView;
 import poseidon.entities.Board;
 import poseidon.entities.BoardToBoardMove;
@@ -18,7 +19,6 @@ import poseidon.entities.MarkUnplayableSquareMove;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.entities.UndoManager;
-import poseidon.player.view.LevelView;
 
 /**
  *  Controls mouse events on the Board.
@@ -26,15 +26,15 @@ import poseidon.player.view.LevelView;
  *  Handles drawing Pieces on the Board on mouseover, placing Pieces on click,
  *  and allowing for Pieces to be moved once placed on the Board by drag & drop.
  *  
- * @author Alex Titus
- * @author Morgan Hopeman
+ *  @author Alex Titus
+ *  @author Morgan Hopeman
  */
 public class BoardController extends MouseAdapter
 {
 	/** The Level (Kabasuji game) state. */
 	LevelModel game;
 	/** The visual representation of the Level. */
-	LevelView view;
+	ILevelView view;
 	/** The Board state. */
 	Board boardModel;
 	/** The visual representation of the Board. */
@@ -51,7 +51,7 @@ public class BoardController extends MouseAdapter
 	 * @param model  the Level that contains the Board
 	 * @param view  the representation of the Board
 	 */
-	public BoardController(LevelModel game, LevelView view)
+	public BoardController(LevelModel game, ILevelView view)
 	{
 		this.game = game;
 		this.view = view;

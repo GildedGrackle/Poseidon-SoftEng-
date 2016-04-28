@@ -22,6 +22,7 @@ import poseidon.common.controller.RotateCWController;
 import poseidon.common.controller.VerticalFlipController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
+import poseidon.common.view.ILevelView;
 import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
@@ -32,7 +33,7 @@ import poseidon.player.controller.LevelSelectController;
  *  
  * @author Alex Titus
  */
-public class LevelView extends JPanel implements IModelUpdated
+public class LevelView extends JPanel implements IModelUpdated, ILevelView
 {
 	/** The top-level representation of the game. */
 	LevelPlayerModel topModel;
@@ -170,37 +171,18 @@ public class LevelView extends JPanel implements IModelUpdated
 		scoreView.setBounds(10, 280, 115, 35);
 		rightPanel.add(scoreView);
 		
-		if(this.model.getGameMode() == LevelModel.PUZZLE)  // If Puzzle Level
+		// Default limit display for Puzzle and Release Levels
+		String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
+		if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning Level
 		{
-			// Then label limit as Moves remaining
-			String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
-			limitView = new JLabel(limitDisplay);
-			limitView.setBackground(Color.WHITE);
-			limitView.setBounds(10, 340, 140, 55);
-			rightPanel.add(limitView);
-			limitView.setHorizontalAlignment(SwingConstants.LEFT);
-			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			limitDisplay = "<html>Time:<br><center>" + this.model.getLimit() + "</center></html>";
 		}
-		else if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning Level
-		{
-			String limitDisplay = "<html>Time:<br><center>" + this.model.getLimit() + "</center></html>";
-			limitView = new JLabel(limitDisplay);
-			limitView.setBackground(Color.WHITE);
-			limitView.setBounds(10, 340, 140, 55);
-			rightPanel.add(limitView);
-			limitView.setHorizontalAlignment(SwingConstants.LEFT);
-			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		}
-		else if(this.model.getGameMode() == LevelModel.RELEASE)  // If Release Level
-		{
-			String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
-			limitView = new JLabel(limitDisplay);
-			limitView.setBackground(Color.WHITE);
-			limitView.setBounds(10, 340, 140, 55);
-			rightPanel.add(limitView);
-			limitView.setHorizontalAlignment(SwingConstants.LEFT);
-			limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		}
+		limitView = new JLabel(limitDisplay);
+		limitView.setBackground(Color.WHITE);
+		limitView.setBounds(10, 340, 140, 55);
+		limitView.setHorizontalAlignment(SwingConstants.LEFT);
+		limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		rightPanel.add(limitView);
 	}
 	
 	

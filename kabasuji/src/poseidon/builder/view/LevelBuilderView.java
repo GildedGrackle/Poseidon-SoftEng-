@@ -125,10 +125,10 @@ public class LevelBuilderView implements IBuilderScreen{
 
 
 	@Override
-	public void update()
+	public Boolean modelUpdated()
 	{
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	public JButton getAbout(){

@@ -2,6 +2,7 @@ package poseidon.builder.view;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 import java.awt.Font;
 
@@ -10,32 +11,56 @@ import javax.swing.JButton;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.entities.LevelBuilderModel;
 
+/**
+ *  Screen for performing operations on saved custom Levels.
+ *  
+ *  Can add Levels to the game, remove added Levels from the game,
+ *  edit Levels, and delete Levels.
+ *  
+ * @author Alex Titus
+ */
 public class EditLevelView extends JPanel implements IBuilderScreen
 {
-//	LevelBuilderModel model;  // The top-level entity object, representing the application's state
-	LevelBuilderView application;  // The top-level GUI object
+	/** The top-level entity object, representing the application's state. */
 	LevelBuilderModel model;
-	JButton deleteButton;  // To delete selected Level
-	JButton editButton;  // To edit selected Level
-	JButton addButton;  // To add selected Level to game
-	JButton backButton;  // To return to the main menu (LevelBuilderView)
-	
-//	... addedLevels;  // Custom Levels added to the game
-//	... savedLevels;  // Custom Levels saved but not added to the game
+	/** The top-level GUI object. */
+	LevelBuilderView application;
+	/** To delete selected Level. */
+	JButton deleteButton;
+	/** To edit selected Level. */
+	JButton editButton;
+	/** To add selected Level to game. */
+	JButton addButton;
+	/** To return to the main menu (LevelBuilderView). */
+	JButton backButton;
+	/** To hold the added levels. */
+	JScrollPane addLevelsContainer;
+	/** To hold the saved levels. */
+	JScrollPane savedLevelsContainer;
+/** Custom Levels added to the game. */
+	JPanel addedLevels;
+/** Custom Levels saved but not added to the game. */
+	JPanel savedLevels;
 
 
 	/**
-	 * Creates the panel
+	 *  Constructor.
+	 * 
+	 *  @param view  the previous screen, the one returned to by "Back" button
 	 */
-	public EditLevelView(LevelBuilderView view)
+	public EditLevelView(LevelBuilderModel model, LevelBuilderView view)
 	{
+		this.model = model;
 		this.application = view;
-//		getLevels();  // Fills addedLevels and savedLevels
 		initialize();
 	}
 	
 	
-	public void initialize()
+	/**
+	 *  Creates the panel.
+	 *  TODO scrollpanes and the saved/added level lists
+	 */
+	void initialize()
 	{
 		setLayout(null);
 		
@@ -107,19 +132,22 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		add(deleteButton);
 		
 		/*
-		 * Create addedLevels and savedLevels selectors
+		 * TODO Create addedLevels and savedLevels selectors
 		 */
 	}
 
 	
 	/**
-	 *  Updates the display when the model changes
+	 *  Updates the display when the model changes.
+	 *  
+	 *  Updates when Levels are deleted, when Levels are added to the game,
+	 *  or when Levels are removed from the game.
 	 */
 	@Override
-	public void update()
+	public Boolean modelUpdated()
 	{
-		// TODO Probably don't need to do anything
-		
+		// TODO if levels are added to/removed from game or are deleted
+		return false;
 	}
 
 }

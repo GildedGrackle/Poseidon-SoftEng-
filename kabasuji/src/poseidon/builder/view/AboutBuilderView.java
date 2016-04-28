@@ -12,6 +12,11 @@ import javax.swing.JButton;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.entities.LevelBuilderModel;
 
+/**
+ *  TODO AboutBuilder documentation
+ *  
+ *  @author Alex Titus
+ */
 public class AboutBuilderView extends JPanel implements IBuilderScreen{
 	
 	LevelBuilderView application;  // The top-level GUI object
@@ -20,7 +25,10 @@ public class AboutBuilderView extends JPanel implements IBuilderScreen{
 	JButton backButton;
 
 	/**
-	 * Create the panel.
+	 *  Constructor.
+	 *  
+	 *  @param model  
+	 *  @param view  
 	 */
 	public AboutBuilderView(LevelBuilderModel model, LevelBuilderView view){
 		this.application = view;
@@ -30,7 +38,7 @@ public class AboutBuilderView extends JPanel implements IBuilderScreen{
 
 	
 	/**
-	 *  
+	 *  Creates the panel.
 	 */
 	public void initialize(){
 		setLayout(null);
@@ -59,14 +67,17 @@ public class AboutBuilderView extends JPanel implements IBuilderScreen{
 	
 	
 	/**
-	 *  Updates display when model changes
+	 *  Updates display when model changes.
+	 *  
+	 *  Nothing can change on this screen.
+	 *  @return false
 	 */
 	@Override
-	public void update(){
-		// TODO Auto-generated method stub
-		
+	public Boolean modelUpdated(){
+		return false;
 	}
 	
+	/** Returns the Back button, used to navigate back to the main menu. */
 	public JButton getBackButton(){
 		return backButton;
 	}

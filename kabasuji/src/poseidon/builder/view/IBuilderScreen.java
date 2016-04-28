@@ -1,6 +1,13 @@
 package poseidon.builder.view;
 
-public interface IBuilderScreen
+import poseidon.common.view.IModelUpdated;
+
+/**
+ *  Interface for screens in the Kabasuji Level Builder application.
+ *  
+ * @author Alex Titus
+ */
+public interface IBuilderScreen extends IModelUpdated
 {
-	public void update();
+
 }

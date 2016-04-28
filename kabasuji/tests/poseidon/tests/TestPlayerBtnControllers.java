@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.entities.Point;
 import poseidon.entities.XMLHandler;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.BackPlayerController;
@@ -29,7 +30,7 @@ public class TestPlayerBtnControllers extends TestCase{
 	LevelPlayerModel model;
 	AboutPlayerView aboutView = new AboutPlayerView(model, view);
 	int[] current; 
-	LevelModel level;
+	LevelModel testLevel;
 	JButton button;
 	AboutPlayerController controller; 
 	BackPlayerController back;
@@ -41,23 +42,28 @@ public class TestPlayerBtnControllers extends TestCase{
 	SelectLevelController selectLevel;
 	LevelContainer lvlContainer; 
 	
+	
 	private ActionEvent buttonPress(Component button) {
 		return new ActionEvent(button, 0, getName());
 	}
 	
 	public void setUp(){
+		XMLHandler.makeExampleLevels();
+		testLevel = XMLHandler.getTestLevels()[2];
+		int[] currentLvl = new int[]{
+				1, 1, 1};
+		model = new LevelPlayerModel(currentLvl, testLevel);
 		view = new LevelPlayerView(model);
 		current = new int[3];
-		// level = new LevelModel(null, null, 0, getName(), null);  // TODO sorry, I made it abstract, now you have to choose what kind
-		model = new LevelPlayerModel(current, level);
 		controller = new AboutPlayerController(model, view);
 		back = new BackPlayerController(model, view);
 		continueControl = new ContinueController(model, view);
 		exit = new ExitPlayerController(view);
 		lvlSelect = new LevelSelectController(model, view);
+		lvlSelectView = new LevelSelectView(model, view);
 		playSelect = new PlaySelectedController(model, lvlSelectView, view);
 		selectLevel = new SelectLevelController(lvlSelectView);
-		//lvlContainer = new LevelContainer(name, 0, 0, level, 0);
+		lvlContainer = new LevelContainer("puzzle0.xml", 0, 0, testLevel, 0);
 	}
 	
 	
@@ -104,14 +110,21 @@ public class TestPlayerBtnControllers extends TestCase{
 		assertEquals(view.getCurrentView().getCurrentlyPlaying().getClass(), LevelView.class);
 	}
 	
-//	public void testPlaySelectLevel(){
-//		setSelectedLevel(lvlContainer);
-//		button = lvlSelectView.getPlay();
-//		ActionEvent	playPress = buttonPress(button);
-//		playSelect.actionPerformed(playPress);
-//		
-//		
-//	}
+	public void testPlaySelectLevel(){
+		
+		view.setCurrentView(new LevelSelectView(model, view));
+		lvlSelectView.setSelectedLevel(lvlContainer);
+
+		assertEquals(lvlSelectView.getSelectedLevel(), lvlContainer);
+		
+		button = lvlSelectView.getPlay();
+		
+		ActionEvent	playPress = buttonPress(button);
+		playSelect.actionPerformed(playPress);
+		
+		assertEquals(model.getPlayingLevel(), lvlContainer.getLevel());
+		
+	}
 	
 	
 	
