@@ -55,7 +55,9 @@ public class ResetController implements ActionListener
 	boolean resetLevel() {
 		// Reload the current level
 		LevelModel currentLevel = model.getPlayingLevel();
-		LevelModel resetLevel = XMLHandler.loadXML(currentLevel.getLevelName() + ".xml", currentLevel.isCustom());
+		LevelModel resetLevel = XMLHandler.loadXML(currentLevel.getLevelName() + ".xml",
+				currentLevel.isCustom(),
+				currentLevel.isCustom());
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
 		model.setPlayingLevel(resetLevel);
