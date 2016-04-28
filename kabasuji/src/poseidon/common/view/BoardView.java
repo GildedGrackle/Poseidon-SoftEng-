@@ -34,8 +34,11 @@ public class BoardView extends JPanel implements IModelUpdated
 	public static final int SQUARE_SIZE = 30;
 	public static final int PIECE_SIZE = 180;
 
+	
 	/**
-	 * Create the panel.
+	 *  Constructor.
+	 *  
+	 *  @param board  the Board to render
 	 */
 	public BoardView(Board board)
 	{
@@ -45,6 +48,9 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/**
+	 *  Overrides JPanel's paintComponent() method, drawing the Board.
+	 */
 	@Override
 	public void paintComponent(Graphics g)
 	{
@@ -67,6 +73,13 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/**
+	 *  Draws the Squares of the Board.
+	 *  
+	 *  This method shouldn't be called directly. It is called during repaintComponent().
+	 *  
+	 *  @param g  Graphics object passed from repaintComponent()
+	 */
 	void drawBoard(Graphics g)
 	{
 		Graphics drawer = g.create();
@@ -100,6 +113,13 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/**
+	 *  Draws the Pieces that have been placed on the Board.
+	 *  
+	 *  This method shouldn't be called directly. It is called during repaintComponent().
+	 *  
+	 *  @param g  Graphics object passed from repaintComponent()
+	 */
 	void drawPieces(Graphics g)
 	{
 		Graphics drawer = g.create();
@@ -134,6 +154,13 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/**
+	 *  Draws the Piece currently being moved on the Board.
+	 *  
+	 *  This method shouldn't be called directly. It is called during repaintComponent().
+	 *  
+	 *  @param g  Graphics object passed from repaintComponent()
+	 */
 	void drawActiveDragging(Graphics g)
 	{
 		Graphics drawer = g.create();
@@ -155,6 +182,16 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/**
+	 *  Draws the ReleaseNumber on the indicated Square.
+	 *  
+	 *  This method shouldn't be called directly. It is called during repaintComponent().
+	 *  
+	 *  @param g  Graphics object passed from repaintComponent()
+	 *  @param toDraw  the ReleaseNumber to draw
+	 *  @param row  the row of the Square containing this ReleaseNumber
+	 *  @param col  the column of the Square containing this ReleaseNumber
+	 */
 	void drawNumber(Graphics g, ReleaseNumber toDraw, int row, int col)
 	{
 		Graphics drawer = g.create();
@@ -179,6 +216,13 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/**
+	 *  Draws the hint indicated on the Board.
+	 *  
+	 *  This method shouldn't be called directly. It is called during repaintComponent().
+	 *  
+	 *  @param g  Graphics object passed from repaintComponent()
+	 */
 	void drawHints(Graphics g)
 	{
 		Graphics drawer = g.create();
@@ -202,6 +246,9 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/**
+	 *  Updates the display when the underlying model changes.
+	 */
 	@Override
 	public Boolean modelUpdated()
 	{
@@ -274,6 +321,7 @@ public class BoardView extends JPanel implements IModelUpdated
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	// TODO BoardView documentation
 	public Board getBoard()
 	{
 		return board;

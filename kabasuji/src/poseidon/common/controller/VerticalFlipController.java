@@ -9,7 +9,7 @@ import poseidon.common.view.PieceView;
 /**
  *  Flips the selected Piece in the Bullpen vertically.
  *  
- * @author Alex Titus
+ *  @author Alex Titus
  *
  */
 public class VerticalFlipController implements ActionListener
@@ -20,7 +20,8 @@ public class VerticalFlipController implements ActionListener
 	
 	/**
 	 *  Constructor.
-	 * @param view  the visual representation of the Bullpen
+	 *  
+	 *  @param view  the visual representation of the Bullpen
 	 */
 	public VerticalFlipController(BullpenView view)
 	{
@@ -30,6 +31,8 @@ public class VerticalFlipController implements ActionListener
 	
 	/**
 	 *  Flips the selected Piece in the Bullpen vertically.
+	 *  
+	 *  @param ae  the initiating action event (button press)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)

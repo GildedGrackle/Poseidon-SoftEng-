@@ -19,7 +19,8 @@ public class RotateCCWController implements ActionListener
 	
 	/**
 	 *  Constructor.
-	 * @param view  the visual representation of the Bullpen
+	 *  
+	 *  @param view  the visual representation of the Bullpen
 	 */
 	public RotateCCWController(BullpenView view) {
 		this.view = view;

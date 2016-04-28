@@ -43,7 +43,7 @@ public class EditLevelController implements ActionListener
 	 */
 	public Boolean toEditLevel()
 	{
-		EditLevelView newScreen = new EditLevelView(application);  // The new screen to display
+		EditLevelView newScreen = new EditLevelView(model, application);  // The new screen to display
 		
 		// Set new screen
 		application.setCurrentScreen(newScreen);

@@ -1,9 +1,9 @@
 package poseidon.entities;
 
+import poseidon.common.view.ILevelView;
 import poseidon.common.view.PieceView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
-import poseidon.player.view.LevelView;
 
 /**
  * Moving piece from one part of the board to another.
@@ -14,7 +14,7 @@ import poseidon.player.view.LevelView;
  */
 public class BoardToBoardMove implements IMove{
 	/** The representation of the Board being changed. */
-	LevelView view;
+	ILevelView view;
 	/** Original location of the Piece. */
 	Point from;
 	/** Possible new location of the Piece. */
@@ -25,7 +25,7 @@ public class BoardToBoardMove implements IMove{
 	PieceView draggedPiece;
 	
 	
-	public BoardToBoardMove(LevelView view, PieceContainer piece, Point from, Point to) {
+	public BoardToBoardMove(ILevelView view, PieceContainer piece, Point from, Point to) {
 		this.from = from;
 		this.to = to;
 		this.piece = piece;
