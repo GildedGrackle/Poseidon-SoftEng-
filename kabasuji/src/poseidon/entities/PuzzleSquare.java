@@ -9,7 +9,14 @@ package poseidon.entities;
 public class PuzzleSquare extends Square {
 	Boolean isHint;
 	
-	PuzzleSquare(Boolean isFilled) {
+	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param isFilled  indicator whether Square should be initialized as filled
+	 *  TODO add isHint to PuzzleSquare constructor
+	 */
+	public PuzzleSquare(Boolean isFilled) {
 		super(isFilled);
 		this.isHint = false;					//Set to false as default
 	}

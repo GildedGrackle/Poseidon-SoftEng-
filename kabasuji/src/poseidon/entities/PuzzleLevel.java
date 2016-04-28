@@ -9,12 +9,26 @@ package poseidon.entities;
 public class PuzzleLevel extends LevelModel {
 	int allottedMoves, remainingMoves;
 
-	PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Board board, Boolean isCustom) {
-		super(bullpen, board, PUZZLE, levelName, isCustom);
+	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param allottedMoves  the maximum number of moves allowed
+	 *  @param levelName  the displayed name of this Level
+	 *  @param bullpen  the Bullpen used in this Level
+	 *  @param board  the Board used in this Level
+	 *  @param isCustom  indicator whether level is custom-made by user
+	 */
+	public PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom) {
+		super(bullpen, infinite, board, PUZZLE, levelName, isCustom);
 		this.allottedMoves = allottedMoves;
 		initialize();
 	}
 
+	
+	/**
+	 *  TODO documentation PuzzleLevel.resetMoves
+	 */
 	void resetMoves() {
 		//TODO: Change return value
 	}

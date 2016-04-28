@@ -20,7 +20,7 @@ import javax.swing.ScrollPaneConstants;
 public class BuilderView extends JPanel implements IBuilderScreen
 {
 	LevelBuilderView application;  // The top-level GUI object
-	LevelBuilderModel model;  // The top-level entity object, representing the application's state
+	LevelBuilderModel topmodel;  // The top-level entity object, representing the application's state
 	BoardView board;  // The game Board being built
 	JScrollPane bullpenContainer;  // To hold Infinite Bullpen
 	BullpenView bullpen;  // The Infinite Bullpen, to help build the Board and for Hints
@@ -44,7 +44,7 @@ public class BuilderView extends JPanel implements IBuilderScreen
 	 */
 	public BuilderView(LevelBuilderModel model, LevelBuilderView view)
 	{
-		this.model = model;
+		this.topmodel = model;
 		application = view;
 		
 		initialize();
@@ -52,7 +52,7 @@ public class BuilderView extends JPanel implements IBuilderScreen
 	
 	
 	/**
-	 *  TODO
+	 *  TODO add Board and Bullpen Controllers
 	 */
 	public void initialize()
 	{
@@ -71,11 +71,11 @@ public class BuilderView extends JPanel implements IBuilderScreen
 		rotateCWButton.setBounds(621, 160, 45, 45);
 		add(rotateCWButton);
 		
-		board = new BoardView(model.getBuildingLevel().getLevel().getBoard());
+		board = new BoardView(topmodel.getBuildingLevel().getLevel().getBoard());
 		board.setBounds(160, 250, 361, 361);
 		add(board);
 		
-		bullpen = new BullpenView(model.getBuildingLevel().getLevel().getInfiniteBullpen());
+		bullpen = new BullpenView(topmodel.getBuildingLevel().getLevel().getInfiniteBullpen());
 		bullpenContainer = new JScrollPane(bullpen);
 		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		bullpenContainer.setBounds(160, 80, 360, 70);
@@ -138,7 +138,7 @@ public class BuilderView extends JPanel implements IBuilderScreen
 		quitButton = new JButton("Quit");
 		quitButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		quitButton.setBounds(10, 405, 110, 55);
-		quitButton.addActionListener(new BackBuilderController(model, application));
+		quitButton.addActionListener(new BackBuilderController(topmodel, application));
 		add(quitButton);
 		
 		saveButton = new JButton("Save");

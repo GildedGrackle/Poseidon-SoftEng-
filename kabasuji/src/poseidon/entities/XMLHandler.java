@@ -253,18 +253,21 @@ public class XMLHandler {
 			loadLevel =  new PuzzleLevel(countdown,
 										 nameElement.getText(),
 										 loadBullpen,
+										 null,  // TODO figure out what to do for infinite bullpen
 										 loadBoard,
 										 levelIsCustom);
 		} else if (loadGameMode == 2) {
 			loadLevel =  new LightningLevel(countdown,
 										    nameElement.getText(),
 										    loadBullpen,
+										    null,  // TODO figure out what to do for infinite bullpen
 										    loadBoard,
 										    levelIsCustom);
 		} else if (loadGameMode == 3) {
 			loadLevel =  new ReleaseLevel(countdown,
 										  nameElement.getText(),
 										  loadBullpen,
+										  null,  // TODO figure out what to do for infinite bullpen
 										  loadBoard,
 										  levelIsCustom);
 		} else {
@@ -325,6 +328,7 @@ public class XMLHandler {
 					levels[i][j] = new PuzzleLevel(15,
 												   "puzzle" + String.valueOf(j),
 												   pbull,
+												   null,  // TODO figure out what to do for infinite bullpen
 												   pbor,
 												   false);
 					break;
@@ -332,6 +336,7 @@ public class XMLHandler {
 					levels[i][j] = new LightningLevel(60,
 												   "lightning" + String.valueOf(j),
 												   lbull,
+												   null,  // TODO figure out what to do for infinite bullpen
 												   lbor,
 												   false);
 					break;
@@ -339,6 +344,7 @@ public class XMLHandler {
 					levels[i][j] = new ReleaseLevel(10,
 												   "release" + String.valueOf(j),
 												   rbull,
+												   null,  // TODO figure out what to do for infinite bullpen
 												   rbor,
 												   false);
 					break;
@@ -397,6 +403,7 @@ public class XMLHandler {
 				testLevels[i] = new PuzzleLevel(15,
 						"puzzle0",
 						pbull,
+						null,  // TODO figure out what to do for infinite bullpen
 						pbor,
 						false);
 				break;
@@ -404,6 +411,7 @@ public class XMLHandler {
 				testLevels[i] = new LightningLevel(60,
 						"lightning0",
 						lbull,
+						null,  // TODO figure out what to do for infinite bullpen
 						lbor,
 						false);
 				break;
@@ -411,6 +419,7 @@ public class XMLHandler {
 				testLevels[i] = new ReleaseLevel(10,
 						"release0",
 						rbull,
+						null,  // TODO figure out what to do for infinite bullpen
 						rbor,
 						false);
 				break;

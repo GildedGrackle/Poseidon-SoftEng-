@@ -2,6 +2,8 @@ package poseidon.builder.view;
 
 import java.awt.EventQueue;
 
+import poseidon.entities.LevelBuilderModel;
+
 public class Main
 {
 	/**
@@ -13,7 +15,8 @@ public class Main
 			public void run() {
 				try {
 					Thread.sleep(1000);
-					LevelBuilderView application = new LevelBuilderView();
+					LevelBuilderModel model = new LevelBuilderModel();
+					LevelBuilderView application = new LevelBuilderView(model);
 					application.getBuilder().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

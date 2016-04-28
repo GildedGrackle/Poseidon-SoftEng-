@@ -30,9 +30,39 @@ public class Bullpen {
 	 * @param logic  the game-mode-specific logic associated with the Bullpen
 	 */
 	public Bullpen(ArrayList <PieceContainer> pieces, IBullpenLogic logic) {
-		this.pieces = new ArrayList<>(pieces);
+		this.pieces = new ArrayList<PieceContainer>(pieces);
 		this.logic = logic;
 		this.pieceSelected = null;
+	}
+	
+	
+	/**
+	 *  Constructor for infinite Bullpen.
+	 *  
+	 *  Creates a Bullpen with one of every type of Piece in it.
+	 */
+	public Bullpen(IBullpenLogic logic)
+	{
+		this.pieceSelected = null;
+		this.logic = logic;
+		this.pieces = new ArrayList<PieceContainer>(35);
+		
+		initializeInfinite();
+	}
+	
+	
+	/**
+	 *  Fills pieces with one of every type of Piece
+	 */
+	void initializeInfinite()
+	{
+		PieceFactory factory = new PieceFactory();  // For creating the pieces
+		
+		for(int i = 1; i <= 35; i++)  // Fill pieces
+		{
+			PieceContainer nextPiece = new PieceContainer(factory.getPiece(i), new Point(-1, -1));
+			pieces.add(nextPiece);
+		}
 	}
 	
 	

@@ -6,9 +6,14 @@ package poseidon.entities;
  */
 public class BuilderBoardLogic implements IBoardLogic {
 
-	BuilderBoardLogic() {
+	
+	/**
+	 *  Constructor.
+	 */
+	public BuilderBoardLogic() {
 		
 	}
+	
 	
 	/**
 	 * Adds given piece to the board and returns whether the addition was successful.

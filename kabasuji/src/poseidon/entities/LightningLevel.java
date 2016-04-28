@@ -15,8 +15,8 @@ public class LightningLevel extends LevelModel{
 	int allottedTime, usedTime;
 	Timer timer;
 
-	LightningLevel(int allottedTime, String name, Bullpen bullpen, Board board, Boolean isCustom){
-		super(bullpen, board, LIGHTNING, name, isCustom);
+	LightningLevel(int allottedTime, String name, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
+		super(bullpen, infinite, board, LIGHTNING, name, isCustom);
 		this.allottedTime = allottedTime;
 		this.usedTime = 0;  // TODO does this count up to allotted time or down to 0 from allotted time?
 	}

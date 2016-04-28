@@ -48,12 +48,14 @@ public class LevelBuilderView implements IBuilderScreen{
 	 *  Constructor.
 	 *  
 	 *  Creates the frame and initializes the frame, model, and other variables.
+	 *  
+	 *  @param model  the top-level model to base the application on
 	 */
-	public LevelBuilderView()
+	public LevelBuilderView(LevelBuilderModel model)
 	{
 		builder = new JFrame("Kabasuji Level Builder");
+		this.model = model;
 		initialize();
-		model = new LevelBuilderModel();
 		currentScreen = null;
 	}
 	

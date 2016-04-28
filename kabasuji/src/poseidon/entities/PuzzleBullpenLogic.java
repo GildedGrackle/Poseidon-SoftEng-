@@ -6,7 +6,11 @@ package poseidon.entities;
  *
  */
 public class PuzzleBullpenLogic extends IBullpenLogic {
-	PuzzleBullpenLogic(){
+	
+	/**
+	 *  Constructor.
+	 */
+	public PuzzleBullpenLogic(){
 		//TODO: Change return value
 	}
 	

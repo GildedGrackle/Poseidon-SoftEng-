@@ -6,7 +6,11 @@ package poseidon.entities;
  */
 public class BuilderBullpenLogic extends IBullpenLogic {
 
-	BuilderBullpenLogic() {
+	
+	/**
+	 *  Constructor.
+	 */
+	public BuilderBullpenLogic() {
 	
 	}
 
