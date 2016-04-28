@@ -2,11 +2,28 @@ package poseidon.builder.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
+import poseidon.entities.Board;
+import poseidon.entities.BuilderBoardLogic;
+import poseidon.entities.BuilderBullpenLogic;
+import poseidon.entities.Bullpen;
 import poseidon.entities.LevelBuilderModel;
+import poseidon.entities.LevelContainer;
+import poseidon.entities.PieceContainer;
+import poseidon.entities.PuzzleBoardLogic;
+import poseidon.entities.PuzzleBullpenLogic;
+import poseidon.entities.PuzzleLevel;
+import poseidon.entities.PuzzleSquare;
+import poseidon.entities.Square;
 
+/**
+ *  Creates a new Puzzle Level and displays it on the screen.
+ *  
+ * @author Alex Titus
+ */
 public class MakePuzzleController implements ActionListener
 {
 	LevelBuilderModel model;  // The top-level entity object, representing the application's state
@@ -42,6 +59,21 @@ public class MakePuzzleController implements ActionListener
 	 */
 	public Boolean toPuzzleLevel()
 	{
+		Square[][] newPlayArea = new Square[12][12];
+		for(int i = 0; i < Board.MAXROWS; i++)  // Fill newPlayArea with empty PuzzleSquares
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				newPlayArea[i][j] = new PuzzleSquare(false);
+			}
+		}
+		BuilderBullpenLogic newBullpenLogic = new BuilderBullpenLogic();
+		BuilderBoardLogic newBoardLogic = new BuilderBoardLogic();
+		PuzzleLevel newLevel = new PuzzleLevel(10, "New Puzzle Level",
+				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
+				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true);
+		LevelContainer newContainer = new LevelContainer("", 3, 0, newLevel, 0);  // TODO use correct "inGame" input
+		model.setBuildingLevel(newContainer);
 		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
 		
 		// Set new screen

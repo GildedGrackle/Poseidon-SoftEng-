@@ -37,9 +37,10 @@ public abstract class LevelModel {
 	 * @param levelName  the name of this Level
 	 * @param isCustom  true if the Level is user-created
 	 */
-	public LevelModel (Bullpen bullpen, Board board, int gameMode, String levelName, Boolean isCustom) {
+	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode, String levelName, Boolean isCustom) {
 		this.levelName = levelName;
 		this.playableBullpen = bullpen;
+		this.infiniteBullpen = infinite;
 		this.gameMode = gameMode;
 		this.board = board;
 		this.isCustom = isCustom;

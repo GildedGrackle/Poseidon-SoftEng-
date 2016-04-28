@@ -7,10 +7,17 @@ package poseidon.entities;
  * @author Alex Titus
  */
 public class PuzzleBoardLogic implements IBoardLogic{
-	PuzzleBoardLogic() {
+	
+	/**
+	 *  Constructor.
+	 */
+	public PuzzleBoardLogic() {
 	}
 	
 
+	/**
+	 *  TODO PuzzleBoardLogic.shouldAddPiece documentation
+	 */
 	@Override
 	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;

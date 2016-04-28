@@ -8,6 +8,16 @@ public class LevelContainer {
 	Boolean isChanged;  // If the level has been modified (for Level Builder)
 	int score;  // Added here to simplify LevelSelect display
 	
+	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param levelFileName  name of the file containing the Level's data
+	 *  @param inGame  indicator of status: built-in, custom added, or unadded but saved
+	 *  @param lvlnum  Level number, for display on the Level Select screen
+	 *  @param level  the Level associated with this container
+	 *  @param score  the highest score attained on the Level
+	 */
 	public LevelContainer (String levelFileName, int inGame, int lvlnum, LevelModel level, int score) {
 		this.levelFileName = levelFileName;
 		this.inGame = inGame;

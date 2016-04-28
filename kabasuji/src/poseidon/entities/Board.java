@@ -31,11 +31,18 @@ public class Board {
 	IBoardLogic logic;	
 	
 	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param playArea  the total Board area, of dimensions MAXROW X MAXCOLS
+	 *  @param logic  the game-type-specific logic to associate with the Board
+	 */
 	public Board (Square [][] playArea, IBoardLogic logic) {
 		this.playArea = playArea;
 		pieces = new ArrayList<PieceContainer>();
 		this.logic = logic;
 	}
+	
 	
 	/**
 	 * Finds the piece container that is located on a selected square and returns it.
