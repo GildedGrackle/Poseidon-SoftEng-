@@ -12,6 +12,7 @@ import poseidon.builder.controller.AboutBuilderController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
 import poseidon.common.controller.HorizontalFlipController;
+import poseidon.common.controller.ResetController;
 import poseidon.common.controller.RotateCCWController;
 import poseidon.common.controller.RotateCWController;
 import poseidon.common.controller.VerticalFlipController;
@@ -29,6 +30,7 @@ import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.entities.XMLHandler;
 import poseidon.player.view.LevelPlayerView;
+import poseidon.player.view.LevelSelectView;
 import poseidon.player.view.LevelView;
 import poseidon.tests.TestMouseEvents;
 import poseidon.tests.TestEntities.TestBullpenLogic;
@@ -156,17 +158,10 @@ public class TestCommonControllers extends TestMouseEvents{
 		
 		BoardController controller = new BoardController(testLevel, lvlView);
 		
-		MouseEvent enterBoard = createEntered(lvlView, lvlView.getBoard(), 0, 0);
-		controller.mouseEntered(enterBoard); 
-		
-		assertEquals(squigglePieceView.getModel(), lvlView.getBoard().getActiveDragging().getModel());
-		
-		java.awt.Point oldLocation = new java.awt.Point(lvlView.getBoard().getActiveDragging().getY(), lvlView.getBoard().getActiveDragging().getX());
-		
 		MouseEvent movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mouseMoved(movePiece);
 		
-		assertNotSame(lvlView.getBoard().getActiveLocation(), oldLocation);
+		assertEquals(lvlView.getBoard().getActiveDragging(), squigglePieceView);
 		
 		MouseEvent pressed = createBoardPressed(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mousePressed(pressed);
@@ -211,8 +206,8 @@ public class TestCommonControllers extends TestMouseEvents{
 		assertEquals(testBullpen.getPieceSelected(), lineCont);
 		assertEquals(lvlView.getBullpen().getSelectedPiece(), linePieceView);
 		
-		enterBoard = createEntered(lvlView, lvlView.getBoard(), 0, 0);
-		controller.mouseEntered(enterBoard);
+		movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
+		controller.mouseMoved(movePiece);;
 		
 		assertEquals(linePieceView.getModel(),
 				lvlView.getBoard().getActiveDragging().getModel());
@@ -242,11 +237,6 @@ public class TestCommonControllers extends TestMouseEvents{
 		
 		assertFalse(testBullpen.getPieceSelected() == testBullpen.getPiece(0));
 		assertEquals(testBullpen.getPieceSelected(), testBullpen.getPiece(4));
-		
-//		selectPiece = createBullpenPressed(lvlView, bullpenView, 40000 , 0);
-//		bullpenController.mousePressed(selectPiece);
-//		
-//		assertNull(testBullpen.getPieceSelected());
 			
 	}
 	
@@ -358,6 +348,43 @@ public class TestCommonControllers extends TestMouseEvents{
 		};
 		
 		assertEquals(new Piece(flipVPoints), squiggleCont.getPiece());
+	}
+	
+	public void testResetController(){
+		LevelView lvlView = new LevelView(model, view); 
+		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		bullpenView = lvlView.getBullpen();
+		board = lvlView.getBoard();
+		testBullpen.setPieceSelected(squiggleCont);
+		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
+		view.setCurrentView(new LevelSelectView(model, view));
+		
+		ResetController resetController = new ResetController(model, view);
+		
+		button = lvlView.getReset();
+		ActionEvent reset = buttonPress(button);
+		
+		
+		BoardController controller = new BoardController(testLevel, lvlView);
+		
+		MouseEvent movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
+		controller.mouseMoved(movePiece);
+		
+		assertEquals(lvlView.getBoard().getActiveDragging(), squigglePieceView);
+		
+		MouseEvent pressed = createBoardPressed(lvlView, lvlView.getBoard(), 4, 5);
+		controller.mousePressed(pressed);
+		
+		assertFalse(testBullpen.getPieces().contains(squiggleCont));
+		assertFalse(lvlView.getBoard().getPieces().isEmpty());
+		assertTrue(testBoard.getPieces().contains(squiggleCont));
+		assertEquals(lvlView.getBoard().getActiveDragging(), null);
+		
+		resetController.actionPerformed(reset);	
+
+		assertTrue(view.getCurrentView().getCurrentlyPlaying().getBoard().getPieces().isEmpty());
+		assertNull(view.getCurrentView().getCurrentlyPlaying().getBoard().getActiveDragging());
+
 	}
 	
 }

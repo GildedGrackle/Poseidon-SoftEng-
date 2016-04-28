@@ -103,7 +103,8 @@ public class LevelView extends JPanel implements IModelUpdated
 		add(board);
 		
 		// Add Bullpen and Board controllers
-		bullpen.addMouseListener(new BullpenController(this.model.getPlayableBullpen(), bullpen, board));
+		BullpenController bullpenCont = new BullpenController(this.model.getPlayableBullpen(), bullpen, board);
+		bullpen.addMouseListener(bullpenCont);
 		BoardController boardController = new BoardController(this.model, this);
 		board.addMouseListener(boardController);
 		board.addMouseMotionListener(boardController);

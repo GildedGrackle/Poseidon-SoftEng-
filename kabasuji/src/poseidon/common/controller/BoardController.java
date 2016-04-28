@@ -27,6 +27,7 @@ import poseidon.player.view.LevelView;
  *  and allowing for Pieces to be moved once placed on the Board by drag & drop.
  *  
  * @author Alex Titus
+ * @author Morgan Hopeman
  */
 public class BoardController extends MouseAdapter
 {
@@ -59,32 +60,6 @@ public class BoardController extends MouseAdapter
 		this.bullpenModel = game.getPlayableBullpen();
 		this.bullpenView = view.getBullpen();
 	}
-	
-	
-	/**
-	 *  Draws the Piece selected in the Bullpen onto the Board.
-	 *  
-	 *  @param me  the initiating mouse event
-	 */
-	@Override
-	public void mouseEntered(MouseEvent me)
-	{
-		PieceContainer piece = bullpenModel.getPieceSelected(); 
-		PieceView pv = bullpenView.getSelectedPiece();
-		
-		// If nothing is selected, leave
-		if(piece == null || pv == null)
-		{
-			return ;
-		}
-		
-		// Notify Board that there is a Piece on it
-		boardView.setActiveDragging(pv);
-		boardView.setActiveLocation(me.getPoint());
-		
-		boardView.repaint();
-	}
-	
 	
 	/**
 	 *  Removes the active dragging Piece from the Board.
@@ -131,6 +106,7 @@ public class BoardController extends MouseAdapter
 		java.awt.Point newLocation = me.getPoint();
 		newLocation.x = newLocation.x - 14;
 		newLocation.y = newLocation.y - 14;
+		boardView.setActiveDragging(pv);
 		boardView.setActiveLocation(newLocation);
 		
 		boardView.repaint();
@@ -319,19 +295,34 @@ public class BoardController extends MouseAdapter
 	public void mouseDragged(MouseEvent me)
 	{
 		PieceView pv = boardView.getActiveDragging();
-		
-		// If nothing is selected, leave
-		if(pv == null)
-		{
-			return ;
+		if (pv == null){
+			PieceContainer piece = bullpenModel.getPieceSelected(); 
+			PieceView selectedPV = bullpenView.getSelectedPiece();
+			
+			// If nothing is selected, leave
+			if(piece == null)
+			{
+				return ;
+			}
+			
+			// Notify Board that there is a Piece on it
+			boardView.setActiveDragging(selectedPV);
+			java.awt.Point newLocation = me.getPoint();
+			newLocation.x = newLocation.x - 14;
+			newLocation.y = newLocation.y - 14;
+			boardView.setActiveLocation(newLocation);
+			
+			boardView.repaint();
 		}
 		
-		// Notify Board that the Piece has changed locations
-		java.awt.Point newLocation = me.getPoint();
-		newLocation.x = newLocation.x - 14;
-		newLocation.y = newLocation.y - 14;
-		boardView.setActiveLocation(newLocation);
-		
-		boardView.repaint();
+		else {
+			// Notify Board that the Piece has changed locations
+			java.awt.Point newLocation = me.getPoint();
+			newLocation.x = newLocation.x - 14;
+			newLocation.y = newLocation.y - 14;
+			boardView.setActiveLocation(newLocation);
+			
+			boardView.repaint();	
+		}
 	}
 }
