@@ -61,33 +61,6 @@ public class BoardController extends MouseAdapter
 		this.bullpenView = view.getBullpen();
 	}
 	
-	
-	/**
-	 *  Draws the Piece selected in the Bullpen onto the Board.
-	 *  
-	 *  @param me  the initiating mouse event
-	 */
-//	@Override
-//	public void mouseEntered(MouseEvent me)
-//	{
-//		PieceContainer piece = bullpenModel.getPieceSelected(); 
-//		PieceView pv = bullpenView.getSelectedPiece();
-//		
-//		// If nothing is selected, leave
-//		if(piece == null || pv == null)
-//		{
-//			return ;
-//		}
-//		
-//		// Notify Board that there is a Piece on it
-//		boardView.setActiveDragging(pv);
-//		boardModel.setActiveDragged(piece);
-//		boardView.setActiveLocation(me.getPoint());
-//		
-//		boardView.repaint();
-//	}
-//	
-	
 	/**
 	 *  Removes the active dragging Piece from the Board.
 	 *  

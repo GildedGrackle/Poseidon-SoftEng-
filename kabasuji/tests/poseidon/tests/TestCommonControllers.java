@@ -156,17 +156,10 @@ public class TestCommonControllers extends TestMouseEvents{
 		
 		BoardController controller = new BoardController(testLevel, lvlView);
 		
-		MouseEvent enterBoard = createEntered(lvlView, lvlView.getBoard(), 0, 0);
-		controller.mouseEntered(enterBoard); 
-		
-		assertEquals(squigglePieceView.getModel(), lvlView.getBoard().getActiveDragging().getModel());
-		
-		java.awt.Point oldLocation = new java.awt.Point(lvlView.getBoard().getActiveDragging().getY(), lvlView.getBoard().getActiveDragging().getX());
-		
 		MouseEvent movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mouseMoved(movePiece);
 		
-		assertNotSame(lvlView.getBoard().getActiveLocation(), oldLocation);
+		assertEquals(lvlView.getBoard().getActiveDragging(), squigglePieceView);
 		
 		MouseEvent pressed = createBoardPressed(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mousePressed(pressed);
@@ -211,8 +204,8 @@ public class TestCommonControllers extends TestMouseEvents{
 		assertEquals(testBullpen.getPieceSelected(), lineCont);
 		assertEquals(lvlView.getBullpen().getSelectedPiece(), linePieceView);
 		
-		enterBoard = createEntered(lvlView, lvlView.getBoard(), 0, 0);
-		controller.mouseEntered(enterBoard);
+		movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
+		controller.mouseMoved(movePiece);;
 		
 		assertEquals(linePieceView.getModel(),
 				lvlView.getBoard().getActiveDragging().getModel());
