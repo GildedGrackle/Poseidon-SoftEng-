@@ -8,30 +8,33 @@ import poseidon.entities.LevelModel;
 import poseidon.entities.Square;
 
 /**
- *  Implementation of LevelModel for Release Levels in Kabasuji.
+ *  Implementation of LevelModel for Release levels in Kabasuji.
  *  
  *  
  * @author Alex Titus
  * @author Natalia
  */
 public class ReleaseLevel extends LevelModel{
-	int allottedMoves, movesRemaining;
+	/** The number of moves to start the level with. */
+	int allottedMoves;
+	/** The number of moves remaining in this level. */
+	int movesRemaining;
+	/** Stores of numbers collected during gameplay. */
 	Set<Integer> redNumbers, greenNumbers, yellownumbers;
 	
 	
 	/**
 	 *  Constructor.
 	 *  
-	 *  TODO ReleaseLevel constructor documentation
-	 *  @param allottedMoves
-	 *  @param name
-	 *  @param bullpen
-	 *  @param infinite
-	 *  @param board
-	 *  @param isCustom
+	 *  @param allottedMoves  the maximum number of moves allowed
+	 *  @param levelName  the displayed name of this level
+	 *  @param bullpen  the bullpen used in this level
+	 *  @param infinite  the infinite bullpen
+	 *  @param board  the board used in this level
+	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public ReleaseLevel(int allottedMoves, String name, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
-		super(bullpen, infinite, board, RELEASE, name, isCustom);
+	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
+		super(bullpen, infinite, board, RELEASE, levelName, isCustom);
 		this.allottedMoves = allottedMoves;
 		
 		initialize();
@@ -52,6 +55,15 @@ public class ReleaseLevel extends LevelModel{
 	@Override
 	public void decrementLimit() {
 		movesRemaining--;
+	}
+	
+	
+	/**
+	 *  Decreases the number of moves remaining by 1.
+	 */
+	@Override
+	public void incrementLimit() {
+		movesRemaining++;
 	}
 	
 	

@@ -5,13 +5,17 @@ import java.util.Stack;
 /**
  *  Stores and handles moves made during a session.
  *  
- *  getLastMove should only be called if in a Builder session.
+ *  getLastMove() should only be called if in a Builder session.
  *  
- *  @author 
+ *  @author Natalia?
  *  @author Alex Titus
  */
 public class UndoManager {
+	
+	/** Store of moves that have been made and can be undone. */
 	Stack<IMove> movesMade;
+	
+	/** Instance for singleton. */
 	static UndoManager undoManagerInstance = null;
 	
 	
@@ -25,7 +29,8 @@ public class UndoManager {
 	
 	/**
 	 *  Access control for singleton.
-	 * @return  the single instance of this class
+	 *  
+	 *  @return  The single instance of this class.
 	 */
 	public static UndoManager instance () {
 		// If instance hasn't been created yet
@@ -40,8 +45,9 @@ public class UndoManager {
 	
 	/**
 	 *  Pushes the move onto the undo stack.
-	 * @param move
-	 * @return  indication if operation completed successfully
+	 *  
+	 *  @param move  move to record
+	 *  @return  Indicator of whether the operation completed successfully.
 	 */
 	public Boolean recordMove(IMove move) {
 		movesMade.push(move);
@@ -50,14 +56,21 @@ public class UndoManager {
 	
 	
 	/**
-	 *  Gets the most recently made Move from the undo stack.
+	 *  Gets the most recently made move from the undo stack.
 	 *  
-	 *  This removes the Move from the undo stack.
-	 * @return  the most recently made Move
+	 *  This removes the move from the undo stack. Undo stack
+	 *  must be checked for emptiness before calling this method.
+	 *  
+	 * @return  The most recently made move.
 	 */
 	public IMove getLastMove() {
 		return movesMade.pop();
 	}
 
 	
+	/** @return  Indicator of whether the undo stack is empty. */
+	public Boolean isEmpty()
+	{
+		return movesMade.empty();
+	}
 }

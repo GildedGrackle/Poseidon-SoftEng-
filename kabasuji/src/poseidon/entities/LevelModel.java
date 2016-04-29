@@ -9,8 +9,12 @@ package poseidon.entities;
  * @author Alex Titus
  */
 public abstract class LevelModel {
+	
+	/** The number used to represent Puzzle levels. */
 	public static final int PUZZLE = 1;
+	/** The number used to represent Lightning levels. */
 	public static final int LIGHTNING = 2;
+	/** The number used to represent Release levels. */
 	public static final int RELEASE = 3;
 	
 	/** The name of the Level. */
@@ -46,7 +50,8 @@ public abstract class LevelModel {
 		this.isCustom = isCustom;
 	}
 	
-	void SaveLevel () {
+	
+	void saveLevel () {
 		//TODO: change return value
 	}
 	
@@ -54,14 +59,19 @@ public abstract class LevelModel {
 		//TODO: change return value
 	}
 	
+	/** Start the level in a game-type-specific way. */
 	abstract void initialize();
 	
-	abstract Boolean hasWon(); //Checks whether the player reached 3 stars
+	/** @return  Whether the player reached 3 stars. */
+	abstract Boolean hasWon();
 	
-	abstract Boolean hasPassed(); //Checks whether the player can move to the next level
+	/** @return  Whether the player can move to the next level. */
+	abstract Boolean hasPassed();
 	
+	/** @return  The current score on this level. */
 	abstract int calculateScore();
 	
+	/** Returns the level to its starting state. */
 	abstract void reset();
 	
 
@@ -76,9 +86,17 @@ public abstract class LevelModel {
 	/**
 	 *  Decreases the moves remaining by 1, if applicable.
 	 *  
-	 *  Override this in level subclasses to decrease the move limit, if it exists.
+	 *  Override this in level subclasses to decrease the remaining move limit, if it exists.
 	 */
 	public abstract void decrementLimit();
+	
+	
+	/**
+	 *  Increase the moves remaining by 1, if applicable.
+	 *  
+	 *  Override this in level subclasses to increase the remaing move limit, if it exists.
+	 */
+	public abstract void incrementLimit();
 	
 	
 	/**
@@ -91,30 +109,37 @@ public abstract class LevelModel {
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	/** @return  The name of the level. */
 	public String getLevelName()
 	{
 		return levelName;
 	}
+	/** @return  The state of the level's infinite bullpen. */
 	public Bullpen getInfiniteBullpen()
 	{
 		return infiniteBullpen;
 	}
+	/** @return  The state of the level's playable bullpen. */
 	public Bullpen getPlayableBullpen()
 	{
 		return playableBullpen;
 	}
+	/** @return  The current score on this level (not all-time score). */
 	public int getScore()
 	{
 		return score;
 	}
+	/** @return  Number indicating what kind of level this is. */
 	public int getGameMode()
 	{
 		return gameMode;
 	}
+	/** @return  The state of the level's board. */
 	public Board getBoard()
 	{
 		return board;
 	}
+	/** @return  Indicator of whether this level is custom-made. */
 	public Boolean getIsCustom() {
 		return isCustom;
 	}

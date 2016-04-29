@@ -256,6 +256,8 @@ public class BoardView extends JPanel implements IModelUpdated
 	
 	/**
 	 *  Updates the display when the underlying model changes.
+	 *  
+	 *  @return  Indicator of whether operation completed successfully.
 	 */
 	@Override
 	public Boolean modelUpdated()
@@ -271,7 +273,7 @@ public class BoardView extends JPanel implements IModelUpdated
 	 *  Adds the given PieceView to the list of PieceViews.
 	 *  
 	 * @param piece  PieceView to add
-	 * @return  indicator of operation's success
+	 * @return  Indicator of whether operation completed successfully.
 	 */
 	public boolean addPiece(PieceView piece)
 	{
@@ -283,7 +285,7 @@ public class BoardView extends JPanel implements IModelUpdated
 	 *  Removes the given PieceView from the list of PieceViews.
 	 *  
 	 *  @param piece  PieceView to remove
-	 *  @return  indicator of if operation modified the list
+	 *  @return  Indicator of whether operation modified the list.
 	 */
 	public boolean removePiece(PieceView piece)
 	{
@@ -329,26 +331,34 @@ public class BoardView extends JPanel implements IModelUpdated
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/** @return the Board associated with this object. */
+	/** @return The Board associated with this object. */
 	public Board getBoard()
 	{
 		return board;
 	}
-	/** @return the full list of PieceViews on the Board. */
+	
+	
+	/** @return The full list of PieceViews on the Board. */
 	public ArrayList<PieceView> getPieces()
 	{
 		return pieces;
 	}
-	/** @return the PieceView currently being dragged on the Board. */
+	
+	
+	/** @return The PieceView currently being dragged on the Board. */
 	public PieceView getActiveDragging()
 	{
 		return activeDragging;
 	}
-	/** @return the location of the anchor point of the piece being dragged. */
+	
+	
+	/** @return The location of the anchor point of the piece being dragged. */
 	public java.awt.Point getActiveLocation()
 	{
 		return activeLocation;
 	}
+	
+	
 	/** 
 	 *  Sets the list of PieceViews on the Board.
 	 *  
@@ -358,6 +368,8 @@ public class BoardView extends JPanel implements IModelUpdated
 	{
 		this.pieces = pieces;
 	}
+	
+	
 	/** 
 	 *  Sets the piece being dragged.
 	 *  
@@ -367,6 +379,8 @@ public class BoardView extends JPanel implements IModelUpdated
 	{
 		this.activeDragging = activeDragging;
 	}
+	
+	
 	/**
 	 *  Sets the location of the anchor point of the piece being dragged.
 	 *  

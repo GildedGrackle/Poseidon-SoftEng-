@@ -6,30 +6,36 @@ import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 
 /**
- *  Implementation of LevelModel for Lightning Levels in Kabasuji.
+ *  Implementation of LevelModel for Lightning levels in Kabasuji.
  *  
  * @author Alex Titus
  * @author Natalia
  */
 public class LightningLevel extends LevelModel{
-	int allottedTime, usedTime;
+	/** The amount of time to start the level with. */
+	int allottedTime;
+	/** The amount of time remaining in the level. */
+	int remainingTime;
+	/** The amount of time elapsed since the level began. */
+	int usedTime;
+	/** Timer for tracking time limit. */
 	Timer timer;
 
 	
 	/**
 	 *  Constructor.
-	 *  TODO LightningLevel constructor documentation
-	 *  @param allottedTime
-	 *  @param name
-	 *  @param bullpen
-	 *  @param infinite
-	 *  @param board
-	 *  @param isCustom
+	 *  
+	 *  @param allottedMoves  the maximum number of moves allowed
+	 *  @param levelName  the displayed name of this level
+	 *  @param bullpen  the bullpen used in this level
+	 *  @param infinite  the infinite bullpen
+	 *  @param board  the board used in this level
+	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public LightningLevel(int allottedTime, String name, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
-		super(bullpen, infinite, board, LIGHTNING, name, isCustom);
+	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
+		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom);
 		this.allottedTime = allottedTime;
-		this.usedTime = 0;  // TODO does this count up to allotted time or down to 0 from allotted time?
+		
 	}
 	
 	void startTimer() {
@@ -46,6 +52,8 @@ public class LightningLevel extends LevelModel{
 	
 	void initialize() {
 		//TODO: Change return value
+		this.usedTime = 0;  // TODO does this count up to allotted time or down to 0 from allotted time?
+		this.remainingTime = allottedTime;
 	}
 	
 	/**
@@ -90,7 +98,9 @@ public class LightningLevel extends LevelModel{
 		if(stars<=0) {return 0;}
 		else return stars;
 	}
-	void reset() {
+	
+	
+	public void reset() {
 		//TODO: Change return value
 	}
 	
@@ -100,35 +110,66 @@ public class LightningLevel extends LevelModel{
 	 */
 	public void decrementLimit()
 	{
-		return;
+		return ;
+	}
+	
+	
+	/**
+	 *  Doesn't do anything; no moves to increment.
+	 */
+	public void incrementLimit()
+	{
+		return ;
 	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/** @return  the amount of time remaining */
+	/** @return  The amount of time remaining. */
 	@Override
 	public int getLimit()
 	{
-		return allottedTime;
+		return remainingTime;
 	}
+	
+	/** @return  The allotted time for this level. */
 	int getAllottedTime()
 	{
 		return allottedTime;
 	}
+	
+	/** @return  Time remaining in this level */
+	int getRemainingTime()
+	{
+		return remainingTime;
+	}
+	
+	/** @return  Elapsed time. */
 	int getUsedTime()
 	{
 		return usedTime;
 	}
+	
+	/**
+	 *  Sets the allotted time.
+	 *  
+	 *  @param newTime  time to set
+	 */
 	void setAllottedTime(int newTime)
 	{
 		allottedTime = newTime;
 	}
+	/**
+	 *  Sets the elapsed time.
+	 *  
+	 *  @param newTime  time to set
+	 */
 	void setUsedTime(int newTime)
 	{
 		usedTime = newTime;
 	}
+	
 	/**
-	 *  Sets the allotted move limit.
+	 *  Sets the allotted time limit.
 	 *  
 	 *  @param newLimit  the new limit
 	 */
