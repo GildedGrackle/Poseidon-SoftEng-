@@ -68,7 +68,8 @@ public abstract class LevelModel {
 	/** 
 	 *  Provides the game-type-specific limit for play.
 	 *  
-	 *  Override this in level subclasses to provide the maximum move or time limit. */
+	 *  Override this in level subclasses to provide the maximum move or time limit.
+	 */
 	public abstract int getLimit();
 	
 	
@@ -80,6 +81,13 @@ public abstract class LevelModel {
 	public abstract void decrementLimit();
 	
 	
+	/**
+	 *  Sets the game-type-specific allotted limit.
+	 *  
+	 *  Override this in level subclasses to set the maximum move or time limit.
+	 *  @param newLimit  the new limit
+	 */
+	public abstract void setLimit(int newLimit);	
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
@@ -107,8 +115,7 @@ public abstract class LevelModel {
 	{
 		return board;
 	}
-	
-	public Boolean isCustom() {
+	public Boolean getIsCustom() {
 		return isCustom;
 	}
 

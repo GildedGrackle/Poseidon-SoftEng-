@@ -45,23 +45,23 @@ public class AboutBuilderView extends JPanel implements IBuilderScreen{
 		
 		JLabel pageTitle = new JLabel("About");
 		pageTitle.setFont(new Font("Lucida Handwriting", Font.PLAIN, 35));
-		pageTitle.setBounds(277, 21, 115, 49);
+		pageTitle.setBounds(269, 20, 115, 45);
 		add(pageTitle);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setText("Here is some text about how to make builder work");
-		textPane.setBounds(34, 94, 598, 374);
+		textPane.setBounds(35, 90, 610, 420);
 		add(textPane);
 		
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Dialog", Font.PLAIN, 25));
-		backButton.setBounds(34, 529, 148, 86);
+		backButton.setBounds(35, 550, 145, 45);
 		backButton.addActionListener(new BackBuilderController(model, application));
 		add(backButton);
 		
 		nextButton = new JButton("Next");
 		nextButton.setFont(new Font("Dialog", Font.PLAIN, 25));
-		nextButton.setBounds(484, 529, 148, 86);
+		nextButton.setBounds(485, 550, 145, 45);
 		add(nextButton);
 	}
 	

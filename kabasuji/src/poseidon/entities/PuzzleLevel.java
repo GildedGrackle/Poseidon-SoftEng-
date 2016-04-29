@@ -83,9 +83,24 @@ public class PuzzleLevel extends LevelModel {
 		if (stars <=0) {return 0;}
 		else return stars;
 	}
+	
+	
+	/** @return  the number of moves remaining */
 	@Override
 	public int getLimit()
 	{
 		return remainingMoves;
+	}
+	
+	
+	/**
+	 *  Sets the allotted move limit.
+	 *  
+	 *  @param newLimit  the new limit
+	 */
+	@Override
+	public void setLimit(int newLimit)
+	{
+		allottedMoves = newLimit;
 	}
 }

@@ -11,23 +11,24 @@ import poseidon.entities.PieceContainer;
  * @author Jacob Wennersten
  */
 public class Board {
-	/**Largest amount of rows and columns, set for convinience and optional future modification.*/
+	/** Largest amount of rows, set for convenience and optional future modification. */
 	public static final int MAXROWS = 12;
+	/** Largest amount of columns, set for convenience and optional future modification. */
 	public static final int MAXCOLS = 12;
 	
-	/**Initial playArea. Changes when constructor is called. */
+	/** Initial playArea. Changes when constructor is called. */
 	Square [][] playArea = new Square [MAXROWS][MAXCOLS];	
 	
-	/**A list of all the pieces that are currently positioned on the board*/
+	/** A list of all the pieces that are currently positioned on the board. */
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
 	
-	/**Piece that is currently selected*/ 
+	/** Piece that is currently selected. */ 
 	PieceContainer activeDragged;
 	
 	/** The coordinates of the origin of the active dragging Piece. */
 	Point activeSource;
 	
-	/**The functioning of the board, game mode/builder*/
+	/** The functioning of the board, game mode/builder. */
 	IBoardLogic logic;	
 	
 	
@@ -53,7 +54,7 @@ public class Board {
 	 */
 	PieceContainer findPiece (int row, int col) {
 		for (int i=0; i<pieces.size(); i++) {							//Iterates through all the pieces on a board
-			Point pivot = pieces.get(i).getLocation();  // TODO need to check if this returns null
+			Point pivot = pieces.get(i).getLocation();
 			for (Point p : pieces.get(i).getPiece().getPiece() ) {
 				if (p.getRow() + pivot.getRow() == row && p.getCol() + pivot.getCol() == col){
 																		//checks if a point on the piece is located at 
@@ -111,17 +112,7 @@ public class Board {
 		return shouldRemove;
 		
 	}
-	
-
-	
-	
-	/**
-	 * Displays the hint that was chosen for the board.
-	 */
-	void showHint () {
-		//TODO: Change return value
-	}
-	
+		
 	
 	/**
 	 * Deals with selected squares depending on the type.
@@ -191,40 +182,46 @@ public class Board {
 		addPiece(activeDragged);
 	}
 	
+	
+	/** @return  the entire play area (both playable and unplayable squares) */
 	public Square [] [] getPlayArea (){
 		return this.playArea;
 	}
 	
+	
+	/** @return  the list of pieces on the board */
 	public ArrayList<PieceContainer> getPieces()
 	{
 		return pieces;
 	}
 	
+	
+	/** @return  the number of rows in the play area */
 	int getRows () {
 		return this.playArea.length;
 	}
 	
+	
+	/** @return  the number of columns in the play area */
 	int getCols () {
 		return this.playArea[0].length;
 	}
+
 	
-	int getMaxRows() {
-		return MAXROWS;
-	}
-	
-	int getMaxCols() {
-		return MAXCOLS;
-	}
-	
+	/** @return  the Square at location (row, col) */
 	public Square getSquare(int row, int col) {
 		return playArea[row][col];
 	}
 	
+	
+	/** @return  the PieceContainer currently being moved on the Board */
 	public PieceContainer getActiveDragged()
 	{
 		return activeDragged;
 	}
 	
+	
+	/** @return  the (row, col) starting point of the active dragged PieceContainer */
 	public Point getActiveSource()
 	{
 		return activeSource;
@@ -249,6 +246,12 @@ public class Board {
 		activeDragged = piece;
 	}
 	
+	
+	/**
+	 *  Sets the starting point of the active dragged PieceContainer.
+	 *  
+	 *  @param activeSource  the starting Point
+	 */
 	public void setActiveSource(Point activeSource)
 	{
 		this.activeSource = activeSource;

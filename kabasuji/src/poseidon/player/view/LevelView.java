@@ -117,10 +117,10 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		leftPanel.setLayout(null);
 		
 		resetButton = new JButton("Reset");
-		resetButton.addActionListener(new ResetController(topModel, game));
-		resetButton.setBounds(10, 290, 130, 40);
-		leftPanel.add(resetButton);
 		resetButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		resetButton.setBounds(10, 290, 130, 40);
+		resetButton.addActionListener(new ResetController(topModel, game));
+		leftPanel.add(resetButton);
 		
 		quitButton = new JButton("Quit");
 		quitButton.addActionListener(

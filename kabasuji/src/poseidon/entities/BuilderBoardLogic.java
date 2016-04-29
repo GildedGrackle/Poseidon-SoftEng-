@@ -55,7 +55,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 		for (Point pt : piece.getPiece().getPiece()) {
 			int pointRow = pt.getRow() + location.getRow();		//finds the theoretical row of the square
 			int pointCol = pt.getCol() + location.getCol();		//finds the theoretical col of the square
-			if (pointRow >= board.getMaxRows() || pointCol >= board.getMaxCols()
+			if (pointRow >= Board.MAXROWS || pointCol >= Board.MAXCOLS
 					|| pointRow < 0 || pointCol < 0) {
 				//Compares it to 11, since it's the largest number
 				//Checks that the piece isn't outside the border
