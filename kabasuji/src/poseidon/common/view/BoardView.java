@@ -22,16 +22,17 @@ import poseidon.entities.Square;
  */
 public class BoardView extends JPanel implements IModelUpdated
 {
-	/** The model of the Board */
+	/** The model of the Board. */
 	Board board;
-	/** The Pieces currently on the Board */
+	/** The Pieces currently on the Board. */
 	ArrayList<PieceView> pieces;
-	/** The Piece currently being dragged (if applicable) */
+	/** The Piece currently being dragged (if applicable). */
 	PieceView activeDragging;
-	/** Location of the top-left corner (anchor) of activeDragging */
+	/** Location of the top-left corner (anchor) of activeDragging. */
 	java.awt.Point activeLocation;
-	/** The size (height or width) of a Square when displayed on the Board */
+	/** The size (height or width) of a Square, in pixels. */
 	public static final int SQUARE_SIZE = 30;
+	/** The size (height or width) of a Piece when, in pixels. */
 	public static final int PIECE_SIZE = 180;
 
 	
@@ -50,6 +51,8 @@ public class BoardView extends JPanel implements IModelUpdated
 	
 	/**
 	 *  Overrides JPanel's paintComponent() method, drawing the Board.
+	 *  
+	 *  @param g  Graphics object used to render this object
 	 */
 	@Override
 	public void paintComponent(Graphics g)
@@ -95,8 +98,9 @@ public class BoardView extends JPanel implements IModelUpdated
 					// Then at least draw a square for it
 					drawer.drawRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
 					
-					// If the Square is a ReleaseSquare
-					if(playArea[i][j].getType() == LevelModel.RELEASE)
+					// If the Square is a ReleaseSquare and it has a number to draw
+					if(playArea[i][j].getType() == LevelModel.RELEASE &&
+							playArea[i][j].getReleaseNumber() != null)
 					{
 						// Then draw the number in its color
 						drawNumber(drawer, playArea[i][j].getReleaseNumber(), i, j);
@@ -321,31 +325,49 @@ public class BoardView extends JPanel implements IModelUpdated
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	// TODO BoardView documentation
+	/** @return the Board associated with this object. */
 	public Board getBoard()
 	{
 		return board;
 	}
+	/** @return the full list of PieceViews on the Board. */
 	public ArrayList<PieceView> getPieces()
 	{
 		return pieces;
 	}
+	/** @return the PieceView currently being dragged on the Board. */
 	public PieceView getActiveDragging()
 	{
 		return activeDragging;
 	}
+	/** @return the location of the anchor point of the piece being dragged. */
 	public java.awt.Point getActiveLocation()
 	{
 		return activeLocation;
 	}
+	/** 
+	 *  Sets the list of PieceViews on the Board.
+	 *  
+	 *  @param pieces  the new list to be set
+	 */
 	public void setPieces(ArrayList<PieceView> pieces)
 	{
 		this.pieces = pieces;
 	}
+	/** 
+	 *  Sets the piece being dragged.
+	 *  
+	 *  @param activeDragging  the new Piece to start dragging
+	 */
 	public void setActiveDragging(PieceView activeDragging)
 	{
 		this.activeDragging = activeDragging;
 	}
+	/**
+	 *  Sets the location of the anchor point of the piece being dragged.
+	 *  
+	 *  @param activeLocation  the new location of the piece
+	 */
 	public void setActiveLocation(java.awt.Point activeLocation)
 	{
 		this.activeLocation = activeLocation;

@@ -47,7 +47,6 @@ public class PuzzleSquare extends Square {
 	@Override
 	public ReleaseNumber getReleaseNumber()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

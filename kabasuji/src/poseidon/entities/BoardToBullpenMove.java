@@ -21,12 +21,13 @@ public class BoardToBullpenMove implements IMove{
 	Point from;
 	/** The Piece to move. */
 	PieceContainer piece;
-	
+	/** The color represenation of the Piece being moved. */
 	PieceView draggedPiece;
 	
 	
 	/**
 	 *  Constructor.
+	 *  
 	 * @param game  model of the Level
 	 * @param view  the GUI representation of the Level
 	 * @param piece  the Piece to move, must have a valid location on the Board
@@ -37,6 +38,7 @@ public class BoardToBullpenMove implements IMove{
 		this.view = view;
 		this.from = piece.getLocation();
 		this.piece = piece;
+		this.draggedPiece = view.getBoard().getActiveDragging();
 	}
 	
 	
@@ -63,12 +65,15 @@ public class BoardToBullpenMove implements IMove{
 		
 		if(isValid())
 		{
+			// Inform piece of new location
 			piece.setLocation(new Point(-1, -1));  // Piece is "Nowhere"
-			// Now in Bullpen  
-			game.getPlayableBullpen().addPiece(piece);
-			draggedPiece = view.getBoard().getActiveDragging();
+			
+			// Add piece to Bullpen  
+			view.getBullpen().getModel().addPiece(piece);
 			view.getBullpen().addPiece(draggedPiece);
-			// Not on Board anymore (was removed during BoardController.mousePressed)
+			
+			// Remove piece from Board not required because was removed during
+			// BoardController.mousePressed()
 			game.getBoard().setActiveDragged(null);
 			view.getBoard().setActiveDragging(null);
 			

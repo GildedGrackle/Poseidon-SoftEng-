@@ -133,32 +133,55 @@ public class Bullpen {
 	 *  
 	 *  Sets the given Piece as selected, and will replace any
 	 *  currently selected Piece with the given one.
+	 *  
+	 *  @param pieceSelected  the new piece to select, or null to deselect all
 	 */
 	public void setPieceSelected(PieceContainer pieceSelected)
 	{
-		// Deselect if select same Piece
-		if (this.pieceSelected != null && pieceSelected.getIsSelected()) {
-			this.pieceSelected.setIsSelected(false);
-			this.pieceSelected = null;
-		} else {  // Set new selected Piece
-			if(pieceSelected != null)  // If passing actual Piece
+		// If there is no piece currently selected
+		if(this.pieceSelected == null)
+		{
+			// Then set current selection to incoming piece immediately
+			// If the incoming piece indicates a deselect operation
+			if(pieceSelected != null)
 			{
-				// Deselect previous Piece, if applicable
-				if(this.pieceSelected != null)
-				{
-					this.pieceSelected.setIsSelected(false);
-				}
 				this.pieceSelected = pieceSelected;
 				this.pieceSelected.setIsSelected(true);
 			}
-			else  // Setting to no selected Piece
+			// Else selection was already null, so no change
+		}
+		else  // There is a selected piece
+		{
+			// Then determine state of incoming piece
+			// If incoming piece indicates a deselect operation
+			if(pieceSelected == null)
 			{
-				// Deselect previous Piece, if applicable
-				if(this.pieceSelected != null)
-				{
-					this.pieceSelected.setIsSelected(false);
-				}
+				// Then inform current piece that it is no longer selected
+				// and clear selection (setting to null)
+				this.pieceSelected.setIsSelected(false);
+				this.pieceSelected = pieceSelected;
+			}
+			
+			// If the incoming piece is already selected then it is the currently
+			// selected piece because it is assumed that only one piece will be
+			// selected at a time
+			else if(pieceSelected.getIsSelected())
+			{
+				// Then inform current piece that it is no longer selected
+				// and clear selection
+				this.pieceSelected.setIsSelected(false);
 				this.pieceSelected = null;
+			}
+			
+			// Otherwise the incoming piece is a different piece from the
+			// current selection
+			else
+			{
+				// Inform current piece that it is no longer selected,
+				// set new selection, and inform new selection that it is selected
+				this.pieceSelected.setIsSelected(false);
+				this.pieceSelected = pieceSelected;
+				this.pieceSelected.setIsSelected(true);
 			}
 		}
 	}

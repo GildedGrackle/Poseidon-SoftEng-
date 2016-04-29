@@ -2,9 +2,11 @@ package poseidon.common.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.entities.Bullpen;
+import poseidon.entities.PieceContainer;
 
 /**
  *  Handles click events on the Bullpen.
@@ -52,11 +54,14 @@ public class BullpenController extends MouseAdapter
 		int index = me.getX() / BullpenView.PIECE_SIZE;
 		
 		// Need to check that index is within the number of Pieces in Bullpen
-		// TODO Wipe away if unneeded @Alex 
 		if(index >= model.getSize())  // >= because 0-based indexing
 		{
 			// Then index invalid, but deselect any selected Piece
-			model.getPieceSelected().setIsSelected(false);
+			PieceContainer selected = model.getPieceSelected();
+			if(selected != null)  // Inform currently selected piece that it is no longer selected
+			{
+				selected.setIsSelected(false);
+			}
 			model.setPieceSelected(null);
 			view.setSelectedPiece(null);
 		}

@@ -29,11 +29,12 @@ public class BullpenToBoardMove implements IMove{
 	 * @param piece  Piece to place on Board
 	 * @param location  location Piece is intended to be moved to
 	 */
-	public BullpenToBoardMove(LevelModel game, ILevelView view, PieceContainer piece, Point location) {
-		this.game = game;
+	public BullpenToBoardMove(ILevelView view, PieceContainer piece, Point location) {
+		this.game = view.getModel();
 		this.piece = piece;
 		this.location = location;
 		this.view = view;
+		this.draggedPiece = view.getBullpen().getSelectedPiece();
 	}
 	
 	
@@ -69,12 +70,16 @@ public class BullpenToBoardMove implements IMove{
 		
 		if(isValid())
 		{
+			// Inform piece of new location
 			piece.setLocation(location);
-			game.getBoard().addPiece(piece);
 			
-			draggedPiece = view.getBullpen().getSelectedPiece();
+			// Add piece to board
+			game.getBoard().addPiece(piece);
 			view.getBoard().addPiece(draggedPiece);
-			game.getPlayableBullpen().removePiece(piece);
+			
+			// Remove piece from bullpen
+			// To get playable in Player and infinite in Builder
+			view.getBullpen().getModel().removePiece(piece);  
 			view.getBullpen().removePiece(draggedPiece);
 			view.getBullpen().setSelectedPiece(null);
 

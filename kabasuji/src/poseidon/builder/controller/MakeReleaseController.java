@@ -2,20 +2,44 @@ package poseidon.builder.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
+import poseidon.entities.Board;
+import poseidon.entities.BuilderBoardLogic;
+import poseidon.entities.BuilderBullpenLogic;
+import poseidon.entities.Bullpen;
 import poseidon.entities.LevelBuilderModel;
+import poseidon.entities.LevelContainer;
+import poseidon.entities.PieceContainer;
+import poseidon.entities.ReleaseLevel;
+import poseidon.entities.ReleaseSquare;
+import poseidon.entities.Square;
 
+/**
+ *  Creates a new Release Level and displays it on the screen.
+ *  
+ *  The new Level has a 12x12 Board consisting entirely of ReleaseSquares. None
+ *  of the squares contain a ReleaseNumber or are a hint. Initial allotted moves are 10.
+ *  The LevelContainer for the Level has no file name. Max score is set to zero.
+ *  "inGame" indicator is set to indicate unadded saved game. No level number is assigned.
+ *  
+ * @author Alex Titus
+ */
 public class MakeReleaseController implements ActionListener
 {
-	LevelBuilderModel model;  // The top-level entity object, representing the application's state
-	LevelBuilderView application;  // The top-level GUI object
+	/** The top-level entity object, representing the application's state. */
+	LevelBuilderModel model;
+	/** The top-level GUI object. */
+	LevelBuilderView application;
 
 	
 	/**
-	 *  Constructor
-	 * @param view
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level object of the application's state
+	 *  @param view  the top-level GUI object
 	 */
 	public MakeReleaseController(LevelBuilderModel model, LevelBuilderView view)
 	{
@@ -26,7 +50,7 @@ public class MakeReleaseController implements ActionListener
 
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  Level Builder screen, with a new Release Level ready to build
+	 *  Level Builder screen, with a new Release Level ready to build.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -38,13 +62,29 @@ public class MakeReleaseController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  Level Builder screen, with a new Release Level ready to build
+	 *  Level Builder screen, with a new Release Level ready to build.
 	 */
 	public Boolean toReleaseLevel()
 	{
-		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
+		// Create new Level and LevelContainer
+		Square[][] newPlayArea = new Square[12][12];
+		for(int i = 0; i < Board.MAXROWS; i++)  // Fill newPlayArea with empty PuzzleSquares
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				newPlayArea[i][j] = new ReleaseSquare(false, null);
+			}
+		}
+		BuilderBullpenLogic newBullpenLogic = new BuilderBullpenLogic();
+		BuilderBoardLogic newBoardLogic = new BuilderBoardLogic();
+		ReleaseLevel newLevel = new ReleaseLevel(10, "New Puzzle Level",
+				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
+				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true);
+		LevelContainer newContainer = new LevelContainer("", 3, 0, newLevel, 0);  // TODO use correct "inGame" input
+		model.setBuildingLevel(newContainer);
 		
 		// Set new screen
+		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
 		application.setCurrentScreen(newScreen);
 		application.getBuilder().setContentPane(newScreen);
 		

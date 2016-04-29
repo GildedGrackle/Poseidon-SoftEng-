@@ -15,7 +15,7 @@ import poseidon.entities.Square;
  * @author Natalia
  */
 public class ReleaseLevel extends LevelModel{
-	int allottedPieces, movesRemaining;
+	int allottedMoves, movesRemaining;
 	Set<Integer> redNumbers, greenNumbers, yellownumbers;
 	
 	
@@ -23,16 +23,18 @@ public class ReleaseLevel extends LevelModel{
 	 *  Constructor.
 	 *  
 	 *  TODO ReleaseLevel constructor documentation
-	 *  @param allottedPieces
+	 *  @param allottedMoves
 	 *  @param name
 	 *  @param bullpen
 	 *  @param infinite
 	 *  @param board
 	 *  @param isCustom
 	 */
-	ReleaseLevel(int allottedPieces, String name, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
+	public ReleaseLevel(int allottedMoves, String name, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
 		super(bullpen, infinite, board, RELEASE, name, isCustom);
-		this.allottedPieces = allottedPieces;
+		this.allottedMoves = allottedMoves;
+		
+		initialize();
 	}
 	
 	void markNumber(int color, int number, Square square) {	 //Not sure
@@ -52,8 +54,12 @@ public class ReleaseLevel extends LevelModel{
 		movesRemaining--;
 	}
 	
+	
+	/**
+	 *  TODO ReleaseLevel.initialize() finished?
+	 */
 	void initialize() {
-		//TODO: Change return value
+		movesRemaining = allottedMoves;
 	}
 	
 	/**
@@ -71,7 +77,7 @@ public class ReleaseLevel extends LevelModel{
 	@Override
 	public int getLimit()
 	{
-		return allottedPieces;
+		return allottedMoves;
 	}
 
 	/**

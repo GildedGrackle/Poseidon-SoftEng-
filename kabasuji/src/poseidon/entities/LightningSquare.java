@@ -7,7 +7,12 @@ package poseidon.entities;
  */
 public class LightningSquare extends Square{
 
-	LightningSquare(Boolean isFilled) {
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param isFilled  indicator whether Square should be initialized as filled
+	 */
+	public LightningSquare(Boolean isFilled) {
 		super(isFilled);
 	}
 	
