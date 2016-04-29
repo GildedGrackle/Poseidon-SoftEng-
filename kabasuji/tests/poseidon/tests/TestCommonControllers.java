@@ -152,8 +152,8 @@ public class TestCommonControllers extends TestMouseEvents{
 
 		testBullpen.setPieceSelected(squiggleCont);
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
-		PieceView linePieceView = new PieceView(lineCont, lvlView.getBullpen());
+		PieceView squigglePieceView = new PieceView(squiggleCont);
+		PieceView linePieceView = new PieceView(lineCont);
 		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
 		
 		BoardController controller = new BoardController(testLevel, lvlView);
@@ -220,8 +220,8 @@ public class TestCommonControllers extends TestMouseEvents{
 		
 	public void testBullpenControllerPuzzle(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
-		PieceView linePieceView = new PieceView(lineCont, lvlView.getBullpen());
+		PieceView squigglePieceView = new PieceView(squiggleCont);
+		PieceView linePieceView = new PieceView(lineCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		
@@ -243,7 +243,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	public void testRotateCWController(){
 		
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
@@ -273,7 +273,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	public void testRotateCCWController(){
 		
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
@@ -300,7 +300,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	}
 	public void testFlipHController(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
@@ -326,7 +326,7 @@ public class TestCommonControllers extends TestMouseEvents{
 
 	public void testFlipVController(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
@@ -352,7 +352,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	
 	public void testResetController(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont, lvlView.getBullpen());
+		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);

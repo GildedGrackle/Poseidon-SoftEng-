@@ -185,5 +185,16 @@ public class Bullpen {
 			}
 		}
 	}
+
+
+	/**
+	 *  Sets the list of pieces in the bullpen.
+	 *  
+	 *  @param pieces  the new list of pieces
+	 */
+	public void setPieces(ArrayList<PieceContainer> pieces)
+	{
+		this.pieces = pieces;
+	}
 	
 }
