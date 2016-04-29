@@ -80,14 +80,19 @@ public class BullpenToBoardMove implements IMove{
 			view.getBoard().addPiece(draggedPiece);
 			
 			// Remove piece from bullpen
-			boolean shouldRemove = view.getBullpen().getModel().removePiece(piece);  
+			// TODO fix this when we fix Bullpen remove piece
+			boolean successRemove = view.getBullpen().getModel().removePiece(piece);  
 			
-			if(!(shouldRemove)){
+			// If remove was unsuccessful
+			if(!(successRemove))
+			{
+				//
 				view.getBullpen().setSelectedPiece(null);
 				
 				return true;
 			}
-			else {
+			else
+			{
 			view.getBullpen().removePiece(draggedPiece);
 			view.getBullpen().setSelectedPiece(null);
 
@@ -101,16 +106,19 @@ public class BullpenToBoardMove implements IMove{
 	}
 	
 	/**
-	 * returns the piece to it's original location.
+	 *  Returns the piece to the bullpen.
+	 *  
+	 *  @return  Indicator of whether operation completed successfully.
 	 */
 	public Boolean undoMove() {
-		if (draggedPiece!=null && game.getBoard().canEdit()) {
-			piece.setLocation(new Point(-1, -1));
+		if (draggedPiece != null && game.getBoard().canEdit()) {
 			game.getBoard().removePiece(piece);
 			view.getBoard().removePiece(draggedPiece);
-			game.getPlayableBullpen().addPiece(piece);
+			piece.setLocation(new Point(-1, -1));
+			view.getBullpen().getModel().addPiece(piece);
 			view.getBullpen().addPiece(draggedPiece);
 			view.getBullpen().setSelectedPiece(draggedPiece);
+			game.incrementLimit();
 			return true;
 		}
 		return false;

@@ -16,7 +16,9 @@ import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.ColSizeController;
 import poseidon.builder.controller.EditPlayableBullpenController;
 import poseidon.builder.controller.LimitController;
+import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.RowSizeController;
+import poseidon.builder.controller.UndoController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
 import poseidon.common.controller.HorizontalFlipController;
@@ -29,6 +31,8 @@ import poseidon.common.view.ILevelView;
 import poseidon.entities.Board;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelModel;
+import poseidon.entities.RedoManager;
+import poseidon.entities.UndoManager;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.text.NumberFormatter;
@@ -193,11 +197,15 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		undoButton = new JButton("Undo");
 		undoButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		undoButton.setBounds(10, 160, 110, 45);
+		undoButton.setEnabled(false);  // Initially nothing to undo
+		undoButton.addActionListener(new UndoController(this));
 		add(undoButton);
 		
 		redoButton = new JButton("Redo");
 		redoButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		redoButton.setBounds(10, 215, 110, 45);
+		redoButton.setEnabled(false);  // Initially nothing to redo
+		redoButton.addActionListener(new RedoController(this));
 		add(redoButton);
 		
 		JLabel dimensionLabel = new JLabel("Size:");
@@ -255,6 +263,28 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		bullpen.modelUpdated();
 		board.modelUpdated();
 		
+		// If there are no moves to undo
+		if(UndoManager.instance().isEmpty())
+		{
+			// Then disable the undo button
+			undoButton.setEnabled(false);
+		}
+		else
+		{
+			undoButton.setEnabled(true);
+		}
+		
+		// Same for redo button
+		if(RedoManager.instance().isEmpty())
+		{
+			redoButton.setEnabled(false);
+		}
+		else
+		{
+			redoButton.setEnabled(true);
+		}
+		
+		// Redraw everything that changed
 		repaint();
 		
 		return true;

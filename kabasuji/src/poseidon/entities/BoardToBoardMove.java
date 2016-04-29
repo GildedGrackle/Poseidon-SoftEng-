@@ -40,6 +40,13 @@ public class BoardToBoardMove implements IMove{
 		this.view = view;
 	}
 	
+	
+	/**
+	 *  Move is valid if the limit still allows for moves, the location isn't the same,
+	 *  and the game-type-specific logic allows for it.
+	 *  
+	 *  @return  Indicator of whether move is valid.
+	 */
 	public Boolean isValid() {
 		// Check that limit has not been met
 		if(view.getModel().getLimit() <= 0)
@@ -47,13 +54,6 @@ public class BoardToBoardMove implements IMove{
 			return false;
 		}
 
-		// Check game-type-specific logic
-		if(view.getModel().getBoard().isValid(piece, to))
-		{
-			// Then valid move
-			return true;
-		}
-		
 		// Check if moving to same spot
 		// This is invalid so that manually returning a piece
 		// doesn't cost a move
@@ -61,14 +61,23 @@ public class BoardToBoardMove implements IMove{
 		{
 			return false;
 		}
-
+		
+		// Check game-type-specific logic
+		if(view.getModel().getBoard().isValid(piece, to))
+		{
+			// Then valid move
+			return true;
+		}
+		
 		// Else invalid move
 		return false;
 	}
 	
 	
 	/**
-	 *  Places the Piece onto the Board at Point to.
+	 *  Places the piece onto the board at point to.
+	 *  
+	 *  @return  Indicator of whether move was successful.
 	 */
 	public Boolean doMove() {
 
@@ -88,9 +97,9 @@ public class BoardToBoardMove implements IMove{
 		return false;
 	}
 	
+	
 	/**
-	 * Returns false since board to board moves are only possible in puzzle, where moves are un-undoable.
-	 * 
+	 * @return  False - Board to board moves are only possible in Puzzle, where moves are un-undoable.
 	 */
 	public Boolean undoMove() {
 		return false;

@@ -1,22 +1,26 @@
 package poseidon.entities;
 
 /**
- *  Implementation of LevelModel for Puzzle Levels in Kabasuji.
+ *  Implementation of LevelModel for Puzzle levels in Kabasuji.
  *  
  * @author Alex Titus
  * @author Natalia
  */
 public class PuzzleLevel extends LevelModel {
-	int allottedMoves, remainingMoves;
+	/** The number of moves to start the level with. */
+	int allottedMoves;
+	/** The number of moves remaining in this level. */
+	int remainingMoves;
 
 	
 	/**
 	 *  Constructor.
 	 *  
 	 *  @param allottedMoves  the maximum number of moves allowed
-	 *  @param levelName  the displayed name of this Level
-	 *  @param bullpen  the Bullpen used in this Level
-	 *  @param board  the Board used in this Level
+	 *  @param levelName  the displayed name of this level
+	 *  @param bullpen  the bullpen used in this level
+	 *  @param infinite  the infinite bullpen
+	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
 	public PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom) {
@@ -41,6 +45,16 @@ public class PuzzleLevel extends LevelModel {
 	public void decrementLimit() {
 		remainingMoves--;
 	}
+	
+	
+	/**
+	 *  Decreases the number of moves remaining by 1.
+	 */
+	@Override
+	public void incrementLimit() {
+		remainingMoves++;
+	}
+	
 	
 	void initialize() {
 		//TODO: Change return value

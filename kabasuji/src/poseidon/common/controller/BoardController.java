@@ -18,6 +18,7 @@ import poseidon.entities.MarkPlayableSquareMove;
 import poseidon.entities.MarkUnplayableSquareMove;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
+import poseidon.entities.RedoManager;
 import poseidon.entities.UndoManager;
 
 /**
@@ -144,6 +145,9 @@ public class BoardController extends MouseAdapter
 				{
 					// Then record the move
 					UndoManager.instance().recordMove(move);
+					
+					// Clear redo stack
+					RedoManager.instance().clearMove();
 				}
 
 				// Now finished
@@ -159,6 +163,9 @@ public class BoardController extends MouseAdapter
 				{
 					// Then record the move
 					UndoManager.instance().recordMove(move);
+					
+					// Clear redo stack
+					RedoManager.instance().clearMove();
 				}
 			}
 
@@ -256,7 +263,7 @@ public class BoardController extends MouseAdapter
 		}
 		
 		// Attempt to add Piece to Board or remove it from the Board, depending on
-		// If the release event occurred outside of the Board
+		// if the release event occurred outside of the Board
 		IMove move;
 		if(col < 0 || row < 0)
 		{
@@ -269,13 +276,17 @@ public class BoardController extends MouseAdapter
 			move = new BoardToBoardMove(view, piece,
 					boardModel.getActiveSource(), new Point(row, col));
 		}
+		
+		// Attempt move
 		if(move.doMove())  // If move is successful
 		{
 			// Then record it and reset Board and Bullpen's active/selection
 			boardView.setActiveDragging(null);
 			boardView.setActiveLocation(null);
 			UndoManager.instance().recordMove(move);
-			view.modelUpdated();
+			
+			// Clear redo stack
+			RedoManager.instance().clearMove();
 		}
 		else
 		{
@@ -286,9 +297,10 @@ public class BoardController extends MouseAdapter
 			boardView.setActiveLocation(null);
 			boardModel.setActiveDragged(null);
 			boardModel.setActiveSource(null);
-			
-			boardView.modelUpdated();
 		}
+		
+		// Update display
+		view.modelUpdated();
 	}
 	
 	
