@@ -16,16 +16,16 @@ public class Board {
 	/** Largest amount of columns, set for convenience and optional future modification. */
 	public static final int MAXCOLS = 12;
 	
-	/** Initial playArea. Changes when constructor is called. */
+	/** Initial play area. Changes when constructor is called. */
 	Square [][] playArea = new Square [MAXROWS][MAXCOLS];	
 	
 	/** A list of all the pieces that are currently positioned on the board. */
 	ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
 	
-	/** Piece that is currently selected. */ 
+	/** The piece that is currently selected. */ 
 	PieceContainer activeDragged;
 	
-	/** The coordinates of the origin of the active dragging Piece. */
+	/** The coordinates of the origin of the active dragging piece. */
 	Point activeSource;
 	
 	/** The functioning of the board, game mode/builder. */
@@ -35,7 +35,7 @@ public class Board {
 	/**
 	 *  Constructor.
 	 *  
-	 *  @param playArea  the total Board area, of dimensions MAXROW X MAXCOLS
+	 *  @param playArea  the total board area, of dimensions MAXROW x MAXCOLS
 	 *  @param logic  the game-type-specific logic to associate with the Board
 	 */
 	public Board (Square [][] playArea, IBoardLogic logic) {
@@ -46,11 +46,11 @@ public class Board {
 	
 	
 	/**
-	 * Finds the piece container that is located on a selected square and returns it.
+	 * Finds the PieceContainer that is located on a selected square and returns it.
 	 * 
-	 * @param row
-	 * @param col
-	 * @return PieceContainer 
+	 * @param row  row part of selected square's coordinates
+	 * @param col  column part of selected square's coordinates
+	 * @return  PieceContainer found at (row, col)
 	 */
 	PieceContainer findPiece (int row, int col) {
 		for (int i=0; i<pieces.size(); i++) {							//Iterates through all the pieces on a board
@@ -66,6 +66,10 @@ public class Board {
 		return null;													//No piece found
 	}
 	
+	
+	/*
+	 *  Fills the squares covered by the given piece
+	 */
 	private void placePiece(PieceContainer piece){
 		Point location = piece.getLocation();
 		Square[][] playArea = this.getPlayArea();
@@ -79,11 +83,12 @@ public class Board {
 
 		}
 	
+	
 	/**
 	 * Adds piece to a specific pivot point on the board depending on the type of board.
 	 * 
 	 * @param piece - The piece that needs to be placed on the board.
-	 * @return Boolean - Indicates whether the addition was successful.
+	 * @return  Boolean - Indicates whether the addition was successful.
 	 */
 	public Boolean addPiece (PieceContainer piece) {
 		boolean shouldAdd = logic.shouldAddPiece(this, piece);
@@ -97,10 +102,10 @@ public class Board {
 	
 
 	/**
-	 * Removes a Piece from the board depending on the type of board.
+	 * Removes a piece from the board depending on the type of board.
 	 * 
-	 * @param piece - The Piece that needs to be removed from the board. 
-	 * @return Boolean - Indicates whether the removal was successful.
+	 * @param piece - The piece that needs to be removed from the board. 
+	 * @return  Boolean - Indicates whether the removal was successful.
 	 */
 	public Boolean removePiece (PieceContainer piece) {
 		boolean shouldRemove = logic.shouldRemovePiece(this, piece) 
@@ -117,7 +122,7 @@ public class Board {
 	/**
 	 * Deals with selected squares depending on the type.
 	 * 
-	 * Note:	If builder, selects/deselcts the square.
+	 * Note:	If builder, selects/deselects the square.
 	 * 			If puzzle, selects the piece that is on the square.
 	 * 			If lightning/release, doesn't perform any action.
 	 * 
@@ -132,7 +137,7 @@ public class Board {
 		}
 		PieceContainer piece = findPiece(row,col);
 		if(piece != null) {
-			if(logic.selectPiece(this, piece)) {
+			if(logic.canSelectPieces()) {
 				activeDragged.setIsSelected(false);
 				activeDragged = piece;
 				piece.setIsSelected(true);
@@ -145,15 +150,21 @@ public class Board {
 	
 	
 	/**
-	 *  Determines if the given Piece can be played at the given location.
+	 *  Determines if the given piece can be played at the given location.
 	 *  
-	 * @return  indicator if the placement is valid
+	 *  @param piece  the piece being placed
+	 *  @param location  the (row, col) location of the piece's anchor point
+	 *  @return  Indicator whether the placement is valid.
 	 */
 	public boolean isValid(PieceContainer piece, Point location)
 	{
 		return logic.isValid(this, piece, location);
 	}
 	
+	
+	/**
+	 *  @return  Indicates whether the board's play area can be modified.
+	 */
 	public boolean canEdit(){
 		Boolean editBoard = logic.canEdit(this);
 		return editBoard;
@@ -161,20 +172,20 @@ public class Board {
 	
 	
 	/**
-	 *  Determines if a Piece with part at (row, col) can be selected.
+	 *  Determines if a piece with part at (row, col) can be selected.
 	 *  
-	 * @param row  the row of the Square the Piece would contain
-	 * @param col  the column of the Square the Piece would contain
-	 * @return  indicator if there is a Piece that can be selected at (row, col)
+	 * @param row  the row of the square the piece would contain
+	 * @param col  the column of the square the piece would contain
+	 * @return  Indicator of whether there is a piece that can be selected at (row, col).
 	 */
 	public boolean canSelect(int row, int col)
 	{
-		return logic.canSelect(this, row, col);
+		return logic.selectablePieceAt(this, row, col);
 	}
 	
 	
 	/**
-	 *  Returns the active dragging Piece to its source.
+	 *  Returns the active dragging piece to its source.
 	 */
 	public void returnPiece()
 	{
@@ -183,45 +194,45 @@ public class Board {
 	}
 	
 	
-	/** @return  the entire play area (both playable and unplayable squares) */
-	public Square [] [] getPlayArea (){
+	/** @return  The entire play area (both playable and unplayable squares). */
+	public Square[][] getPlayArea (){
 		return this.playArea;
 	}
 	
 	
-	/** @return  the list of pieces on the board */
+	/** @return  The list of pieces on the board. */
 	public ArrayList<PieceContainer> getPieces()
 	{
 		return pieces;
 	}
 	
 	
-	/** @return  the number of rows in the play area */
+	/** @return  The number of rows in the play area. */
 	int getRows () {
 		return this.playArea.length;
 	}
 	
 	
-	/** @return  the number of columns in the play area */
+	/** @return  The number of columns in the play area. */
 	int getCols () {
 		return this.playArea[0].length;
 	}
 
 	
-	/** @return  the Square at location (row, col) */
+	/** @return  The square at location (row, col). */
 	public Square getSquare(int row, int col) {
 		return playArea[row][col];
 	}
 	
 	
-	/** @return  the PieceContainer currently being moved on the Board */
+	/** @return  The PieceContainer currently being moved on the board. */
 	public PieceContainer getActiveDragged()
 	{
 		return activeDragged;
 	}
 	
 	
-	/** @return  the (row, col) starting point of the active dragged PieceContainer */
+	/** @return  The (row, col) starting point of the active dragged PieceContainer. */
 	public Point getActiveSource()
 	{
 		return activeSource;
@@ -232,7 +243,8 @@ public class Board {
 	 *  Sets the specified Piece as the active dragging Piece.
 	 *  
 	 *  Empties the Squares occupied by the Piece.
-	 * @param piece  a Piece that is on the Board
+	 *  
+	 *  @param piece  a Piece that is on the Board
 	 */
 	public void setActiveDragged(PieceContainer piece)
 	{
@@ -257,5 +269,19 @@ public class Board {
 		this.activeSource = activeSource;
 	}
 	
-
+	
+	/**
+	 *  Sets the square at location to newSquare and returns the replaced square.
+	 *  
+	 * @param location  the (row, col) coordinates of the square to modify
+	 * @param newSquare  the square to place at location
+	 * @return  The square that was replaced.
+	 */
+	public Square setSquare(Point location, Square newSquare)
+	{
+		Square oldSquare = playArea[location.getRow()][location.getCol()];
+		playArea[location.getRow()][location.getCol()]	= newSquare;
+		
+		return oldSquare;
+	}
 }

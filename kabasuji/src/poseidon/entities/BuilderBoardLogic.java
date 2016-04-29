@@ -17,30 +17,35 @@ public class BuilderBoardLogic implements IBoardLogic {
 	
 	/**
 	 * Adds given piece to the board and returns whether the addition was successful.
+	 * TODO see IBoardLogic
 	 * 
 	 * @param board - The board the addition is performed on.
 	 * @param piece - The piece container of the piece that needs to be added, location must be set.
 	 * @param row, col - The location on the board where the pivot of the piece should be.
-	 * @return Boolean - Indicates whether the addition was successful
+	 * @return Boolean - Indicates whether the addition was successful.
 	 */
 	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;
 }
 	
 	/**
-	 * Removes a piece from the board.
+	 *  Removes a piece from the board.
 	 * 
-	 * Note: Removing pieces from the board in builder shouldn't be possible, however this function is created
-	 * in order to make the Undo action possible. Shouldn't be called in any case except undo.
+	 *  Note: Removing pieces from the board in builder shouldn't be possible, however this function is created
+	 *  in order to make the Undo action possible. Shouldn't be called in any case except undo.
 	 * 
-	 * @param board - The board the piece is removed from
-	 * @param piece - The container of the piece that needs to be removed
+	 *  @param board - The board the piece is removed from
+	 *  @param piece - The container of the piece that needs to be removed
+	 *  @return  Indicator whether operation could be completed.
 	 */
 	public Boolean shouldRemovePiece (Board board, PieceContainer piece){
 		return false;											//TODO change return value
 
 	}
-	public Boolean selectPiece (Board board, PieceContainer piece){
+	
+	
+	/** @return  False - cannot select pieces on the board in Builder. */
+	public Boolean canSelectPieces(){
 		return false;
 	}
 	
@@ -48,7 +53,12 @@ public class BuilderBoardLogic implements IBoardLogic {
 	/**
 	 *  Indicates if this move is valid given game logic.
 	 *  
-	 *  Piece must be only be on Board.
+	 *  Piece must only be on board.
+	 *  
+	 *  @param board  the board being checked
+	 *  @param piece  the piece prospectively being placed
+	 *  @param location  the (row, col) coordinates of the anchor point of piece
+	 *  @return  Indicator of whether prospective move is valid.
 	 */
 	public Boolean isValid(Board board, PieceContainer piece, Point location)
 	{
@@ -71,9 +81,14 @@ public class BuilderBoardLogic implements IBoardLogic {
 	 *  Determines if a Piece with part at (row, col) can be selected.
 	 *  
 	 *  Checks that the Square is playable and contains a Piece.
+	 *  
+	 *  @param board  the board being searched
+	 *  @param row  the row of the selected square
+	 *  @param col  the column of the selected square
+	 *  @return  Indicator of whether there is a selectable piece at (row, col)
 	 */
 	@Override
-	public Boolean canSelect(Board board, int row, int col)
+	public Boolean selectablePieceAt(Board board, int row, int col)
 	{
 		// If location is unplayable or unfilled
 		if(board.getSquare(row, col).getType() < 0 || !board.getSquare(row, col).isFilled())
@@ -101,6 +116,8 @@ public class BuilderBoardLogic implements IBoardLogic {
 		return false;
 	}
 
+	
+	/** @return  False - cannot edit Puzzle board during gameplay. */
 	@Override
 	public Boolean canEdit(Board board) {
 		return true;

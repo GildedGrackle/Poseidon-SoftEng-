@@ -96,6 +96,9 @@ public class BoardView extends JPanel implements IModelUpdated
 				if(playArea[i][j].getType() > 0)
 				{
 					// Then at least draw a square for it
+					drawer.setColor(Color.white);
+					drawer.fillRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
+					drawer.setColor(Color.black);
 					drawer.drawRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
 					
 					// If the Square is a ReleaseSquare and it has a number to draw

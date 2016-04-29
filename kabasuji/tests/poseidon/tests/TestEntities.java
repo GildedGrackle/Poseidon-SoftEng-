@@ -317,14 +317,14 @@ public class TestEntities extends TestCase{
 		public Boolean shouldRemovePiece (Board board, PieceContainer piece){
 			return true;
 		}
-		public Boolean selectPiece (Board board, PieceContainer piece){
+		public Boolean canSelectPieces(){
 			return true;
 		}
 		
 		public Boolean isValid(Board board, PieceContainer piece, Point location){
 			return true;
 		}
-		public Boolean canSelect(Board board, int row, int col){
+		public Boolean selectablePieceAt(Board board, int row, int col){
 			return true;
 		}
 
