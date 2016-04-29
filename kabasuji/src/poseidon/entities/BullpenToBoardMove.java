@@ -20,6 +20,8 @@ public class BullpenToBoardMove implements IMove{
 	ILevelView view;
 	/** The color represenation of the Piece being moved. */
 	PieceView draggedPiece;
+	/** The functioning of the board, game mode/builder. */
+	IBoardLogic logic;	
 	
 	
 	/**
@@ -78,8 +80,14 @@ public class BullpenToBoardMove implements IMove{
 			view.getBoard().addPiece(draggedPiece);
 			
 			// Remove piece from bullpen
-			// To get playable in Player and infinite in Builder
 			view.getBullpen().getModel().removePiece(piece);  
+			
+//			if(!(view.getBullpen().getModel().removePiece(piece))){
+//				view.getBullpen().setSelectedPiece(null);
+//				
+//				return true;
+//			}
+//			else {
 			view.getBullpen().removePiece(draggedPiece);
 			view.getBullpen().setSelectedPiece(null);
 
@@ -87,7 +95,7 @@ public class BullpenToBoardMove implements IMove{
 			game.decrementLimit();
 			
 			return true;
-		}
+		}}
 		
 		return false;
 	}
