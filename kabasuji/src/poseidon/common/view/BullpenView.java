@@ -36,7 +36,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/**
 	 *  Constructor.
 	 * 
-	 *  @param model  the model of the Bullpen
+	 *  @param model  the Bullpen
 	 */
 	public BullpenView(Bullpen model)
 	{
@@ -52,9 +52,9 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 
 	
 	/**
-	 *  Creates the PieceView objects based on the model's Bullpen.
+	 *  Creates the PieceView objects based on the model's playable bullpen.
 	 *  
-	 *  @return  indicator whether operation completed successfully
+	 *  @return  Indicator whether operation completed successfully.
 	 */
 	public Boolean createPieces()
 	{
@@ -62,7 +62,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 		
 		for(PieceContainer p : model.getPieces())
 		{
-			pieces.add(new PieceView(p, this));
+			pieces.add(new PieceView(p));
 		}
 		
 		return true;
@@ -72,7 +72,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/**
 	 *  Updates display when the model changes.
 	 *  
-	 *  @return whether operation completed successfully
+	 *  @return  Indicator whether operation completed successfully.
 	 */
 	public Boolean modelUpdated()
 	{
@@ -93,7 +93,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	
 	
 	/**
-	 *  Overrides JPanel's paintComponent() method, drawing the Board.
+	 *  Overrides JPanel's paintComponent() method, drawing the board.
 	 *  
 	 *  @param g  Graphics object used to render this object
 	 */
@@ -107,7 +107,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	
 	
 	/** 
-	 *  Draws pieces currently in the Bullpen.
+	 *  Draws pieces currently in the bullpen.
 	 *  
 	 *  This method shouldn't be called directly. It is automatically called
 	 *  during repaintComponent().
@@ -154,7 +154,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	 *  Adds given PieceView to the list of PieceViews.
 	 *  
 	 * @param piece  PieceView to add
-	 * @return  indicator of operation's success
+	 * @return  Indicator whether operation completed successfully.
 	 */
 	public boolean addPiece(PieceView piece)
 	{
@@ -166,7 +166,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	 *  Removes given PieceView from the list of PieceViews.
 	 *  
 	 * @param piece  the PieceView to remove
-	 * @return  indicator of if operation changed list
+	 * @return  Indicator whether operation changed list.
 	 */
 	public boolean removePiece(PieceView piece)
 	{
@@ -177,7 +177,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/**
 	 *  Determines how much of this panel will be displayed in the containing scroll pane.
 	 *  
-	 *  @return  size to fully display 6 pieces arranged left-to-right
+	 *  @return  Size to fully display 6 pieces arranged left-to-right.
 	 */
 	@Override
 	public Dimension getPreferredScrollableViewportSize()
@@ -187,17 +187,20 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 
 
 	/**
-	 *  Whenever the user clicks the track, move two pieces over.
+	 *  Whenever the user clicks the track, move four pieces over.
 	 *  
-	 *  @return  distance to scroll to location two pieces over
+	 *  @param visibleRect  The view area visible within the viewport
+	 *  @param orientation  Either SwingConstants.VERTICAL or SwingConstants.HORIZONTAL
+	 *  @param direction  Less than zero to scroll up/left, greater than zero for down/right
+	 *  @return  Distance to scroll to location two pieces over.
 	 */
 	@Override
 	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation,
 			int direction)
 	{
-		// Scroll enough to move two Pieces in the Bullpen, snapping to next Piece
-		int maximum = 2 * BullpenView.PIECE_SIZE;
-		
+		// Enough to move four Pieces in the bullpen
+		int maximum = 4 * BullpenView.PIECE_SIZE;
+		//                          to snap to next piece
 		return maximum - visibleRect.x % BullpenView.PIECE_SIZE;
 	}
 
@@ -205,12 +208,11 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/**
 	 *  Whether the panel should be constrained by the height of the viewing window.
 	 *  
-	 *  @return  false - don't want to be constrained
+	 *  @return  False - don't want to be constrained.
 	 */
 	@Override
 	public boolean getScrollableTracksViewportHeight()
 	{
-		// Don't want to be constrained
 		return false;
 	}
 
@@ -218,12 +220,11 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/**
 	 *  Whether the panel should be constrained by the width of the viewing window.
 	 *  
-	 *  @return  false - don't want to be constrained
+	 *  @return  False - don't want to be constrained.
 	 */
 	@Override
 	public boolean getScrollableTracksViewportWidth()
 	{
-		// Don't want to be constrained
 		return false;
 	}
 
@@ -231,7 +232,10 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/**
 	 *  Whenever the user clicks on one of the arrow buttons, move one piece over.
 	 *  
-	 *  @return  distance to scroll to the next piece
+	 *  @param visibleRect  The view area visible within the viewport
+	 *  @param orientation  Either SwingConstants.VERTICAL or SwingConstants.HORIZONTAL
+	 *  @param direction  Less than zero to scroll up/left, greater than zero for down/right
+	 *  @return  Distance to scroll to the next piece.
 	 */
 	@Override
 	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation,
@@ -246,22 +250,29 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/** Returns the Bullpen associated with this object. */
+	/** @return  The Bullpen associated with this object. */
 	public Bullpen getModel()
 	{
 		return model;
 	}
-	/** Returns the selected PieceView. */
+	/** @return  The selected PieceView. */
 	public PieceView getSelectedPiece()
 	{
 		return selectedPiece;
 	}
-	/** Gets the PieceView at index. */
+	/**
+	 *  @param index  location in the list of pieces, must be within list bounds
+	 *  @return  The PieceView at index. 
+	 */
 	public PieceView getPieceView(int index)
 	{
 		return pieces.get(index);
 	}
-	/** Sets the selected PieceView, or deselects the same PieceView. */
+	/** 
+	 * Sets the selected PieceView, or deselects the PieceView is already selected.
+	 * 
+	 * @param piece  the piece to select
+   */
 	public void setSelectedPiece(PieceView piece)
 	{
 		// If incoming piece is already selected
