@@ -80,14 +80,14 @@ public class BullpenToBoardMove implements IMove{
 			view.getBoard().addPiece(draggedPiece);
 			
 			// Remove piece from bullpen
-			view.getBullpen().getModel().removePiece(piece);  
+			boolean shouldRemove = view.getBullpen().getModel().removePiece(piece);  
 			
-//			if(!(view.getBullpen().getModel().removePiece(piece))){
-//				view.getBullpen().setSelectedPiece(null);
-//				
-//				return true;
-//			}
-//			else {
+			if(!(shouldRemove)){
+				view.getBullpen().setSelectedPiece(null);
+				
+				return true;
+			}
+			else {
 			view.getBullpen().removePiece(draggedPiece);
 			view.getBullpen().setSelectedPiece(null);
 
