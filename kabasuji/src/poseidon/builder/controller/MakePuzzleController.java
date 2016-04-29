@@ -13,8 +13,6 @@ import poseidon.entities.Bullpen;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.PieceContainer;
-import poseidon.entities.PuzzleBoardLogic;
-import poseidon.entities.PuzzleBullpenLogic;
 import poseidon.entities.PuzzleLevel;
 import poseidon.entities.PuzzleSquare;
 import poseidon.entities.Square;
@@ -22,17 +20,26 @@ import poseidon.entities.Square;
 /**
  *  Creates a new Puzzle Level and displays it on the screen.
  *  
+ *  The new Level has a 12x12 Board consisting entirely of PuzzleSquares. None
+ *  of the squares are hints. Initial allotted moves are 10.
+ *  The LevelContainer for the Level has no file name. Max score is set to zero.
+ *  "inGame" indicator is set to indicate unadded saved game. No level number is assigned.
+ *  
  * @author Alex Titus
  */
 public class MakePuzzleController implements ActionListener
 {
-	LevelBuilderModel model;  // The top-level entity object, representing the application's state
-	LevelBuilderView application;  // The top-level GUI object
+	/** The top-level entity object, representing the application's state. */
+	LevelBuilderModel model;
+	/** The top-level GUI object. */
+	LevelBuilderView application;
 
 	
 	/**
-	 *  Constructor
-	 * @param view
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level object of the application's state
+	 *  @param view  the top-level GUI object
 	 */
 	public MakePuzzleController(LevelBuilderModel model, LevelBuilderView view)
 	{
@@ -43,7 +50,7 @@ public class MakePuzzleController implements ActionListener
 
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  Level Builder screen, with a new Puzzle Level ready to build
+	 *  Level Builder screen, with a new Puzzle Level ready to build.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -55,10 +62,11 @@ public class MakePuzzleController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  Level Builder screen, with a new Puzzle Level ready to build
+	 *  Level Builder screen, with a new Puzzle Level ready to build.
 	 */
 	public Boolean toPuzzleLevel()
 	{
+		// Create new Level and LevelContainer
 		Square[][] newPlayArea = new Square[12][12];
 		for(int i = 0; i < Board.MAXROWS; i++)  // Fill newPlayArea with empty PuzzleSquares
 		{
@@ -74,9 +82,9 @@ public class MakePuzzleController implements ActionListener
 				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true);
 		LevelContainer newContainer = new LevelContainer("", 3, 0, newLevel, 0);  // TODO use correct "inGame" input
 		model.setBuildingLevel(newContainer);
-		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
 		
 		// Set new screen
+		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
 		application.setCurrentScreen(newScreen);
 		application.getBuilder().setContentPane(newScreen);
 		

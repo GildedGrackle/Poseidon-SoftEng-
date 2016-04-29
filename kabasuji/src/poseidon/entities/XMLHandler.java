@@ -60,7 +60,7 @@ public class XMLHandler {
 		} else if (level.gameMode == 2) { // Lightning
 			countdownElement.setText(String.valueOf(((LightningLevel) level).allottedTime));
 		} else if (level.gameMode == 3) { // Release
-			countdownElement.setText(String.valueOf(((ReleaseLevel) level).allottedPieces));
+			countdownElement.setText(String.valueOf(((ReleaseLevel) level).allottedMoves));
 		} else { // Invalid level, can't save
 			return false;
 		}

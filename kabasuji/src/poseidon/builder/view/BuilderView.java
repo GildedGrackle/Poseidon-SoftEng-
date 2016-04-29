@@ -108,6 +108,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		bullpenContainer.setBounds(160, 80, 360, 78);
 		add(bullpenContainer);
 		
+		// Add Board and Bullpen controllers
 		BoardController boardController = new BoardController(model, this);
 		board.addMouseListener(boardController);
 		board.addMouseMotionListener(boardController);
@@ -219,8 +220,12 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	@Override
 	public Boolean modelUpdated()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		bullpen.modelUpdated();
+		board.modelUpdated();
+		
+		repaint();
+		
+		return true;
 	}
 
 				/***********************

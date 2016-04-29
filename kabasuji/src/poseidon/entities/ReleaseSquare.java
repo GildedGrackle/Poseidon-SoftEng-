@@ -7,15 +7,21 @@ package poseidon.entities;
  * @author Alex Titus
  */
 public class ReleaseSquare extends Square{
-	ReleaseNumber number;					//type release number. consists of number and color
+	/** Number to this Square contains. Consists of number and color. */
+	ReleaseNumber number;
 	Boolean isHint;
 	
 	
-	// TODO need a way to indicate no number  // Just use null
-	ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param isFilled  indicator whether Square should be initialized as filled
+	 *  @param number  the ReleaseNumber in this square, null if none
+	 */
+	public ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
 		super(isFilled);
 		this.number = number;
-		isHint = false;						//Set to false as default
+		isHint = false;				// Set to false as default
 	}
 	
 	

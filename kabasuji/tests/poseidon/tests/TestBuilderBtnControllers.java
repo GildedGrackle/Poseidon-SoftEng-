@@ -6,14 +6,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import poseidon.entities.LevelModel;
+import poseidon.entities.Board;
+import poseidon.entities.Bullpen;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.EditLevelController;
 import poseidon.builder.controller.ExitBuilderController;
+import poseidon.builder.controller.MakePuzzleController;
 import poseidon.builder.controller.NewLevelController;
 import poseidon.builder.view.AboutBuilderView;
+import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.NewLevelView;
 import poseidon.builder.view.EditLevelView;
@@ -28,13 +32,15 @@ public class TestBuilderBtnControllers extends TestCase{
 	AboutBuilderView aboutView = new AboutBuilderView(model, view);
 	LevelContainer lvlContainer;
 	int[] current; 
-	LevelModel level;
 	JButton button;
 	AboutBuilderController aboutController; 
 	BackBuilderController back;
 	NewLevelController newLevelControl;
 	ExitBuilderController exit;
 	EditLevelController editLvlSelect;
+	NewLevelView newLvlView;
+	MakePuzzleController makePuzCont;
+
 		
 	private ActionEvent buttonPress(Component button) {
 		return new ActionEvent(button, 0, getName() );
@@ -44,14 +50,13 @@ public class TestBuilderBtnControllers extends TestCase{
 			model = new LevelBuilderModel();
 			view = new LevelBuilderView(model);
 			current = new int[3];
-			// level = new LevelModel(null, null, 0, getName(), null);  // TODO sorry, I made it abstract, now you have to choose what kind
-			model = new LevelBuilderModel();
-			model.setBuildingLevel(lvlContainer);
 			aboutController = new AboutBuilderController(model, view);
 			back = new BackBuilderController(model, view);
 			newLevelControl = new NewLevelController(model, view);
 			exit = new ExitBuilderController(model, view);
 			editLvlSelect = new EditLevelController(model, view); 
+			newLvlView = new NewLevelView(model, view);
+			makePuzCont = new MakePuzzleController(model, view);
 			
 		}
 		
@@ -97,4 +102,13 @@ public class TestBuilderBtnControllers extends TestCase{
 			assertEquals(view.getCurrentScreen().getClass(), EditLevelView.class);
 		}
 		
+		public void testNewPuzzleLvl(){
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
+			assertTrue(makePuzCont.toPuzzleLevel());
+			
+		}
 }

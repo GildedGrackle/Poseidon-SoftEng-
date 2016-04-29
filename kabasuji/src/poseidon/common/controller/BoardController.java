@@ -69,11 +69,10 @@ public class BoardController extends MouseAdapter
 	@Override
 	public void mouseExited(MouseEvent me)
 	{
-		PieceContainer piece = bullpenModel.getPieceSelected();
 		PieceView pv = bullpenView.getSelectedPiece();
 		
 		// If nothing is selected, leave
-		if(piece == null || pv == null)
+		if(pv == null)
 		{
 			return ;
 		}
@@ -157,9 +156,11 @@ public class BoardController extends MouseAdapter
 				}
 			}
 
+			// Update display
 			view.modelUpdated();
-			return ;
 		}
+		
+		// Else nothing
 	}
 	
 	
@@ -173,7 +174,6 @@ public class BoardController extends MouseAdapter
 	@Override
 	public void mousePressed(MouseEvent me)
 	{
-		PieceContainer piece = bullpenModel.getPieceSelected();
 		PieceView pv = bullpenView.getSelectedPiece();
 
 		// Determine row and column of click
@@ -181,7 +181,7 @@ public class BoardController extends MouseAdapter
 		int row = me.getY() / BoardView.SQUARE_SIZE;
 
 		// If nothing is selected in the Bullpen
-		if(piece == null || pv == null)
+		if(pv == null)
 		{
 			// Then must be trying to select Piece on the Board
 			// If it is possible to select Piece at Square (row, col)
@@ -190,7 +190,7 @@ public class BoardController extends MouseAdapter
 				boardView.selectPiece(row, col);
 				boardModel.setActiveSource(boardView.getActiveDragging().getModel().getLocation());
 				pv = boardView.getActiveDragging();
-				piece = pv.getModel();
+				PieceContainer piece = pv.getModel();
 				boardModel.setActiveDragged(piece);
 				
 				// If nothing is selected, release any dragged objects and leave
@@ -212,14 +212,14 @@ public class BoardController extends MouseAdapter
 		}
 
 		// Else attempt to add Piece to Board
-		BullpenToBoardMove move = new BullpenToBoardMove(game, view, piece, new Point(row, col));
+		BullpenToBoardMove move = new BullpenToBoardMove(view, pv.getModel(), new Point(row, col));
 		if(move.doMove())  // If move is successful
 		{
 			// Then record it and reset Board and Bullpen's active/selection
 			boardView.setActiveDragging(null);
 			boardView.setActiveLocation(null);
 			bullpenView.setSelectedPiece(null);
-			piece.setIsSelected(false);
+			pv.getModel().setIsSelected(false);
 			UndoManager.instance().recordMove(move);
 			view.modelUpdated();
 		}
