@@ -13,18 +13,26 @@ import poseidon.entities.Point;
  * @author Alex Titus
  */
 public class BoardToBoardMove implements IMove{
-	/** The representation of the Board being changed. */
+	/** The representation of the board being changed. */
 	ILevelView view;
-	/** Original location of the Piece. */
+	/** Original location of the piece. */
 	Point from;
-	/** Possible new location of the Piece. */
+	/** Possible new location of the piece. */
 	Point to;
-	/** Piece being moved. */
+	/** The piece being moved. */
 	PieceContainer piece;
-	
+	/** Color container for piece being moved. */
 	PieceView draggedPiece;
 	
 	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param view  the GUI of the board being modified
+	 *  @param piece  the piece being moved
+	 *  @param from  original location of the piece
+	 *  @param to  possible new location of the piece
+	 */
 	public BoardToBoardMove(ILevelView view, PieceContainer piece, Point from, Point to) {
 		this.from = from;
 		this.to = to;
@@ -44,6 +52,14 @@ public class BoardToBoardMove implements IMove{
 		{
 			// Then valid move
 			return true;
+		}
+		
+		// Check if moving to same spot
+		// This is invalid so that manually returning a piece
+		// doesn't cost a move
+		if(from.equals(to))
+		{
+			return false;
 		}
 
 		// Else invalid move

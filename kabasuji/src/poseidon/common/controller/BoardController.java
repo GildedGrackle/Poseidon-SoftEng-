@@ -21,35 +21,35 @@ import poseidon.entities.Point;
 import poseidon.entities.UndoManager;
 
 /**
- *  Controls mouse events on the Board.
+ *  Controls mouse events on the board.
  *  
- *  Handles drawing Pieces on the Board on mouseover, placing Pieces on click,
- *  and allowing for Pieces to be moved once placed on the Board by drag & drop.
+ *  Handles drawing pieces on the board on mouseover, placing pieces on click,
+ *  and allowing for pieces to be moved once placed on the board by drag & drop.
  *  
  *  @author Alex Titus
  *  @author Morgan Hopeman
  */
 public class BoardController extends MouseAdapter
 {
-	/** The Level (Kabasuji game) state. */
+	/** The level (Kabasuji game) state. */
 	LevelModel game;
-	/** The visual representation of the Level. */
+	/** The visual representation of the level. */
 	ILevelView view;
-	/** The Board state. */
+	/** The board state. */
 	Board boardModel;
-	/** The visual representation of the Board. */
+	/** The visual representation of the board. */
 	BoardView boardView;
-	/** The Bullpen state. */
+	/** The bullpen state. */
 	Bullpen bullpenModel;
-	/** The visual representation of the Bullpen. */
+	/** The visual representation of the bullpen. */
 	BullpenView bullpenView;
 
 	
 	/**
 	 *  Constructor.
 	 *  
-	 * @param model  the Level that contains the Board
-	 * @param view  the representation of the Board
+	 * @param model  the level that contains the board
+	 * @param view  the representation of the board
 	 */
 	public BoardController(LevelModel game, ILevelView view)
 	{
@@ -62,7 +62,7 @@ public class BoardController extends MouseAdapter
 	}
 	
 	/**
-	 *  Removes the active dragging Piece from the Board.
+	 *  Removes the active dragging piece from the board.
 	 *  
 	 *  @param me  the initiating mouse event
 	 */
@@ -86,7 +86,7 @@ public class BoardController extends MouseAdapter
 	
 	
 	/**
-	 *  Notifies Board of cursor's new location to render the active dragging Piece.
+	 *  Notifies board of cursor's new location to render the active dragging piece.
 	 *  
 	 *  @param me  the initiating move event
 	 */
@@ -113,7 +113,7 @@ public class BoardController extends MouseAdapter
 	
 	
 	/**
-	 *  Toggles Square from playable to nonplayable on double click (or higher).
+	 *  Toggles square from playable to nonplayable on double click (or higher).
 	 *  
 	 *  @param me  the initiating mouse click
 	 */
@@ -125,13 +125,19 @@ public class BoardController extends MouseAdapter
 			// Then try to set a Playable Square
 			int col = me.getX() / BoardView.SQUARE_SIZE;
 			int row = me.getY() / BoardView.SQUARE_SIZE;
+			
+			// Just in case
+			if(col > 11 || row > 11 || col < 0 || row < 0)
+			{
+				return ;
+			}
 
 			// Figure out whether to try a Mark Playable or Unplayable Move
 			if(boardModel.getSquare(row, col).getType() < 0)
 			{
 				// Is UnplayableSquare, try to mark as Playable
 				MarkPlayableSquareMove move =
-						new MarkPlayableSquareMove(boardModel, new Point(row, col));
+						new MarkPlayableSquareMove(boardModel, new Point(row, col), game.getGameMode());
 
 				// Attempt move
 				if(move.doMove())  // If successful
@@ -146,7 +152,7 @@ public class BoardController extends MouseAdapter
 			{
 				// Try to mark as Unplayable
 				MarkUnplayableSquareMove move =
-						new MarkUnplayableSquareMove(boardModel, new Point(row, col));
+						new MarkUnplayableSquareMove(boardModel, new Point(row, col), game.getGameMode());
 
 				// Attempt move
 				if(move.doMove())  // If successful
@@ -160,14 +166,14 @@ public class BoardController extends MouseAdapter
 			view.modelUpdated();
 		}
 		
-		// Else nothing
+		// No double-click, do nothing
 	}
 	
 	
 	/**
-	 *  Used to select a Piece for moving or place a Piece from the Bullpen.
+	 *  Used to select a piece for moving or place a piece from the bullpen.
 	 *  
-	 *  Only used in Puzzle Levels and sometimes in the Builder.
+	 *  Only used in Puzzle levels and sometimes in the Builder.
 	 *  
 	 *  @param me  the initiating mouse press
 	 */
@@ -180,11 +186,11 @@ public class BoardController extends MouseAdapter
 		int col = me.getX() / BoardView.SQUARE_SIZE;
 		int row = me.getY() / BoardView.SQUARE_SIZE;
 
-		// If nothing is selected in the Bullpen
+		// If nothing is selected in the bullpen
 		if(pv == null)
 		{
-			// Then must be trying to select Piece on the Board
-			// If it is possible to select Piece at Square (row, col)
+			// Then must be trying to select piece on the board
+			// If it is possible to select piece at square (row, col)
 			if(boardModel.canSelect(row, col))
 			{
 				boardView.selectPiece(row, col);
@@ -227,9 +233,9 @@ public class BoardController extends MouseAdapter
 	
 	
 	/**
-	 *  Used to place a Piece on the Board.
+	 *  Used to place a piece on the board.
 	 *  
-	 *  Handles either a Board-to-Board move or a Board-to-Bullpen move
+	 *  Handles either a board-to-board move or a board-to-bullpen move
 	 * 
 	 *  @param me  the initiating mouse release
 	 */
@@ -287,7 +293,7 @@ public class BoardController extends MouseAdapter
 	
 	
 	/**
-	 *  Used to move a Piece selected from the Board.
+	 *  Used to move a piece selected from the board.
 	 * 
 	 *  @param me  the initiating drag event
 	 */

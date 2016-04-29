@@ -16,7 +16,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	
 
 	/**
-	 *  TODO PuzzleBoardLogic.shouldAddPiece documentation
+	 *  TODO PuzzleBoardLogic.shouldAddPiece documentation; see IBoardLogic
 	 */
 	@Override
 	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
@@ -29,7 +29,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	 * 
 	 * @param board - The board the piece is removed from
 	 * @param piece - The container of the piece that needs to be removed
-	 * @return Boolean - Indicates whether the removal was successful
+	 * @return Boolean - Indicates whether the removal was successful.
 	 */
 	@Override
 	public Boolean shouldRemovePiece(Board board, PieceContainer piece){
@@ -56,12 +56,15 @@ public class PuzzleBoardLogic implements IBoardLogic{
 		return true;
 	}
 	
+	
 	/**
 	 * Indicates whether it's possible to select a piece on the board.
 	 * Since this is puzzle, we can always select pieces.
+	 * 
+	 * @return  True - can always select piece.
 	 */
 	@Override
-	public Boolean selectPiece (Board board, PieceContainer piece){
+	public Boolean canSelectPieces (){
 		return true;
 	}
 	
@@ -70,6 +73,11 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	 *  Indicates if this move is valid given game logic.
 	 *  
 	 *  Piece must be only on playable Squares and must not overlap other Pieces.
+	 *  
+	 *  @param board  the board being checked
+	 *  @param piece  the piece prospectively being placed
+	 *  @param location  the (row, col) coordinates of the anchor point of piece
+	 *  @return  Indicator of whether the prospective move is valid.
 	 */
 	public Boolean isValid(Board board, PieceContainer piece, Point location)
 	{
@@ -91,12 +99,17 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	
 	
 	/**
-	 *  Determines if a Piece with part at (row, col) can be selected.
+	 *  Determines if a piece with part at (row, col) can be selected.
 	 *  
-	 *  Checks that the Square is playable and contains a Piece.
+	 *  Checks that the square is playable and contains a piece.
+	 *  
+	 *  @param board  the board being searched
+	 *  @param row  the row of the selected square
+	 *  @param col  the column of the selected square
+	 *  @return  Indicator of whether there is a selectable piece at (row, col)
 	 */
 	@Override
-	public Boolean canSelect(Board board, int row, int col)
+	public Boolean selectablePieceAt(Board board, int row, int col)
 	{
 		// If location is unplayable or unfilled
 		if(board.getSquare(row, col).getType() < 0 || !board.getSquare(row, col).isFilled())
@@ -125,8 +138,10 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	}
 
 
+	/** @return  False - cannot edit Puzzle board during gameplay. */
 	@Override
 	public Boolean canEdit(Board board) {
 		return false;
 	}
+
 }
