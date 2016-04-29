@@ -112,6 +112,7 @@ public class BoardView extends JPanel implements IModelUpdated
 						drawer.fillRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
 					}
 				}
+				// Else don't draw anything for unplayable squares
 			}
 		}
 	}

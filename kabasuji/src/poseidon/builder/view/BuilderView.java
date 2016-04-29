@@ -5,14 +5,17 @@ import javax.swing.JButton;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import poseidon.builder.controller.BackBuilderController;
+import poseidon.builder.controller.ColSizeController;
+import poseidon.builder.controller.LimitController;
+import poseidon.builder.controller.RowSizeController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
 import poseidon.common.controller.HorizontalFlipController;
@@ -22,13 +25,15 @@ import poseidon.common.controller.VerticalFlipController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.common.view.ILevelView;
+import poseidon.entities.Board;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelModel;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.text.NumberFormatter;
 
 /**
- *  Creates the GUI used to create Kabasuji Levels.
+ *  Creates the GUI used to create Kabasuji levels.
  *  
  *  @author Alex Titus
  */
@@ -38,48 +43,53 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	LevelBuilderView application;
 	/** The top-level entity object, representing the application's state. */
 	LevelBuilderModel topmodel;
-	/** The state of the Level under construction. */
+	/** The state of the level under construction. */
 	LevelModel model;
-	/** The game Board being built. */
+	/** The GUI game board being built. */
 	BoardView board;
-	/** To hold Infinite Bullpen. */
+	/** To hold GUI infinite bullpen. */
 	JScrollPane bullpenContainer;
-	/** The Infinite Bullpen, to help build the Board and for Hints. */
+	/** The GUI infinite bullpen, to help build the board and for hints. */
 	BullpenView bullpen;
-	/** To save the Level to a file. */
+	/** To save the level to a file. */
 	JButton saveButton;
 	/** To undo change. */
 	JButton undoButton;
 	/** To redo change. */
 	JButton redoButton;
-	/** To add Hint to Board. */
+	/** To add hint to board. */
 	JButton addHintButton;
-	/** To make changes to the Playable Bullpen. */
+	/** To make changes to the playable bullpen. */
 	JButton editPlayBullpenButton;
-	/** To reset Board. */
+	/** To reset board. */
 	JButton resetButton;
-	/** To flip Piece vertically. */
+	/** To flip piece vertically. */
 	JButton verFlipButton;
-	/** To flip Piece horizontally. */
+	/** To flip piece horizontally. */
 	JButton horFlipButton;
-	/** To rotate a Piece clock-wise. */
+	/** To rotate a piece clock-wise. */
 	JButton rotateCWButton;
-	/** To rotate a Piece counter-clock-wise. */
+	/** To rotate a piece counter-clock-wise. */
 	JButton rotateCCWButton;
-	/** To return to the Main Menu (LevelBuilderView). */
+	/** To return to the main menu (LevelBuilderView). */
 	JButton quitButton;
-	/** To change the Board's width. */
-	JTextField colSize;
-	/** To change the Board's height. */
-	JTextField rowSize;
-	/** To change the Level's limit. */
+	/** To change the board's width. */
+	JFormattedTextField colSizeInput;
+	/** To change the board's height. */
+	JFormattedTextField rowSizeInput;
+	/** To change the level's limit. */
 	JFormattedTextField limitInput;
+	/** The name of this level. */
 	JLabel title;
+	/** Label for the limit input field. */
 	JLabel limitLabel;
 
 
 	/**
 	 *  Constructor.
+	 *  
+	 *  @param model  the top-level model of the application
+	 *  @param view  the top-level GUI of the application
 	 */
 	public BuilderView(LevelBuilderModel model, LevelBuilderView view)
 	{
@@ -108,7 +118,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		bullpenContainer.setBounds(160, 80, 360, 78);
 		add(bullpenContainer);
 		
-		// Add Board and Bullpen controllers
+		// Add board and bullpen controllers
 		BoardController boardController = new BoardController(model, this);
 		board.addMouseListener(boardController);
 		board.addMouseMotionListener(boardController);
@@ -141,11 +151,11 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		title.setBounds(176, 22, 310, 45);
 		add(title);
 		
-		// Default limit display for Puzzle and Release Levels
+		// Default limit display for Puzzle and Release levels
 		String limitDisplay = "Move Limit:";
-		if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning Level
+		if(this.model.getGameMode() == LevelModel.LIGHTNING)  // If Lightning level
 		{
-			// Then label limit as time remaining
+			// Then label limit as time instead of moves
 			limitDisplay = "Time Limit:";
 		}
 		limitLabel = new JLabel(limitDisplay);
@@ -155,12 +165,19 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		limitLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
 		add(limitLabel);
 		
-		limitInput = new JFormattedTextField();
+		NumberFormat limitFormat = NumberFormat.getIntegerInstance();
+		limitFormat.setMinimumIntegerDigits(1);
+		limitFormat.setMaximumIntegerDigits(5);
+		NumberFormatter limitFormatter = new NumberFormatter(limitFormat);
+		limitFormatter.setMinimum(new Integer(1));
+		limitFormatter.setMaximum(new Integer(99999));
+		
+		limitInput = new JFormattedTextField(limitFormatter);
 		limitInput.setValue(model.getLimit());
 		limitInput.setBounds(555, 255, 110, 30);
 		limitInput.setColumns(10);
+		limitInput.addPropertyChangeListener("value", new LimitController(this.getModel()));
 		add(limitInput);
-		
 		
 		addHintButton = new JButton("Hint");
 		addHintButton.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -186,15 +203,28 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		dimensionLabel.setBounds(35, 280, 55, 30);
 		add(dimensionLabel);
 		
-		rowSize = new JTextField();
-		rowSize.setColumns(10);
-		rowSize.setBounds(10, 320, 45, 30);
-		add(rowSize);
+		NumberFormat boardSizeFormat = NumberFormat.getIntegerInstance();
+		boardSizeFormat.setMinimumIntegerDigits(1);
+		boardSizeFormat.setMaximumIntegerDigits(2);
+		NumberFormatter boardSizeFormatter = new NumberFormatter(boardSizeFormat);
+		boardSizeFormatter.setMinimum(new Integer(1));
+		boardSizeFormatter.setMaximum(new Integer(Board.MAXCOLS));  // Board is square, so shouldn't matter
 		
-		colSize = new JTextField();
-		colSize.setColumns(10);
-		colSize.setBounds(70, 320, 45, 30);
-		add(colSize);
+		rowSizeInput = new JFormattedTextField(boardSizeFormatter);
+		rowSizeInput.setValue(Board.MAXROWS);
+		rowSizeInput.setToolTipText("Enter new number of rows here.");
+		rowSizeInput.setColumns(10);
+		rowSizeInput.setBounds(10, 320, 45, 30);
+		rowSizeInput.addPropertyChangeListener("value", new RowSizeController(this));
+		add(rowSizeInput);
+		
+		colSizeInput = new JFormattedTextField(boardSizeFormatter);
+		colSizeInput.setValue(Board.MAXCOLS);
+		colSizeInput.setToolTipText("Enter new number of columns here.");
+		colSizeInput.setColumns(10);
+		colSizeInput.setBounds(70, 320, 45, 30);
+		colSizeInput.addPropertyChangeListener("value", new ColSizeController(this));
+		add(colSizeInput);
 		
 		JLabel xLabel = new JLabel("X");
 		xLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -242,7 +272,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 
 
 	/**
-	 *  Returns the BullpenView object (the rendered infinite Bullpen) associated with this BuilderView.
+	 *  @return  the BullpenView object (the rendered infinite Bullpen) associated with this BuilderView
 	 */
 	@Override
 	public BullpenView getBullpen()
@@ -252,11 +282,25 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 
 
 	/**
-	 *  Returns the LevelModel object associated with this BuilderView. 
+	 *  @return  the LevelModel object associated with this BuilderView
 	 */
 	@Override
 	public LevelModel getModel()
 	{
 		return model;
+	}
+	
+	
+	/** @return  the JFormattedTextField responsible for the board's row size */
+	public JFormattedTextField getRowSizeInput()
+	{
+		return rowSizeInput;
+	}
+	
+	
+	/** @return  the JFormattedTextField responsible for the board's column size */
+	public JFormattedTextField getColSizeInput()
+	{
+		return colSizeInput;
 	}
 }

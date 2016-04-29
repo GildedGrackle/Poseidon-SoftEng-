@@ -105,26 +105,37 @@ public class LightningLevel extends LevelModel{
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	/** @return  the amount of time remaining */
 	@Override
 	public int getLimit()
 	{
 		return allottedTime;
 	}
-	public int getAllottedTime()
+	int getAllottedTime()
 	{
 		return allottedTime;
 	}
-	public int getUsedTime()
+	int getUsedTime()
 	{
 		return usedTime;
 	}
-	public void setAllottedTime(int newTime)
+	void setAllottedTime(int newTime)
 	{
 		allottedTime = newTime;
 	}
-	public void setUsedTime(int newTime)
+	void setUsedTime(int newTime)
 	{
 		usedTime = newTime;
+	}
+	/**
+	 *  Sets the allotted move limit.
+	 *  
+	 *  @param newLimit  the new limit
+	 */
+	@Override
+	public void setLimit(int newLimit)
+	{
+		allottedTime = newLimit;
 	}
 
 

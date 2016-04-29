@@ -49,9 +49,21 @@ public class ReleaseLevel extends LevelModel{
 	/**
 	 *  Decreases the number of moves remaining by 1.
 	 */
+	@Override
 	public void decrementLimit() {
-		//TODO: Change return value
 		movesRemaining--;
+	}
+	
+	
+	/**
+	 *  Sets the allotted move limit.
+	 *  
+	 *  @param newLimit  the new limit
+	 */
+	@Override
+	public void setLimit(int newLimit)
+	{
+		allottedMoves = newLimit;
 	}
 	
 	
@@ -64,21 +76,22 @@ public class ReleaseLevel extends LevelModel{
 	
 	/**
 	 * Checks whether the player has achieved a perfect score.
+	 * 
+	 * @return  indicator whether game has been completed
 	 */
 	Boolean hasWon() {
 		if (calculateScore() == 3) {return true;}
 		return false;
 	}
-	
-	void reset() {
-		//TODO: Change return value
-	}
 
+	
+	/** @return  the number of moves remaining */
 	@Override
 	public int getLimit()
 	{
-		return allottedMoves;
+		return movesRemaining;
 	}
+	
 
 	/**
 	 * Checks whether the player is eligible to move to the next level.
@@ -131,5 +144,12 @@ public class ReleaseLevel extends LevelModel{
 		}
 		
 		return passed;
+	}
+
+	@Override
+	void reset()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }
