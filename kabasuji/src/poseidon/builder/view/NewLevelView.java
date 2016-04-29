@@ -85,4 +85,12 @@ public class NewLevelView extends JPanel implements IBuilderScreen{
 		return newPuzzleButton;
 	}
 	
+	public JButton getNewLightning(){
+		return newLightningButton;
+	}
+	
+	public JButton getNewRelease(){
+		return newReleaseButton;
+	}
+	
 }

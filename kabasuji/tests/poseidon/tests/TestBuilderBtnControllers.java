@@ -14,7 +14,9 @@ import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.EditLevelController;
 import poseidon.builder.controller.ExitBuilderController;
+import poseidon.builder.controller.MakeLightningController;
 import poseidon.builder.controller.MakePuzzleController;
+import poseidon.builder.controller.MakeReleaseController;
 import poseidon.builder.controller.NewLevelController;
 import poseidon.builder.view.AboutBuilderView;
 import poseidon.builder.view.BuilderView;
@@ -40,6 +42,8 @@ public class TestBuilderBtnControllers extends TestCase{
 	EditLevelController editLvlSelect;
 	NewLevelView newLvlView;
 	MakePuzzleController makePuzCont;
+	MakeLightningController makeLightCont;
+	MakeReleaseController makeReleaseCont;
 
 		
 	private ActionEvent buttonPress(Component button) {
@@ -57,6 +61,9 @@ public class TestBuilderBtnControllers extends TestCase{
 			editLvlSelect = new EditLevelController(model, view); 
 			newLvlView = new NewLevelView(model, view);
 			makePuzCont = new MakePuzzleController(model, view);
+			makeLightCont = new MakeLightningController(model, view);
+			makeReleaseCont = new MakeReleaseController(model, view);
+			
 			
 		}
 		
@@ -109,6 +116,29 @@ public class TestBuilderBtnControllers extends TestCase{
 			
 			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
 			assertTrue(makePuzCont.toPuzzleLevel());
+		}
+		
+		public void testNewLightningLvl(){
+			button = newLvlView.getNewLightning();
+			ActionEvent newLightning = buttonPress(button);
+			makeLightCont.actionPerformed(newLightning);
+			
+			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
+			assertTrue(makeLightCont.toLightningLevel());
 			
 		}
+		
+		public void testNewReleaseLvl(){
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makeReleaseCont.actionPerformed(newPuzzle);
+			
+			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
+			assertTrue(makeReleaseCont.toReleaseLevel());
+			
+		}
+		
+		
+		
+		
 }
