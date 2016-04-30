@@ -1,5 +1,6 @@
 package poseidon.player.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
@@ -22,6 +23,8 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 	LevelPlayerModel model;
 	/** The level select screen to modify. */
 	LevelSelectView view;
+	/** The level select buttons. */
+	StarView[] buttons;
 	/** Which gamemode's levels should be displayed. */
 	int gameMode;
 
@@ -37,7 +40,8 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 	{
 		this.model = model;
 		this.view = view;
-		this.gameMode = gameMode;		
+		this.gameMode = gameMode;
+		this.buttons = new StarView[model.getLevels().get(gameMode).size()];
 		
 		// Set component details
 		setLayout(null);
@@ -51,27 +55,47 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 	}
 	
 	
+	/**
+	 *  Creates and places the StarView icons.
+	 */
 	void initialize()
 	{
+		int i = 0;
 		for(LevelContainer lc : model.getLevels().get(gameMode))
 		{
 			// If the level is unlocked
 			if(lc.getLevelNumber() <= model.getCurrentLevel()[gameMode])
 			{
 				// Then create a selectable icon
-				StarView levelButton = new StarView(model.getLevels().get(gameMode).get(lc.getLevelNumber()));
-				levelButton.setBounds(10 + (ICON_SPACING + ICON_WIDTH) * lc.getLevelNumber(), 2, ICON_WIDTH, ICON_HEIGHT);
-				levelButton.addActionListener(new SelectLevelController(view));
-				add(levelButton);
+				buttons[i] = new StarView(model.getLevels().get(gameMode).get(lc.getLevelNumber()));
+				buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * lc.getLevelNumber(), 2, ICON_WIDTH, ICON_HEIGHT);
+				buttons[i].setBackground(Color.cyan);
+				buttons[i].addActionListener(new SelectLevelController(view));
+				add(buttons[i]);
 			}
 			else  // Level is locked
 			{
 				// Then create a nonselectable "level locked" icon
-				StarView lockButton = new StarView();
-				lockButton.setBounds(10 + (ICON_SPACING + ICON_WIDTH) * lc.getLevelNumber(), 2, ICON_WIDTH, ICON_HEIGHT);
-				lockButton.setEnabled(false);
-				add(lockButton);
+				buttons[i] = new StarView();
+				buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * lc.getLevelNumber(), 2, ICON_WIDTH, ICON_HEIGHT);
+				buttons[i].setBackground(Color.cyan);
+				buttons[i].setEnabled(false);
+				add(buttons[i]);
 			}
+			
+			i++;
+		}
+	}
+	
+	
+	/**
+	 *  Resets all level select buttons to have blue backgrounds.
+	 */
+	public void resetSelectColors()
+	{
+		for(StarView sv : buttons)
+		{
+			sv.setBackground(Color.cyan);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package poseidon.common.controller;
+package poseidon.player.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

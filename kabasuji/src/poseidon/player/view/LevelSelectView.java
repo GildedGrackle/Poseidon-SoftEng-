@@ -133,6 +133,18 @@ public class LevelSelectView extends JPanel implements IGameScreen
 
 
 	/**
+	 *  Resets all level select buttons to have blue backgrounds.
+	 */
+	public void resetSelectColors()
+	{
+		puzzlePanel.resetSelectColors();
+		lightningPanel.resetSelectColors();
+		releasePanel.resetSelectColors();
+	}
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	/**
 	 *  Returns the current level boundary object
 	 */
 	@Override
@@ -156,6 +168,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	/** TODO LevelSelectView documentation */
 	public LevelContainer getSelectedLevel()
 	{
 		return selectedLevel;

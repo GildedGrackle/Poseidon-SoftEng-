@@ -1,31 +1,33 @@
-package poseidon.player.controller;
+package poseidon.builder.controller;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 
-
-import poseidon.player.view.LevelSelectView;
+import poseidon.builder.view.EditLevelIcon;
+import poseidon.builder.view.EditLevelView;
 import poseidon.player.view.StarView;
 
 /**
- *  Handles selecting a level to play.
+ *  Handles selecting a level to edit.
  *  
- * @author Alex Titus
+ *  @author Alex Titus
+ *
  */
-public class SelectLevelController implements ActionListener
+public class SelectEditLevelController implements ActionListener
 {
 	/** The GUI object to modify. */
-	LevelSelectView view;
-	
-	
+	EditLevelView view;
+
+
 	/**
 	 *  Constructor.
 	 *  
 	 *  @param view  The GUI object to modify
 	 */
-	public SelectLevelController(LevelSelectView view)
+	public SelectEditLevelController(EditLevelView view)
 	{
 		this.view = view;
 	}
@@ -39,14 +41,14 @@ public class SelectLevelController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
-		StarView source = (StarView) ae.getSource();
-		
+		EditLevelIcon source = (EditLevelIcon) ae.getSource();
+
 		view.setSelectedLevel(source.getLevelContainer());
 
 		// Update display
 		view.resetSelectColors();
 		source.setBackground(Color.yellow);
-		view.getPlay().setEnabled(true);
+		view.enableButtons();
 		view.repaint();
 	}
 
