@@ -20,6 +20,7 @@ import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
+import poseidon.builder.controller.CancelEditController;
 import poseidon.builder.controller.EditLevelController;
 import poseidon.builder.controller.EditPlayableBullpenController;
 import poseidon.builder.controller.ExitBuilderController;
@@ -27,6 +28,7 @@ import poseidon.builder.controller.MakeLightningController;
 import poseidon.builder.controller.MakePuzzleController;
 import poseidon.builder.controller.MakeReleaseController;
 import poseidon.builder.controller.NewLevelController;
+import poseidon.builder.controller.SetBullpenController;
 import poseidon.builder.view.AboutBuilderView;
 import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
@@ -55,7 +57,9 @@ public class TestBuilderBtnControllers extends TestCase{
 	MakeLightningController makeLightCont;
 	MakeReleaseController makeReleaseCont;
 	EditPlayableBullpenController editBullpenScreen;
-
+	SetBullpenController setBullpenController;
+	EditPlayableBullpenView editBullpenView;
+	CancelEditController cancelBullEdit;
 		
 	private ActionEvent buttonPress(Component button) {
 		return new ActionEvent(button, 0, getName() );
@@ -166,6 +170,31 @@ public class TestBuilderBtnControllers extends TestCase{
 			
 			assertEquals(EditPlayableBullpenView.class, view.getBuilder().getContentPane().getClass());
 			 
+			editBullpenView = new EditPlayableBullpenView(view);
+			
+			setBullpenController = new SetBullpenController(view, editBullpenView, model.getBuildingLevel().getLevel().getPlayableBullpen());
+			
+			editBullpenView.getPieceCountsPanel().getInputs()[0].setValue(4);
+			
+			button = editBullpenView.getDoneButton();
+			ActionEvent doneEditing = buttonPress(button);
+			setBullpenController.actionPerformed(doneEditing);
+			
+			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
+			assertEquals(model.getBuildingLevel().getLevel().getPlayableBullpen().getSize(), 4);
+			
+			button = builderView.getSetPlayBull();
+			editBullpenScreen.actionPerformed(setBullpen);
+			
+			editBullpenView.getPieceCountsPanel().getInputs()[2].setValue(6);
+			
+			cancelBullEdit = new CancelEditController(view);
+			button =editBullpenView.getCancelButton();
+			ActionEvent cancelEditing = buttonPress(button);
+			cancelBullEdit.actionPerformed(cancelEditing);
+			
+			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
+			assertEquals(model.getBuildingLevel().getLevel().getPlayableBullpen().getSize(), 4);
 			
 		}
 		

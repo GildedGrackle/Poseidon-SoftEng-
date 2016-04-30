@@ -57,7 +57,7 @@ public class SetBullpenController implements ActionListener
 		// Create pieces
 		ArrayList<PieceContainer> pieces = new ArrayList<PieceContainer>();
 		JFormattedTextField[] data = editView.getPieceCountsPanel().getInputs();
-		for(int i = 0; i < 35; i++)  // Go through all input values
+		for(int i = 0; i < data.length; i++)  // Go through all input values
 		{
 			int pieceCount = (int) data[i].getValue();
 			for(int j = 0; j < pieceCount; j++)
