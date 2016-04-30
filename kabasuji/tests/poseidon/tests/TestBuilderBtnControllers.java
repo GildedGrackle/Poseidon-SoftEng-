@@ -2,17 +2,26 @@ package poseidon.tests;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 import poseidon.entities.LevelModel;
+import poseidon.entities.PieceContainer;
+import poseidon.entities.PieceFactory;
+import poseidon.entities.PuzzleLevel;
+import poseidon.entities.PuzzleSquare;
+import poseidon.entities.Square;
 import poseidon.entities.Board;
+import poseidon.entities.BuilderBoardLogic;
+import poseidon.entities.BuilderBullpenLogic;
 import poseidon.entities.Bullpen;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.EditLevelController;
+import poseidon.builder.controller.EditPlayableBullpenController;
 import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.MakeLightningController;
 import poseidon.builder.controller.MakePuzzleController;
@@ -23,6 +32,7 @@ import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.NewLevelView;
 import poseidon.builder.view.EditLevelView;
+import poseidon.builder.view.EditPlayableBullpenView;
 import junit.framework.TestCase;
 
 public class TestBuilderBtnControllers extends TestCase{
@@ -44,6 +54,7 @@ public class TestBuilderBtnControllers extends TestCase{
 	MakePuzzleController makePuzCont;
 	MakeLightningController makeLightCont;
 	MakeReleaseController makeReleaseCont;
+	EditPlayableBullpenController editBullpenScreen;
 
 		
 	private ActionEvent buttonPress(Component button) {
@@ -63,7 +74,7 @@ public class TestBuilderBtnControllers extends TestCase{
 			makePuzCont = new MakePuzzleController(model, view);
 			makeLightCont = new MakeLightningController(model, view);
 			makeReleaseCont = new MakeReleaseController(model, view);
-			
+			editBullpenScreen = new EditPlayableBullpenController(view);
 			
 		}
 		
@@ -138,7 +149,24 @@ public class TestBuilderBtnControllers extends TestCase{
 			
 		}
 		
-		
+		public void testSetBullpen(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			
+			button = builderView.getSetPlayBull();
+			ActionEvent setBullpen = buttonPress(button);
+			editBullpenScreen.actionPerformed(setBullpen);
+			
+			assertEquals(EditPlayableBullpenView.class, view.getBuilder().getContentPane().getClass());
+			
+		}
 		
 		
 }
