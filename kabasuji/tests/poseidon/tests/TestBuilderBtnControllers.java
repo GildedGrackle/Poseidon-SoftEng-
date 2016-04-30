@@ -2,11 +2,13 @@ package poseidon.tests;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 import poseidon.entities.LevelModel;
+import poseidon.entities.Piece;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.PieceFactory;
 import poseidon.entities.PuzzleLevel;
@@ -33,11 +35,14 @@ import poseidon.builder.view.AboutBuilderView;
 import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.NewLevelView;
+import poseidon.common.controller.BoardController;
+import poseidon.common.view.BoardView;
+import poseidon.common.view.PieceView;
 import poseidon.builder.view.EditLevelView;
 import poseidon.builder.view.EditPlayableBullpenView;
 import junit.framework.TestCase;
 
-public class TestBuilderBtnControllers extends TestCase{
+public class TestBuilderBtnControllers extends TestMouseEvents{
 
 		
 	
@@ -198,5 +203,36 @@ public class TestBuilderBtnControllers extends TestCase{
 			
 		}
 		
+		public void testUndoManager(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			
+			PieceContainer selectedPiece = model.getBuildingLevel().getLevel().getInfiniteBullpen().getPiece(1);
 		
+			model.getBuildingLevel().getLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
+			PieceView selectedPieceView = builderView.getBullpen().getPieceView(1);
+			builderView.getBullpen().setSelectedPiece(selectedPieceView); 
+			
+			BoardController boardController = new BoardController(model.getBuildingLevel().getLevel() , builderView);
+			
+			MouseEvent movePiece = createBuilderMoved(builderView, builderView.getBoard(), 0, 0);
+			boardController.mouseMoved(movePiece);
+			
+			assertEquals(builderView.getBoard().getActiveDragging(), selectedPieceView);
+			
+			MouseEvent pressed = createBuilderPress(builderView, builderView.getBoard(), 0, 0);
+			boardController.mousePressed(pressed);
+			
+			assertTrue(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
+			assertEquals(builderView.getBoard().getActiveDragging(), null);
+		}
+
+	
 }
