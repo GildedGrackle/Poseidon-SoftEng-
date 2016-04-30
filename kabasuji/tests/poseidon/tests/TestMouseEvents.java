@@ -54,7 +54,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createDoubleClicked (BuilderView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_CLICKED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 2, false);
+				dx, dy, 2, false);
 		return me;
 	}
 	

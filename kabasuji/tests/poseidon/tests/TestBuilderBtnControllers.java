@@ -253,6 +253,29 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			assertTrue(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
 			assertEquals(builderView.getBoard().getActiveDragging(), null);
 			
+		}
+		
+		public void testBuilderDoubleClick(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			
+			BoardController boardController = new BoardController(model.getBuildingLevel().getLevel() , builderView);
+			
+			MouseEvent doubleClick = createDoubleClicked(builderView, builderView.getBoard(), 0, 0);
+			boardController.mouseClicked(doubleClick);
+			
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getSquare(0, 0).getType(), -1);
+			
+			boardController.mouseClicked(doubleClick);
+			
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getSquare(0, 0).getType(), LevelModel.PUZZLE);
 			
 		}
 
