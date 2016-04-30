@@ -101,7 +101,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createBuilderPress (BuilderView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_PRESSED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	

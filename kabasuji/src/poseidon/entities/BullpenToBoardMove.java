@@ -112,7 +112,7 @@ public class BullpenToBoardMove implements IMove{
 	 */
 	public Boolean undoMove() {
 		if (draggedPiece != null && game.getBoard().canEdit()) {
-			game.getBoard().removePiece(piece);
+			game.getBoard().getPieces().remove(piece);
 			view.getBoard().removePiece(draggedPiece);
 			piece.setLocation(new Point(-1, -1));
 			view.getBullpen().getModel().addPiece(piece);

@@ -30,7 +30,9 @@ import poseidon.builder.controller.MakeLightningController;
 import poseidon.builder.controller.MakePuzzleController;
 import poseidon.builder.controller.MakeReleaseController;
 import poseidon.builder.controller.NewLevelController;
+import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.SetBullpenController;
+import poseidon.builder.controller.UndoController;
 import poseidon.builder.view.AboutBuilderView;
 import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
@@ -232,6 +234,26 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 			assertTrue(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
 			assertEquals(builderView.getBoard().getActiveDragging(), null);
+			
+			UndoController undo = new UndoController(builderView);
+			
+			button = builderView.getUndo();
+			ActionEvent newUndo = buttonPress(button);
+			
+			undo.actionPerformed(newUndo);
+			
+			assertFalse(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
+			
+			RedoController redo = new RedoController(builderView);
+			
+			button = builderView.getRedo();
+			ActionEvent newRedo = buttonPress(button);
+			redo.actionPerformed(newRedo);
+			
+			assertTrue(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
+			assertEquals(builderView.getBoard().getActiveDragging(), null);
+			
+			
 		}
 
 	
