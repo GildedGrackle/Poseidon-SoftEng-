@@ -192,7 +192,7 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	 *  @param visibleRect  The view area visible within the viewport
 	 *  @param orientation  Either SwingConstants.VERTICAL or SwingConstants.HORIZONTAL
 	 *  @param direction  Less than zero to scroll up/left, greater than zero for down/right
-	 *  @return  Distance to scroll to location two pieces over.
+	 *  @return  Distance to scroll to location four pieces over.
 	 */
 	@Override
 	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation,

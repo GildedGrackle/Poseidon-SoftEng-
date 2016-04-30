@@ -1,7 +1,9 @@
 package poseidon.player.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 
 import poseidon.player.view.LevelSelectView;
@@ -29,7 +31,11 @@ public class SelectLevelController implements ActionListener
 		StarView source = (StarView) ae.getSource();
 		
 		view.setSelectedLevel(source.getLevelContainer());
-		// TODO update view so that the level is clearly selected
+
+		// Update display
+		source.setBackground(Color.yellow);
+		view.getPlay().setEnabled(true);
+		view.repaint();
 	}
 
 }
