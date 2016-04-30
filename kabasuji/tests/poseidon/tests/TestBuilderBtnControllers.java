@@ -165,6 +165,7 @@ public class TestBuilderBtnControllers extends TestCase{
 			editBullpenScreen.actionPerformed(setBullpen);
 			
 			assertEquals(EditPlayableBullpenView.class, view.getBuilder().getContentPane().getClass());
+			 
 			
 		}
 		
