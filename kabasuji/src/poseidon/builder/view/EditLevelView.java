@@ -3,6 +3,7 @@ package poseidon.builder.view;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import java.awt.Font;
 
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.entities.LevelBuilderModel;
+import poseidon.entities.LevelContainer;
 
 /**
  *  Screen for performing operations on saved custom Levels.
@@ -37,10 +39,12 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	JScrollPane addLevelsContainer;
 	/** To hold the saved levels. */
 	JScrollPane savedLevelsContainer;
-/** Custom Levels added to the game. */
-	JPanel addedLevels;
-/** Custom Levels saved but not added to the game. */
-	JPanel savedLevels;
+	/** Custom Levels added to the game. */
+	SelectableEditLevelsView addedLevels;
+	/** Custom Levels saved but not added to the game. */
+	SelectableEditLevelsView savedLevels;
+	/** The level selected to edit by the user. */
+	LevelContainer selectedLevel;
 
 
 	/**
@@ -58,7 +62,6 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	
 	/**
 	 *  Creates the panel.
-	 *  TODO scrollpanes and the saved/added level lists
 	 */
 	void initialize()
 	{
@@ -70,28 +73,28 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		add(title);
 		
 		JLabel inGameLabel = new JLabel("In Game");
-		inGameLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		inGameLabel.setBounds(25, 105, 120, 30);
+		inGameLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
+		inGameLabel.setBounds(25, 100, 120, 30);
 		add(inGameLabel);
 		
 		JLabel inGPzlLabel = new JLabel("Puzzle Levels");
 		inGPzlLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		inGPzlLabel.setBounds(25, 160, 160, 30);
+		inGPzlLabel.setBounds(25, 135, 160, 30);
 		add(inGPzlLabel);
 		
 		JLabel inGLtngLabel = new JLabel("Lightning Levels");
 		inGLtngLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		inGLtngLabel.setBounds(25, 200, 180, 30);
+		inGLtngLabel.setBounds(25, 190, 180, 30);
 		add(inGLtngLabel);
 		
 		JLabel inGRlsLabel = new JLabel("Release Levels");
 		inGRlsLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		inGRlsLabel.setBounds(25, 240, 160, 30);
+		inGRlsLabel.setBounds(25, 245, 160, 30);
 		add(inGRlsLabel);
 		
 		JLabel notInGameLabel = new JLabel("Not in Game");
-		notInGameLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		notInGameLabel.setBounds(25, 315, 140, 30);
+		notInGameLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
+		notInGameLabel.setBounds(25, 330, 160, 30);
 		add(notInGameLabel);
 		
 		JLabel notGPzlLabel = new JLabel("Puzzle Levels");
@@ -101,39 +104,48 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		
 		JLabel notGLtngLabel = new JLabel("Lightning Levels");
 		notGLtngLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		notGLtngLabel.setBounds(25, 410, 180, 30);
+		notGLtngLabel.setBounds(25, 425, 180, 30);
 		add(notGLtngLabel);
 		
 		JLabel notGRlsLabel = new JLabel("Release Levels");
 		notGRlsLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		notGRlsLabel.setBounds(25, 450, 160, 30);
+		notGRlsLabel.setBounds(25, 480, 160, 30);
 		add(notGRlsLabel);
 		
 		editButton = new JButton("Edit");
 		editButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		editButton.setBounds(508, 530, 120, 80);
+		editButton.setBounds(505, 580, 120, 45);
+		editButton.setEnabled(false);  // Initially not usable
 		add(editButton);
 
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		backButton.setBounds(25, 530, 120, 80);
+		backButton.setBounds(25, 580, 120, 45);
 		backButton.addActionListener(
 				new BackBuilderController(model, application));
 		add(backButton);
 		
 		addButton = new JButton("Add to Game");
 		addButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		addButton.setBounds(317, 530, 165, 80);
+		addButton.setEnabled(false);  // Initially not usable
+		addButton.setBounds(315, 580, 165, 45);
 		add(addButton);
 		
 		deleteButton = new JButton("Delete");
 		deleteButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		deleteButton.setBounds(171, 530, 120, 80);
+		deleteButton.setBounds(170, 580, 120, 45);
+		deleteButton.setEnabled(false);  // Initially not usable
 		add(deleteButton);
 		
-		/*
-		 * TODO Create addedLevels and savedLevels selectors
-		 */
+		addLevelsContainer = new JScrollPane();
+		addLevelsContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		addLevelsContainer.setBounds(230, 115, 390, 202);
+		add(addLevelsContainer);
+		
+		savedLevelsContainer = new JScrollPane();
+		savedLevelsContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		savedLevelsContainer.setBounds(230, 345, 390, 202);
+		add(savedLevelsContainer);
 	}
 
 	
@@ -146,8 +158,33 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	@Override
 	public Boolean modelUpdated()
 	{
-		// TODO if levels are added to/removed from game or are deleted
+		addedLevels.modelUpdated();
+		savedLevels.modelUpdated();
 		return false;
+	}
+	
+	
+	/**
+	 *  Resets all level select buttons to have blue backgrounds.
+	 */
+	public void resetSelectColors()
+	{
+		addedLevels.resetSelectColors();
+		savedLevels.resetSelectColors();
+	}
+	
+	
+	public void enableButtons()
+	{
+		deleteButton.setEnabled(true);
+		editButton.setEnabled(true);
+		addButton.setEnabled(true);
+	}
+	
+	
+	public void setSelectedLevel(LevelContainer newLevel)
+	{
+		this.selectedLevel = newLevel;
 	}
 
 }

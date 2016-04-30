@@ -93,19 +93,26 @@ public class LevelPlayerModel {
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	/** @return  The LevelModel currently being played. */
 	public LevelModel getPlayingLevel()
 	{
 		return playingLevel;
 	}
+	/** @return  The player's progress on each gamemode. */
 	public int[] getCurrentLevel()
 	{
 		return currentLevel;
 	}
+	/** @return  The LevelContainer structure, containing data about all of the loaded levels. */
 	public ArrayList<ArrayList<LevelContainer>> getLevels()
 	{
 		return levels;
 	}
-	
+	/** 
+	 *  Sets the level currently being played.
+	 *  
+	 *  @param newLevel  the new level
+	 */
 	public void setPlayingLevel(LevelModel newLevel)
 	{
 		playingLevel = newLevel;

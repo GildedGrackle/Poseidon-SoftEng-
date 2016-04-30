@@ -11,9 +11,16 @@ import poseidon.entities.LevelContainer;
 
 import javax.swing.SwingConstants;
 
+/**
+ *  TODO StarView documentation
+ *  
+ *  @author Morgan Hopeman
+ *  @author Alex Titus
+ */
 public class StarView extends JButton
 {
-	LevelContainer levelContainer;  // The Level Container associated with this StarView
+	/** The Level Container associated with this StarView. */
+	LevelContainer levelContainer;
 
 	/**
 	 *  Construct selectable icon

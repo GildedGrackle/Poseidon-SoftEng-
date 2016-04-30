@@ -16,7 +16,6 @@ import javax.swing.ScrollPaneConstants;
 import poseidon.common.controller.BullpenController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.HorizontalFlipController;
-import poseidon.common.controller.ResetController;
 import poseidon.common.controller.RotateCCWController;
 import poseidon.common.controller.RotateCWController;
 import poseidon.common.controller.VerticalFlipController;
@@ -27,6 +26,7 @@ import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.LevelSelectController;
+import poseidon.player.controller.ResetController;
 
 /**
  *  Renders the Kabasuji game Level for playing Levels.
