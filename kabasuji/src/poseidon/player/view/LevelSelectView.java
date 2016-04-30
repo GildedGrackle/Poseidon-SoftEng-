@@ -2,6 +2,8 @@ package poseidon.player.view;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import java.awt.Font;
 
@@ -9,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 import poseidon.entities.LevelContainer;
+import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.PlaySelectedController;
@@ -37,11 +40,13 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	/** The "Play Level" button. */
 	JButton btnPlay;
 	/** The panel holding the Puzzle Levels. */
-	JPanel puzzlePanel;
+	SelectableLevelsView puzzlePanel;
 	/** The panel holding the Lightning Levels. */
-	JPanel lightningPanel;
+	SelectableLevelsView lightningPanel;
 	/** The panel holding the Release Levels. */
-	JPanel releasePanel;
+	SelectableLevelsView releasePanel;
+	/** The button to return to the main menu (LevelPlayerView). */
+	JButton backButton;
 
 	
 	/**
@@ -59,11 +64,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		game = view;
 		setLayout(null);
 		
-		// TODO get levels, which are unlocked and such
-		
 		initialize();
-		
-		
 	}
 
 	
@@ -82,20 +83,20 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		
 		JLabel puzzleLabel = new JLabel("Puzzle");
 		puzzleLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		puzzleLabel.setBounds(10, 180, 90, 30);
+		puzzleLabel.setBounds(10, 170, 90, 30);
 		add(puzzleLabel);
 		
-		JLabel lblLightning = new JLabel("Lightning");
-		lblLightning.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblLightning.setBounds(10, 270, 105, 30);
-		add(lblLightning);
+		JLabel lightningLabel = new JLabel("Lightning");
+		lightningLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lightningLabel.setBounds(10, 280, 105, 30);
+		add(lightningLabel);
 		
-		JLabel lblRelease = new JLabel("Release");
-		lblRelease.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblRelease.setBounds(10, 360, 90, 30);
-		add(lblRelease);
+		JLabel releaseLabel = new JLabel("Release");
+		releaseLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		releaseLabel.setBounds(10, 390, 90, 30);
+		add(releaseLabel);
 		
-		JButton backButton = new JButton("Back");
+		backButton = new JButton("Back");
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		backButton.setBounds(10, 550, 180, 50);
 		backButton.addActionListener(new BackPlayerController(model, game));
@@ -104,33 +105,30 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		btnPlay = new JButton("Play");
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnPlay.setBounds(470, 550, 180, 50);
+		btnPlay.setEnabled(false);  // Can't select initially
 		btnPlay.addActionListener(new PlaySelectedController(model, this, game));
 		add(btnPlay);
 		
-
-		for(int i = 0; i < LevelPlayerModel.NUM_GAMEMODES; i++)
-		{
-			for(int j = 0; j < 5; j++)
-			{
-				// If the level is unlocked
-				if(j <= model.getCurrentLevel()[i])
-				{
-					// Then create a selectable icon
-					StarView levelButton = new StarView(model.getLevels().get(i).get(j));
-					levelButton.setBounds(175 + 95 * j, 170 + 90 * i, 60, 80);
-					levelButton.addActionListener(new SelectLevelController(this));
-					add(levelButton);
-				}
-				else  // Level is locked
-				{
-					// Then create a nonselectable "level locked" icon
-					StarView lockButton = new StarView();
-					lockButton.setBounds(175 + 95 * j, 170 + 90 * i, 60, 80);
-					lockButton.setEnabled(false);
-					add(lockButton);
-				}
-			}
-		}
+		// Create selectable level buttons
+		int puzzle = 0;
+		int lightning = 1;
+		int release = 2;
+		puzzlePanel = new SelectableLevelsView(model, this, puzzle);
+		lightningPanel = new SelectableLevelsView(model, this, lightning);
+		releasePanel = new SelectableLevelsView(model, this, release);
+		
+		JScrollPane puzzleContainer = new JScrollPane(puzzlePanel);
+		puzzleContainer.setBounds(140, 135, 464, 102);
+		puzzleContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		add(puzzleContainer);
+		JScrollPane lightningContainer = new JScrollPane(lightningPanel);
+		lightningContainer.setBounds(140, 245, 464, 102);
+		lightningContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		add(lightningContainer);
+		JScrollPane releaseContainer = new JScrollPane(releasePanel);
+		releaseContainer.setBounds(140, 355, 464, 102);
+		releaseContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		add(releaseContainer);
 	}
 
 

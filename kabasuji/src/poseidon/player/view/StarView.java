@@ -3,10 +3,12 @@ package poseidon.player.view;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import poseidon.entities.LevelContainer;
+
 import javax.swing.SwingConstants;
 
 public class StarView extends JButton
@@ -88,9 +90,12 @@ public class StarView extends JButton
 		setLayout(null);
 		
 		JLabel lockedLabel = new JLabel("No");
+		// TODO load the locked level icon instead
+//		ImageIcon lockedLevel = ___.getLockedLevelImage();
+//		JLabel lockedLabel = new JLabel(lockedLevel);
 		lockedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lockedLabel.setBounds(0, 0, 60, 80);
-		lockedLabel.setBackground(Color.DARK_GRAY);  // TODO load the locked level icon instead
+		lockedLabel.setBackground(Color.DARK_GRAY);
 		add(lockedLabel);
 	}
 	
