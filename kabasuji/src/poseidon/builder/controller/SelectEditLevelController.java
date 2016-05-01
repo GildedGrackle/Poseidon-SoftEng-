@@ -4,11 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import poseidon.builder.view.EditLevelIcon;
 import poseidon.builder.view.EditLevelView;
-import poseidon.player.view.StarView;
 
 /**
  *  Handles selecting a level to edit.
@@ -37,12 +34,14 @@ public class SelectEditLevelController implements ActionListener
 	 *  Sets the selectedLevel LevelContainer in LevelSelectView to the
 	 *  LevelContainer associated with the StarView that produced this
 	 *  ActionEvent
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
+		// Set new selected level
 		EditLevelIcon source = (EditLevelIcon) ae.getSource();
-
 		view.setSelectedLevel(source.getLevelContainer());
 
 		// Update display

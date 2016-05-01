@@ -11,16 +11,14 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 import poseidon.entities.LevelContainer;
-import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.PlaySelectedController;
-import poseidon.player.controller.SelectLevelController;
 
 /**
- *  Creates the Level Select screen.
+ *  Creates the level select screen.
  *  
- *  Allows player to select all Levels that have been added to the game.
+ *  Allows player to select all levels that have been added to the game.
  *  TODO figure out if player-made levels are always unlocked
  *  
  *  @author Alex Titus
@@ -31,19 +29,19 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	LevelPlayerModel model;
 	/** The base GUI object. */
 	LevelPlayerView game;
-	/** The GUI of the Level being played. */
+	/** The GUI of the level being played. */
 	LevelView currentlyPlaying;
 	/** The selectable level icons. */
 	StarView levels[][];
 	/** The level selected to play by the player. */
 	LevelContainer selectedLevel;
 	/** The "Play Level" button. */
-	JButton btnPlay;
-	/** The panel holding the Puzzle Levels. */
+	JButton playButton;
+	/** The panel holding the Puzzle levels. */
 	SelectableLevelsView puzzlePanel;
-	/** The panel holding the Lightning Levels. */
+	/** The panel holding the Lightning levels. */
 	SelectableLevelsView lightningPanel;
-	/** The panel holding the Release Levels. */
+	/** The panel holding the Release levels. */
 	SelectableLevelsView releasePanel;
 	/** The button to return to the main menu (LevelPlayerView). */
 	JButton backButton;
@@ -52,10 +50,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 	/**
 	 *  Constructor.
 	 *  
-	 *  Does some work to figure out which levels are
-	 *  available for play
-	 *  
-	 *  @param model  the top-level model, with references to the Levels
+	 *  @param model  the top-level model, with references to the levels
 	 *  @param view  the base GUI object
 	 */
 	public LevelSelectView(LevelPlayerModel model, LevelPlayerView view)
@@ -69,9 +64,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 
 	
 	/**
-	 *  Creates and fills the screen with selectable levels
-	 *  and buttons 
-	 *  TODO use panels and scrollpanes here
+	 *  Creates and fills the screen with selectable levels and buttons.
 	 */
 	private void initialize()
 	{
@@ -102,12 +95,12 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		backButton.addActionListener(new BackPlayerController(model, game));
 		add(backButton);
 		
-		btnPlay = new JButton("Play");
-		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnPlay.setBounds(470, 550, 180, 50);
-		btnPlay.setEnabled(false);  // Can't select initially
-		btnPlay.addActionListener(new PlaySelectedController(model, this, game));
-		add(btnPlay);
+		playButton = new JButton("Play");
+		playButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		playButton.setBounds(470, 550, 180, 50);
+		playButton.setEnabled(false);  // Can't select initially
+		playButton.addActionListener(new PlaySelectedController(model, this, game));
+		add(playButton);
 		
 		// Create selectable level buttons
 		int puzzle = 0;
@@ -117,6 +110,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		lightningPanel = new SelectableLevelsView(model, this, lightning);
 		releasePanel = new SelectableLevelsView(model, this, release);
 		
+		// Add selectable level buttons
 		JScrollPane puzzleContainer = new JScrollPane(puzzlePanel);
 		puzzleContainer.setBounds(140, 135, 464, 102);
 		puzzleContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -133,7 +127,7 @@ public class LevelSelectView extends JPanel implements IGameScreen
 
 
 	/**
-	 *  Resets all level select buttons to have blue backgrounds.
+	 *  Resets all level select buttons to have blue (Color.cyan) backgrounds.
 	 */
 	public void resetSelectColors()
 	{
@@ -144,18 +138,28 @@ public class LevelSelectView extends JPanel implements IGameScreen
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/**
-	 *  Returns the current level boundary object
-	 */
+	/** @return  The current level boundary object. */
 	@Override
 	public LevelView getCurrentlyPlaying()
 	{
 		return currentlyPlaying;
 	}
-
 	
+	/** @return  The level currently selected. */
+	public LevelContainer getSelectedLevel()
+	{
+		return selectedLevel;
+	}
+	
+	/** @return  The button which starts the level. */
+	public JButton getPlayButton(){
+		return playButton;
+	}
+
 	/**
-	 *  Sets the current level boundary object
+	 *  Sets the current level boundary object.
+	 *  
+	 *  @param newGame  the new level boundary object
 	 */
 	@Override
 	public Boolean setCurrentlyPlaying(LevelView newGame)
@@ -164,21 +168,13 @@ public class LevelSelectView extends JPanel implements IGameScreen
 		return true;
 	}
 	
-	
-				/***********************
-				 *  Getters & Setters  *
-				 ***********************/
-	/** TODO LevelSelectView documentation */
-	public LevelContainer getSelectedLevel()
-	{
-		return selectedLevel;
-	}
+	/**
+	 *  Sets the selected level.
+	 *  
+	 *  @param selected  the new selected level
+	 */
 	public void setSelectedLevel(LevelContainer selected)
 	{
 		selectedLevel = selected;
-	}
-	
-	public JButton getPlay(){
-		return btnPlay;
 	}
 }

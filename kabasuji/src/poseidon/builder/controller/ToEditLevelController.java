@@ -8,7 +8,7 @@ import poseidon.builder.view.EditLevelView;
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.entities.LevelBuilderModel;
 
-public class EditLevelController implements ActionListener
+public class ToEditLevelController implements ActionListener
 {
 	LevelBuilderModel model;  // The top-level entity object, representing the application's state
 	LevelBuilderView application;  // The top-level GUI object
@@ -18,7 +18,7 @@ public class EditLevelController implements ActionListener
 	 *  Constructor
 	 * @param view
 	 */
-	public EditLevelController(LevelBuilderModel model,  LevelBuilderView view)
+	public ToEditLevelController(LevelBuilderModel model,  LevelBuilderView view)
 	{
 		this.model = model;
 		this.application = view;

@@ -12,18 +12,18 @@ import poseidon.player.view.StarView;
 /**
  *  Handles selecting a level to play.
  *  
- * @author Alex Titus
+ *  @author Alex Titus
  */
 public class SelectLevelController implements ActionListener
 {
-	/** The GUI object to modify. */
+	/** The select level screen to modify. */
 	LevelSelectView view;
 	
 	
 	/**
 	 *  Constructor.
 	 *  
-	 *  @param view  The GUI object to modify
+	 *  @param view  The select level screen to modify
 	 */
 	public SelectLevelController(LevelSelectView view)
 	{
@@ -35,6 +35,8 @@ public class SelectLevelController implements ActionListener
 	 *  Sets the selectedLevel LevelContainer in LevelSelectView to the
 	 *  LevelContainer associated with the StarView that produced this
 	 *  ActionEvent
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -46,7 +48,7 @@ public class SelectLevelController implements ActionListener
 		// Update display
 		view.resetSelectColors();
 		source.setBackground(Color.yellow);
-		view.getPlay().setEnabled(true);
+		view.getPlayButton().setEnabled(true);
 		view.repaint();
 	}
 

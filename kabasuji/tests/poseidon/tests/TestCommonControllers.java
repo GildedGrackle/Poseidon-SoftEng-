@@ -22,6 +22,7 @@ import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 import poseidon.entities.IBullpenLogic;
 import poseidon.entities.LevelBuilderModel;
+import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.entities.Piece;
@@ -46,6 +47,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	Point location;
 	BullpenView bullpenView;
 	Bullpen testBullpen;
+	LevelContainer testLevelContainer;
 	LevelModel testLevel;
 	Board testBoard;
 	Point testLocation;
@@ -60,16 +62,12 @@ public class TestCommonControllers extends TestMouseEvents{
 		return new ActionEvent(button, 0, getName());
 	}
 	
-	public class TestBullpenLogic extends IBullpenLogic{
+	public class TestBullpenLogic implements IBullpenLogic{
 
 		@Override
-		public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
-			return true;
-		}
-
-		@Override
-		public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
-			return true;
+		public void afterPieceRemoved(Bullpen bullpen, PieceContainer piece)
+		{
+			return ;  // TODO  change this to suit purpose
 		}
 		
 	}
@@ -79,10 +77,10 @@ public class TestCommonControllers extends TestMouseEvents{
 		int[] currentLvl = new int[]{
 				1, 1, 1
 		};
-		
+		testLevelContainer = new LevelContainer("Test level X", 0, 0, testLevel, 0);  // TODO set this to whatever
 		testBoard = testLevel.getBoard();
 		testLocation = new Point(1,1);
-		model = new LevelPlayerModel(currentLvl, testLevel);
+		model = new LevelPlayerModel(currentLvl, testLevelContainer);
 		builderModel = new LevelBuilderModel();
 		
 		Point[] piece1Points = new Point[] {

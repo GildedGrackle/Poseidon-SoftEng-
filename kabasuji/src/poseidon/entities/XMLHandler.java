@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class XMLHandler {
 	
 	/** These are what the filenames are appended onto for saving and loading. */
-	static String stockDirectory = "StockLevels/";
-	static String customDirectory = "CustomLevels/";
+	public static String stockDirectory = "StockLevels/";
+	public static String customDirectory = "CustomLevels/";
 
 	/** Unnecessary, should just call the static methods directly. */
 	public XMLHandler() {};
@@ -33,10 +33,10 @@ public class XMLHandler {
 	 * @return 				True if saved, false is failed.
 	 */
 	// TODO Should this use a boolean return confirmation or exception(s)?
-	public static boolean saveXML(LevelModel level, String filePath, boolean isCustom) {
+	public static boolean saveXML(LevelModel level, String filePath) {
 		// Turn filePath into an actual File object and create directory if necessary
 		File file;
-		if (isCustom) {
+		if (level.getIsCustom()) {
 			file = new File(customDirectory + filePath);
 		} else {
 			file = new File(stockDirectory + filePath);
@@ -125,8 +125,13 @@ public class XMLHandler {
 
 		// --- level.isCustom ---
 		Element isCustomElement = new Element("isCustom");
-		isCustomElement.setText(String.valueOf(level.isCustom));
+		isCustomElement.setText(String.valueOf(level.getIsCustom()));
 		levelElement.addContent(isCustomElement);
+		
+		// --- level.isCustom ---
+		Element isAddedToPlayerElement = new Element("isAddedToPlayer");
+		isAddedToPlayerElement.setText(String.valueOf(level.getIsAddedToPlayer()));
+		levelElement.addContent(isAddedToPlayerElement);
 
 		// Generate new XML file at specified location
 		Document doc = new Document(levelElement);
@@ -245,7 +250,9 @@ public class XMLHandler {
 			return null; // Invalid gameMode
 		}
 
-		Boolean levelIsCustom = Boolean.parseBoolean(levelElement.getChild("isCustom").getText());
+		Boolean levelIsCustom = Boolean.parseBoolean(levelElement.getChildText("isCustom"));
+		
+		Boolean levelIsAdded = Boolean.parseBoolean(levelElement.getChildText("isAddedToPlayer"));
 
 		// Construct level object
 		LevelModel loadLevel;
@@ -255,21 +262,24 @@ public class XMLHandler {
 										 loadBullpen,
 										 null,  // TODO figure out what to do for infinite bullpen
 										 loadBoard,
-										 levelIsCustom);
+										 levelIsCustom,
+										 levelIsAdded);
 		} else if (loadGameMode == 2) {
 			loadLevel =  new LightningLevel(countdown,
 										    nameElement.getText(),
 										    loadBullpen,
 										    null,  // TODO figure out what to do for infinite bullpen
 										    loadBoard,
-										    levelIsCustom);
+										    levelIsCustom,
+										    levelIsAdded);
 		} else if (loadGameMode == 3) {
 			loadLevel =  new ReleaseLevel(countdown,
 										  nameElement.getText(),
 										  loadBullpen,
 										  null,  // TODO figure out what to do for infinite bullpen
 										  loadBoard,
-										  levelIsCustom);
+										  levelIsCustom,
+										  levelIsAdded);
 		} else {
 			return null; // Invalid gameMode, can't load
 		}
@@ -330,7 +340,8 @@ public class XMLHandler {
 												   pbull,
 												   null,  // TODO figure out what to do for infinite bullpen
 												   pbor,
-												   false);
+												   false,
+												   true);
 					break;
 				case 1:  // Lightning levels
 					levels[i][j] = new LightningLevel(60,
@@ -338,7 +349,8 @@ public class XMLHandler {
 												   lbull,
 												   null,  // TODO figure out what to do for infinite bullpen
 												   lbor,
-												   false);
+												   false,
+												   true);
 					break;
 				case 2:  // Release levels
 					levels[i][j] = new ReleaseLevel(10,
@@ -346,12 +358,13 @@ public class XMLHandler {
 												   rbull,
 												   null,  // TODO figure out what to do for infinite bullpen
 												   rbor,
-												   false);
+												   false,
+												   true);
 					break;
 				}
 				
 				// Save the new level as xml
-				saveXML(levels[i][j], levels[i][j].levelName + ".xml", false);
+				saveXML(levels[i][j], levels[i][j].levelName + ".xml");
 			}
 		}
 	}
@@ -405,7 +418,8 @@ public class XMLHandler {
 						pbull,
 						null,  // TODO figure out what to do for infinite bullpen
 						pbor,
-						false);
+						false,
+						true);
 				break;
 			case 1:  // Lightning levels
 				testLevels[i] = new LightningLevel(60,
@@ -413,7 +427,8 @@ public class XMLHandler {
 						lbull,
 						null,  // TODO figure out what to do for infinite bullpen
 						lbor,
-						false);
+						false,
+						true);
 				break;
 			case 2:  // Release levels
 				testLevels[i] = new ReleaseLevel(10,
@@ -421,7 +436,8 @@ public class XMLHandler {
 						rbull,
 						null,  // TODO figure out what to do for infinite bullpen
 						rbor,
-						false);
+						false,
+						true);
 				break;
 			}
 		}

@@ -1,5 +1,7 @@
 package poseidon.entities;
 
+import poseidon.player.view.LevelView;
+
 /**
  *  The base class of a Kabasuji Level.
  *  
@@ -31,23 +33,27 @@ public abstract class LevelModel {
 	Board board;
 	/** Indicates if this Level is built-in or user-created. */
 	Boolean isCustom;
+	/** Indicates if this Level has been added to the player. */
+	Boolean isAddedToPlayer;
 	
 	
 	/**
 	 *  Constructor.
-	 * @param bullpen  the model of this Level's Bullpen
-	 * @param board  the model of this Level's Board
-	 * @param gameMode  the type of Level this is
-	 * @param levelName  the name of this Level
-	 * @param isCustom  true if the Level is user-created
+	 *  
+	 *  @param bullpen  the model of this Level's Bullpen
+	 *  @param board  the model of this Level's Board
+	 *  @param gameMode  the type of Level this is
+	 *  @param levelName  the name of this Level
+	 *  @param isCustom  true if the Level is user-created
 	 */
-	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode, String levelName, Boolean isCustom) {
+	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode, String levelName, Boolean isCustom, Boolean isAddedToPlayer) {
 		this.levelName = levelName;
 		this.playableBullpen = bullpen;
 		this.infiniteBullpen = infinite;
 		this.gameMode = gameMode;
 		this.board = board;
 		this.isCustom = isCustom;
+		this.isAddedToPlayer = isAddedToPlayer;
 	}
 	
 	
@@ -59,8 +65,25 @@ public abstract class LevelModel {
 		//TODO: change return value
 	}
 	
-	/** Start the level in a game-type-specific way. */
-	abstract void initialize();
+	/** 
+	 *  Start the level in a game-type-specific way.
+	 *  
+	 *  Given the rendering object so that if the implementing level needs
+	 *  to create game-type-specific controllers that can update the display
+	 *  they (the controllers) can do so.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public abstract void initialize(LevelView view);
+	
+	/** 
+	 *  Start the level in the builder.
+	 *  
+	 *  Should set the moves in such a way that moves can always be made.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public abstract void builderInitialize();
 	
 	/** @return  Whether the player reached 3 stars. */
 	abstract Boolean hasWon();
@@ -71,16 +94,21 @@ public abstract class LevelModel {
 	/** @return  The current score on this level. */
 	abstract int calculateScore();
 	
-	/** Returns the level to its starting state. */
-	abstract void reset();
-	
 
 	/** 
 	 *  Provides the game-type-specific limit for play.
 	 *  
-	 *  Override this in level subclasses to provide the maximum move or time limit.
+	 *  Override this in level subclasses to provide the current remaining move or time limit.
 	 */
 	public abstract int getLimit();
+	
+	
+	/** 
+	 *  Provides the game-type-specific allocated limit for play.
+	 *  
+	 *  Override this in level subclasses to provide the allocated move or time limit.
+	 */
+	public abstract int getMaxLimit();
 	
 	
 	/**
@@ -105,7 +133,7 @@ public abstract class LevelModel {
 	 *  Override this in level subclasses to set the maximum move or time limit.
 	 *  @param newLimit  the new limit
 	 */
-	public abstract void setLimit(int newLimit);	
+	public abstract void setMaxLimit(int newLimit);
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
@@ -113,6 +141,10 @@ public abstract class LevelModel {
 	public String getLevelName()
 	{
 		return levelName;
+	}
+	/** Set the level name. */
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
 	}
 	/** @return  The state of the level's infinite bullpen. */
 	public Bullpen getInfiniteBullpen()
@@ -143,5 +175,16 @@ public abstract class LevelModel {
 	public Boolean getIsCustom() {
 		return isCustom;
 	}
-
+	/** Set the custom level flag. */
+	public void setIsCustom(Boolean isCustom) {
+		this.isCustom = isCustom;
+	}
+	/** @return  Indicator of whether this level has been added to the player. */
+	public Boolean getIsAddedToPlayer() {
+		return isAddedToPlayer;
+	}
+	/** Set the added level flag. */
+	public void setIsAddedToPlayer(Boolean isAddedToPlayer) {
+		this.isAddedToPlayer = isAddedToPlayer;
+	}
 }

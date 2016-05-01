@@ -4,6 +4,8 @@ import javax.swing.Timer;
 
 import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
+import poseidon.player.controller.TimeController;
+import poseidon.player.view.LevelView;
 
 /**
  *  Implementation of LevelModel for Lightning levels in Kabasuji.
@@ -16,8 +18,6 @@ public class LightningLevel extends LevelModel{
 	int allottedTime;
 	/** The amount of time remaining in the level. */
 	int remainingTime;
-	/** The amount of time elapsed since the level began. */
-	int usedTime;
 	/** Timer for tracking time limit. */
 	Timer timer;
 
@@ -32,29 +32,65 @@ public class LightningLevel extends LevelModel{
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
-		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom);
+	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom, isAddedToPlayer);
 		this.allottedTime = allottedTime;
-		
 	}
 	
+	
+	/**
+	 *  Starts the timer.
+	 */
 	void startTimer() {
-		//TODO: Change return value
+		timer.start();
 	}
 	
-	void stopTimer () {
-		//TODO: Change return value
+	
+	/**
+	 *  Stops the timer.
+	 */
+	public void stopTimer () {
+		timer.stop();
 	}
 	
+	
+	/**
+	 *  Stops the timer and resets remaining time.
+	 */
 	void resetTimer() {
-		//TODO: Change return value
+		timer.stop();
+		remainingTime = allottedTime;
 	}
 	
-	void initialize() {
-		//TODO: Change return value
-		this.usedTime = 0;  // TODO does this count up to allotted time or down to 0 from allotted time?
+	
+	/**
+	 *  Begins the timer that signals the start of the level.
+	 *  
+	 *  @param view  the GUI representation of this
+	 */
+	public void initialize(LevelView view) {
 		this.remainingTime = allottedTime;
+		timer = new Timer(1000, new TimeController(this, view));
+		
+		startTimer();
 	}
+	
+	
+	/** 
+	 *  Start the level in the builder.
+	 *  
+	 *  Should set the moves in such a way that moves can always be made.
+	 *  This is achieved by setting remainingTime to Integer.MAX_VALUE, which
+	 *  should provide enough moves for any single level-building session. It
+	 *  also never starts the timer, so the limit here will always be preserved.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public void builderInitialize()
+	{
+		remainingTime = Integer.MAX_VALUE;
+	}
+	
 	
 	/**
 	 * Checks whether the player has achieved a perfect score.
@@ -100,8 +136,12 @@ public class LightningLevel extends LevelModel{
 	}
 	
 	
-	public void reset() {
-		//TODO: Change return value
+	/**
+	 *  Decreases the remaining time by one.
+	 */
+	public void decrementTime()
+	{
+		remainingTime--;
 	}
 	
 	
@@ -132,6 +172,13 @@ public class LightningLevel extends LevelModel{
 	}
 	
 	/** @return  The allotted time for this level. */
+	@Override
+	public int getMaxLimit()
+	{
+		return allottedTime;
+	}
+	
+	/** @return  The allotted time for this level. */
 	int getAllottedTime()
 	{
 		return allottedTime;
@@ -143,12 +190,6 @@ public class LightningLevel extends LevelModel{
 		return remainingTime;
 	}
 	
-	/** @return  Elapsed time. */
-	int getUsedTime()
-	{
-		return usedTime;
-	}
-	
 	/**
 	 *  Sets the allotted time.
 	 *  
@@ -158,15 +199,6 @@ public class LightningLevel extends LevelModel{
 	{
 		allottedTime = newTime;
 	}
-	/**
-	 *  Sets the elapsed time.
-	 *  
-	 *  @param newTime  time to set
-	 */
-	void setUsedTime(int newTime)
-	{
-		usedTime = newTime;
-	}
 	
 	/**
 	 *  Sets the allotted time limit.
@@ -174,7 +206,7 @@ public class LightningLevel extends LevelModel{
 	 *  @param newLimit  the new limit
 	 */
 	@Override
-	public void setLimit(int newLimit)
+	public void setMaxLimit(int newLimit)
 	{
 		allottedTime = newLimit;
 	}

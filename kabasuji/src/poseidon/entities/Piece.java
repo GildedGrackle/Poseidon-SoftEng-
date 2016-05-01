@@ -15,6 +15,12 @@ public class Piece {
 	/** The container that handles the moving and positioning the piece*/
 	PieceContainer container;
 	
+	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param piece  the Points that make up this Piece's shape
+	 */
 	public Piece(Point[] piece) {
 		Set<Point> myPoints = new HashSet<>(Arrays.asList(piece));
 		if (myPoints.size() != 6) {
@@ -24,14 +30,17 @@ public class Piece {
 		this.container = new PieceContainer (this, new Point(-1, -1));
 	}
 	
-	/**Constructor for random pieces
-	 * @return */
+	
+	/**
+	 *  Constructor for random pieces
+	 */
 	public Piece() {
 		PieceFactory factory = new PieceFactory();
 		this.piece = factory.getRandomPiece().getPiece();
 		this.container = new PieceContainer (this, new Point(-1, -1));
 	}
 
+	
 	/**
 	 * Finds the Bottom left point of the piece (even if isn't a part of it) and returns it.
 	 * 

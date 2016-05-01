@@ -25,6 +25,7 @@ import poseidon.common.view.ILevelView;
 import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.player.controller.EndLevelController;
 import poseidon.player.controller.LevelSelectController;
 import poseidon.player.controller.ResetController;
 
@@ -79,7 +80,7 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 	public LevelView(LevelPlayerModel model, LevelPlayerView view)
 	{
 		topModel = model;
-		this.model = topModel.getPlayingLevel();
+		this.model = topModel.getPlayingLevel().getLevel();
 		game = view;
 		setLayout(null);
 		
@@ -89,7 +90,7 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		levelTitle.setBackground(new Color(0, 191, 255));
 		levelTitle.setFont(new Font("Lucida Handwriting", Font.PLAIN, 35));
 		levelTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		levelTitle.setBounds(150, 0, 380, 75);
+		levelTitle.setBounds(155, 0, 380, 75);
 		add(levelTitle);
 		
 		bullpen = new BullpenView(this.model.getPlayableBullpen());
@@ -112,7 +113,7 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		
 		JPanel leftPanel = new JPanel();
 		leftPanel.setBackground(new Color(0, 191, 255));
-		leftPanel.setBounds(0, 0, 150, 615);
+		leftPanel.setBounds(0, 0, 155, 631);
 		add(leftPanel);
 		leftPanel.setLayout(null);
 		
@@ -132,11 +133,12 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		finishButton = new JButton("<html><center>Finish<br>Level</center></html>");
 		finishButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		finishButton.setBounds(10, 508, 130, 87);
+		finishButton.addActionListener(new EndLevelController(game));
 		leftPanel.add(finishButton);
 		
 		JPanel rightPanel = new JPanel();
 		rightPanel.setBackground(new Color(0, 191, 255));
-		rightPanel.setBounds(530, 0, 150, 615);
+		rightPanel.setBounds(535, 0, 155, 631);
 		add(rightPanel);
 		rightPanel.setLayout(null);
 		
@@ -167,7 +169,7 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		scoreLabel.setBounds(10, 250, 115, 25);
 		rightPanel.add(scoreLabel);
 		
-		scoreView = new ScoreView(this.model, this);
+		scoreView = new ScoreView(this.model);
 		scoreView.setBounds(10, 280, 115, 35);
 		rightPanel.add(scoreView);
 		

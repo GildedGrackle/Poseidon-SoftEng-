@@ -3,6 +3,7 @@ package poseidon.player.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.entities.XMLHandler;
@@ -54,13 +55,15 @@ public class ResetController implements ActionListener
 	 */
 	boolean resetLevel() {
 		// Reload the current level
-		LevelModel currentLevel = model.getPlayingLevel();
+		LevelContainer currentLevelContainer = model.getPlayingLevel();
+		LevelModel currentLevel = currentLevelContainer.getLevel();
 		LevelModel resetLevel = XMLHandler.loadXML(currentLevel.getLevelName() + ".xml",
 				currentLevel.getIsCustom(),
 				currentLevel.getIsCustom());
+		currentLevelContainer.setLevel(resetLevel);
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
-		model.setPlayingLevel(resetLevel);
+		model.setPlayingLevel(currentLevelContainer);
 		LevelView newScreen = new LevelView(model, game);
 
 		// Set new screen
@@ -70,6 +73,8 @@ public class ResetController implements ActionListener
 
 		// Display the new screen
 		game.getfrmKabasuji().setVisible(true);
+		model.getPlayingLevel().getLevel().initialize(newScreen);
+		newScreen.modelUpdated();  // To show initial time in Lightning levels
 		
 		return true;
 	}

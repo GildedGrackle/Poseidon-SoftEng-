@@ -9,7 +9,9 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
+import poseidon.builder.controller.AddToGameController;
 import poseidon.builder.controller.BackBuilderController;
+import poseidon.builder.controller.DeleteLevelController;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 
@@ -50,6 +52,7 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	/**
 	 *  Constructor.
 	 * 
+	 *  @param model  the top-level object representing the application's state
 	 *  @param view  the previous screen, the one returned to by "Back" button
 	 */
 	public EditLevelView(LevelBuilderModel model, LevelBuilderView view)
@@ -111,12 +114,6 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		notGRlsLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		notGRlsLabel.setBounds(25, 480, 160, 30);
 		add(notGRlsLabel);
-		
-		editButton = new JButton("Edit");
-		editButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		editButton.setBounds(505, 580, 120, 45);
-		editButton.setEnabled(false);  // Initially not usable
-		add(editButton);
 
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -125,15 +122,23 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 				new BackBuilderController(model, application));
 		add(backButton);
 		
+		editButton = new JButton("Edit");
+		editButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+		editButton.setBounds(505, 580, 120, 45);
+		editButton.setEnabled(false);  // Initially not usable
+		add(editButton);
+		
 		addButton = new JButton("Add to Game");
 		addButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		addButton.setEnabled(false);  // Initially not usable
 		addButton.setBounds(315, 580, 165, 45);
+		addButton.addActionListener(new AddToGameController(selectedLevel));
+		addButton.setEnabled(false);  // Initially not usable
 		add(addButton);
 		
 		deleteButton = new JButton("Delete");
 		deleteButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		deleteButton.setBounds(170, 580, 120, 45);
+		deleteButton.addActionListener(new DeleteLevelController(selectedLevel));
 		deleteButton.setEnabled(false);  // Initially not usable
 		add(deleteButton);
 		
@@ -154,13 +159,15 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	 *  
 	 *  Updates when Levels are deleted, when Levels are added to the game,
 	 *  or when Levels are removed from the game.
+	 *  
+	 *  @return  Indicator of whether the operation completed successfully.
 	 */
 	@Override
 	public Boolean modelUpdated()
 	{
 		addedLevels.modelUpdated();
 		savedLevels.modelUpdated();
-		return false;
+		return true;
 	}
 	
 	
@@ -174,6 +181,9 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	}
 	
 	
+	/**
+	 *  Enables the delete level, edit level, and add level to game buttons.
+	 */
 	public void enableButtons()
 	{
 		deleteButton.setEnabled(true);
@@ -182,6 +192,11 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	}
 	
 	
+	/**
+	 *  Sets the selected level.
+	 *  
+	 *  @param newLevel  the new selected level
+	 */
 	public void setSelectedLevel(LevelContainer newLevel)
 	{
 		this.selectedLevel = newLevel;
