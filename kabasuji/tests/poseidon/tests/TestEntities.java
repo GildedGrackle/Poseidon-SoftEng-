@@ -445,7 +445,7 @@ public class TestEntities extends TestCase{
 		LevelContainer testLevel = testLevels.get(0).get(0);
 		
 		testPlayer.setPlayingLevel(testLevel);
-		assertEquals(testLevel.getLevel(), testPlayer.getPlayingLevel());
+		assertEquals(testLevel.getLevel(), testPlayer.getPlayingLevel().getLevel());
 	}
 
 	public void testPieceFactory(){

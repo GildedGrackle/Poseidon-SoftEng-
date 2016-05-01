@@ -122,7 +122,7 @@ public class TestPlayerBtnControllers extends TestCase{
 		ActionEvent	playPress = buttonPress(button);
 		playSelect.actionPerformed(playPress);
 		
-		assertEquals(model.getPlayingLevel(), lvlContainer.getLevel());
+		assertEquals(model.getPlayingLevel(), lvlContainer);
 		
 	}
 	
