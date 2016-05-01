@@ -74,6 +74,8 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 	ScoreView scoreView;
 	/** The current move/time limit for the Level. */
 	JLabel limitView;
+	/** Images for the rotate button Icons*/ 
+	Image rotateCW, rotateCCW;
 
 	/**
 	 *  Constructor.
@@ -146,22 +148,23 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		add(rightPanel);
 		rightPanel.setLayout(null);
 		
-		rotateCCWButton = new JButton("<");
+		rotateCCWButton = new JButton("");
 		rotateCCWButton.setBounds(10, 160, 45, 45);
 		rotateCCWButton.addActionListener(new RotateCCWController(bullpen));
 		rightPanel.add(rotateCCWButton);
 		
-		Image img;
-		try {
-			img = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCCW.png"));
-			rotateCCWButton.setIcon(new ImageIcon(img));
-		} catch (IOException e) {
-		}
-		
-		rotateCWButton = new JButton(">");
+		rotateCWButton = new JButton("");
 		rotateCWButton.setBounds(93, 160, 45, 45);
 		rotateCWButton.addActionListener(new RotateCWController(bullpen));
 		rightPanel.add(rotateCWButton);
+
+		try {
+			rotateCCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCCW.png"));
+			rotateCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCW.png"));
+			rotateCCWButton.setIcon(new ImageIcon(rotateCCW));
+			rotateCWButton.setIcon(new ImageIcon(rotateCW));
+		} catch (IOException e) {
+		}
 		
 		flipHButton = new JButton("<html><center>Horizontal<br>Flip</center></html>");
 		flipHButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
