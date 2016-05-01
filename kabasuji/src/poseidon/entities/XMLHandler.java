@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class XMLHandler {
 	
 	/** These are what the filenames are appended onto for saving and loading. */
-	static String stockDirectory = "StockLevels/";
-	static String customDirectory = "CustomLevels/";
+	public static String stockDirectory = "StockLevels/";
+	public static String customDirectory = "CustomLevels/";
 
 	/** Unnecessary, should just call the static methods directly. */
 	public XMLHandler() {};

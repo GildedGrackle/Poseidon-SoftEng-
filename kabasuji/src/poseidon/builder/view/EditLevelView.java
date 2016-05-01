@@ -9,7 +9,9 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
+import poseidon.builder.controller.AddToGameController;
 import poseidon.builder.controller.BackBuilderController;
+import poseidon.builder.controller.DeleteLevelController;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 
@@ -128,13 +130,15 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		
 		addButton = new JButton("Add to Game");
 		addButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		addButton.setEnabled(false);  // Initially not usable
 		addButton.setBounds(315, 580, 165, 45);
+		addButton.addActionListener(new AddToGameController(selectedLevel));
+		addButton.setEnabled(false);  // Initially not usable
 		add(addButton);
 		
 		deleteButton = new JButton("Delete");
 		deleteButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		deleteButton.setBounds(170, 580, 120, 45);
+		deleteButton.addActionListener(new DeleteLevelController(selectedLevel));
 		deleteButton.setEnabled(false);  // Initially not usable
 		add(deleteButton);
 		
