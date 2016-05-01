@@ -53,7 +53,7 @@ public class RowSizeController implements PropertyChangeListener
 		int oldVal = (int) evt.getOldValue();
 		int newVal = (int) evt.getNewValue();
 		int colVal = (int) view.getColSizeInput().getValue();
-		ResizeBoardMove move = new ResizeBoardMove(view.getBoard(), oldVal, colVal, newVal, colVal);
+		ResizeBoardMove move = new ResizeBoardMove(view.getBoard().getBoard(), oldVal, colVal, newVal, colVal);
 		if(move.doMove())  // If move succeeds
 		{
 			// Then record it and indicate success

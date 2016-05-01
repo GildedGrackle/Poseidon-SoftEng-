@@ -11,6 +11,8 @@ import poseidon.entities.PieceContainer;
  * @author Jacob Wennersten
  */
 public class Board {
+	/**type of board. 1-Puzzle, 2-Lightning, 3-bullpen. Regardless of builder/player*/
+	int type;
 	/** Largest amount of rows, set for convenience and optional future modification. */
 	public static final int MAXROWS = 12;
 	/** Largest amount of columns, set for convenience and optional future modification. */
@@ -42,6 +44,17 @@ public class Board {
 		this.playArea = playArea;
 		pieces = new ArrayList<PieceContainer>();
 		this.logic = logic;
+		
+		//Might be a little complicated, but determines the "type" of board. Mostly needed to deal with builder boards
+		if (logic instanceof PuzzleBoardLogic) { type = 1; }
+		else if (logic instanceof LightningBoardLogic) { type = 2;}
+		else if (logic instanceof ReleaseBoardLogic) {type = 3;}
+		else if (logic instanceof BuilderBoardLogic) {
+			if (playArea[0][0] instanceof PuzzleSquare) { type = 1; }
+			else if (playArea[0][0] instanceof LightningSquare) { type = 2; }
+			else if (playArea[0][0] instanceof ReleaseSquare) { type = 3; }
+		}
+		
 	}
 	
 	
@@ -117,7 +130,36 @@ public class Board {
 		return shouldRemove;
 		
 	}
+	
+	/**
+	 * Resizes the board to the requested size.
+	 * 
+	 * NOTE: Checks for validity while making the move itself. Nothing should be calling this function
+	 * except ResizeBoardMove.
+	 * @param newRow
+	 * @param newCol - The sizes that the board needs to be resized to
+	 */
+	void resizeBoard (int newRow, int newCol){
+		int smallRow = 0, smallCol = 0;
+		Square [] [] newBoard = new Square [newRow] [newCol];
 		
+		if(newRow>this.getRows()){ smallRow = this.getRows();}
+		else smallRow = newRow;
+		if(newCol>this.getCols()){ smallCol = this.getCols();}
+		else smallCol = newCol;
+		//Checks for the smallest board size that is copied over. 
+		
+		for (int i=0; i<smallRow; i++){
+			for (int j=0; j<smallCol; j++) {
+				newBoard[i][j] =  playArea[i][j];
+			}
+		}	
+		playArea = newBoard;
+	}
+	
+	void setBoard(Square [] [] newBoard){		
+		this.playArea = newBoard;
+	}
 	
 	/**
 	 * Deals with selected squares depending on the type.
@@ -132,7 +174,22 @@ public class Board {
 	 */
 	public Boolean selectSquare (int row, int col) {
 		if (logic instanceof BuilderBoardLogic) {
-			//TODO toggle squares on/off
+			Square square = playArea [row][col];
+			if(square instanceof NonplayableSquare) {
+				switch (type){
+				case 1:
+					playArea [row][col] = new PuzzleSquare(false);
+					break;
+				case 2:
+					playArea [row][col] = new LightningSquare(false);
+					break;
+				case 3:
+					playArea [row][col] = new ReleaseSquare(false, null); //release number set to null until updated
+					break;
+				}
+			}
+			//set to nonplayable
+			else { playArea [row][col] = new NonplayableSquare();}
 			return true;
 		}
 		PieceContainer piece = findPiece(row,col);
@@ -197,6 +254,11 @@ public class Board {
 	/** @return  The entire play area (both playable and unplayable squares). */
 	public Square[][] getPlayArea (){
 		return this.playArea;
+	}
+	
+	/**@return the logic of the board.*/
+	public IBoardLogic getLogic() {
+		return logic;
 	}
 	
 	
