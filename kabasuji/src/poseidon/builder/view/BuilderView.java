@@ -101,7 +101,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	{
 		this.topmodel = model;
 		application = view;
-		this.model = topmodel.getBuildingLevel().getLevel();
+		this.model = topmodel.getBuildingLevel();
 		
 		initialize();
 	}
@@ -245,7 +245,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		resetButton = new JButton("Reset");
 		resetButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		resetButton.setBounds(15, 370, 110, 55);
-		//quitButton.addActionListener(new ResetBuilderController(topmodel, application));
+		resetButton.addActionListener(new ResetBuilderController(topmodel, application));
 		add(resetButton);
 		
 		quitButton = new JButton("Quit");

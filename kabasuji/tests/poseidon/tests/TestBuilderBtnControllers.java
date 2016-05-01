@@ -69,8 +69,8 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 	CancelEditController cancelBullEdit;
 		
 	private ActionEvent buttonPress(Component button) {
-		return new ActionEvent(button, 0, getName() );
-		}
+		return new ActionEvent(button, 0, "" );
+	}
 		
 		public void setUp(){
 			model = new LevelBuilderModel();
@@ -179,7 +179,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			 
 			editBullpenView = new EditPlayableBullpenView(view);
 			
-			setBullpenController = new SetBullpenController(view, editBullpenView, model.getBuildingLevel().getLevel().getPlayableBullpen());
+			setBullpenController = new SetBullpenController(view, editBullpenView, model.getBuildingLevel().getPlayableBullpen());
 			
 			editBullpenView.getPieceCountsPanel().getInputs()[0].setValue(4);
 			
@@ -188,7 +188,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			setBullpenController.actionPerformed(doneEditing);
 			
 			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
-			assertEquals(model.getBuildingLevel().getLevel().getPlayableBullpen().getSize(), 4);
+			assertEquals(model.getBuildingLevel().getPlayableBullpen().getSize(), 4);
 			
 			button = builderView.getSetPlayBull();
 			editBullpenScreen.actionPerformed(setBullpen);
@@ -201,7 +201,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			cancelBullEdit.actionPerformed(cancelEditing);
 			
 			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
-			assertEquals(model.getBuildingLevel().getLevel().getPlayableBullpen().getSize(), 4);
+			assertEquals(model.getBuildingLevel().getPlayableBullpen().getSize(), 4);
 			
 		}
 		
@@ -216,13 +216,13 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 			BuilderView builderView = new BuilderView(model, view);
 			
-			PieceContainer selectedPiece = model.getBuildingLevel().getLevel().getInfiniteBullpen().getPiece(1);
+			PieceContainer selectedPiece = model.getBuildingLevel().getInfiniteBullpen().getPiece(1);
 		
-			model.getBuildingLevel().getLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
+			model.getBuildingLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
 			PieceView selectedPieceView = builderView.getBullpen().getPieceView(1);
 			builderView.getBullpen().setSelectedPiece(selectedPieceView); 
 			
-			BoardController boardController = new BoardController(model.getBuildingLevel().getLevel() , builderView);
+			BoardController boardController = new BoardController(model.getBuildingLevel() , builderView);
 			
 			MouseEvent movePiece = createBuilderMoved(builderView, builderView.getBoard(), 0, 0);
 			boardController.mouseMoved(movePiece);
@@ -232,7 +232,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			MouseEvent pressed = createBuilderPress(builderView, builderView.getBoard(), 0, 0);
 			boardController.mousePressed(pressed);
 			
-			assertTrue(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
+			assertTrue(model.getBuildingLevel().getBoard().getPieces().contains(selectedPiece));
 			assertEquals(builderView.getBoard().getActiveDragging(), null);
 			
 			UndoController undo = new UndoController(builderView);
@@ -242,7 +242,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 			undo.actionPerformed(newUndo);
 			
-			assertFalse(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
+			assertFalse(model.getBuildingLevel().getBoard().getPieces().contains(selectedPiece));
 			
 			RedoController redo = new RedoController(builderView);
 			
@@ -250,7 +250,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			ActionEvent newRedo = buttonPress(button);
 			redo.actionPerformed(newRedo);
 			
-			assertTrue(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
+			assertTrue(model.getBuildingLevel().getBoard().getPieces().contains(selectedPiece));
 			assertEquals(builderView.getBoard().getActiveDragging(), null);
 			
 		}
@@ -266,16 +266,16 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 			BuilderView builderView = new BuilderView(model, view);
 			
-			BoardController boardController = new BoardController(model.getBuildingLevel().getLevel() , builderView);
+			BoardController boardController = new BoardController(model.getBuildingLevel() , builderView);
 			
 			MouseEvent doubleClick = createDoubleClicked(builderView, builderView.getBoard(), 0, 0);
 			boardController.mouseClicked(doubleClick);
 			
-			assertEquals(model.getBuildingLevel().getLevel().getBoard().getSquare(0, 0).getType(), -1);
+			assertEquals(model.getBuildingLevel().getBoard().getSquare(0, 0).getType(), -1);
 			
 			boardController.mouseClicked(doubleClick);
 			
-			assertEquals(model.getBuildingLevel().getLevel().getBoard().getSquare(0, 0).getType(), LevelModel.PUZZLE);
+			assertEquals(model.getBuildingLevel().getBoard().getSquare(0, 0).getType(), LevelModel.PUZZLE);
 			
 		}
 
