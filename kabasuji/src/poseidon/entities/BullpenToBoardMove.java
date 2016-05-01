@@ -10,23 +10,23 @@ import poseidon.common.view.PieceView;
  * @author Alex Titus
  */
 public class BullpenToBoardMove implements IMove{
-	/** The Level, containing the score, Bullpen, and Board. */
+	/** The level, containing the score, bullpen, and board. */
 	LevelModel game;
-	/** The Piece being moved. */
+	/** The piece being moved. */
 	PieceContainer piece;
-	/** The location on the Board the Piece's anchor point is being moved to. */
+	/** The location on the board the piece's anchor point is being moved to. */
 	Point location;
 	/** The GUI representation of the Level. */
 	ILevelView view;
-	/** The color represenation of the Piece being moved. */
+	/** The color represenation of the piece being moved. */
 	PieceView draggedPiece;
-	/** The functioning of the board, game mode/builder. */
-	IBoardLogic logic;	
+	/** The index of the piece in the bullpen. */
+	int index;
 	
 	
 	/**
 	 *  Constructor.
-	 * @param game  the Level
+	 * @param view  the Level
 	 * @param view  the GUI of the Level
 	 * @param piece  Piece to place on Board
 	 * @param location  location Piece is intended to be moved to
@@ -37,6 +37,7 @@ public class BullpenToBoardMove implements IMove{
 		this.location = location;
 		this.view = view;
 		this.draggedPiece = view.getBullpen().getSelectedPiece();
+		this.index = view.getBullpen().getModel().getPieces().indexOf(piece);
 	}
 	
 	
@@ -44,6 +45,8 @@ public class BullpenToBoardMove implements IMove{
 	 *  Move is validated according to game mode.
 	 *  
 	 *  Valid if Piece is entirely on playable Squares and any game-type-specific logic.
+	 *  
+	 *  @return  Indicator of whether operation completed successfully.
 	 */
 	public Boolean isValid() {
 		
@@ -86,7 +89,7 @@ public class BullpenToBoardMove implements IMove{
 			// If remove was unsuccessful
 			if(!(successRemove))
 			{
-				//
+				// Then nothing selected in the bullpen
 				view.getBullpen().setSelectedPiece(null);
 				
 				return true;
@@ -115,9 +118,10 @@ public class BullpenToBoardMove implements IMove{
 			game.getBoard().removePiece(piece);
 			view.getBoard().removePiece(draggedPiece);
 			piece.setLocation(new Point(-1, -1));
-			view.getBullpen().getModel().addPiece(piece);
-			view.getBullpen().addPiece(draggedPiece);
+			view.getBullpen().getModel().addPieceAt(piece, index);
+			view.getBullpen().addPieceAt(draggedPiece, index);
 			view.getBullpen().setSelectedPiece(draggedPiece);
+			piece.setIsSelected(true);
 			game.incrementLimit();
 			return true;
 		}

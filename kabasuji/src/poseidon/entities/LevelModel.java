@@ -1,5 +1,7 @@
 package poseidon.entities;
 
+import poseidon.player.view.LevelView;
+
 /**
  *  The base class of a Kabasuji Level.
  *  
@@ -59,8 +61,16 @@ public abstract class LevelModel {
 		//TODO: change return value
 	}
 	
-	/** Start the level in a game-type-specific way. */
-	abstract void initialize();
+	/** 
+	 *  Start the level in a game-type-specific way.
+	 *  
+	 *  Given the rendering object so that if the implementing level needs
+	 *  to create game-type-specific controllers that can update the display
+	 *  they (the controllers) can do so.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public abstract void initialize(LevelView view);
 	
 	/** @return  Whether the player reached 3 stars. */
 	abstract Boolean hasWon();

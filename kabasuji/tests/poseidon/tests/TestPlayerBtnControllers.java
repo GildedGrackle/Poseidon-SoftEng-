@@ -52,7 +52,8 @@ public class TestPlayerBtnControllers extends TestCase{
 		testLevel = XMLHandler.getTestLevels()[2];
 		int[] currentLvl = new int[]{
 				1, 1, 1};
-		model = new LevelPlayerModel(currentLvl, testLevel);
+		lvlContainer = new LevelContainer("puzzle0.xml", 0, 0, testLevel, 0);
+		model = new LevelPlayerModel(currentLvl, lvlContainer);
 		view = new LevelPlayerView(model);
 		current = new int[3];
 		controller = new AboutPlayerController(model, view);
@@ -63,7 +64,6 @@ public class TestPlayerBtnControllers extends TestCase{
 		lvlSelectView = new LevelSelectView(model, view);
 		playSelect = new PlaySelectedController(model, lvlSelectView, view);
 		selectLevel = new SelectLevelController(lvlSelectView);
-		lvlContainer = new LevelContainer("puzzle0.xml", 0, 0, testLevel, 0);
 	}
 	
 	

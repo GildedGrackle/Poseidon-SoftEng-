@@ -21,8 +21,8 @@ public class LevelPlayerModel {
 	/** Where the player is on each mode: 1 - Puzzle, 2 - Lightning, 3 - Release .
 	 *  Zero-based (0 means level 1 is unlocked but not others) */
 	int[] currentLevel = new int[NUM_GAMEMODES];
-	/** The level being currently played. */
-	LevelModel playingLevel;
+	/** The level (container) being currently played. */
+	LevelContainer playingLevel;
 	
 	
 	
@@ -31,7 +31,7 @@ public class LevelPlayerModel {
 	 * @param current  designates player progress in each mode: 1 - Puzzle, 2 - Lightning, 3 - Release
 	 * @param playing  reference to level currently being played; can be null if no level is being played
 	 */
-	public LevelPlayerModel (int[] current, LevelModel playing) {
+	public LevelPlayerModel (int[] current, LevelContainer playing) {
 		this.currentLevel = current;
 		this.playingLevel = playing;
 		
@@ -93,8 +93,8 @@ public class LevelPlayerModel {
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/** @return  The LevelModel currently being played. */
-	public LevelModel getPlayingLevel()
+	/** @return  The LevelContainer for the level currently being played. */
+	public LevelContainer getPlayingLevel()
 	{
 		return playingLevel;
 	}
@@ -109,11 +109,11 @@ public class LevelPlayerModel {
 		return levels;
 	}
 	/** 
-	 *  Sets the level currently being played.
+	 *  Sets the level (container) currently being played.
 	 *  
-	 *  @param newLevel  the new level
+	 *  @param newLevel  the new level container
 	 */
-	public void setPlayingLevel(LevelModel newLevel)
+	public void setPlayingLevel(LevelContainer newLevel)
 	{
 		playingLevel = newLevel;
 	}

@@ -6,6 +6,7 @@ import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 import poseidon.entities.LevelModel;
 import poseidon.entities.Square;
+import poseidon.player.view.LevelView;
 
 /**
  *  Implementation of LevelModel for Release levels in Kabasuji.
@@ -36,8 +37,6 @@ public class ReleaseLevel extends LevelModel{
 	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
 		super(bullpen, infinite, board, RELEASE, levelName, isCustom);
 		this.allottedMoves = allottedMoves;
-		
-		initialize();
 	}
 	
 	void markNumber(int color, int number, Square square) {	 //Not sure
@@ -80,11 +79,14 @@ public class ReleaseLevel extends LevelModel{
 	
 	
 	/**
-	 *  TODO ReleaseLevel.initialize() finished?
+	 *  Sets the remaining moves, which signals the start of the game.
+	 *  
+	 *  @param view  the GUI representation of this, unused
 	 */
-	void initialize() {
+	public void initialize(LevelView view) {
 		movesRemaining = allottedMoves;
 	}
+	
 	
 	/**
 	 * Checks whether the player has achieved a perfect score.

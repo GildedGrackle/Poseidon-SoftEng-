@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.ColSizeController;
-import poseidon.builder.controller.EditPlayableBullpenController;
+import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.LimitController;
 import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.ResetBuilderController;
@@ -192,7 +192,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		
 		editPlayBullpenButton = new JButton("Choose Pieces");
 		editPlayBullpenButton.setBounds(555, 450, 110, 90);
-		editPlayBullpenButton.addActionListener(new EditPlayableBullpenController(application));
+		editPlayBullpenButton.addActionListener(new ToEditPlayableBullpenController(application));
 		add(editPlayBullpenButton);
 		
 		undoButton = new JButton("Undo");
