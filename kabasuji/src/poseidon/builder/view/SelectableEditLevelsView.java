@@ -14,6 +14,13 @@ import poseidon.entities.LevelContainer;
 import poseidon.player.controller.SelectLevelController;
 import poseidon.player.view.StarView;
 
+/**
+ *  Creates a panel containing selectable icons representing all custom-made
+ *  levels that have either been added to the game or are have only been saved.
+ *  
+ *  @author Alex Titus
+ *
+ */
 public class SelectableEditLevelsView extends JPanel implements Scrollable
 {
 	/** The height of a level icon */
@@ -95,15 +102,27 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	}
 	
 	
+	/**
+	 *  Update the display when the underlying model has changed.
+	 */
 	public void modelUpdated()
 	{
-		// TODO
+		resetSelectColors();
 	}
 	
 	
+	/**
+	 *  Sets all EditLevelIcons to have Color.cyan backgrounds.
+	 */
 	public void resetSelectColors()
 	{
-		
+		for(EditLevelIcon[] type : buttons)
+		{
+			for(EditLevelIcon icon : type)
+			{
+				icon.setBackground(Color.cyan);
+			}
+		}
 	}
 	
 	

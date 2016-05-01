@@ -11,7 +11,7 @@ import poseidon.builder.view.LevelBuilderView;
  *  
  *  @author Alex Titus
  */
-public class EditPlayableBullpenController implements ActionListener
+public class ToEditPlayableBullpenController implements ActionListener
 {
 	/** The top-level GUI object. */
 	LevelBuilderView view;
@@ -22,7 +22,7 @@ public class EditPlayableBullpenController implements ActionListener
 	 *  
 	 *  @param view  the top-level GUI object
 	 */
-	public EditPlayableBullpenController(LevelBuilderView view)
+	public ToEditPlayableBullpenController(LevelBuilderView view)
 	{
 		this.view = view;
 	}

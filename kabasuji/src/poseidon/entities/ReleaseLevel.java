@@ -6,6 +6,7 @@ import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 import poseidon.entities.LevelModel;
 import poseidon.entities.Square;
+import poseidon.player.view.LevelView;
 
 /**
  *  Implementation of LevelModel for Release levels in Kabasuji.
@@ -18,7 +19,7 @@ public class ReleaseLevel extends LevelModel{
 	/** The number of moves to start the level with. */
 	int allottedMoves;
 	/** The number of moves remaining in this level. */
-	int movesRemaining;
+	int remainingMoves;
 	/** Stores of numbers collected during gameplay. */
 	Set<Integer> redNumbers, greenNumbers, yellownumbers;
 	
@@ -33,11 +34,9 @@ public class ReleaseLevel extends LevelModel{
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
-		super(bullpen, infinite, board, RELEASE, levelName, isCustom);
+	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+		super(bullpen, infinite, board, RELEASE, levelName, isCustom, isAddedToPlayer);
 		this.allottedMoves = allottedMoves;
-		
-		initialize();
 	}
 	
 	void markNumber(int color, int number, Square square) {	 //Not sure
@@ -54,7 +53,7 @@ public class ReleaseLevel extends LevelModel{
 	 */
 	@Override
 	public void decrementLimit() {
-		movesRemaining--;
+		remainingMoves--;
 	}
 	
 	
@@ -63,7 +62,7 @@ public class ReleaseLevel extends LevelModel{
 	 */
 	@Override
 	public void incrementLimit() {
-		movesRemaining++;
+		remainingMoves++;
 	}
 	
 	
@@ -73,18 +72,36 @@ public class ReleaseLevel extends LevelModel{
 	 *  @param newLimit  the new limit
 	 */
 	@Override
-	public void setLimit(int newLimit)
+	public void setMaxLimit(int newLimit)
 	{
 		allottedMoves = newLimit;
 	}
 	
 	
 	/**
-	 *  TODO ReleaseLevel.initialize() finished?
+	 *  Sets the remaining moves, which signals the start of the game.
+	 *  
+	 *  @param view  the GUI representation of this, unused
 	 */
-	void initialize() {
-		movesRemaining = allottedMoves;
+	public void initialize(LevelView view) {
+		remainingMoves = allottedMoves;
 	}
+	
+	
+	/** 
+	 *  Start the level in the builder.
+	 *  
+	 *  Should set the moves in such a way that moves can always be made.
+	 *  This is achieved by setting remainingMoves to Integer.MAX_VALUE, which
+	 *  should provide enough moves for any single level-building session.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public void builderInitialize()
+	{
+		remainingMoves = Integer.MAX_VALUE;
+	}
+	
 	
 	/**
 	 * Checks whether the player has achieved a perfect score.
@@ -101,7 +118,15 @@ public class ReleaseLevel extends LevelModel{
 	@Override
 	public int getLimit()
 	{
-		return movesRemaining;
+		return remainingMoves;
+	}
+	
+	
+	/** @return  The allotted moves for this level. */
+	@Override
+	public int getMaxLimit()
+	{
+		return allottedMoves;
 	}
 	
 
@@ -157,11 +182,5 @@ public class ReleaseLevel extends LevelModel{
 		
 		return passed;
 	}
-
-	@Override
-	void reset()
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

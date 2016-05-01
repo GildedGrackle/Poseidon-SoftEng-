@@ -67,40 +67,52 @@ public class Bullpen {
 	
 	
 	/**
-	 *  Removes the given Piece from the Bullpen.
+	 *  Removes the given piece from the bullpen.
 	 *  
 	 *  Performs game-mode-specific operations in addition to removing
-	 *  the Piece.
+	 *  the piece.
 	 *  
-	 * @param piece  the Piece to remove
-	 * @return an indicator of whether the operation completed successfully
+	 * @param piece  the piece to remove
+	 * @return  An indicator of whether the operation modified the bullpen.
 	 */
-	public boolean removePiece (PieceContainer piece) {	
-		boolean shouldRemove = logic.shouldRemovePiece(this, piece) 
-				&& pieces.contains(piece);
-		if (shouldRemove) {
-			pieces.remove(piece);
-			logic.afterPiece(this);
+	public Boolean removePiece (PieceContainer piece) {	
+		if(pieces.remove(piece))
+		{
+			logic.afterPieceRemoved(this, piece);
+			return true;
 		}
-		return shouldRemove;
+		return false;
 	}
 	
+	
 	/**
-	 *  Adds given Piece to the Bullpen.
+	 *  Adds given piece to the bullpen.
 	 *  
-	 * @param piece  the Piece to add
-	 * @return an indicator of whether the operation completed successfully
+	 * @param piece  the piece to add
+	 * @return  An indicator of whether the operation modified the bullpen.
 	 */
-	public boolean addPiece (PieceContainer piece) {
-		 boolean shouldAdd = logic.shouldAddPiece(this, piece);
-		 if (shouldAdd) {
-			 pieces.add(piece);
-		 }
-		 return shouldAdd;
+	public Boolean addPiece (PieceContainer piece) {		 
+		 return pieces.add(piece);
+	}
+	
+	
+	/**
+	 *  Returns a given piece to the bullpen at given index.
+	 *  
+	 *  Should only be called by the bullpen logic.
+	 *  
+	 * @param piece  the piece to add
+	 * @param index  the index of this piece, must be within bounds
+	 * @return  Indicator of whether the bullpen now contains that piece.
+	 */
+	boolean addPieceAt(PieceContainer piece, int index) {
+		pieces.add(index, piece);
+		
+		return pieces.contains(piece);
 	}
 	
 
-	/** Returns the number of Pieces in the Bullpen. */
+	/** @return The number of pieces in the bullpen. */
 	public int getSize()
 	{
 		return pieces.size();
@@ -108,31 +120,32 @@ public class Bullpen {
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/** Returns the list of Pieces in the Bullpen. */
+	/** @return The list of pieces in the bullpen. */
 	public ArrayList<PieceContainer> getPieces()
 	{
 		return pieces;
 	}
-	/** Returns the Piece that is currently selected in the Bullpen. */
+	/** @return The piece that is currently selected in the bullpen. */
 	public PieceContainer getPieceSelected()
 	{
 		return pieceSelected;
 	}
 	
-	/** Returns the Piece contained at index. */
+	/** @return The piece contained at index. */
 	public PieceContainer getPiece(int index) {
 		return pieces.get(index);
 	}
-	/** Returns the index of the given Piece. */
+	
+	/** @return The index of the given Piece. */
 	public int getLocation(PieceContainer piece){
 		return pieces.indexOf(piece);
 	}
 	
 	/** 
-	 *  Sets the given Piece as the currently selected Piece.
+	 *  Sets the given piece as the currently selected piece.
 	 *  
-	 *  Sets the given Piece as selected, and will replace any
-	 *  currently selected Piece with the given one.
+	 *  Sets the given piece as selected, and will replace any
+	 *  currently selected piece with the given one.
 	 *  
 	 *  @param pieceSelected  the new piece to select, or null to deselect all
 	 */

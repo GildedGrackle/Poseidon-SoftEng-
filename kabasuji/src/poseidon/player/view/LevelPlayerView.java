@@ -15,47 +15,45 @@ import poseidon.player.controller.ContinueController;
 import poseidon.player.controller.ExitPlayerController;
 import poseidon.player.controller.LevelSelectController;
 
+/**
+ *  The top-level GUI object, containing the application frame (window).
+ *  
+ *  It also creates the main menu.
+ *  
+ *  @author Alex Titus
+ */
 public class LevelPlayerView
 {
-	LevelPlayerModel model;  // The state of the game
-	JFrame kabasuji;  // The frame holding the screens
-	JPanel mainMenu;  // The panel containing the menu buttons
-	JButton continueGameButton;  // Goes to most recently unlocked Level
-	JButton levelSelectButton;  // Goes to the Level Select screen
-	JButton customLevelsButton;  // Goes to the Custom Level Select screen
-	JButton aboutButton;  // Goes to the About page
-	JButton exitButton;  // Closes the application
-	IGameScreen currentView;  // The current screen displayed in the frame (besides this one)
-//	LevelPlayerModel model;  // The top-level entity object, representing the game
+	/** The top-level entity object, representing the game. */
+	LevelPlayerModel model;
+	/** The frame holding the screens. */
+	JFrame kabasuji;
+	/** The panel containing the menu buttons. */
+	JPanel mainMenu;
+	/** Goes to most recently unlocked Level. */
+	JButton continueGameButton;
+	/** Goes to the Level Select screen. */
+	JButton levelSelectButton;
+	/** Goes to the Custom Level Select screen. */
+	JButton customLevelsButton;
+	/** Goes to the About page. */
+	JButton aboutButton;
+	/** Closes the application. */
+	JButton exitButton;
+	/** The current screen displayed in the frame (besides this one). */
+	IGameScreen currentView;
 
 
 	/**
-	 * Create the application.
+	 *  Constructor.
+	 * 
+	 *  @param model  the top-level application-state object
 	 */
 	public LevelPlayerView(LevelPlayerModel model){
 		
 		this.model = model;
 		kabasuji = new JFrame();
 		initialize();
-	}
-	
-	
-	/***********************
-	 *  Getters & Setters  *
-	 ***********************/
-	public JFrame getfrmKabasuji()
-	{
-		return kabasuji;
-	}
-	
-	public void setCurrentView(IGameScreen newScreen)
-	{
-		currentView = newScreen;
-	}
-	
-	public IGameScreen getCurrentView()
-	{
-		return currentView; 
 	}
 	
 	
@@ -67,6 +65,7 @@ public class LevelPlayerView
 		kabasuji.setTitle("Kabasuji Level Player");
 		kabasuji.setBounds(100, 100, 695, 660);
 		kabasuji.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		kabasuji.setResizable(false);
 		
 		mainMenu = new JPanel();
 		mainMenu.setLayout(null);
@@ -103,21 +102,51 @@ public class LevelPlayerView
 		
 		kabasuji.setContentPane(mainMenu);
 	}
-
+	
+	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	/** @return  The top-level application-state object. */
+	public LevelPlayerModel getModel()
+	{
+		return model;
+	}
+	/** @return  The JFrame containing the the application. */
+	public JFrame getfrmKabasuji()
+	{
+		return kabasuji;
+	}
+	/** @return  The screen currently being displayed in the application frame. */
+	public IGameScreen getCurrentView()
+	{
+		return currentView; 
+	}
+	/** @return  The "About" button, used to get to the "about" screen. */
 	public JButton getAbout(){
 		return aboutButton;
 	}
-	
+	/** @return  The "Continue" button, used to start a game immediately. */
 	public JButton getContinue(){
 		return continueGameButton;
 	}
-	
+	/** @return  The "Level Select" button, used to get to the level select screen. */
 	public JButton getLvlSelect(){
 		return levelSelectButton;
 	}
-	
+	/** @return  The "Exit" button, used to close the application. */
 	public JButton getExit(){
 		return exitButton;
+	}
+	
+	/**
+	 *  Sets the screen currently being displayed in the application frame.
+	 *  
+	 *  @param newScreen  the new screen to display
+	 */
+	public void setCurrentView(IGameScreen newScreen)
+	{
+		currentView = newScreen;
 	}
 
 }

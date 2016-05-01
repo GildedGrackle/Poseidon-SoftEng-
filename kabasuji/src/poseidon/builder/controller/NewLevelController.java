@@ -7,15 +7,24 @@ import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.NewLevelView;
 import poseidon.entities.LevelBuilderModel;
 
+/**
+ *  Handles the creation and display of the new level creation screen.
+ *  
+ *  @author Alex Titus
+ */
 public class NewLevelController implements ActionListener
 {
-	LevelBuilderModel model;  // The top-level entity object, representing the application's state
-	LevelBuilderView application;  // The top-level GUI object
+	/** The top-level entity object, representing the application's state. */
+	LevelBuilderModel model;
+	/** The top-level GUI object. */
+	LevelBuilderView application;
 	
 	
 	/**
-	 *  Constructor
-	 * @param view
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object
+	 *  @param view  the top-level GUI object
 	 */
 	public NewLevelController(LevelBuilderModel model,  LevelBuilderView view)
 	{
@@ -26,7 +35,9 @@ public class NewLevelController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  New Level screen
+	 *  New Level screen.
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -38,7 +49,9 @@ public class NewLevelController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  New Level screen
+	 *  New Level screen.
+	 *  
+	 *  @return  Indicator of operation's exit status.
 	 */
 	public Boolean toNewLevel()
 	{

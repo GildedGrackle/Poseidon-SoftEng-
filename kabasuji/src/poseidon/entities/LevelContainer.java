@@ -1,12 +1,23 @@
 package poseidon.entities;
 
+/**
+ *  Stores the file-related and persistant game-related information about a level.
+ *  
+ *  @author Alex Titus
+ */
 public class LevelContainer {
-	String levelFileName;  // For file reading
-	int inGame;  // TODO If it is one of the original 15, custom, or not in the game but saved
-	int levelNumber;  // Level for placement in level select screen and for game progress
-	LevelModel level;  // The level associated with this container
-	Boolean isChanged;  // If the level has been modified (for Level Builder)
-	int score;  // Added here to simplify LevelSelect display
+	/** For file reading. */
+	String levelFileName;
+	/** If it is one of the original 15, custom, or not in the game but saved. */
+	int inGame;  // TODO create standard constants for this
+	/** Level for placement in level select screen and for game progress. */
+	int levelNumber;
+	/** The level associated with this container. */
+	LevelModel level;
+	/** If the level has been modified (for Level Builder). */
+	Boolean isChanged;
+	/** Added here to simplify LevelSelect display. */
+	int score;
 	
 	
 	/**

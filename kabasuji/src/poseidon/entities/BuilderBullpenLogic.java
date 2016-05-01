@@ -1,12 +1,11 @@
 package poseidon.entities;
 /**
  * Handles the actions on the bullpen in Builder mode.
+ * 
  * @author Natalia
- *
  */
-public class BuilderBullpenLogic extends IBullpenLogic {
+public class BuilderBullpenLogic implements IBullpenLogic {
 
-	
 	/**
 	 *  Constructor.
 	 */
@@ -14,27 +13,54 @@ public class BuilderBullpenLogic extends IBullpenLogic {
 	
 	}
 
-	/**
-	 * Returns false because the bullpen is a set of fixed 35 pieces in builder mode. 
-	 */
-	public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
-		return false;		
-	}
 	
 	/**
-	 * Supposed to remove a piece from the bullpen, however the action is not possible in builder mode.
-	 * 
-	 * Note: The action isn't required for the undo operation, since there is no need to add pieces to the bullpen
-	 * while inside builder.
-	 * 
-	 * @param bullpen - the bullpen that the piece needs to get removed from.
-	 * @param piece - The PieceContainer of the piece that needs to be removed
-	 * 
-	 * @return Boolean - Always false, since pieces cannot be removed from buillpen in builder mode
+	 *  Replaces the piece that was removed with an identical copy.
+	 *  
+	 *  @param bullpen  the bullpen to modify
+	 *  @param piece  the piece that was removed
 	 */
-	public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
-		return false;																									
+	@Override
+	public void afterPieceRemoved(Bullpen bullpen, PieceContainer piece)
+	{
+		// Create new PieceContainer copy
+		PieceContainer freshCopy = createNewPiece(piece);
+		
+		// Find where the removed piece was in the bullpen
+		PieceFactory fac = new PieceFactory();
+		int index = 0;
+		for(int i = 1; i <= 35; i++)
+		{
+			if(freshCopy.equals(fac.getPiece(i)))
+			{
+				index = i;
+			}
+		}
+		
+		// Add the new copy
+		bullpen.addPieceAt(freshCopy, index - 1);
 	}
 	
 
+	/**
+	 *  Creates a new PieceContainer that contains the same Piece but is different.
+	 *  
+	 *  @param piece  the PieceContainer to duplicate
+	 *  @return  The newly created PieceContainer.
+	 */
+	PieceContainer createNewPiece(PieceContainer piece)
+	{
+		Point[] points = new Point[6];
+		for(Point newPt : points)
+		{
+			for(Point pt : piece.getPiece().getPiece())
+			{
+				newPt = new Point(pt.getRow(), pt.getCol());
+			}
+		}
+		Piece pieceCopy = new Piece(points);
+		PieceContainer newPC = new PieceContainer(pieceCopy, new Point(-1, -1));
+		
+		return newPC;
+	}
 }

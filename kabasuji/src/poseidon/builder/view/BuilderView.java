@@ -14,11 +14,12 @@ import javax.swing.SwingConstants;
 
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.ColSizeController;
-import poseidon.builder.controller.EditPlayableBullpenController;
+import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.LimitController;
 import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.ResetBuilderController;
 import poseidon.builder.controller.RowSizeController;
+import poseidon.builder.controller.SaveLevelController;
 import poseidon.builder.controller.UndoController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
@@ -179,7 +180,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		limitFormatter.setMaximum(new Integer(99999));
 		
 		limitInput = new JFormattedTextField(limitFormatter);
-		limitInput.setValue(model.getLimit());
+		limitInput.setValue(model.getMaxLimit());
 		limitInput.setBounds(555, 255, 110, 30);
 		limitInput.setColumns(10);
 		limitInput.addPropertyChangeListener("value", new LimitController(this.getModel()));
@@ -192,7 +193,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		
 		editPlayBullpenButton = new JButton("Choose Pieces");
 		editPlayBullpenButton.setBounds(555, 450, 110, 90);
-		editPlayBullpenButton.addActionListener(new EditPlayableBullpenController(application));
+		editPlayBullpenButton.addActionListener(new ToEditPlayableBullpenController(application));
 		add(editPlayBullpenButton);
 		
 		undoButton = new JButton("Undo");
@@ -257,6 +258,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton = new JButton("Save");
 		saveButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		saveButton.setBounds(15, 510, 110, 55);
+		saveButton.addActionListener(new SaveLevelController(model, application));
 		add(saveButton);
 	}
 

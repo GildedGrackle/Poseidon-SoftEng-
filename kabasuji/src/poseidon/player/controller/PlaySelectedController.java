@@ -52,7 +52,7 @@ public class PlaySelectedController implements ActionListener
 		lvlCon.setLevel(XMLHandler.loadXML(lvlCon.getLevelFileName(), false, false));
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
-		model.setPlayingLevel(lvlCon.getLevel());
+		model.setPlayingLevel(lvlCon);
 		LevelView newScreen = new LevelView(model, game);
 
 		// Set new screen
@@ -62,6 +62,8 @@ public class PlaySelectedController implements ActionListener
 
 		// Display the new screen
 		game.getfrmKabasuji().setVisible(true);
+		model.getPlayingLevel().getLevel().initialize(newScreen);
+		newScreen.modelUpdated();  // To show initial time in Lightning levels
 
 		return true;
 	}

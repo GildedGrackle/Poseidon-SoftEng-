@@ -23,8 +23,8 @@ import poseidon.entities.LevelContainer;
 import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.CancelEditController;
-import poseidon.builder.controller.EditLevelController;
-import poseidon.builder.controller.EditPlayableBullpenController;
+import poseidon.builder.controller.ToEditLevelController;
+import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.MakeLightningController;
 import poseidon.builder.controller.MakePuzzleController;
@@ -58,15 +58,16 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 	BackBuilderController back;
 	NewLevelController newLevelControl;
 	ExitBuilderController exit;
-	EditLevelController editLvlSelect;
+	ToEditLevelController editLvlSelect;
 	NewLevelView newLvlView;
 	MakePuzzleController makePuzCont;
 	MakeLightningController makeLightCont;
 	MakeReleaseController makeReleaseCont;
-	EditPlayableBullpenController editBullpenScreen;
+	ToEditPlayableBullpenController editBullpenScreen;
 	SetBullpenController setBullpenController;
 	EditPlayableBullpenView editBullpenView;
 	CancelEditController cancelBullEdit;
+
 		
 	private ActionEvent buttonPress(Component button) {
 		return new ActionEvent(button, 0, "" );
@@ -80,12 +81,12 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			back = new BackBuilderController(model, view);
 			newLevelControl = new NewLevelController(model, view);
 			exit = new ExitBuilderController(model, view);
-			editLvlSelect = new EditLevelController(model, view); 
+			editLvlSelect = new ToEditLevelController(model, view); 
 			newLvlView = new NewLevelView(model, view);
 			makePuzCont = new MakePuzzleController(model, view);
 			makeLightCont = new MakeLightningController(model, view);
 			makeReleaseCont = new MakeReleaseController(model, view);
-			editBullpenScreen = new EditPlayableBullpenController(view);
+			editBullpenScreen = new ToEditPlayableBullpenController(view);
 			
 		}
 		
@@ -279,5 +280,6 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 		}
 
-	
+		
+		
 }

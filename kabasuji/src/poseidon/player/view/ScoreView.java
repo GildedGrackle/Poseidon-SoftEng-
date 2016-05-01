@@ -1,5 +1,7 @@
 package poseidon.player.view;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -8,7 +10,6 @@ import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 
 public class ScoreView extends JPanel implements IModelUpdated{
-	LevelView game;  // The GUI object StarViewer belongs to
 	LevelModel model;  // The state of the Level
 	JLabel firstStar;  // The left-most star in the score
 	JLabel secondStar;  // The middle star in the score
@@ -18,12 +19,12 @@ public class ScoreView extends JPanel implements IModelUpdated{
 	/**
 	 * Create the panel. All stars start as empty sockets
 	 */
-	public ScoreView(LevelModel model, LevelView view) {
+	public ScoreView(LevelModel model) {
 		this.model = model;
-		game = view;
 		
 		// Create objects in panel
 		setLayout(null);
+		setBackground(Color.white);
 		
 		ImageIcon emptyStar = new ImageIcon("images/emptyStar.gif");  // TODO Filename subject to change
 		firstStar = new JLabel(emptyStar);

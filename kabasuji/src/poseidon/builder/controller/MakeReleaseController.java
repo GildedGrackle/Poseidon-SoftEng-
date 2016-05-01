@@ -79,9 +79,10 @@ public class MakeReleaseController implements ActionListener
 		BuilderBoardLogic newBoardLogic = new BuilderBoardLogic();
 		ReleaseLevel newLevel = new ReleaseLevel(10, "New Puzzle Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
-				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true);
+				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
 		LevelContainer newContainer = new LevelContainer("newRelease", 3, 0, newLevel, 0);  // TODO use correct "inGame" input
 		model.setBuildingLevel(newLevel);
+
 		
 		// Set new screen
 		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
@@ -90,6 +91,7 @@ public class MakeReleaseController implements ActionListener
 		
 		// Display the new screen
 		application.getBuilder().setVisible(true);
+		newLevel.builderInitialize();
 		
 		return true;
 	}

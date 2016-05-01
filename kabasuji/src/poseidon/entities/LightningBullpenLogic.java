@@ -6,16 +6,9 @@ package poseidon.entities;
  * @author Natalia
  * @author Alex Titus
  */
-public class LightningBullpenLogic extends IBullpenLogic {
+public class LightningBullpenLogic implements IBullpenLogic {
 	LightningBullpenLogic() {
 
-	}
-
-	/**
-	 * Returns False because you should not be able to add a piece once the level has started
-	 */
-	public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
-		return false;
 	}
 	
 	
@@ -23,27 +16,22 @@ public class LightningBullpenLogic extends IBullpenLogic {
 	 * Unique to lightning, generates a random piece and adds it to the board.
 	 * 
 	 * @param bullpen - The bullpen that the piece gets added to.
-	 * @param piece - The container of the piece that needs to be added to the bullpen.
+	 * @return  An indicator of whether the operation modified the bullpen.
 	 */
 	Boolean addRandomPiece(Bullpen bullpen) {
 		PieceContainer pc = new PieceContainer(new Point(-1, -1));
-		return bullpen.getPieces().add(pc);
-	}
-
-	/**
-	 * Removes a piece from the bullpen and replaces it with a random piece
-	 * 
-	 * 
-	 * @param bullpen - the bullpen that the piece needs to get removed from.
-	 * @param piece - The PieceContainer of the piece that needs to be removed
-	 * 
-	 * @return Boolean - true if piece is removed and replaced, false if piece isn't found
-	 */
-	public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
-		return true;
+		return bullpen.addPiece(pc);
 	}
 	
-	public void afterPieceRemoved(Bullpen bullpen) {
+	
+	/**
+	 *  After a piece is removed from the Lightning bullpen, add another random one.
+	 *  
+	 *  @param bullpen  the bullpen to modify
+	 *  @param piece  the piece that was removed,  unused
+	 */
+	@Override
+	public void afterPieceRemoved(Bullpen bullpen, PieceContainer piece) {
 		addRandomPiece(bullpen);
 	}
 }

@@ -1,5 +1,7 @@
 package poseidon.entities;
 
+import poseidon.player.view.LevelView;
+
 /**
  *  Implementation of LevelModel for Puzzle levels in Kabasuji.
  *  
@@ -23,18 +25,9 @@ public class PuzzleLevel extends LevelModel {
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom) {
-		super(bullpen, infinite, board, PUZZLE, levelName, isCustom);
+	public PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer) {
+		super(bullpen, infinite, board, PUZZLE, levelName, isCustom, isAddedToPlayer);
 		this.allottedMoves = allottedMoves;
-		initialize();
-	}
-
-	
-	/**
-	 *  TODO documentation PuzzleLevel.resetMoves
-	 */
-	void resetMoves() {
-		//TODO: Change return value
 	}
 	
 	
@@ -56,10 +49,30 @@ public class PuzzleLevel extends LevelModel {
 	}
 	
 	
-	void initialize() {
-		//TODO: Change return value
+	/**
+	 *  Sets the remaining moves, which signals the start of the game.
+	 * 
+	 *  @param view  the GUI representation of this, unused
+	 */
+	public void initialize(LevelView view) {
 		remainingMoves = allottedMoves;
 	}
+	
+	
+	/** 
+	 *  Start the level in the builder.
+	 *  
+	 *  Should set the moves in such a way that moves can always be made.
+	 *  This is achieved by setting movesRemaining to Integer.MAX_VALUE, which
+	 *  should provide enough moves for any single level-building session.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public void builderInitialize()
+	{
+		remainingMoves = Integer.MAX_VALUE;
+	}
+	
 	
 	/**
 	 * Checks whether the player has achieved a perfect score.
@@ -75,10 +88,6 @@ public class PuzzleLevel extends LevelModel {
 	Boolean hasPassed() {
 		if(calculateScore() > 0) { return true; }
 		return false;
-	}
-	
-	void reset() {
-		//TODO: Change return value
 	}
 
 	/**
@@ -107,13 +116,21 @@ public class PuzzleLevel extends LevelModel {
 	}
 	
 	
+	/** @return  The allotted moves for this level. */
+	@Override
+	public int getMaxLimit()
+	{
+		return allottedMoves;
+	}
+	
+	
 	/**
 	 *  Sets the allotted move limit.
 	 *  
 	 *  @param newLimit  the new limit
 	 */
 	@Override
-	public void setLimit(int newLimit)
+	public void setMaxLimit(int newLimit)
 	{
 		allottedMoves = newLimit;
 	}
