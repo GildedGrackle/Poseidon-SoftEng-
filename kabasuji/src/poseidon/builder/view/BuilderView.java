@@ -17,6 +17,7 @@ import poseidon.builder.controller.ColSizeController;
 import poseidon.builder.controller.EditPlayableBullpenController;
 import poseidon.builder.controller.LimitController;
 import poseidon.builder.controller.RedoController;
+import poseidon.builder.controller.ResetBuilderController;
 import poseidon.builder.controller.RowSizeController;
 import poseidon.builder.controller.UndoController;
 import poseidon.common.controller.BoardController;
@@ -196,21 +197,21 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		
 		undoButton = new JButton("Undo");
 		undoButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		undoButton.setBounds(10, 160, 110, 45);
+		undoButton.setBounds(15, 160, 110, 45);
 		undoButton.setEnabled(false);  // Initially nothing to undo
 		undoButton.addActionListener(new UndoController(this));
 		add(undoButton);
 		
 		redoButton = new JButton("Redo");
 		redoButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		redoButton.setBounds(10, 215, 110, 45);
+		redoButton.setBounds(15, 215, 110, 45);
 		redoButton.setEnabled(false);  // Initially nothing to redo
 		redoButton.addActionListener(new RedoController(this));
 		add(redoButton);
 		
 		JLabel dimensionLabel = new JLabel("Size:");
 		dimensionLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
-		dimensionLabel.setBounds(35, 280, 55, 30);
+		dimensionLabel.setBounds(40, 280, 55, 30);
 		add(dimensionLabel);
 		
 		NumberFormat boardSizeFormat = NumberFormat.getIntegerInstance();
@@ -224,7 +225,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		rowSizeInput.setValue(Board.MAXROWS);
 		rowSizeInput.setToolTipText("Enter new number of rows here.");
 		rowSizeInput.setColumns(10);
-		rowSizeInput.setBounds(10, 320, 45, 30);
+		rowSizeInput.setBounds(15, 320, 45, 30);
 		rowSizeInput.addPropertyChangeListener("value", new RowSizeController(this));
 		add(rowSizeInput);
 		
@@ -238,18 +239,24 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		
 		JLabel xLabel = new JLabel("X");
 		xLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		xLabel.setBounds(55, 327, 15, 16);
+		xLabel.setBounds(60, 327, 15, 16);
 		add(xLabel);
+		
+		resetButton = new JButton("Reset");
+		resetButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+		resetButton.setBounds(15, 370, 110, 55);
+		//quitButton.addActionListener(new ResetBuilderController(topmodel, application));
+		add(resetButton);
 		
 		quitButton = new JButton("Quit");
 		quitButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		quitButton.setBounds(10, 405, 110, 55);
+		quitButton.setBounds(15, 440, 110, 55);
 		quitButton.addActionListener(new BackBuilderController(topmodel, application));
 		add(quitButton);
 		
 		saveButton = new JButton("Save");
 		saveButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		saveButton.setBounds(10, 500, 110, 55);
+		saveButton.setBounds(15, 510, 110, 55);
 		add(saveButton);
 	}
 
