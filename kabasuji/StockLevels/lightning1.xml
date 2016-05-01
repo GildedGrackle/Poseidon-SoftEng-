@@ -411,4 +411,5 @@
     <square143 type="lightning" />
   </board>
   <isCustom>false</isCustom>
+  <isAddedToPlayer>true</isAddedToPlayer>
 </level>

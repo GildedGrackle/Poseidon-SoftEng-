@@ -33,6 +33,8 @@ public abstract class LevelModel {
 	Board board;
 	/** Indicates if this Level is built-in or user-created. */
 	Boolean isCustom;
+	/** Indicates if this Level has been added to the player. */
+	Boolean isAddedToPlayer;
 	
 	
 	/**
@@ -43,13 +45,14 @@ public abstract class LevelModel {
 	 * @param levelName  the name of this Level
 	 * @param isCustom  true if the Level is user-created
 	 */
-	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode, String levelName, Boolean isCustom) {
+	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode, String levelName, Boolean isCustom, Boolean isAddedToPlayer) {
 		this.levelName = levelName;
 		this.playableBullpen = bullpen;
 		this.infiniteBullpen = infinite;
 		this.gameMode = gameMode;
 		this.board = board;
 		this.isCustom = isCustom;
+		this.isAddedToPlayer = isAddedToPlayer;
 	}
 	
 	
@@ -124,6 +127,10 @@ public abstract class LevelModel {
 	{
 		return levelName;
 	}
+	/** Set the level name. */
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
 	/** @return  The state of the level's infinite bullpen. */
 	public Bullpen getInfiniteBullpen()
 	{
@@ -153,5 +160,16 @@ public abstract class LevelModel {
 	public Boolean getIsCustom() {
 		return isCustom;
 	}
-
+	/** Set the custom level flag. */
+	public void setIsCustom(Boolean isCustom) {
+		this.isCustom = isCustom;
+	}
+	/** @return  Indicator of whether this level has been added to the player. */
+	public Boolean getIsAddedToPlayer() {
+		return isAddedToPlayer;
+	}
+	/** Set the added level flag. */
+	public void setIsAddedToPlayer(Boolean isAddedToPlayer) {
+		this.isAddedToPlayer = isAddedToPlayer;
+	}
 }

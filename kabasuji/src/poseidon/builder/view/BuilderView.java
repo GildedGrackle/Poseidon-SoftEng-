@@ -19,6 +19,7 @@ import poseidon.builder.controller.LimitController;
 import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.ResetBuilderController;
 import poseidon.builder.controller.RowSizeController;
+import poseidon.builder.controller.SaveLevelController;
 import poseidon.builder.controller.UndoController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
@@ -257,6 +258,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton = new JButton("Save");
 		saveButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		saveButton.setBounds(15, 510, 110, 55);
+		saveButton.addActionListener(new SaveLevelController(model, application));
 		add(saveButton);
 	}
 

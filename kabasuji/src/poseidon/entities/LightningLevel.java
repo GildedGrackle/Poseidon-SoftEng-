@@ -32,8 +32,8 @@ public class LightningLevel extends LevelModel{
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
-		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom);
+	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom, isAddedToPlayer);
 		this.allottedTime = allottedTime;
 	}
 	
