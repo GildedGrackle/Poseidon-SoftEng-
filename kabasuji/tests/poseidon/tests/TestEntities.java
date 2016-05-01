@@ -357,6 +357,7 @@ public class TestEntities extends TestCase{
 		
 		LevelModel[] testLevels = XMLHandler.getTestLevels();
 		LevelModel testLevelCustom = XMLHandler.getTestLevels()[1];
+		testLevelCustom.setIsCustom(true);
 		LevelModel[] testLevelsWrite = new LevelModel[]{testLevels[0],
 														testLevels[1],
 														testLevels[2],
@@ -381,10 +382,10 @@ public class TestEntities extends TestCase{
 		assertEquals(testCustomNamesWrite[0], testCustomNamesRead[0]);
 		
 		// Ensure that the levels save successfully
-		assertTrue(XMLHandler.saveXML(testLevelsWrite[0], testStockNamesRead[0], false));
-		assertTrue(XMLHandler.saveXML(testLevelsWrite[1], testStockNamesRead[1], false));
-		assertTrue(XMLHandler.saveXML(testLevelsWrite[2], testStockNamesRead[2], false));
-		assertTrue(XMLHandler.saveXML(testLevelsWrite[3], testCustomNamesRead[0], true));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[0], testStockNamesRead[0]));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[1], testStockNamesRead[1]));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[2], testStockNamesRead[2]));
+		assertTrue(XMLHandler.saveXML(testLevelsWrite[3], testCustomNamesRead[0]));
 		
 		// Load the levels back in for comparison
 		testLevelsRead[0] = XMLHandler.loadXML("testPuzzle0.xml", false, false);
@@ -396,6 +397,8 @@ public class TestEntities extends TestCase{
 		for (int i=0; i<4; i++) {
 			assertTrue(testLevelsWrite[i].getLevelName().equals(testLevelsRead[i].getLevelName()));
 			assertEquals(testLevelsWrite[i].getGameMode(), testLevelsRead[i].getGameMode());
+			assertEquals(testLevelsWrite[i].getIsCustom(), testLevelsRead[i].getIsCustom());
+			assertEquals(testLevelsWrite[i].getIsAddedToPlayer(), testLevelsRead[i].getIsAddedToPlayer());
 			
 			Bullpen testBullpenWrite = testLevelsWrite[i].getPlayableBullpen();
 			Bullpen testBullpenRead = testLevelsRead[i].getPlayableBullpen();

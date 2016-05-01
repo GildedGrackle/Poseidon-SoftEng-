@@ -34,8 +34,8 @@ public class ReleaseLevel extends LevelModel{
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
-		super(bullpen, infinite, board, RELEASE, levelName, isCustom);
+	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+		super(bullpen, infinite, board, RELEASE, levelName, isCustom, isAddedToPlayer);
 		this.allottedMoves = allottedMoves;
 	}
 	

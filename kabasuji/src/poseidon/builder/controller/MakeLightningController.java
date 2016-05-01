@@ -79,7 +79,7 @@ public class MakeLightningController implements ActionListener
 		BuilderBoardLogic newBoardLogic = new BuilderBoardLogic();
 		LightningLevel newLevel = new LightningLevel(60, "New Puzzle Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
-				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true);
+				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
 		LevelContainer newContainer = new LevelContainer("", 3, 0, newLevel, 0);  // TODO use correct "inGame" input
 		model.setBuildingLevel(newContainer);
 		
