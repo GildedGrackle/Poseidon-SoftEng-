@@ -70,6 +70,8 @@ public class ResetController implements ActionListener
 
 		// Display the new screen
 		game.getfrmKabasuji().setVisible(true);
+		model.getPlayingLevel().initialize(newScreen);
+		newScreen.modelUpdated();  // To show initial time in Lightning levels
 		
 		return true;
 	}

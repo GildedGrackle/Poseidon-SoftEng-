@@ -163,6 +163,20 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	
 	
 	/**
+	 *  Returns a given PieceView to the list of PieceViews at given index.
+	 *  
+	 *  @param piece  PieceView to add
+	 *  @param index  the index of this piece, must be within bounds
+	 *  @return  Indicator whether operation completed successfully.
+	 */
+	public boolean addPieceAt(PieceView piece, int index)
+	{
+		pieces.add(index, piece);
+		return true;
+	}
+	
+	
+	/**
 	 *  Removes given PieceView from the list of PieceViews.
 	 *  
 	 * @param piece  the PieceView to remove

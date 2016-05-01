@@ -1,5 +1,7 @@
 package poseidon.entities;
 
+import poseidon.player.view.LevelView;
+
 /**
  *  Implementation of LevelModel for Puzzle levels in Kabasuji.
  *  
@@ -26,7 +28,6 @@ public class PuzzleLevel extends LevelModel {
 	public PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom) {
 		super(bullpen, infinite, board, PUZZLE, levelName, isCustom);
 		this.allottedMoves = allottedMoves;
-		initialize();
 	}
 
 	
@@ -56,8 +57,12 @@ public class PuzzleLevel extends LevelModel {
 	}
 	
 	
-	void initialize() {
-		//TODO: Change return value
+	/**
+	 *  Sets the remaining moves, which signals the start of the game.
+	 * 
+	 *  @param view  the GUI representation of this, unused
+	 */
+	public void initialize(LevelView view) {
 		remainingMoves = allottedMoves;
 	}
 	

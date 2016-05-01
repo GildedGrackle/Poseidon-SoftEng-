@@ -85,6 +85,7 @@ public class Bullpen {
 		return shouldRemove;
 	}
 	
+	
 	/**
 	 *  Adds given Piece to the Bullpen.
 	 *  
@@ -99,8 +100,24 @@ public class Bullpen {
 		 return shouldAdd;
 	}
 	
+	
+	/**
+	 *  Returns a given piece to the bullpen at given index.
+	 *  
+	 * @param piece  the piece to add
+	 * @param index  the index of this piece, must be within bounds
+	 * @return  Indicator of whether the operation completed successfully.
+	 */
+	public boolean addPieceAt(PieceContainer piece, int index) {
+		 boolean shouldAdd = logic.shouldAddPiece(this, piece);
+		 if (shouldAdd) {
+			 pieces.add(index, piece);
+		 }
+		 return shouldAdd;
+	}
+	
 
-	/** Returns the number of Pieces in the Bullpen. */
+	/** @return The number of Pieces in the Bullpen. */
 	public int getSize()
 	{
 		return pieces.size();
