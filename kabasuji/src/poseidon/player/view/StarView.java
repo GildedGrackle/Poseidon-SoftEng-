@@ -2,7 +2,10 @@ package poseidon.player.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,6 +24,8 @@ public class StarView extends JButton
 {
 	/** The Level Container associated with this StarView. */
 	LevelContainer levelContainer;
+	
+	Image star, greyStar, locked;
 
 	/**
 	 *  Construct selectable icon
@@ -33,14 +38,13 @@ public class StarView extends JButton
 		
 		
 		JLabel levelNumLabel = new JLabel();
-		if(lc.getLevel() != null)
-		{
+		if(lc.getLevel() != null) {
 			levelNumLabel.setText("" + lc.getLevelNumber());
 		}
-		else
-		{
+		else {
 			levelNumLabel.setText("File Not Found");
 		}
+		
 		levelNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		levelNumLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		levelNumLabel.setBounds(0, 0, 60, 60);
@@ -61,32 +65,63 @@ public class StarView extends JButton
 		thirdStar.setOpaque(true);
 		add(thirdStar);
 		
+		try {
+			star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+			greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+			firstStar.setIcon(new ImageIcon(greyStar));
+			secondStar.setIcon(new ImageIcon(greyStar));
+			thirdStar.setIcon(new ImageIcon(greyStar));
+		} catch (IOException e) {
+		}
+	
+		
+		
 		// Display the appropriate number of stars
-		switch(lc.getScore())
-		{
+		switch(lc.getScore()) {
 		case 0:
-			firstStar.setBackground(Color.gray);  // TODO instead of background colors, load empty and filled star images
-			secondStar.setBackground(Color.gray);
-			thirdStar.setBackground(Color.gray);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(greyStar));
+				secondStar.setIcon(new ImageIcon(greyStar));
+				thirdStar.setIcon(new ImageIcon(greyStar));
+			} catch (IOException e) {
+			}
 			break;
+			
 		case 1:
-			firstStar.setBackground(Color.yellow);
-			secondStar.setBackground(Color.gray);
-			thirdStar.setBackground(Color.gray);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(star));
+				secondStar.setIcon(new ImageIcon(greyStar));
+				thirdStar.setIcon(new ImageIcon(greyStar));
+			} catch (IOException e) {
+			}
 			break;
 		case 2:
-			firstStar.setBackground(Color.yellow);
-			secondStar.setBackground(Color.yellow);
-			thirdStar.setBackground(Color.gray);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(star));
+				secondStar.setIcon(new ImageIcon(star));
+				thirdStar.setIcon(new ImageIcon(greyStar));
+			} catch (IOException e) {
+			}
 			break;
 		case 3:
-			firstStar.setBackground(Color.yellow);
-			secondStar.setBackground(Color.yellow);
-			thirdStar.setBackground(Color.yellow);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(star));
+				secondStar.setIcon(new ImageIcon(star));
+				thirdStar.setIcon(new ImageIcon(star));
+			} catch (IOException e) {
+			}
 			break;
+			}
 		}
 		
-	}
 	
 	
 	/**
@@ -96,14 +131,17 @@ public class StarView extends JButton
 	{
 		setLayout(null);
 		
-		JLabel lockedLabel = new JLabel("No");
-		// TODO load the locked level icon instead
-//		ImageIcon lockedLevel = ___.getLockedLevelImage();
-//		JLabel lockedLabel = new JLabel(lockedLevel);
+		JLabel lockedLabel = new JLabel("");
 		lockedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lockedLabel.setBounds(0, 0, 60, 80);
 		lockedLabel.setBackground(Color.DARK_GRAY);
 		add(lockedLabel);
+		
+		try {
+			locked = ImageIO.read(getClass().getClassLoader().getResource("images/lock.png"));
+			lockedLabel.setIcon(new ImageIcon(locked));
+		} catch (IOException e) {
+		}
 	}
 	
 	

@@ -5,7 +5,11 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
+import java.awt.Image;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.Color;
@@ -146,6 +150,13 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		rotateCCWButton.setBounds(10, 160, 45, 45);
 		rotateCCWButton.addActionListener(new RotateCCWController(bullpen));
 		rightPanel.add(rotateCCWButton);
+		
+		Image img;
+		try {
+			img = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCCW.png"));
+			rotateCCWButton.setIcon(new ImageIcon(img));
+		} catch (IOException e) {
+		}
 		
 		rotateCWButton = new JButton(">");
 		rotateCWButton.setBounds(93, 160, 45, 45);
