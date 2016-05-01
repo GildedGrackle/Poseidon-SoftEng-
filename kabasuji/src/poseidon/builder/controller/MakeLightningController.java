@@ -79,9 +79,10 @@ public class MakeLightningController implements ActionListener
 		BuilderBoardLogic newBoardLogic = new BuilderBoardLogic();
 		LightningLevel newLevel = new LightningLevel(60, "New Puzzle Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
-				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true);
+				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
 		LevelContainer newContainer = new LevelContainer("", 3, 0, newLevel, 0);  // TODO use correct "inGame" input
-		model.setBuildingLevel(newContainer);
+		model.setBuildingLevel(newLevel);
+
 		
 		// Set new screen
 		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
@@ -90,6 +91,7 @@ public class MakeLightningController implements ActionListener
 		
 		// Display the new screen
 		application.getBuilder().setVisible(true);
+		newLevel.builderInitialize();
 		
 		return true;
 	}

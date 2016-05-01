@@ -19,6 +19,7 @@ import poseidon.builder.controller.LimitController;
 import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.ResetBuilderController;
 import poseidon.builder.controller.RowSizeController;
+import poseidon.builder.controller.SaveLevelController;
 import poseidon.builder.controller.UndoController;
 import poseidon.common.controller.BoardController;
 import poseidon.common.controller.BullpenController;
@@ -101,7 +102,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	{
 		this.topmodel = model;
 		application = view;
-		this.model = topmodel.getBuildingLevel().getLevel();
+		this.model = topmodel.getBuildingLevel();
 		
 		initialize();
 	}
@@ -179,7 +180,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		limitFormatter.setMaximum(new Integer(99999));
 		
 		limitInput = new JFormattedTextField(limitFormatter);
-		limitInput.setValue(model.getLimit());
+		limitInput.setValue(model.getMaxLimit());
 		limitInput.setBounds(555, 255, 110, 30);
 		limitInput.setColumns(10);
 		limitInput.addPropertyChangeListener("value", new LimitController(this.getModel()));
@@ -245,7 +246,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		resetButton = new JButton("Reset");
 		resetButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		resetButton.setBounds(15, 370, 110, 55);
-		//quitButton.addActionListener(new ResetBuilderController(topmodel, application));
+		resetButton.addActionListener(new ResetBuilderController(topmodel, application));
 		add(resetButton);
 		
 		quitButton = new JButton("Quit");
@@ -257,6 +258,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton = new JButton("Save");
 		saveButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		saveButton.setBounds(15, 510, 110, 55);
+		saveButton.addActionListener(new SaveLevelController(model, application));
 		add(saveButton);
 	}
 

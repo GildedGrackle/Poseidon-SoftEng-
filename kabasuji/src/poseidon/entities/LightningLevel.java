@@ -32,8 +32,8 @@ public class LightningLevel extends LevelModel{
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom){
-		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom);
+	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom, isAddedToPlayer);
 		this.allottedTime = allottedTime;
 	}
 	
@@ -73,6 +73,22 @@ public class LightningLevel extends LevelModel{
 		timer = new Timer(1000, new TimeController(this, view));
 		
 		startTimer();
+	}
+	
+	
+	/** 
+	 *  Start the level in the builder.
+	 *  
+	 *  Should set the moves in such a way that moves can always be made.
+	 *  This is achieved by setting remainingTime to Integer.MAX_VALUE, which
+	 *  should provide enough moves for any single level-building session. It
+	 *  also never starts the timer, so the limit here will always be preserved.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public void builderInitialize()
+	{
+		remainingTime = Integer.MAX_VALUE;
 	}
 	
 	
@@ -121,16 +137,6 @@ public class LightningLevel extends LevelModel{
 	
 	
 	/**
-	 *  TODO LightningLevel.reset
-	 */
-	public void reset() {
-		//TODO: Change return value
-		resetTimer();
-		startTimer();
-	}
-	
-	
-	/**
 	 *  Decreases the remaining time by one.
 	 */
 	public void decrementTime()
@@ -166,6 +172,13 @@ public class LightningLevel extends LevelModel{
 	}
 	
 	/** @return  The allotted time for this level. */
+	@Override
+	public int getMaxLimit()
+	{
+		return allottedTime;
+	}
+	
+	/** @return  The allotted time for this level. */
 	int getAllottedTime()
 	{
 		return allottedTime;
@@ -193,7 +206,7 @@ public class LightningLevel extends LevelModel{
 	 *  @param newLimit  the new limit
 	 */
 	@Override
-	public void setLimit(int newLimit)
+	public void setMaxLimit(int newLimit)
 	{
 		allottedTime = newLimit;
 	}

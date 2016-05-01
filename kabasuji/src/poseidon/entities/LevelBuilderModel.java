@@ -17,7 +17,7 @@ public class LevelBuilderModel {
 	/** Saved levels [gamemode][level] */
 	ArrayList<ArrayList<LevelContainer>> savedLevels;
 	/** Level currently under construction. */
-	LevelContainer buildingLevel;
+	LevelModel buildingLevel;
 	
 	
 	/**
@@ -81,7 +81,7 @@ public class LevelBuilderModel {
 				 *  Getter & Setter  *
 				 *********************/
 	/** @return  The level currently being built. */
-	public LevelContainer getBuildingLevel()
+	public LevelModel getBuildingLevel()
 	{
 		return buildingLevel;
 	}
@@ -90,7 +90,7 @@ public class LevelBuilderModel {
 	 *  
 	 *  @param buildingLevel  the new level
 	 */
-	public void setBuildingLevel(LevelContainer buildingLevel)
+	public void setBuildingLevel(LevelModel buildingLevel)
 	{
 		this.buildingLevel = buildingLevel;
 	}

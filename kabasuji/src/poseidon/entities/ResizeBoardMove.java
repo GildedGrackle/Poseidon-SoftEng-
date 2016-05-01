@@ -1,6 +1,5 @@
 package poseidon.entities;
 
-import poseidon.common.view.BoardView;
 
 /**
  *  Changing the size of the Board.
@@ -10,7 +9,7 @@ import poseidon.common.view.BoardView;
  */
 public class ResizeBoardMove implements IMove{
 	/** The GUI of the Board being modified. */
-	BoardView view;
+	Board board;
 	/** Old number of rows. */
 	int oldHeight;
 	/** Old number of columns. */
@@ -19,6 +18,9 @@ public class ResizeBoardMove implements IMove{
 	int newHeight;
 	/** New number of columns. */
 	int newWidth;
+	/** Backup board for undoing */
+	Board backupBoard;
+	
 	
 	
 	/**
@@ -30,17 +32,28 @@ public class ResizeBoardMove implements IMove{
 	 *  @param newHeight  the new number of rows of the Board
 	 *  @param newWidth  the new number of columns of the Board
 	 */
-	public ResizeBoardMove(BoardView view, int oldHeight, int oldWidth, int newHeight, int newWidth) {
-		this.view = view;
+	public ResizeBoardMove(Board board, int oldHeight, int oldWidth, int newHeight, int newWidth) {
+		this.board = board;
 		this.oldHeight = oldHeight;
 		this.oldWidth = oldWidth;
 		this.newHeight = newHeight;
 		this.newWidth = newWidth;
+		this.backupBoard = null;
 	}
 	
 	
+	/**
+	 * Checks if the resize is valid.
+	 * 
+	 * Should be only valid in builder mode, and the board size has to be between 6*6 and 12*12.
+	 */
 	public Boolean isValid() {
-		return false;						//TODO: change return value
+		if (board.getLogic() instanceof BuilderBoardLogic) {
+			if(newHeight<=12 && newWidth<=12 && newHeight>=6 && newWidth>=6) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
@@ -52,14 +65,22 @@ public class ResizeBoardMove implements IMove{
 	public Boolean doMove() {
 		if(isValid())
 		{
-			// TODO resizeBoardMove
+			backupBoard = board; 			//Backup in case we want to undo the move
+			board.resizeBoard(newHeight, newWidth);
 			return true;
 		}
 		// Else failure
 		return false;
 	}
 	
+	/**
+	 * Reverts the performed move.
+	 */
 	public Boolean undoMove() {
-		return false;						//TODO: change return value
+		if(backupBoard !=null){				//Backup board would be null if the move wasn't performed
+			board.setBoard(backupBoard.getPlayArea()); 
+			return true;
+		}
+		return false;
 	}
 }

@@ -8,19 +8,18 @@ public class PieceContainer {
 	
 	/** The piece that is contained */
 	Piece piece;
-	
 	/** Where the piece is located on the board (if not on board is Point(-1, -1))*/
 	Point location;
-	
 	/** Indicates whether the piece is the selected piece on the board.bullpen*/
 	Boolean isSelected;
 	
 	
 	/**
 	 *  Constructor.
-	 * @param piece  Piece being contained
-	 * @param location  initial location of this Piece, usually Point(-1, -1)
-	 * @param isSelected  indicates whether the Piece is the selected Piece in the Bullpen/Board
+	 *  
+	 *  @param piece  Piece being contained
+	 *  @param location  initial location of this Piece, usually Point(-1, -1)
+	 *  @param isSelected  indicates whether the Piece is the selected Piece in the Bullpen/Board
 	 */
 	public PieceContainer (Piece piece, Point location) {
 		this.piece = piece;
@@ -46,7 +45,6 @@ public class PieceContainer {
 	}
 
 	
-	@Override
 	/**
 	 * Overrides the standard equals() method for PiecesContainers.
 	 * 
@@ -54,6 +52,7 @@ public class PieceContainer {
 	 * For Board: would need to be the exact same piece (since location would be different otherwise)
 	 * For Bullpen: Since location on bullpen would be equal to null, would produce true even those are two different pieces that just "look" the same
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof PieceContainer)) { return false; }
 		PieceContainer newPiece = (PieceContainer) o;
@@ -66,6 +65,7 @@ public class PieceContainer {
 		{ return true; }
 		return false;
 	}
+	
 	
 	@Override
 	public int hashCode() {
