@@ -3,45 +3,28 @@ package poseidon.entities;
 /**
  * Handles the actions on the bullpen in the puzzle game mode.
  * @author Natalia
- *
+ * @author Alex Titus
  */
-public class PuzzleBullpenLogic extends IBullpenLogic {
+public class PuzzleBullpenLogic implements IBullpenLogic {
 	
 	/**
 	 *  Constructor.
 	 */
 	public PuzzleBullpenLogic(){
-		//TODO: Change return value
+		
 	}
 	
-	/**
-	 * Adds a piece to the bullpen. 
-	 * 
-	 * Note: would add the piece to the end of the list of pieces on bullpen. 
-	 * Since there is no undo in puzzle, the function would be called when moving a piece from 
-	 * the board to the bullpen
-	 * 
-	 * @param bullpen - The bullpen that the piece gets added to.
-	 * @param piece - The container of the piece that needs to be added to the bullpen.
-	 * @return Boolean - Returns false in any case.
-	 */
-	public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
-		return true;
-	}
-	
-	/**
-	 * Removes a piece from the bullpen.
-	 * 
-	 * Note: currently shifts all the pieces after removing the piece
-	 * 
-	 * @param bullpen - the bullpen that the piece needs to get removed from.
-	 * @param piece - The PieceContainer of the piece that needs to be removed
-	 * 
-	 * @return Boolean - Indicates whether the removal was successful
-	 */
-	public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
-		return true;
-	}
 
+	/**
+	 *  No action is taken after piece is removed from a Puzzle bullpen.
+	 *  
+	 *  @param bullpen  the bullpen to modify,  unused
+	 *  @param piece  the piece that was removed,  unused
+	 */
+	@Override
+	public void afterPieceRemoved(Bullpen bullpen, PieceContainer piece)
+	{
+		return ;
+	}
 
 }

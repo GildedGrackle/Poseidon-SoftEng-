@@ -76,6 +76,22 @@ public class LightningLevel extends LevelModel{
 	}
 	
 	
+	/** 
+	 *  Start the level in the builder.
+	 *  
+	 *  Should set the moves in such a way that moves can always be made.
+	 *  This is achieved by setting remainingTime to Integer.MAX_VALUE, which
+	 *  should provide enough moves for any single level-building session. It
+	 *  also never starts the timer, so the limit here will always be preserved.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public void builderInitialize()
+	{
+		remainingTime = Integer.MAX_VALUE;
+	}
+	
+	
 	/**
 	 * Checks whether the player has achieved a perfect score.
 	 */
@@ -121,16 +137,6 @@ public class LightningLevel extends LevelModel{
 	
 	
 	/**
-	 *  TODO LightningLevel.reset
-	 */
-	public void reset() {
-		//TODO: Change return value
-		resetTimer();
-		startTimer();
-	}
-	
-	
-	/**
 	 *  Decreases the remaining time by one.
 	 */
 	public void decrementTime()
@@ -166,6 +172,13 @@ public class LightningLevel extends LevelModel{
 	}
 	
 	/** @return  The allotted time for this level. */
+	@Override
+	public int getMaxLimit()
+	{
+		return allottedTime;
+	}
+	
+	/** @return  The allotted time for this level. */
 	int getAllottedTime()
 	{
 		return allottedTime;
@@ -193,7 +206,7 @@ public class LightningLevel extends LevelModel{
 	 *  @param newLimit  the new limit
 	 */
 	@Override
-	public void setLimit(int newLimit)
+	public void setMaxLimit(int newLimit)
 	{
 		allottedTime = newLimit;
 	}

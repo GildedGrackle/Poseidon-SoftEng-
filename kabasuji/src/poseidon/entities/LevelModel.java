@@ -37,11 +37,12 @@ public abstract class LevelModel {
 	
 	/**
 	 *  Constructor.
-	 * @param bullpen  the model of this Level's Bullpen
-	 * @param board  the model of this Level's Board
-	 * @param gameMode  the type of Level this is
-	 * @param levelName  the name of this Level
-	 * @param isCustom  true if the Level is user-created
+	 *  
+	 *  @param bullpen  the model of this Level's Bullpen
+	 *  @param board  the model of this Level's Board
+	 *  @param gameMode  the type of Level this is
+	 *  @param levelName  the name of this Level
+	 *  @param isCustom  true if the Level is user-created
 	 */
 	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode, String levelName, Boolean isCustom) {
 		this.levelName = levelName;
@@ -72,6 +73,15 @@ public abstract class LevelModel {
 	 */
 	public abstract void initialize(LevelView view);
 	
+	/** 
+	 *  Start the level in the builder.
+	 *  
+	 *  Should set the moves in such a way that moves can always be made.
+	 * 
+	 *  @param view  the rendering object
+	 */
+	public abstract void builderInitialize();
+	
 	/** @return  Whether the player reached 3 stars. */
 	abstract Boolean hasWon();
 	
@@ -81,16 +91,21 @@ public abstract class LevelModel {
 	/** @return  The current score on this level. */
 	abstract int calculateScore();
 	
-	/** Returns the level to its starting state. */
-	abstract void reset();
-	
 
 	/** 
 	 *  Provides the game-type-specific limit for play.
 	 *  
-	 *  Override this in level subclasses to provide the maximum move or time limit.
+	 *  Override this in level subclasses to provide the current remaining move or time limit.
 	 */
 	public abstract int getLimit();
+	
+	
+	/** 
+	 *  Provides the game-type-specific allocated limit for play.
+	 *  
+	 *  Override this in level subclasses to provide the allocated move or time limit.
+	 */
+	public abstract int getMaxLimit();
 	
 	
 	/**
@@ -115,7 +130,7 @@ public abstract class LevelModel {
 	 *  Override this in level subclasses to set the maximum move or time limit.
 	 *  @param newLimit  the new limit
 	 */
-	public abstract void setLimit(int newLimit);	
+	public abstract void setMaxLimit(int newLimit);
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/

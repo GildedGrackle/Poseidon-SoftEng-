@@ -62,16 +62,12 @@ public class TestCommonControllers extends TestMouseEvents{
 		return new ActionEvent(button, 0, getName());
 	}
 	
-	public class TestBullpenLogic extends IBullpenLogic{
+	public class TestBullpenLogic implements IBullpenLogic{
 
 		@Override
-		public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
-			return true;
-		}
-
-		@Override
-		public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
-			return true;
+		public void afterPieceRemoved(Bullpen bullpen, PieceContainer piece)
+		{
+			return ;  // TODO  change this to suit purpose
 		}
 		
 	}

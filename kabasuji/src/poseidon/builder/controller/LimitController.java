@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import poseidon.entities.LevelModel;
 
 /**
- *  Handles a change level allocatted limit request.
+ *  Handles a change level allocated limit request.
  *  
  *  @author Alex Titus
  */
@@ -38,7 +38,7 @@ public class LimitController implements PropertyChangeListener
 	{
 		int newLimit = (int) evt.getNewValue();
 
-		model.setLimit(newLimit);
+		model.setMaxLimit(newLimit);
 	}
 
 }

@@ -20,16 +20,15 @@ public class BullpenToBoardMove implements IMove{
 	ILevelView view;
 	/** The color represenation of the piece being moved. */
 	PieceView draggedPiece;
-	/** The index of the piece in the bullpen. */
-	int index;
 	
 	
 	/**
 	 *  Constructor.
-	 * @param view  the Level
-	 * @param view  the GUI of the Level
-	 * @param piece  Piece to place on Board
-	 * @param location  location Piece is intended to be moved to
+	 *  
+	 *  @param view  the Level
+	 *  @param view  the GUI of the Level
+	 *  @param piece  Piece to place on Board
+	 *  @param location  location Piece is intended to be moved to
 	 */
 	public BullpenToBoardMove(ILevelView view, PieceContainer piece, Point location) {
 		this.game = view.getModel();
@@ -37,7 +36,6 @@ public class BullpenToBoardMove implements IMove{
 		this.location = location;
 		this.view = view;
 		this.draggedPiece = view.getBullpen().getSelectedPiece();
-		this.index = view.getBullpen().getModel().getPieces().indexOf(piece);
 	}
 	
 	
@@ -70,6 +68,8 @@ public class BullpenToBoardMove implements IMove{
 	
 	/**
 	 *  Places the Piece from the Bullpen to Board at location.
+	 *  
+	 *  @return  Indication of operation completion.
 	 */
 	public Boolean doMove() {
 		
@@ -84,26 +84,27 @@ public class BullpenToBoardMove implements IMove{
 			
 			// Remove piece from bullpen
 			// TODO fix this when we fix Bullpen remove piece
-			boolean successRemove = view.getBullpen().getModel().removePiece(piece);  
+			boolean successRemove = view.getBullpen().getModel().removePiece(piece);
 			
 			// If remove was unsuccessful
 			if(!(successRemove))
 			{
-				// Then nothing selected in the bullpen
+				// Then nothing selected in the bullpen?
 				view.getBullpen().setSelectedPiece(null);
 				
+				return true;  // ?
+			}
+			else  // Remove successful
+			{
+				view.getBullpen().removePiece(draggedPiece);
+				view.getBullpen().setSelectedPiece(null);
+
+				// Decrease moves remaining by 1 (if applicable)
+				game.decrementLimit();
+
 				return true;
 			}
-			else
-			{
-			view.getBullpen().removePiece(draggedPiece);
-			view.getBullpen().setSelectedPiece(null);
-
-			// Decrease moves remaining by 1 (if applicable)
-			game.decrementLimit();
-			
-			return true;
-		}}
+		}
 		
 		return false;
 	}
@@ -118,9 +119,10 @@ public class BullpenToBoardMove implements IMove{
 			game.getBoard().removePiece(piece);
 			view.getBoard().removePiece(draggedPiece);
 			piece.setLocation(new Point(-1, -1));
-			view.getBullpen().getModel().addPieceAt(piece, index);
-			view.getBullpen().addPieceAt(draggedPiece, index);
-			view.getBullpen().setSelectedPiece(draggedPiece);
+			// TODO just select the new one in the bullpen
+//			view.getBullpen().getModel().addPiece(piece);
+//			view.getBullpen().addPiece(draggedPiece);
+//			view.getBullpen().setSelectedPiece(draggedPiece);
 			piece.setIsSelected(true);
 			game.incrementLimit();
 			return true;

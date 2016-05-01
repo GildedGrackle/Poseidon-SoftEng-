@@ -179,7 +179,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		limitFormatter.setMaximum(new Integer(99999));
 		
 		limitInput = new JFormattedTextField(limitFormatter);
-		limitInput.setValue(model.getLimit());
+		limitInput.setValue(model.getMaxLimit());
 		limitInput.setBounds(555, 255, 110, 30);
 		limitInput.setColumns(10);
 		limitInput.addPropertyChangeListener("value", new LimitController(this.getModel()));

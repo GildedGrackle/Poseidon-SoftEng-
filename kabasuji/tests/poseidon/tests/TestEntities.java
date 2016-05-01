@@ -234,16 +234,12 @@ public class TestEntities extends TestCase{
 		
 	}
 	
-	public class TestBullpenLogic extends IBullpenLogic{
+	public class TestBullpenLogic implements IBullpenLogic{
 
 		@Override
-		public Boolean shouldAddPiece(Bullpen bullpen, PieceContainer piece) {
-			return true;
-		}
-
-		@Override
-		public Boolean shouldRemovePiece(Bullpen bullpen, PieceContainer piece) {
-			return true;
+		public void afterPieceRemoved(Bullpen bullpen, PieceContainer piece)
+		{
+			return ;  // TODO  change this to suit purpose
 		}
 		
 	}

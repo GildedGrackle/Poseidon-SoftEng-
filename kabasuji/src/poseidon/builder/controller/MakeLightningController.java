@@ -90,6 +90,7 @@ public class MakeLightningController implements ActionListener
 		
 		// Display the new screen
 		application.getBuilder().setVisible(true);
+		newLevel.builderInitialize();
 		
 		return true;
 	}
