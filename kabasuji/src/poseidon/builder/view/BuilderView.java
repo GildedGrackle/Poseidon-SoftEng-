@@ -335,4 +335,26 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	{
 		return colSizeInput;
 	}
+	
+	/** @return  the button associated with saving the level */
+	public JButton getSave(){
+		return saveButton;
+	}
+	
+	/** @return  the button associated with the undo controller  */
+	public JButton getUndo(){
+		return undoButton;
+	}
+	
+	/** @return  the button associated with the redo controller */
+	public JButton getRedo(){
+		return redoButton;
+	}
+	
+	/** @return  the button associated with the edit playable bullpen controller*/
+	public JButton getSetPlayBull(){
+		return editPlayBullpenButton;
+	}
+	
+	
 }

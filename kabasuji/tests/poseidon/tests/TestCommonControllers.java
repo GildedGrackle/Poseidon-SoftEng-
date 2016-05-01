@@ -123,26 +123,7 @@ public class TestCommonControllers extends TestMouseEvents{
 	public void tearDown(){
 		view.getfrmKabasuji().dispose();
 	}
-	
-	public void testHFlip(){
-		
-	}
-	
-	public void testVFlip(){
-		
-	}
-	
-	public void testRedoManger(){
-		
-	}
-	
-	public void testCCWController(){
-		
-	}
-	
-	public void testRotateCW(){
-		
-	}
+
 	
 	/**
 	 * Tests the board controllers using a puzzle board. 
@@ -386,5 +367,6 @@ public class TestCommonControllers extends TestMouseEvents{
 		assertNull(view.getCurrentView().getCurrentlyPlaying().getBoard().getActiveDragging());
 
 	}
+
 	
 }

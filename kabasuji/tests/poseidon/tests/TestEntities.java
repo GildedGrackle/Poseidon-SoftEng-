@@ -73,10 +73,6 @@ public class TestEntities extends TestCase{
 		
 	}
 	
-	public void testUndoManager(){
-		
-	}
-	
 	public void testSetReleaseNumber(){
 		
 	}
@@ -88,6 +84,8 @@ public class TestEntities extends TestCase{
 	public void testGetBestScore(){
 		
 	}
+	
+	
 	/**
 	 * Test of the piece entity. 
 	 * First Checks that we can make a piece and that the new equals works

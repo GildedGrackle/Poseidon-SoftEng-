@@ -39,7 +39,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 	 *  @return  Indicator whether operation could be completed.
 	 */
 	public Boolean shouldRemovePiece (Board board, PieceContainer piece){
-		return false;											//TODO change return value
+		return true;											//TODO change return value
 
 	}
 	

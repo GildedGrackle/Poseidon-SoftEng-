@@ -84,4 +84,12 @@ public class EditPlayableBullpenView extends JPanel implements IBuilderScreen
 	{
 		return pieceCountsPanel;
 	}
+	
+	public JButton getDoneButton(){
+		return doneButton;
+	}
+	
+	public JButton getCancelButton(){
+		return cancelButton;
+	}
 }
