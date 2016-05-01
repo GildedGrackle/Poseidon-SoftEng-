@@ -11,6 +11,12 @@ import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.SelectLevelController;
 
+/**
+ *  Creates a scrollable panel containing selectable icons for each level in a gamemode.
+ *  
+ *  @author Alex Titus
+ *
+ */
 public class SelectableLevelsView extends JPanel implements Scrollable
 {
 	/** The height of a level icon */

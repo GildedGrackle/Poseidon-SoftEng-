@@ -12,7 +12,7 @@ import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
-import poseidon.builder.controller.EditLevelController;
+import poseidon.builder.controller.ToEditLevelController;
 import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.MakeLightningController;
 import poseidon.builder.controller.MakePuzzleController;
@@ -39,7 +39,7 @@ public class TestBuilderBtnControllers extends TestCase{
 	BackBuilderController back;
 	NewLevelController newLevelControl;
 	ExitBuilderController exit;
-	EditLevelController editLvlSelect;
+	ToEditLevelController editLvlSelect;
 	NewLevelView newLvlView;
 	MakePuzzleController makePuzCont;
 	MakeLightningController makeLightCont;
@@ -58,7 +58,7 @@ public class TestBuilderBtnControllers extends TestCase{
 			back = new BackBuilderController(model, view);
 			newLevelControl = new NewLevelController(model, view);
 			exit = new ExitBuilderController(model, view);
-			editLvlSelect = new EditLevelController(model, view); 
+			editLvlSelect = new ToEditLevelController(model, view); 
 			newLvlView = new NewLevelView(model, view);
 			makePuzCont = new MakePuzzleController(model, view);
 			makeLightCont = new MakeLightningController(model, view);
