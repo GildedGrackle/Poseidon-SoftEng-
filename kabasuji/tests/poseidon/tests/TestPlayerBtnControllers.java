@@ -117,7 +117,7 @@ public class TestPlayerBtnControllers extends TestCase{
 
 		assertEquals(lvlSelectView.getSelectedLevel(), lvlContainer);
 		
-		button = lvlSelectView.getPlay();
+		button = lvlSelectView.getPlayButton();
 		
 		ActionEvent	playPress = buttonPress(button);
 		playSelect.actionPerformed(playPress);

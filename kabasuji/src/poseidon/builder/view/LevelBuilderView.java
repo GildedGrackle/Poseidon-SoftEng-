@@ -11,7 +11,7 @@ import java.awt.CardLayout;
 import javax.swing.JButton;
 
 import poseidon.builder.controller.AboutBuilderController;
-import poseidon.builder.controller.EditLevelController;
+import poseidon.builder.controller.ToEditLevelController;
 import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.NewLevelController;
 import poseidon.entities.LevelBuilderModel;
@@ -111,7 +111,7 @@ public class LevelBuilderView implements IBuilderScreen{
 		 editLevelButton = new JButton("Edit Level");
 		 editLevelButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		 editLevelButton.setBounds(255, 334, 159, 52);
-		 editLevelButton.addActionListener(new EditLevelController(model, this));
+		 editLevelButton.addActionListener(new ToEditLevelController(model, this));
 		 mainMenu.add(editLevelButton);
 			
 		 exitButton = new JButton("Quit ");
