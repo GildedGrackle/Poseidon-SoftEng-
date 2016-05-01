@@ -24,7 +24,7 @@ import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.CancelEditController;
 import poseidon.builder.controller.ToEditLevelController;
-import poseidon.builder.controller.EditPlayableBullpenController;
+import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.MakeLightningController;
 import poseidon.builder.controller.MakePuzzleController;
@@ -63,7 +63,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 	MakePuzzleController makePuzCont;
 	MakeLightningController makeLightCont;
 	MakeReleaseController makeReleaseCont;
-	EditPlayableBullpenController editBullpenScreen;
+	ToEditPlayableBullpenController editBullpenScreen;
 	SetBullpenController setBullpenController;
 	EditPlayableBullpenView editBullpenView;
 	CancelEditController cancelBullEdit;
@@ -86,7 +86,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			makePuzCont = new MakePuzzleController(model, view);
 			makeLightCont = new MakeLightningController(model, view);
 			makeReleaseCont = new MakeReleaseController(model, view);
-			editBullpenScreen = new EditPlayableBullpenController(view);
+			editBullpenScreen = new ToEditPlayableBullpenController(view);
 			
 		}
 		

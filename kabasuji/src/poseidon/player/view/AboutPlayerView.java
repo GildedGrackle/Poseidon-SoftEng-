@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.SwingConstants;
@@ -27,6 +28,7 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 		this.model = model;
 		game = view;
 		setLayout(null);
+		setBackground(new Color(0, 191, 255));
 		
 		JTextArea aboutUsTextArea = new JTextArea();
 		aboutUsTextArea.setEditable(false);

@@ -15,10 +15,18 @@ import poseidon.player.view.LevelView;
  */
 public class ContinueController implements ActionListener
 {
+	/** The top-level entity object. */
 	LevelPlayerModel model;
+	/** The top-level boundary object. */
 	LevelPlayerView game;
 	
-	// TODO ContinueController documentation
+
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object
+	 *  @param view  the top-level boundary object
+	 */
 	public ContinueController(LevelPlayerModel model, LevelPlayerView view)
 	{
 		this.model = model;
@@ -57,7 +65,7 @@ public class ContinueController implements ActionListener
 		}
 		
 		// Now set currently playing in LevelPlayerModel to the level determined above
-		model.setPlayingLevel(model.getLevels().get(gameMode).get(lowestLevel).getLevel());
+		model.setPlayingLevel(model.getLevels().get(gameMode).get(lowestLevel));
 		LevelView newScreen = new LevelView(model, game);
 		
 		// Set new screen
@@ -69,7 +77,7 @@ public class ContinueController implements ActionListener
 			
 		// Display the new screen
 		game.getfrmKabasuji().setVisible(true);
-		model.getPlayingLevel().initialize(newScreen);
+		model.getPlayingLevel().getLevel().initialize(newScreen);
 		newScreen.modelUpdated();  // To show initial time in Lightning levels
 			
 		return true;

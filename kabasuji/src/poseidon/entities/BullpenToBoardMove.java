@@ -26,7 +26,7 @@ public class BullpenToBoardMove implements IMove{
 	
 	/**
 	 *  Constructor.
-	 * @param game  the Level
+	 * @param view  the Level
 	 * @param view  the GUI of the Level
 	 * @param piece  Piece to place on Board
 	 * @param location  location Piece is intended to be moved to

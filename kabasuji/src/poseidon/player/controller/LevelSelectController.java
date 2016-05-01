@@ -7,15 +7,24 @@ import poseidon.entities.LevelPlayerModel;
 import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
 
+/**
+ *  Creates and displays the level select screen.
+ *  
+ *  @author Alex Titus
+ */
 public class LevelSelectController implements ActionListener
 {
-	LevelPlayerModel model;  // The top-level entity object, representing the game
-	LevelPlayerView game;  // The top-level GUI object
+	/** The top-level entity object, representing the game. */
+	LevelPlayerModel model;
+	/** The top-level GUI object. */
+	LevelPlayerView game;
 
 	
 	/**
-	 *  Constructor
-	 * @param view
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object, representing the game
+	 *  @param view  the top-level GUI object
 	 */
 	public LevelSelectController(LevelPlayerModel model, LevelPlayerView view)
 	{
@@ -26,18 +35,22 @@ public class LevelSelectController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently displayed in LevelPlayerView to the
-	 *  Level Select screen
+	 *  level select screen.
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e)
+	public void actionPerformed(ActionEvent ae)
 	{
 		toLevelSelect();
 	}
 	
 	
 	/**
-	 * Switches the panel currently displayed in LevelPlayerView to the
-	 *  Level Select screen 
+	 *  Switches the panel currently displayed in LevelPlayerView to the
+	 *  level select screen.
+	 *  
+	 *  @return  Indicator of whether the operation completed successfully.
 	 */
 	public Boolean toLevelSelect()
 	{
