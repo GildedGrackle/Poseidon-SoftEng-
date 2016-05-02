@@ -249,6 +249,24 @@ public class Board {
 	}
 	
 	
+	/** 
+	 *  Sets the square at (row, col) to be a hint, if possible.
+	 *  
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 */
+	public void setHint(int row, int col)
+	{
+		// Just in case
+		if(row >= MAXROWS || col >= MAXCOLS || row < 0 || col < 0)
+		{
+			return ;
+		}
+		
+		logic.setHint(this, row, col);
+	}
+	
+	
 	/**
 	 *  Determines if the given piece can be played at the given location.
 	 *  

@@ -215,9 +215,15 @@ public class BoardController extends MouseAdapter
 				// Notify Board that there is a Piece on it
 				boardView.setActiveLocation(me.getPoint());
 				
-				boardView.repaint();
+				view.modelUpdated();
 			}
-			// Else nothing
+			// Else maybe in hint selection mode
+			if(boardView.getHintSelectionMode())
+			{
+				boardModel.setHint(row, col);
+				view.modelUpdated();
+			}
+			
 			return ;
 		}
 

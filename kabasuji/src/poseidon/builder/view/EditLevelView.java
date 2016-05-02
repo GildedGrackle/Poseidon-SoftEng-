@@ -22,6 +22,7 @@ import poseidon.entities.LevelContainer;
  *  edit Levels, and delete Levels.
  *  
  * @author Alex Titus
+ * @author Jacob
  */
 public class EditLevelView extends JPanel implements IBuilderScreen
 {
@@ -138,7 +139,7 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		deleteButton = new JButton("Delete");
 		deleteButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		deleteButton.setBounds(170, 580, 120, 45);
-		deleteButton.addActionListener(new DeleteLevelController(selectedLevel));
+		deleteButton.addActionListener(new DeleteLevelController(model, selectedLevel));
 		deleteButton.setEnabled(false);  // Initially not usable
 		add(deleteButton);
 		

@@ -240,8 +240,6 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		
 		return true;
 	}
-
-	
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/

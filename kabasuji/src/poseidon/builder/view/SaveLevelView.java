@@ -20,6 +20,7 @@ import poseidon.builder.controller.CancelSaveController;
 import poseidon.builder.controller.ConfirmSaveController;
 import poseidon.builder.controller.LimitController;
 import poseidon.builder.controller.SetBullpenController;
+import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelModel;
 
 /**
@@ -29,6 +30,8 @@ import poseidon.entities.LevelModel;
  */
 public class SaveLevelView extends JPanel implements IBuilderScreen {
 
+	/** The top-level entity. */
+	LevelBuilderModel topModel;
 	/** The state of the level under construction. */
 	LevelModel model;
 	/** The top-level GUI object. */
@@ -49,9 +52,9 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 	 *  
 	 *  @param view  The top-level GUI object.
 	 */
-	public SaveLevelView(LevelModel model, LevelBuilderView view) {
+	public SaveLevelView(LevelBuilderModel topModel, LevelModel model, LevelBuilderView view) {
 		// Nothing should actually change in the model until save button pressed.
-		
+		this.topModel = topModel;
 		this.model = model;
 		this.view = view;
 		
@@ -87,7 +90,7 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 		saveButton = new JButton("Done");
 		saveButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		saveButton.setBounds(500, 550, 145, 45);
-		saveButton.addActionListener(new ConfirmSaveController(view, this, model));
+		saveButton.addActionListener(new ConfirmSaveController(topModel, view, this, model));
 		add(saveButton);
 	}
 	

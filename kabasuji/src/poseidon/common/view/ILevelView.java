@@ -9,10 +9,12 @@ import poseidon.entities.LevelModel;
  */
 public interface ILevelView extends IModelUpdated
 {
-	/** Returns the BoardView object associated with the ILevelView. */
+	/** @return  The BoardView object associated with the ILevelView. */
 	public BoardView getBoard();
-	/** Returns the BullpenView object (the displayed Bullpen) associated with the ILevelView. */
+	
+	/** @return  The BullpenView object (the displayed Bullpen) associated with the ILevelView. */
 	public BullpenView getBullpen();
-	/** Returns the LevelModel object associated with the ILevelView. */
+	
+	/** @return  The LevelModel object associated with the ILevelView. */
 	public LevelModel getModel();
 }

@@ -18,7 +18,7 @@ public class ExitBuilderController implements ActionListener
 	 */
 	public ExitBuilderController( LevelBuilderModel model, LevelBuilderView game)
 	{
-		model = model;
+		this.model = model;
 		view = game;
 	}
 	

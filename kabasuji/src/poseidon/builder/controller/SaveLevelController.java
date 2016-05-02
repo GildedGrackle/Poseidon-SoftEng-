@@ -3,9 +3,9 @@ package poseidon.builder.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import poseidon.builder.view.EditPlayableBullpenView;
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.SaveLevelView;
+import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelModel;
 
 /**
@@ -15,6 +15,8 @@ import poseidon.entities.LevelModel;
  */
 public class SaveLevelController implements ActionListener {
 
+	/** The top-level entity. */
+	LevelBuilderModel topModel;
 	/** The state of the level under construction. */
 	LevelModel model;
 	/** The top-level GUI object. */
@@ -25,7 +27,8 @@ public class SaveLevelController implements ActionListener {
 	 *  
 	 *  @param view  The top-level GUI object.
 	 */
-	public SaveLevelController (LevelModel model, LevelBuilderView view) {
+	public SaveLevelController (LevelBuilderModel topModel, LevelModel model, LevelBuilderView view) {
+		this.topModel = topModel;
 		this.model = model;
 		this.view = view;
 	}
@@ -38,7 +41,7 @@ public class SaveLevelController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		// Switch to new screen but don't set view.currentScreen, to allow for easier return
-		SaveLevelView saveScreen = new SaveLevelView(model, view);
+		SaveLevelView saveScreen = new SaveLevelView(topModel, model, view);
 		view.getBuilder().setContentPane(saveScreen);
 		
 		// Display the new screen

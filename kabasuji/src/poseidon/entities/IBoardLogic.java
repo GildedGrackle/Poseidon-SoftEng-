@@ -64,4 +64,13 @@ public interface IBoardLogic {
 	 *  @param piece  The piece used to fill squares
 	 */
 	void placePiece(Board board, PieceContainer piece);
+	
+	
+	/** 
+	 *  Sets the square at (row, col) to be a hint, if possible.
+	 *  
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 */
+	void setHint(Board board, int row, int col);
 }

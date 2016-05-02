@@ -159,6 +159,19 @@ public class PuzzleBoardLogic implements IBoardLogic{
 			int pointCol = pt.getCol() + location.getCol();
 			playArea[pointRow][pointCol].fill();
 		}
-
 	}
+	
+	
+	/** 
+	 *  Does nothing, can't make hints during gameplay.
+	 *  
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 */
+	@Override
+	public void setHint(Board board, int row, int col)
+	{
+		return ;
+	}
+	
 }

@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.ColSizeController;
+import poseidon.builder.controller.HintSelectModeController;
 import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.LimitController;
 import poseidon.builder.controller.MakeReleaseSquareController;
@@ -71,7 +72,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	/** To redo change. */
 	JButton redoButton;
 	/** To add hint to board. */
-	JButton addHintButton;
+	JToggleButton addHintButton;
 	/** To make changes to the playable bullpen. */
 	JButton editPlayBullpenButton;
 	/** To reset board. */
@@ -100,7 +101,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	Image rotateCW, rotateCCW, icon;
 	/** To add a releaseSquare. */
 	JToggleButton addReleaseSquare;
-	
+	/** The logo. */
 	JLabel poseidon;
 
 
@@ -214,9 +215,10 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		limitInput.addPropertyChangeListener("value", new LimitController(this.getModel()));
 		add(limitInput);
 		
-		addHintButton = new JButton("Hint");
+		addHintButton = new JToggleButton("Hint");
 		addHintButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		addHintButton.setBounds(555, 375, 110, 45);
+		addHintButton.addItemListener(new HintSelectModeController(this));
 		add(addHintButton);
 		
 		editPlayBullpenButton = new JButton("Choose Pieces");
@@ -286,7 +288,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton = new JButton("Save");
 		saveButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		saveButton.setBounds(15, 510, 110, 55);
-		saveButton.addActionListener(new SaveLevelController(model, application));
+		saveButton.addActionListener(new SaveLevelController(topmodel, model, application));
 		add(saveButton);
 		
 		if (model.getGameMode() == 3){
@@ -338,13 +340,13 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		
 		return true;
 	}
-
+	
+	
+	
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/**
-	 *  Returns the BoardView object associated with this BuilderView.
-	 */
+	/** @return  The BoardView object associated with this BuilderView. */
 	@Override
 	public BoardView getBoard()
 	{
@@ -352,9 +354,8 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	}
 
 
-	/**
-	 *  @return  the BullpenView object (the rendered infinite Bullpen) associated with this BuilderView
-	 */
+	/** @return  The BullpenView object (the rendered infinite Bullpen) associated
+	 * with this BuilderView. */
 	@Override
 	public BullpenView getBullpen()
 	{
@@ -362,9 +363,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	}
 
 
-	/**
-	 *  @return  the LevelModel object associated with this BuilderView
-	 */
+	/** @return  The LevelModel object associated with this BuilderView. */
 	@Override
 	public LevelModel getModel()
 	{
@@ -372,35 +371,35 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	}
 	
 	
-	/** @return  the JFormattedTextField responsible for the board's row size */
+	/** @return  The JFormattedTextField responsible for the board's row size. */
 	public JFormattedTextField getRowSizeInput()
 	{
 		return rowSizeInput;
 	}
 	
 	
-	/** @return  the JFormattedTextField responsible for the board's column size */
+	/** @return  The JFormattedTextField responsible for the board's column size. */
 	public JFormattedTextField getColSizeInput()
 	{
 		return colSizeInput;
 	}
 	
-	/** @return  the button associated with saving the level */
+	/** @return  The button associated with saving the level. */
 	public JButton getSave(){
 		return saveButton;
 	}
 	
-	/** @return  the button associated with the undo controller  */
+	/** @return  The button associated with the undo controller.  */
 	public JButton getUndo(){
 		return undoButton;
 	}
 	
-	/** @return  the button associated with the redo controller */
+	/** @return  the button associated with the redo controller. */
 	public JButton getRedo(){
 		return redoButton;
 	}
 	
-	/** @return  the button associated with the edit playable bullpen controller*/
+	/** @return  The button associated with the edit playable bullpen controller. */
 	public JButton getSetPlayBull(){
 		return editPlayBullpenButton;
 	}
