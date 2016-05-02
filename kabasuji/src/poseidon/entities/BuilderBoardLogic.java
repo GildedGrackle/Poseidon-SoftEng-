@@ -80,45 +80,20 @@ public class BuilderBoardLogic implements IBoardLogic {
 	
 	/**
 	 *  Determines if a Piece with part at (row, col) can be selected.
-	 *  
-	 *  Checks that the Square is playable and contains a Piece.
-	 *  
+	 *
 	 *  @param board  the board being searched
 	 *  @param row  the row of the selected square
 	 *  @param col  the column of the selected square
-	 *  @return  Indicator of whether there is a selectable piece at (row, col)
+	 *  @return  False - pieces can't be selected in Release.
 	 */
 	@Override
 	public Boolean selectablePieceAt(Board board, int row, int col)
 	{
-		// If location is unplayable or unfilled
-		if(board.getSquare(row, col).getType() < 0 || !board.getSquare(row, col).isFilled())
-		{
-			// Then can't select any Piece on it
-			return false;
-		}
-		
-		// Search for the Piece covering this Square
-		for(PieceContainer pc : board.getPieces())
-		{
-			for(Point pt : pc.getPiece().getPiece())
-			{
-				// If Piece contains the Square
-				if(pt.getCol() + pc.getLocation().getCol() == col &&
-						pt.getRow() + pc.getLocation().getRow() == row)
-				{
-					// Then can select it
-					return true;
-				}
-			}
-		}
-		
-		// Probably won't get down here, but it keeps the compiler happy.
 		return false;
 	}
 
 	
-	/** @return  False - cannot edit Puzzle board during gameplay. */
+	/** @return  True - can edit board during building. */
 	@Override
 	public Boolean canEdit(Board board) {
 		return true;

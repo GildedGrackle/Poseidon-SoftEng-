@@ -77,7 +77,7 @@ public class MakeLightningController implements ActionListener
 		}
 		BuilderBullpenLogic newBullpenLogic = new BuilderBullpenLogic();
 		BuilderBoardLogic newBoardLogic = new BuilderBoardLogic();
-		LightningLevel newLevel = new LightningLevel(60, "New Puzzle Level",
+		LightningLevel newLevel = new LightningLevel(60, "New Lightning Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
 				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
 		LevelContainer newContainer = new LevelContainer("", 3, 0, newLevel, 0);  // TODO use correct "inGame" input

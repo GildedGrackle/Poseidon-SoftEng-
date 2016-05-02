@@ -23,44 +23,21 @@ public class BuilderBullpenLogic implements IBullpenLogic {
 	@Override
 	public void afterPieceRemoved(Bullpen bullpen, PieceContainer piece)
 	{
-		// Create new PieceContainer copy
-		PieceContainer freshCopy = createNewPiece(piece);
-		
 		// Find where the removed piece was in the bullpen
 		PieceFactory fac = new PieceFactory();
 		int index = 0;
 		for(int i = 1; i <= 35; i++)
 		{
-			if(freshCopy.equals(fac.getPiece(i)))
+			if(! bullpen.getPiece(i - 1).equals(fac.getPiece(i)))
 			{
 				index = i;
+				break;
 			}
 		}
+		
+		PieceContainer freshCopy = new PieceContainer(fac.getPiece(index), new Point(-1, -1));
 		
 		// Add the new copy
 		bullpen.addPieceAt(freshCopy, index - 1);
-	}
-	
-
-	/**
-	 *  Creates a new PieceContainer that contains the same Piece but is different.
-	 *  
-	 *  @param piece  the PieceContainer to duplicate
-	 *  @return  The newly created PieceContainer.
-	 */
-	PieceContainer createNewPiece(PieceContainer piece)
-	{
-		Point[] points = new Point[6];
-		for(Point newPt : points)
-		{
-			for(Point pt : piece.getPiece().getPiece())
-			{
-				newPt = new Point(pt.getRow(), pt.getCol());
-			}
-		}
-		Piece pieceCopy = new Piece(points);
-		PieceContainer newPC = new PieceContainer(pieceCopy, new Point(-1, -1));
-		
-		return newPC;
 	}
 }
