@@ -127,7 +127,6 @@ public class LightningLevel extends LevelModel{
 			}
 		}
 		
-		if (board.getActiveDragged()!=null) {stars-=1;}
 		if (nonFilledSquares <= 12) { stars+=1; }
 		if (nonFilledSquares <= 6) { stars+=1; }
 		if (nonFilledSquares == 0) { stars+=1; }

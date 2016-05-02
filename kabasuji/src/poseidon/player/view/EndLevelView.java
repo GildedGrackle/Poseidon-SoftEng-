@@ -1,11 +1,16 @@
 package poseidon.player.view;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.awt.Image;
+import java.io.IOException;
 
 import javax.swing.JButton;
+
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.ContinueController;
 import poseidon.player.controller.LevelSelectController;
@@ -45,17 +50,17 @@ public class EndLevelView extends JPanel implements IGameScreen
 		levelScore.setBounds(90, 85, 500, 350);
 		add(levelScore);
 		
-		JButton replayButton = new JButton("Replay");
+		JButton replayButton = new JButton();
 		replayButton.setBounds(90, 500, 80, 80);
 		replayButton.addActionListener(new ResetController(model, view));
 		add(replayButton);
 		
-		JButton levelSelectButton = new JButton("Level Select");
+		JButton levelSelectButton = new JButton();
 		levelSelectButton.setBounds(300, 500, 80, 80);
 		levelSelectButton.addActionListener(new LevelSelectController(model, view));
 		add(levelSelectButton);
 		
-		JButton nextLevelButton = new JButton("Next Level");
+		JButton nextLevelButton = new JButton();
 		nextLevelButton.setBounds(510, 500, 80, 80);
 		nextLevelButton.addActionListener(new ContinueController(model, view));
 		if(model.getPlayingLevel().getScore() < 1)  // If the next level hasn't been unlocked
@@ -63,6 +68,18 @@ public class EndLevelView extends JPanel implements IGameScreen
 			// Then disable this button, can't move on
 			nextLevelButton.setEnabled(false);
 		}
+		
+		try
+		{
+			Image replayImage = ImageIO.read(getClass().getClassLoader().getResource("images/Replay level.png"));
+			Image lvlSelectImage = ImageIO.read(getClass().getClassLoader().getResource("images/Level select.png"));
+			Image nextImage = ImageIO.read(getClass().getClassLoader().getResource("images/Next level.png"));
+			replayButton.setIcon(new ImageIcon(replayImage));
+			levelSelectButton.setIcon(new ImageIcon(lvlSelectImage));
+			nextLevelButton.setIcon(new ImageIcon(nextImage));
+		}
+		catch (IOException e) {}
+		
 		add(nextLevelButton);
 	}
 
