@@ -62,4 +62,14 @@ public class PuzzleSquare extends Square {
 		return isHint;
 	}
 
+	
+	/**
+	 *  Sets isHint.
+	 *  
+	 *  @param isHint  the new indication
+	 */
+	public void setIsHint(Boolean isHint)
+	{
+		this.isHint = isHint;
+	}
 }

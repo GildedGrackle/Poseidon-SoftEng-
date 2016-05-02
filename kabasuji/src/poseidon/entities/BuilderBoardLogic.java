@@ -135,6 +135,55 @@ public class BuilderBoardLogic implements IBoardLogic {
 				break;
 			}
 		}
-
 	}
+	
+	
+	/** 
+	 *  Sets the square at (row, col) to be a hint, if possible.
+	 *  
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 */
+	public void setHint(Board board, int row, int col)
+	{
+		Square[][] playArea = board.getPlayArea();
+		
+		// Figure out the gamemode
+		int gamemode = 0;
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				if(playArea[i][j].getType() > 0)
+				{
+					gamemode = playArea[i][j].getType();
+					break;  // Sometimes I wish there would be a double-break
+				}
+			}
+			if(gamemode > 0)  // Then I wouldn't have to do this
+			{
+				break;
+			}
+		}
+		
+		// If the gamemode is Lightning or the square is unplayable
+		if(gamemode == LevelModel.LIGHTNING && playArea[row][col].getType() < 0)
+		{
+			// Then bail, can't make a hint
+			return ;
+		}
+		
+		// Else make a hint
+		if(gamemode == LevelModel.PUZZLE)
+		{
+			PuzzleSquare newHintSquare = (PuzzleSquare) playArea[row][col];
+			newHintSquare.setIsHint(true);
+		}
+		else
+		{
+			ReleaseSquare newHintSquare = (ReleaseSquare) playArea[row][col];
+			newHintSquare.setIsHint(true);
+		}
+	}
+	
 }

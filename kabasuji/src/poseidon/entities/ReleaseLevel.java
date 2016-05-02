@@ -114,7 +114,7 @@ public class ReleaseLevel extends LevelModel{
 		if (calculateScore() == 3) {return true;}
 		return false;
 	}
-
+	
 	
 	/** @return  the number of moves remaining */
 	@Override

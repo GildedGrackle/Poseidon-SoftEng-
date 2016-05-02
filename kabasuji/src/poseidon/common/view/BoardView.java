@@ -3,6 +3,7 @@ package poseidon.common.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
 import poseidon.entities.Board;
@@ -24,6 +25,8 @@ public class BoardView extends JPanel implements IModelUpdated
 	Board board;
 	/** Location of the top-left corner (anchor) of activeDragging. */
 	java.awt.Point activeLocation;
+	/** Whether in hint selection mode or not. */
+	Boolean hintSelectionMode;
 	/** The size (height or width) of a Square, in pixels. */
 	public static final int SQUARE_SIZE = 30;
 	/** The size (height or width) of a Piece when, in pixels. */
@@ -38,6 +41,7 @@ public class BoardView extends JPanel implements IModelUpdated
 	public BoardView(Board board)
 	{
 		this.board = board;
+		this.hintSelectionMode = false;
 	}
 	
 	
@@ -269,6 +273,13 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/** @return  Indication of whether in hint selection mode. */
+	public Boolean getHintSelectionMode()
+	{
+		return hintSelectionMode;
+	}
+	
+	
 	/** @return The location of the anchor point of the piece being dragged. */
 	public java.awt.Point getActiveLocation()
 	{
@@ -284,5 +295,15 @@ public class BoardView extends JPanel implements IModelUpdated
 	public void setActiveLocation(java.awt.Point activeLocation)
 	{
 		this.activeLocation = activeLocation;
+	}
+	
+	/**
+	 *  Sets the hint selection mode.
+	 *  
+	 *  @param newMode  the new mode
+	 */
+	public void setHintSelectionMode(Boolean newMode)
+	{
+		hintSelectionMode = newMode;
 	}
 }
