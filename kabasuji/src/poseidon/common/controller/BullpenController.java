@@ -63,13 +63,11 @@ public class BullpenController extends MouseAdapter
 				selected.setIsSelected(false);
 			}
 			model.setPieceSelected(null);
-			view.setSelectedPiece(null);
 		}
 		else  // Safe to access using index
 		{
 			// Then select that Piece
 			model.setPieceSelected(model.getPiece(index));
-			view.setSelectedPiece(view.getPieceView(index));
 		}
 		
 		// Change view to reflect change

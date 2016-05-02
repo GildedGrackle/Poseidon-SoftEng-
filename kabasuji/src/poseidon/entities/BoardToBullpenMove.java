@@ -1,7 +1,6 @@
 package poseidon.entities;
 
 import poseidon.common.view.ILevelView;
-import poseidon.common.view.PieceView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 
@@ -21,8 +20,6 @@ public class BoardToBullpenMove implements IMove{
 	Point from;
 	/** The Piece to move. */
 	PieceContainer piece;
-	/** The color represenation of the Piece being moved. */
-	PieceView draggedPiece;
 	
 	
 	/**
@@ -38,7 +35,6 @@ public class BoardToBullpenMove implements IMove{
 		this.view = view;
 		this.from = piece.getLocation();
 		this.piece = piece;
-		this.draggedPiece = view.getBoard().getActiveDragging();
 	}
 	
 	
@@ -70,12 +66,10 @@ public class BoardToBullpenMove implements IMove{
 			
 			// Add piece to Bullpen  
 			view.getBullpen().getModel().addPiece(piece);
-			view.getBullpen().addPiece(draggedPiece);
 			
 			// Remove piece from Board not required because was removed during
 			// BoardController.mousePressed()
 			game.getBoard().setActiveDragged(null);
-			view.getBoard().setActiveDragging(null);
 			
 			
 			// Decrease the number of moves remaining

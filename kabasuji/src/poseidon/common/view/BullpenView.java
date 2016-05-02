@@ -22,10 +22,7 @@ import poseidon.entities.Point;
 public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	/** The state of the Bullpen. */
 	Bullpen model;
-	/** The Pieces in the Bullpen. */
-	ArrayList<PieceView> pieces;
-	/** The representation of the selected Piece */
-	PieceView selectedPiece;
+	
 	/** How size (height or width) of the constituent squares of a Piece, in pixels. */
 	public static final int SQUARE_SIZE = 10;
 	/** The size (height or width) of a Piece, in pixels. */
@@ -41,31 +38,10 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	public BullpenView(Bullpen model)
 	{
 		this.model = model;
-		this.selectedPiece = null;
 
-		createPieces();
-		
 		setLayout(null);
 		setMinimumSize(new Dimension(PIECE_SIZE * 6, PIECE_SIZE));
-		setPreferredSize(new Dimension(PIECE_SIZE * pieces.size(), PIECE_SIZE));
-	}
-
-	
-	/**
-	 *  Creates the PieceView objects based on the model's playable bullpen.
-	 *  
-	 *  @return  Indicator whether operation completed successfully.
-	 */
-	public Boolean createPieces()
-	{
-		pieces = new ArrayList<PieceView>(model.getPieces().size());
-		
-		for(PieceContainer p : model.getPieces())
-		{
-			pieces.add(new PieceView(p));
-		}
-		
-		return true;
+		setPreferredSize(new Dimension(PIECE_SIZE * model.getSize(), PIECE_SIZE));
 	}
 	
 	
@@ -77,11 +53,11 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	public Boolean modelUpdated()
 	{
 		// If resizing won't make this panel smaller than its minimum size
-		if(PIECE_SIZE * pieces.size() >= getMinimumSize().width)
+		if(PIECE_SIZE * model.getSize() >= getMinimumSize().width)
 		{
 			// Then resize so that if the number of Pieces changed the
 			// panel will extend or contract to accomodate them
-			setPreferredSize(new Dimension(BullpenView.PIECE_SIZE * pieces.size(),
+			setPreferredSize(new Dimension(BullpenView.PIECE_SIZE * model.getSize(),
 					BullpenView.PIECE_SIZE));
 		}
 		
@@ -120,24 +96,24 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 		
 		// Draw Pieces
 		int i = 0;
-		for(PieceView pv : pieces)
+		for(PieceContainer pc : model.getPieces())
 		{
-			Piece p = pv.getModel().getPiece();
+			Piece p = pc.getPiece();
 			int offsetX = PIECE_SIZE * i;
 			for(Point pt : p.getPiece())
 			{
 				int pieceOffsetY = 2 + SQUARE_SIZE * pt.getRow();
 				int pieceOffsetX = 2 + SQUARE_SIZE * pt.getCol();
-				drawer.setColor(pv.getPieceColor());
+				drawer.setColor(p.getPieceColor());
 				drawer.fillRoundRect(pieceOffsetX + offsetX, pieceOffsetY,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
-				drawer.setColor(pv.getPieceBorder());
+				drawer.setColor(p.getPieceBorder());
 				drawer.drawRoundRect(pieceOffsetX + offsetX, pieceOffsetY,
 						SQUARE_SIZE, SQUARE_SIZE, 3, 3);
 			}
 			
 			// If the Piece Container is currently selected in the Bullpen
-			if(pv.getModel().getIsSelected())
+			if(pc.getIsSelected())
 			{
 				// Then indicate that it is selected (with a border right now)
 				drawer.setColor(Color.CYAN);
@@ -147,44 +123,6 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 			
 			i++;
 		}
-	}
-	
-	
-	/**
-	 *  Adds given PieceView to the list of PieceViews.
-	 *  
-	 * @param piece  PieceView to add
-	 * @return  Indicator whether operation completed successfully.
-	 */
-	public boolean addPiece(PieceView piece)
-	{
-		return pieces.add(piece);
-	}
-	
-	
-	/**
-	 *  Returns a given PieceView to the list of PieceViews at given index.
-	 *  
-	 *  @param piece  PieceView to add
-	 *  @param index  the index of this piece, must be within bounds
-	 *  @return  Indicator whether operation completed successfully.
-	 */
-	public boolean addPieceAt(PieceView piece, int index)
-	{
-		pieces.add(index, piece);
-		return true;
-	}
-	
-	
-	/**
-	 *  Removes given PieceView from the list of PieceViews.
-	 *  
-	 * @param piece  the PieceView to remove
-	 * @return  Indicator whether operation changed list.
-	 */
-	public boolean removePiece(PieceView piece)
-	{
-		return pieces.remove(piece);
 	}
 	
 
@@ -268,34 +206,5 @@ public class BullpenView extends JPanel implements Scrollable, IModelUpdated{
 	public Bullpen getModel()
 	{
 		return model;
-	}
-	/** @return  The selected PieceView. */
-	public PieceView getSelectedPiece()
-	{
-		return selectedPiece;
-	}
-	/**
-	 *  @param index  location in the list of pieces, must be within list bounds
-	 *  @return  The PieceView at index. 
-	 */
-	public PieceView getPieceView(int index)
-	{
-		return pieces.get(index);
-	}
-	/** 
-	 * Sets the selected PieceView, or deselects the PieceView is already selected.
-	 * 
-	 * @param piece  the piece to select
-   */
-	public void setSelectedPiece(PieceView piece)
-	{
-		// If incoming piece is already selected
-		if(piece == selectedPiece){
-			// Then deselect it
-			selectedPiece = null;
-		}
-		else {  // Different piece
-			selectedPiece = piece;
-		}
 	}
 }

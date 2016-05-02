@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import poseidon.common.view.BullpenView;
-import poseidon.common.view.PieceView;
+import poseidon.entities.PieceContainer;
 
 /**
  *  Rotates the selected Piece in the Bullpen clockwise.
@@ -33,16 +33,16 @@ public class RotateCWController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
-		PieceView pv = view.getSelectedPiece();
+		PieceContainer pc = view.getModel().getPieceSelected();
 		
 		// If there is no selected Piece, then leave
-		if(pv == null)
+		if(pc == null)
 		{
 			return ;
 		}
 		
 		// Else Piece exists, so rotate it
-		pv.getModel().getPiece().rotateCW();
+		pc.getPiece().rotateCW();
 		
 		view.repaint();
 	}

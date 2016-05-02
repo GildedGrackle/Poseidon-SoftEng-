@@ -44,6 +44,7 @@ public class Board {
 		this.playArea = playArea;
 		pieces = new ArrayList<PieceContainer>();
 		this.logic = logic;
+		activeSource = new Point(-1, -1);
 		
 		//Might be a little complicated, but determines the "type" of board. Mostly needed to deal with builder boards
 		if (logic instanceof PuzzleBoardLogic) { type = 1; }
@@ -203,6 +204,35 @@ public class Board {
 		}
 		
 		return false;
+	}
+	
+	
+	/**
+	 *  Sets the piece at (row, col) to the active dragged piece.
+	 *  
+	 *  @param row  the row of the selected square
+	 *  @param col  the column of the selected square
+	 */
+	public void selectPiece(int row, int col)
+	{
+		for(PieceContainer pc : pieces)
+		{
+			int mainRow = pc.getLocation().getRow();
+			int mainCol = pc.getLocation().getCol();
+			for(Point pt : pc.getPiece().getPiece())
+			{
+				int actualRow = mainRow + pt.getRow();
+				int actualCol = mainCol + pt.getCol();
+				
+				// If this piece has been clicked on
+				if(actualRow == row && actualCol == col)
+				{
+					// Then set this piece as the active dragged piece
+					activeDragged = pc;
+					return ;  // No point in continuing, found what we were looking for
+				}
+			}
+		}
 	}
 	
 	
