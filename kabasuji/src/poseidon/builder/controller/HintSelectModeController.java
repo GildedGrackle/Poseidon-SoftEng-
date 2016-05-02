@@ -43,6 +43,7 @@ public class HintSelectModeController implements ItemListener
 			view.getBoard().setHintSelectionMode(false);
 		}
 
+		view.modelUpdated();
 	}
 
 }
