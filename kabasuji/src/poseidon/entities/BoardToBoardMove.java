@@ -86,6 +86,7 @@ public class BoardToBoardMove implements IMove{
 			// Decrease moves remaining by 1 (if applicable)
 			view.getModel().decrementLimit();
 			view.getModel().updateScore();
+			view.getModel().checkIfWon();
 			return true;
 		}
 		
