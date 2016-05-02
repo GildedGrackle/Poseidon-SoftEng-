@@ -24,6 +24,7 @@ public abstract class Square {
 		return this.isFilled;
 	}
 	
+	/** Used to indicate the type of Square this is. */
 	public abstract int getType();
 	
 	public abstract ReleaseNumber getReleaseNumber();

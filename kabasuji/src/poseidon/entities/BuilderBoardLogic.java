@@ -15,17 +15,9 @@ public class BuilderBoardLogic implements IBoardLogic {
 	}
 	
 	
-	/**
-	 * Adds given piece to the board and returns whether the addition was successful.
-	 * TODO see IBoardLogic
-	 * 
-	 * @param board - The board the addition is performed on.
-	 * @param piece - The piece container of the piece that needs to be added, location must be set.
-	 * @param row, col - The location on the board where the pivot of the piece should be.
-	 * @return Boolean - Indicates whether the addition was successful.
-	 */
-	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
-		return true;
+	/** @return  False - pieces shouldn't be added to the list of pieces on the board. */
+	public Boolean shouldAddList() {
+		return false;
 	}
 	
 	

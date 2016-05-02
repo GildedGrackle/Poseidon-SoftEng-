@@ -107,13 +107,16 @@ public class Board {
 	 * @return  Boolean - Indicates whether the addition was successful.
 	 */
 	public Boolean addPiece (PieceContainer piece) {
-		boolean shouldAdd = logic.shouldAddPiece(this, piece);
-		if (shouldAdd){
-		pieces.add(piece);	
+		// Add piece
 		placePiece(piece);
+		
+		// If should add to list
+		if (logic.shouldAddList()){
+			// Then add it
+			pieces.add(piece);
 		}
 		
-		return shouldAdd;
+		return true;
 	}
 	
 
@@ -139,26 +142,49 @@ public class Board {
 	 * 
 	 * NOTE: Checks for validity while making the move itself. Nothing should be calling this function
 	 * except ResizeBoardMove.
-	 * @param newRow
-	 * @param newCol - The sizes that the board needs to be resized to
+	 * @param newRow  The new number of rows that the board needs to be resized to
+	 * @param newCol  The new number of columns that the board needs to be resized to
+	 * @param gamemode  to allow the proper squares to be built
 	 */
-	void resizeBoard (int newRow, int newCol){
-		int smallRow = 0, smallCol = 0;
-		Square [] [] newBoard = new Square [newRow] [newCol];
+	void resizeBoard (int newRow, int newCol, int gamemode){
+		Square[][] newBoard = new Square [Board.MAXROWS] [Board.MAXCOLS];
 		
-		if(newRow>this.getRows()){ smallRow = this.getRows();}
-		else smallRow = newRow;
-		if(newCol>this.getCols()){ smallCol = this.getCols();}
-		else smallCol = newCol;
-		//Checks for the smallest board size that is copied over. 
-		
-		for (int i=0; i<smallRow; i++){
-			for (int j=0; j<smallCol; j++) {
-				newBoard[i][j] =  playArea[i][j];
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				// If the square is outside of the resizing boundary
+				if(i > newRow || j > newCol)
+				{
+					// Then make it unplayable
+					newBoard[i][j] = new NonplayableSquare();
+				}
+				else
+				{
+					// Else make it playable
+					switch(gamemode)
+					{
+					case LevelModel.PUZZLE:
+						newBoard[i][j] = new PuzzleSquare(false);
+						break;
+					case LevelModel.LIGHTNING:
+						newBoard[i][j] = new LightningSquare(false);
+						break;
+					case LevelModel.RELEASE:
+						newBoard[i][j] = new ReleaseSquare(false, null);
+						break;
+					default:
+						newBoard[i][j] = playArea[i][j];
+					}
+					
+				}
 			}
-		}	
+		}
+		
 		playArea = newBoard;
 	}
+	
+	
 	
 	void setBoard(Square [] [] newBoard){		
 		this.playArea = newBoard;

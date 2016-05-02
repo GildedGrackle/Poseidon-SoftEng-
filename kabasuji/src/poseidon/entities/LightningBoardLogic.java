@@ -17,17 +17,10 @@ public class LightningBoardLogic implements IBoardLogic {
 		
 	}
 	
-	/**
-	 * Adds given piece to the board. TODO see IBoardLogic
-	 * 
-	 * @param board - The board the addition is performed on.
-	 * @param piece - The piece container of the piece that needs to be added, location must be set.
-	 * @param row, col - The location on the board where the pivot of the piece should be.
-	 * @return Boolean - Indicates whether the addition was successful
-	 */
+	/** @return  False - pieces shouldn't be added to the list of pieces on the board. */
 	@Override
-	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
-		return true;
+	public Boolean shouldAddList() {
+		return false;
 	}
 	
 	/**
