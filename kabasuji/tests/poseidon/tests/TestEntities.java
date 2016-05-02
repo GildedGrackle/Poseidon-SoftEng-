@@ -326,6 +326,23 @@ public class TestEntities extends TestCase{
 		public Boolean canEdit(Board board) {
 			return false;
 		}
+
+		@Override
+		public Boolean shouldAddList() {
+			return true;
+		}
+
+		@Override
+		public void placePiece(Board board, PieceContainer piece) {
+			return;
+			
+		}
+
+		@Override
+		public void setHint(Board board, int row, int col) {
+			return;
+			
+		}
 	}
 	
 	public void testBoard(){

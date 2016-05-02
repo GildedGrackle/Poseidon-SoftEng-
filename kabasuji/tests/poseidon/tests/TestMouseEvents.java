@@ -6,7 +6,6 @@ import junit.framework.TestCase;
 import poseidon.builder.view.BuilderView;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
-import poseidon.common.view.PieceView;
 import poseidon.player.view.LevelView;
 
 public class TestMouseEvents extends TestCase{
@@ -14,7 +13,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createBoardPressed (LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_PRESSED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	
@@ -22,7 +21,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createExited (LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_EXITED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	
@@ -30,7 +29,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createRightClick (LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_PRESSED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, true);
+				dx, dy, 0, true);
 		return me;
 	}
 	
@@ -38,7 +37,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createReleased (LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_RELEASED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	
@@ -46,7 +45,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createClicked (LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_CLICKED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 1, false);
+				dx, dy, 1, false);
 		return me;
 	}
 	
@@ -62,7 +61,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createDragged(LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_DRAGGED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	
@@ -70,14 +69,14 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createMoved(LevelView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_MOVED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	
 	public MouseEvent createBullpenPressed (LevelView lvlView, BullpenView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_PRESSED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	
@@ -85,7 +84,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createBuilderMoved (BuilderView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_MOVED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	
@@ -93,7 +92,7 @@ public class TestMouseEvents extends TestCase{
 	public MouseEvent createBuilderReleased (BuilderView lvlView, BoardView view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(lvlView, MouseEvent.MOUSE_RELEASED, 
 				System.currentTimeMillis(), 0, 
-				view.getX()+dx, view.getY()+dy, 0, false);
+				dx, dy, 0, false);
 		return me;
 	}
 	

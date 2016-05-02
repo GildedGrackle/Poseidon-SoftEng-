@@ -39,7 +39,6 @@ import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.NewLevelView;
 import poseidon.common.controller.BoardController;
 import poseidon.common.view.BoardView;
-import poseidon.common.view.PieceView;
 import poseidon.builder.view.EditLevelView;
 import poseidon.builder.view.EditPlayableBullpenView;
 import junit.framework.TestCase;
@@ -220,21 +219,18 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			PieceContainer selectedPiece = model.getBuildingLevel().getInfiniteBullpen().getPiece(1);
 		
 			model.getBuildingLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
-			PieceView selectedPieceView = builderView.getBullpen().getPieceView(1);
-			builderView.getBullpen().setSelectedPiece(selectedPieceView); 
 			
-			BoardController boardController = new BoardController(model.getBuildingLevel() , builderView);
+			BoardController boardController = new BoardController(view, model.getBuildingLevel() , builderView);
 			
 			MouseEvent movePiece = createBuilderMoved(builderView, builderView.getBoard(), 0, 0);
 			boardController.mouseMoved(movePiece);
 			
-			assertEquals(builderView.getBoard().getActiveDragging(), selectedPieceView);
+			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), selectedPiece);
 			
 			MouseEvent pressed = createBuilderPress(builderView, builderView.getBoard(), 0, 0);
 			boardController.mousePressed(pressed);
 			
-			assertTrue(model.getBuildingLevel().getBoard().getPieces().contains(selectedPiece));
-			assertEquals(builderView.getBoard().getActiveDragging(), null);
+			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), null);
 			
 			UndoController undo = new UndoController(builderView);
 			
@@ -251,8 +247,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			ActionEvent newRedo = buttonPress(button);
 			redo.actionPerformed(newRedo);
 			
-			assertTrue(model.getBuildingLevel().getBoard().getPieces().contains(selectedPiece));
-			assertEquals(builderView.getBoard().getActiveDragging(), null);
+			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), null);
 			
 		}
 		
@@ -267,7 +262,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 			BuilderView builderView = new BuilderView(model, view);
 			
-			BoardController boardController = new BoardController(model.getBuildingLevel() , builderView);
+			BoardController boardController = new BoardController(view, model.getBuildingLevel() , builderView);
 			
 			MouseEvent doubleClick = createDoubleClicked(builderView, builderView.getBoard(), 0, 0);
 			boardController.mouseClicked(doubleClick);

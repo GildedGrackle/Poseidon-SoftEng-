@@ -17,7 +17,6 @@ import poseidon.common.controller.RotateCWController;
 import poseidon.common.controller.VerticalFlipController;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
-import poseidon.common.view.PieceView;
 import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 import poseidon.entities.IBullpenLogic;
@@ -131,76 +130,71 @@ public class TestCommonControllers extends TestMouseEvents{
 
 		testBullpen.setPieceSelected(squiggleCont);
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont);
-		PieceView linePieceView = new PieceView(lineCont);
-		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
+		testLevel.incrementLimit();
+		testLevel.incrementLimit();
 		
-		BoardController controller = new BoardController(testLevel, lvlView);
+		BoardController controller = new BoardController(view, testLevel, lvlView);
 		
 		MouseEvent movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mouseMoved(movePiece);
 		
-		assertEquals(lvlView.getBoard().getActiveDragging(), squigglePieceView);
+		assertEquals(model.getPlayingLevel().getLevel().getBoard().getActiveDragged(), squiggleCont);
 		
 		MouseEvent pressed = createBoardPressed(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mousePressed(pressed);
 		
 		assertFalse(testBullpen.getPieces().contains(squiggleCont));
-		assertFalse(lvlView.getBoard().getPieces().isEmpty());
 		assertTrue(testBoard.getPieces().contains(squiggleCont));
-		assertEquals(lvlView.getBoard().getActiveDragging(), null);
-		
-		java.awt.Point location2 =  new java.awt.Point(squigglePieceView.getY(), squigglePieceView.getX());
-		
+		assertEquals(model.getPlayingLevel().getLevel().getBoard().getActiveDragged(), null);
+
+		testLevel.incrementLimit();
+		testLevel.incrementLimit();
 		controller.mousePressed(pressed);
-		assertEquals(squigglePieceView.getModel(), lvlView.getBoard().getActiveDragging().getModel());
-		assertTrue(lvlView.getBoard().getPieces().isEmpty());
+		assertEquals(squiggleCont, model.getPlayingLevel().getLevel().getBoard().getActiveDragged());
+		assertTrue(model.getPlayingLevel().getLevel().getBoard().getPieces().isEmpty());
 		
-		MouseEvent dragPiece = createDragged(lvlView, lvlView.getBoard(), 2, 2);
+		MouseEvent dragPiece = createDragged(lvlView, lvlView.getBoard(), 30, 2);
 		controller.mouseDragged(dragPiece);
 		
-		assertNotSame(location2, lvlView.getBoard().getActiveLocation());
-		
-		MouseEvent released = createReleased(lvlView, lvlView.getBoard(), 2, 2);
+		MouseEvent released = createReleased(lvlView, lvlView.getBoard(), 30, 2);
 		controller.mouseReleased(released);
 		
 		assertTrue(testBoard.getPieces().contains(squiggleCont));
-		assertEquals(lvlView.getBoard().getActiveDragging(), null);
-		assertNotSame(location2, squigglePieceView.getLocation());
+		assertEquals(model.getPlayingLevel().getLevel().getBoard().getActiveDragged(), null);
 		
-		pressed = createBoardPressed(lvlView, lvlView.getBoard(), 2, 2);
+		pressed = createBoardPressed(lvlView, lvlView.getBoard(), 30, 2);
 		controller.mousePressed(pressed);
-		dragPiece = createDragged(lvlView, lvlView.getBoard(), -300, -300);
+		dragPiece = createDragged(lvlView, lvlView.getBoard(), -1000, -1000);
 		controller.mouseDragged(dragPiece);
-		released = createReleased(lvlView, lvlView.getBoard(), -300, -300);
+		released = createReleased(lvlView, lvlView.getBoard(), -1000, -1000);
 		controller.mouseReleased(released);
 		
-		assertTrue(lvlView.getBoard().getPieces().isEmpty());
+		testLevel.incrementLimit();
+		testLevel.incrementLimit();
+		testLevel.incrementLimit();
+		
+		assertTrue(model.getPlayingLevel().getLevel().getBoard().getPieces().isEmpty());
 		assertTrue(testBullpen.getPieces().contains(squiggleCont));
 		
 		testBullpen.setPieceSelected(lineCont);
-		lvlView.getBullpen().setSelectedPiece(linePieceView);
 		
 		assertTrue(lineCont.getIsSelected());
 		assertEquals(testBullpen.getPieceSelected(), lineCont);
-		assertEquals(lvlView.getBullpen().getSelectedPiece(), linePieceView);
 		
 		movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mouseMoved(movePiece);;
 		
-		assertEquals(linePieceView.getModel(),
-				lvlView.getBoard().getActiveDragging().getModel());
+		assertEquals(lineCont,
+				model.getPlayingLevel().getLevel().getBoard().getActiveDragged());
 		
 		MouseEvent removePiece = createExited(lvlView, lvlView.getBoard(), 0, 0);
 		controller.mouseExited(removePiece);
 		
-		assertNull(lvlView.getBoard().getActiveDragging());	
+		assertNull(model.getPlayingLevel().getLevel().getBoard().getActiveDragged());	
 	}
 		
 	public void testBullpenControllerPuzzle(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont);
-		PieceView linePieceView = new PieceView(lineCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		
@@ -222,11 +216,9 @@ public class TestCommonControllers extends TestMouseEvents{
 	public void testRotateCWController(){
 		
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
-		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
 		
 		RotateCWController rotateCWController = new RotateCWController(bullpenView);
 		
@@ -252,11 +244,9 @@ public class TestCommonControllers extends TestMouseEvents{
 	public void testRotateCCWController(){
 		
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
-		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
 		
 		RotateCCWController rotateCCWController = new RotateCCWController(bullpenView);
 		
@@ -279,11 +269,9 @@ public class TestCommonControllers extends TestMouseEvents{
 	}
 	public void testFlipHController(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
-		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
 		
 		HorizontalFlipController flipHController = new HorizontalFlipController(bullpenView);
 		
@@ -305,11 +293,9 @@ public class TestCommonControllers extends TestMouseEvents{
 
 	public void testFlipVController(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
-		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
 		
 		VerticalFlipController flipVController = new VerticalFlipController(bullpenView);
 		
@@ -331,12 +317,12 @@ public class TestCommonControllers extends TestMouseEvents{
 	
 	public void testResetController(){
 		LevelView lvlView = new LevelView(model, view); 
-		PieceView squigglePieceView = new PieceView(squiggleCont);
 		bullpenView = lvlView.getBullpen();
 		board = lvlView.getBoard();
 		testBullpen.setPieceSelected(squiggleCont);
-		lvlView.getBullpen().setSelectedPiece(squigglePieceView);
 		view.setCurrentView(new LevelSelectView(model, view));
+		testLevel.incrementLimit();
+		testLevel.incrementLimit();
 		
 		ResetController resetController = new ResetController(model, view);
 		
@@ -344,25 +330,25 @@ public class TestCommonControllers extends TestMouseEvents{
 		ActionEvent reset = buttonPress(button);
 		
 		
-		BoardController controller = new BoardController(testLevel, lvlView);
+		BoardController controller = new BoardController(view, testLevel, lvlView);
 		
 		MouseEvent movePiece = createMoved(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mouseMoved(movePiece);
 		
-		assertEquals(lvlView.getBoard().getActiveDragging(), squigglePieceView);
+		assertEquals(model.getPlayingLevel().getLevel().getBoard().getActiveDragged(), squiggleCont);
 		
 		MouseEvent pressed = createBoardPressed(lvlView, lvlView.getBoard(), 4, 5);
 		controller.mousePressed(pressed);
 		
 		assertFalse(testBullpen.getPieces().contains(squiggleCont));
-		assertFalse(lvlView.getBoard().getPieces().isEmpty());
+		assertFalse(model.getPlayingLevel().getLevel().getBoard().getPieces().isEmpty());
 		assertTrue(testBoard.getPieces().contains(squiggleCont));
-		assertEquals(lvlView.getBoard().getActiveDragging(), null);
+		assertEquals(model.getPlayingLevel().getLevel().getBoard().getActiveDragged(), null);
 		
 		resetController.actionPerformed(reset);	
 
-		assertTrue(view.getCurrentView().getCurrentlyPlaying().getBoard().getPieces().isEmpty());
-		assertNull(view.getCurrentView().getCurrentlyPlaying().getBoard().getActiveDragging());
+		assertTrue(model.getPlayingLevel().getLevel().getBoard().getPieces().isEmpty());
+		assertNull(model.getPlayingLevel().getLevel().getBoard().getActiveDragged());
 
 	}
 

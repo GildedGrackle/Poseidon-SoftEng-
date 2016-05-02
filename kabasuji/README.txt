@@ -1,5 +1,5 @@
 Group Poseidon 
-Authors: Monika Danielewicz, Morgan Hopeman, Natalia Kononenko, Alex Titus, and Jacob Wennersten
+Authors: Morgan Hopeman, Natalia Kononenko, Alex Titus, and Jacob Wennersten
 
 This is the first implementation of the Kabasuji game. 
 
