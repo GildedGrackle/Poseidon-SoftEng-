@@ -49,7 +49,7 @@ public class UndoController implements ActionListener
 				RedoManager.instance().recordMove(move);
 			}
 			
-			// TODO Else problem, just going to ignore it
+			// Else problem, just going to ignore it
 		}
 		
 		// Update display

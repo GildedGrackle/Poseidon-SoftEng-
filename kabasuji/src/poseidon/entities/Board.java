@@ -166,7 +166,11 @@ public class Board {
 	}
 	
 	
-	
+	/**
+	 *  Sets the board's play area.
+	 *  
+	 *  @param newBoard  the new play area
+	 */
 	void setBoard(Square [] [] newBoard){		
 		this.playArea = newBoard;
 	}
@@ -320,7 +324,11 @@ public class Board {
 	}
 
 	
-	/** @return  The square at location (row, col). */
+	/**
+	 *  @param row  the row half of the location
+	 *  @param col  the column half of the location
+	 *  @return  The square at location (row, col).
+	 */
 	public Square getSquare(int row, int col) {
 		return playArea[row][col];
 	}
