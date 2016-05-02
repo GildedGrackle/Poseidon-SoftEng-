@@ -97,10 +97,11 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	/** Label for the limit input field. */
 	JLabel limitLabel;
 	/** Icons for the Rotate Buttons*/
-	Image rotateCW, rotateCCW;
+	Image rotateCW, rotateCCW, icon;
 	/** To add a releaseSquare. */
 	JToggleButton addReleaseSquare;
 	
+	JLabel poseidon;
 
 
 	/**
@@ -164,11 +165,18 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		rotateCWButton.addActionListener(new RotateCWController(bullpen));
 		add(rotateCWButton);
 		
+		poseidon = new JLabel("");
+		poseidon.setBounds(35, 40, 100, 100);
+		add(poseidon);
+		
+		
 		try {
 			rotateCCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCCW.png"));
 			rotateCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCW.png"));
+			icon = ImageIO.read(getClass().getClassLoader().getResource("images/Logo.png"));
 			rotateCCWButton.setIcon(new ImageIcon(rotateCCW));
 			rotateCWButton.setIcon(new ImageIcon(rotateCW));
+			poseidon.setIcon(new ImageIcon(icon));
 		} catch (IOException e) {
 		}
 		
