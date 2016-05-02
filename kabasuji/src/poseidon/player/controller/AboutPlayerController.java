@@ -46,10 +46,10 @@ public class AboutPlayerController implements ActionListener
 		
 		// Set new screen
 		game.setCurrentView(newScreen);
-		game.getfrmKabasuji().setContentPane(newScreen);
+		game.getFrame().setContentPane(newScreen);
 		
 		// Display the new screen
-		game.getfrmKabasuji().setVisible(true);
+		game.getFrame().setVisible(true);
 		
 		return true;
 	}

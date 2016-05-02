@@ -6,7 +6,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import java.awt.Font;
-import java.awt.CardLayout;
 
 import javax.swing.JButton;
 
@@ -14,6 +13,7 @@ import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.ToEditLevelController;
 import poseidon.builder.controller.ExitBuilderController;
 import poseidon.builder.controller.NewLevelController;
+import poseidon.common.view.ITopView;
 import poseidon.entities.LevelBuilderModel;
 
 /**
@@ -25,7 +25,7 @@ import poseidon.entities.LevelBuilderModel;
  *  @author Alex Titus
  *
  */
-public class LevelBuilderView implements IBuilderScreen{
+public class LevelBuilderView implements IBuilderScreen, ITopView{
 
 	/** The top-level entity object, representing the application's state. */
 	LevelBuilderModel model;
@@ -117,11 +117,16 @@ public class LevelBuilderView implements IBuilderScreen{
 	 }
 	
 	
+	 /** @return  False - this is not the Level Player. */
+		public Boolean isGame()
+		{
+			return false;
+		}
 				/*************************
 				 *  Getters and setters  *
 				 *************************/
 	/** @return  The application frame. */
-	public JFrame getBuilder()
+	public JFrame getFrame()
 	{
 		return builder;
 	}

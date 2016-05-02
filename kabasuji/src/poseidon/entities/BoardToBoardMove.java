@@ -1,6 +1,7 @@
 package poseidon.entities;
 
 import poseidon.common.view.ILevelView;
+import poseidon.common.view.ITopView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 
@@ -12,6 +13,8 @@ import poseidon.entities.Point;
  * @author Alex Titus
  */
 public class BoardToBoardMove implements IMove{
+	/** The top-level GUI object, for if/when a game is won. */
+	ITopView application;
 	/** The representation of the board being changed. */
 	ILevelView view;
 	/** Original location of the piece. */
@@ -25,12 +28,14 @@ public class BoardToBoardMove implements IMove{
 	/**
 	 *  Constructor.
 	 *  
+	 *  @param application  the top-level GUI object, for if/when a game is won
 	 *  @param view  the GUI of the board being modified
 	 *  @param piece  the piece being moved
 	 *  @param from  original location of the piece
 	 *  @param to  possible new location of the piece
 	 */
-	public BoardToBoardMove(ILevelView view, PieceContainer piece, Point from, Point to) {
+	public BoardToBoardMove(ITopView application, ILevelView view, PieceContainer piece, Point from, Point to) {
+		this.application = application;
 		this.from = from;
 		this.to = to;
 		this.piece = piece;
@@ -86,7 +91,7 @@ public class BoardToBoardMove implements IMove{
 			// Decrease moves remaining by 1 (if applicable)
 			view.getModel().decrementLimit();
 			view.getModel().updateScore();
-			view.getModel().checkIfWon();
+			view.getModel().checkIfWon(application);
 			return true;
 		}
 		

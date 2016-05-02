@@ -39,7 +39,7 @@ public class ExitBuilderController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
-		view.getBuilder().dispose();
+		view.getFrame().dispose();
 		System.exit(0);
 	}
 }

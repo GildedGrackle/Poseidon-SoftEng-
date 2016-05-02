@@ -1,5 +1,10 @@
 package poseidon.entities;
 
+import java.awt.event.ActionEvent;
+
+import poseidon.common.view.ITopView;
+import poseidon.player.controller.EndLevelController;
+import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelView;
 
 /**
@@ -85,12 +90,6 @@ public abstract class LevelModel {
 	 */
 	public abstract void builderInitialize();
 	
-	void checkIfWon() {
-		if (hasWon()){
-			//TODO create action here
-		}
-	}
-	
 	/** @return  Whether the player reached 3 stars. */
 	abstract Boolean hasWon();
 	
@@ -99,13 +98,6 @@ public abstract class LevelModel {
 	
 	/** @return  The current score on this level. */
 	abstract int calculateScore();
-	
-	/**
-	 * Updates the score of the game
-	 */
-	void updateScore() {
-		score = calculateScore();
-	}
 
 	/** 
 	 *  Provides the game-type-specific limit for play.
@@ -146,6 +138,22 @@ public abstract class LevelModel {
 	 *  @param newLimit  the new limit
 	 */
 	public abstract void setMaxLimit(int newLimit);
+	
+	
+	void checkIfWon(ITopView application) {
+		if (hasWon() && application.isGame()){
+			EndLevelController finishLevel = new EndLevelController( (LevelPlayerView) application);
+			finishLevel.actionPerformed(null);  // Dangerous, but the action event itself is unused
+		}
+	}
+	
+	
+	/**
+	 * Updates the score of the game
+	 */
+	void updateScore() {
+		score = calculateScore();
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/

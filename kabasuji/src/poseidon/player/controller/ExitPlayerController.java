@@ -27,7 +27,7 @@ public class ExitPlayerController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
-		view.getfrmKabasuji().dispose();
+		view.getFrame().dispose();
 		System.exit(0);
 	}
 }

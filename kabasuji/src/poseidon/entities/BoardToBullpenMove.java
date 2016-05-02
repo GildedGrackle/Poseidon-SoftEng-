@@ -1,6 +1,7 @@
 package poseidon.entities;
 
 import poseidon.common.view.ILevelView;
+import poseidon.common.view.ITopView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 
@@ -12,6 +13,8 @@ import poseidon.entities.Point;
  * @author Alex Titus
  */
 public class BoardToBullpenMove implements IMove{
+	/** The top-level GUI object, for if/when a game is won. */
+	ITopView application;
 	/** The Level. */
 	LevelModel game;
 	/** The GUI representation of the Level. */
@@ -25,12 +28,14 @@ public class BoardToBullpenMove implements IMove{
 	/**
 	 *  Constructor.
 	 *  
-	 * @param game  model of the Level
-	 * @param view  the GUI representation of the Level
-	 * @param piece  the Piece to move, must have a valid location on the Board
-	 * @param from  the location of the Piece on the Board
+	 *  @param application  the top-level GUI object, for if/when a game is won
+	 *  @param game  model of the Level
+	 *  @param view  the GUI representation of the Level
+	 *  @param piece  the Piece to move, must have a valid location on the Board
+	 *  @param from  the location of the Piece on the Board
 	 */
-	public BoardToBullpenMove(LevelModel game, ILevelView view, PieceContainer piece) {
+	public BoardToBullpenMove(ITopView application, LevelModel game, ILevelView view, PieceContainer piece) {
+		this.application = application;
 		this.game = game;
 		this.view = view;
 		this.from = piece.getLocation();
@@ -75,7 +80,7 @@ public class BoardToBullpenMove implements IMove{
 			// Decrease the number of moves remaining
 			game.decrementLimit();
 			view.getModel().updateScore();
-			view.getModel().checkIfWon();
+			view.getModel().checkIfWon(application);
 			return true;
 		}
 		

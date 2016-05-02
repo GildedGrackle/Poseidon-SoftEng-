@@ -1,6 +1,7 @@
 package poseidon.entities;
 
 import poseidon.common.view.ILevelView;
+import poseidon.common.view.ITopView;
 
 /**
  * Moving a piece from bullpen to board.
@@ -9,6 +10,8 @@ import poseidon.common.view.ILevelView;
  * @author Alex Titus
  */
 public class BullpenToBoardMove implements IMove{
+	/** The top-level GUI object, for if/when a game is won. */
+	ITopView application;
 	/** The level, containing the score, bullpen, and board. */
 	LevelModel game;
 	/** The piece being moved. */
@@ -24,12 +27,14 @@ public class BullpenToBoardMove implements IMove{
 	/**
 	 *  Constructor.
 	 *  
+	 *  @param application  the top-level GUI object, for if/when a game is won
 	 *  @param view  the Level
 	 *  @param view  the GUI of the Level
 	 *  @param piece  Piece to place on Board
 	 *  @param location  location Piece is intended to be moved to
 	 */
-	public BullpenToBoardMove(ILevelView view, PieceContainer piece, Point location) {
+	public BullpenToBoardMove(ITopView application, ILevelView view, PieceContainer piece, Point location) {
+		this.application = application;
 		this.game = view.getModel();
 		this.piece = piece;
 		this.location = location;
@@ -91,7 +96,7 @@ public class BullpenToBoardMove implements IMove{
 			view.getBullpen().getModel().removePiece(piece);
 			view.getBullpen().getModel().setPieceSelected(null);
 			view.getModel().updateScore();
-			view.getModel().checkIfWon();
+			view.getModel().checkIfWon(application);
 
 			// Decrease moves remaining by 1 (if applicable)
 			game.decrementLimit();
@@ -129,6 +134,8 @@ public class BullpenToBoardMove implements IMove{
 		}
 
 		game.incrementLimit();
+		view.getModel().updateScore();
+		
 		return true;
 	}
 }

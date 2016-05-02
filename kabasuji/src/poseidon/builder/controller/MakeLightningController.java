@@ -91,10 +91,10 @@ public class MakeLightningController implements ActionListener
 		// Set new screen
 		BuilderView newScreen = new BuilderView(model, application);  // The new screen to display
 		application.setCurrentScreen(newScreen);
-		application.getBuilder().setContentPane(newScreen);
+		application.getFrame().setContentPane(newScreen);
 		
 		// Display the new screen
-		application.getBuilder().setVisible(true);
+		application.getFrame().setVisible(true);
 		newLevel.builderInitialize();
 		
 		return true;

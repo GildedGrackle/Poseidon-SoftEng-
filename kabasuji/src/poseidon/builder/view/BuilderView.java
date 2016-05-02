@@ -140,7 +140,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		add(bullpenContainer);
 		
 		// Add board and bullpen controllers
-		BoardController boardController = new BoardController(model, this);
+		BoardController boardController = new BoardController(application, model, this);
 		board.addMouseListener(boardController);
 		board.addMouseMotionListener(boardController);
 		bullpen.addMouseListener(new BullpenController(model.getInfiniteBullpen(), bullpen, board));

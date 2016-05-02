@@ -24,7 +24,7 @@ public class Main
 					// Create and show application
 					LevelBuilderModel model = new LevelBuilderModel();
 					LevelBuilderView application = new LevelBuilderView(model);
-					application.getBuilder().setVisible(true);
+					application.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

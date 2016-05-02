@@ -47,7 +47,7 @@ public class BackPlayerController implements ActionListener
 		game.initialize();
 		
 		// Display the new screen
-		game.getfrmKabasuji().setVisible(true);
+		game.getFrame().setVisible(true);
 		
 		return true;
 	}

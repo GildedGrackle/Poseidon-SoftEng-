@@ -37,11 +37,11 @@ public class ToEditPlayableBullpenController implements ActionListener
 	public void actionPerformed(ActionEvent ae)
 	{
 		EditPlayableBullpenView editScreen = new EditPlayableBullpenView(view);
-		view.getBuilder().setContentPane(editScreen);
+		view.getFrame().setContentPane(editScreen);
 		// Don't set view.currentScreen so we can return easier
 		
 		// Display new screen
-		view.getBuilder().setVisible(true);
+		view.getFrame().setVisible(true);
 	}
 
 }

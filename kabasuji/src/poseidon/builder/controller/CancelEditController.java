@@ -39,9 +39,9 @@ public class CancelEditController implements ActionListener
 	public void actionPerformed(ActionEvent ae)
 	{
 		BuilderView currentScreen = (BuilderView) view.getCurrentScreen();
-		view.getBuilder().setContentPane(currentScreen);
+		view.getFrame().setContentPane(currentScreen);
 		
-		view.getBuilder().setVisible(true);
+		view.getFrame().setVisible(true);
 	}
 
 }

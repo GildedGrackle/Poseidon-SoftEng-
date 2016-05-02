@@ -119,7 +119,7 @@ public class TestCommonControllers extends TestMouseEvents{
 		}
 	
 	public void tearDown(){
-		view.getfrmKabasuji().dispose();
+		view.getFrame().dispose();
 	}
 
 	

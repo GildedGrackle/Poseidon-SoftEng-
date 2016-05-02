@@ -49,11 +49,11 @@ public class EndLevelController implements ActionListener
 			currentContainer.setScore(currentLevel.getScore());
 		}
 		EndLevelView newScreen = new EndLevelView(game.getModel(), game);
-		game.getfrmKabasuji().setContentPane(newScreen);
+		game.getFrame().setContentPane(newScreen);
 		game.setCurrentView(newScreen);
 		
 		// Display new screen
-		game.getfrmKabasuji().setVisible(true);
+		game.getFrame().setVisible(true);
 	}
 
 }

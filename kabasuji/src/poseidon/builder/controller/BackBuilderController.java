@@ -59,7 +59,7 @@ public class BackBuilderController implements ActionListener
 		application.initialize();
 		
 		// Display the new screen
-		application.getBuilder().setVisible(true);
+		application.getFrame().setVisible(true);
 		
 		return true;
 	}

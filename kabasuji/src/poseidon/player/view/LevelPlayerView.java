@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import poseidon.common.view.ITopView;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.ContinueController;
@@ -22,7 +23,7 @@ import poseidon.player.controller.LevelSelectController;
  *  
  *  @author Alex Titus
  */
-public class LevelPlayerView
+public class LevelPlayerView implements ITopView
 {
 	/** The top-level entity object, representing the game. */
 	LevelPlayerModel model;
@@ -104,6 +105,11 @@ public class LevelPlayerView
 	}
 	
 	
+	/** @return  True - this is the Level Player. */
+	public Boolean isGame()
+	{
+		return true;
+	}
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
@@ -113,7 +119,7 @@ public class LevelPlayerView
 		return model;
 	}
 	/** @return  The JFrame containing the the application. */
-	public JFrame getfrmKabasuji()
+	public JFrame getFrame()
 	{
 		return kabasuji;
 	}

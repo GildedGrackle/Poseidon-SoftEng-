@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.common.view.ILevelView;
+import poseidon.common.view.ITopView;
 import poseidon.entities.Board;
 import poseidon.entities.BoardToBoardMove;
 import poseidon.entities.BoardToBullpenMove;
@@ -31,6 +32,8 @@ import poseidon.entities.UndoManager;
  */
 public class BoardController extends MouseAdapter
 {
+	/** The top-level GUI object, for if/when a game is won. */
+	ITopView application;
 	/** The level (Kabasuji game) state. */
 	LevelModel game;
 	/** The visual representation of the level. */
@@ -51,8 +54,9 @@ public class BoardController extends MouseAdapter
 	 * @param model  the level that contains the board
 	 * @param view  the representation of the board
 	 */
-	public BoardController(LevelModel game, ILevelView view)
+	public BoardController(ITopView application, LevelModel game, ILevelView view)
 	{
+		this.application = application;
 		this.game = game;
 		this.view = view;
 		this.boardModel = game.getBoard();
@@ -228,7 +232,7 @@ public class BoardController extends MouseAdapter
 		}
 
 		// Else attempt to add Piece to Board
-		BullpenToBoardMove move = new BullpenToBoardMove(view, pc, new Point(row, col));
+		BullpenToBoardMove move = new BullpenToBoardMove(application, view, pc, new Point(row, col));
 		if(move.doMove())  // If move is successful
 		{
 			// Then record it and reset Board and Bullpen's active/selection
@@ -273,12 +277,12 @@ public class BoardController extends MouseAdapter
 		if(col < 0 || row < 0)
 		{
 			// Then remove it
-			move = new BoardToBullpenMove(game, view, piece);
+			move = new BoardToBullpenMove(application, game, view, piece);
 		}
 		else
 		{
 			// Add it
-			move = new BoardToBoardMove(view, piece,
+			move = new BoardToBoardMove(application, view, piece,
 					boardModel.getActiveSource(), new Point(row, col));
 		}
 		

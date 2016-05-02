@@ -44,10 +44,10 @@ public class SaveLevelController implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		// Switch to new screen but don't set view.currentScreen, to allow for easier return
 		SaveLevelView saveScreen = new SaveLevelView(topModel, model, view);
-		view.getBuilder().setContentPane(saveScreen);
+		view.getFrame().setContentPane(saveScreen);
 		
 		// Display the new screen
-		view.getBuilder().setVisible(true);
+		view.getFrame().setVisible(true);
 	}
 
 }

@@ -62,7 +62,7 @@ public class TestEntities extends TestCase{
 	}
 	
 	public void tearDown(){
-		view.getfrmKabasuji().dispose();
+		view.getFrame().dispose();
 	}
 	
 	public void testMakeHint(){

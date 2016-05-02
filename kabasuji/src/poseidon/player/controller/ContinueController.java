@@ -73,10 +73,10 @@ public class ContinueController implements ActionListener
 		game.setCurrentView(new LevelSelectView(model, game));
 		// Then set new level as that screen's currently playing
 		game.getCurrentView().setCurrentlyPlaying(newScreen);
-		game.getfrmKabasuji().setContentPane(newScreen);
+		game.getFrame().setContentPane(newScreen);
 			
 		// Display the new screen
-		game.getfrmKabasuji().setVisible(true);
+		game.getFrame().setVisible(true);
 		model.getPlayingLevel().getLevel().initialize(newScreen);
 		newScreen.modelUpdated();  // To show initial time in Lightning levels
 			

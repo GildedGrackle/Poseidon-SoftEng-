@@ -68,7 +68,7 @@ public class TestPlayerBtnControllers extends TestCase{
 	
 	
 	public void tearDown(){
-			view.getfrmKabasuji().dispose();
+			view.getFrame().dispose();
 	}
 	
 	public void testAboutBtn(){

@@ -92,7 +92,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 		
 		
 		public void tearDown(){
-				view.getBuilder().dispose();
+				view.getFrame().dispose();
 		}
 		
 		public void testAboutBtn(){
@@ -176,7 +176,7 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			ActionEvent setBullpen = buttonPress(button);
 			editBullpenScreen.actionPerformed(setBullpen);
 			
-			assertEquals(EditPlayableBullpenView.class, view.getBuilder().getContentPane().getClass());
+			assertEquals(EditPlayableBullpenView.class, view.getFrame().getContentPane().getClass());
 			 
 			editBullpenView = new EditPlayableBullpenView(view);
 			

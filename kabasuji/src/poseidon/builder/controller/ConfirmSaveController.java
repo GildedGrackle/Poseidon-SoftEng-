@@ -74,9 +74,9 @@ public class ConfirmSaveController implements ActionListener {
 		
 		// Set screen
 		BuilderView currentScreen = (BuilderView) view.getCurrentScreen();
-		view.getBuilder().setContentPane(currentScreen);
+		view.getFrame().setContentPane(currentScreen);
 
 		// Display new screen
-		view.getBuilder().setVisible(true);
+		view.getFrame().setVisible(true);
 	}
 }
