@@ -304,7 +304,7 @@ public class TestEntities extends TestCase{
 
 	public class TestBoardLogic implements IBoardLogic{
 
-		public Boolean shouldAddPiece (Board board, PieceContainer piece){
+		public Boolean shouldAddList (Board board, PieceContainer piece){
 			return true;
 		}
 		

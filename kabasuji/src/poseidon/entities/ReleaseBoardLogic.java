@@ -18,16 +18,10 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	}
 	
 	
-	/**
-	 * Adds given piece to the board and returns whether the addition was successful.
-	 * 
-	 * @param board - The board the addition is performed on.
-	 * @param piece - The piece container of the piece that needs to be added, location must be set.
-	 * @param row, col - The location on the board where the pivot of the piece should be.
-	 * @return Boolean - Indicates whether the addition was successful
-	 */
-	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
-		return true;
+	/** @return  False - pieces shouldn't be added to the list of pieces on the board. */
+	@Override
+	public Boolean shouldAddList() {
+		return false;
 	}
 	
 	
@@ -103,5 +97,25 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	@Override
 	public Boolean canEdit(Board board) {
 		return false;
+	}
+	
+	
+	/**
+	 *  Fills the squares covered by the given piece.
+	 *  
+	 *  @param piece  The piece used to fill squares
+	 */
+	@Override
+	public void placePiece(Board board, PieceContainer piece){
+		Point location = piece.getLocation();
+		Square[][] playArea = board.getPlayArea();
+		
+		//fills the squares with the piece points
+		for (Point pt : piece.getPiece().getPiece()) {
+			int pointRow = pt.getRow() + location.getRow();
+			int pointCol = pt.getCol() + location.getCol();
+			playArea[pointRow][pointCol].fill();
+		}
+
 	}
 }

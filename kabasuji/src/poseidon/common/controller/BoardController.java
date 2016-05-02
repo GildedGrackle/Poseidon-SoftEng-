@@ -231,6 +231,7 @@ public class BoardController extends MouseAdapter
 			bullpenModel.setPieceSelected(null);
 			pc.setIsSelected(false);
 			UndoManager.instance().recordMove(move);
+			RedoManager.instance().clearMove();  // New move made, destroy redo stack
 			view.modelUpdated();
 		}
 	}

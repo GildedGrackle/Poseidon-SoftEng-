@@ -91,6 +91,7 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		this.model = topModel.getPlayingLevel().getLevel();
 		game = view;
 		setLayout(null);
+		setBackground(new Color(0, 191, 255));
 		
 		levelTitle = new JLabel(this.model.getLevelName());
 		levelTitle.setOpaque(true);

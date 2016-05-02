@@ -15,17 +15,9 @@ public class BuilderBoardLogic implements IBoardLogic {
 	}
 	
 	
-	/**
-	 * Adds given piece to the board and returns whether the addition was successful.
-	 * TODO see IBoardLogic
-	 * 
-	 * @param board - The board the addition is performed on.
-	 * @param piece - The piece container of the piece that needs to be added, location must be set.
-	 * @param row, col - The location on the board where the pivot of the piece should be.
-	 * @return Boolean - Indicates whether the addition was successful.
-	 */
-	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
-		return true;
+	/** @return  False - pieces shouldn't be added to the list of pieces on the board. */
+	public Boolean shouldAddList() {
+		return false;
 	}
 	
 	
@@ -97,5 +89,52 @@ public class BuilderBoardLogic implements IBoardLogic {
 	@Override
 	public Boolean canEdit(Board board) {
 		return true;
+	}
+	
+	
+	/**
+	 *  Fills the squares covered by the given piece.
+	 *  
+	 *  @param piece  The piece used to fill squares
+	 */
+	@Override
+	public void placePiece(Board board, PieceContainer piece){
+		Point location = piece.getLocation();
+		Square[][] playArea = board.getPlayArea();
+		int gamemode = 0;
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				if(playArea[i][j].getType() > 0)
+				{
+					gamemode = playArea[i][j].getType();
+					break;  // Sometimes I wish there would be a double-break
+				}
+			}
+			if(gamemode > 0)  // Then I wouldn't have to do this
+			{
+				break;
+			}
+		}
+		
+		//fills the squares with the piece points
+		for (Point pt : piece.getPiece().getPiece()) {
+			int pointRow = pt.getRow() + location.getRow();
+			int pointCol = pt.getCol() + location.getCol();
+			switch(gamemode)
+			{
+			case LevelModel.PUZZLE:
+				playArea[pointRow][pointCol] = new PuzzleSquare(true);
+				break;
+			case LevelModel.LIGHTNING:
+				playArea[pointRow][pointCol] = new LightningSquare(true);
+				break;
+			case LevelModel.RELEASE:
+				playArea[pointRow][pointCol] = new ReleaseSquare(true, null);
+				break;
+			}
+		}
+
 	}
 }

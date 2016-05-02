@@ -97,13 +97,23 @@ public class PuzzleLevel extends LevelModel {
 	 * and also based on whether there is a piece being dragged.
 	 */
 	int calculateScore() {
+		int nonFilledSquares = 0;
 		int stars = 0;
-		if (board.getActiveDragged()!=null) {stars-=1;}
-		if(playableBullpen.getSize() == 2) { stars+=1; }
-		else if (playableBullpen.getSize() == 1) { stars+=2; }
-		else if(playableBullpen.getSize() == 0) { stars+=3; }
+		Square [] [] playArea = super.getBoard().getPlayArea();
+		for (int i = 0; i < Board.MAXROWS ; i++) {
+			for (int j = 0; j < Board.MAXCOLS ; j++) {
+				if (!(playArea[i][j].isFilled()) && playArea[i][j] instanceof PuzzleSquare) {
+					nonFilledSquares+=1;
+				}
+			}
+		}
 		
-		if (stars <=0) {return 0;}
+		if (board.getActiveDragged()!=null) {stars-=1;}
+		if (nonFilledSquares <= 12) { stars+=1; }
+		if (nonFilledSquares <= 6) { stars+=1; }
+		if (nonFilledSquares == 0) { stars+=1; }
+		
+		if(stars<=0) {return 0;}
 		else return stars;
 	}
 	

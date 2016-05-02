@@ -17,6 +17,8 @@ public class BullpenToBoardMove implements IMove{
 	Point location;
 	/** The GUI representation of the Level. */
 	ILevelView view;
+	/** For easy resetting of the prior board state */
+	Square[][] before;
 	
 	
 	/**
@@ -32,6 +34,14 @@ public class BullpenToBoardMove implements IMove{
 		this.piece = piece;
 		this.location = location;
 		this.view = view;
+		this.before = new Square[Board.MAXROWS][Board.MAXCOLS];
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				before[i][j] = game.getBoard().getSquare(i, j);
+			}
+		}
 	}
 	
 	
@@ -78,25 +88,15 @@ public class BullpenToBoardMove implements IMove{
 			game.getBoard().addPiece(piece);
 			
 			// Remove piece from bullpen
-			// If remove was unsuccessful
-			if(!(view.getBullpen().getModel().removePiece(piece)))
-			{
-				// Then something bad happened, deselect everything in bullpen
-				// and hope for the best
-				view.getBullpen().getModel().setPieceSelected(null);
-				
-				return false;
-			}
-			else  // Remove successful
-			{
-				view.getBullpen().getModel().setPieceSelected(null);
-				view.getModel().updateScore();
-				view.getModel().checkIfWon();
-				// Decrease moves remaining by 1 (if applicable)
-				game.decrementLimit();
+			view.getBullpen().getModel().removePiece(piece);
+			view.getBullpen().getModel().setPieceSelected(null);
+			view.getModel().updateScore();
+			view.getModel().checkIfWon();
 
-				return true;
-			}
+			// Decrease moves remaining by 1 (if applicable)
+			game.decrementLimit();
+
+			return true;
 		}
 		
 		return false;
@@ -108,17 +108,27 @@ public class BullpenToBoardMove implements IMove{
 	 *  @return  Indicator of whether operation completed successfully.
 	 */
 	public Boolean undoMove() {
-		if (game.getBoard().canEdit()) {
-			game.getBoard().removePiece(piece);
-			piece.setLocation(new Point(-1, -1));
-			// TODO just select the new one in the bullpen
-//			view.getBullpen().getModel().addPiece(piece);
-//			view.getBullpen().addPiece(draggedPiece);
-//			view.getBullpen().setSelectedPiece(draggedPiece);
-			piece.setIsSelected(true);
-			game.incrementLimit();
-			return true;
+		
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				game.getBoard().setSquare(new Point(i, j), before[i][j]);
+			}
 		}
-		return false;
+		piece.setLocation(new Point(-1, -1));
+		for(int i = 0; i < view.getBullpen().getModel().getSize(); i++)
+		{
+			if(piece.equals(view.getBullpen().getModel().getPiece(i)))
+			{
+				PieceContainer newSelected = view.getBullpen().getModel().getPiece(i);
+				view.getBullpen().getModel().setPieceSelected(newSelected);
+				newSelected.setIsSelected(true);
+				break;
+			}
+		}
+
+		game.incrementLimit();
+		return true;
 	}
 }
