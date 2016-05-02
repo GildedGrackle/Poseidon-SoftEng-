@@ -13,6 +13,7 @@ import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -20,6 +21,7 @@ import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.ColSizeController;
 import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.LimitController;
+import poseidon.builder.controller.MakeReleaseSquareController;
 import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.ResetBuilderController;
 import poseidon.builder.controller.RowSizeController;
@@ -97,7 +99,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	/** Icons for the Rotate Buttons*/
 	Image rotateCW, rotateCCW;
 	/** To add a releaseSquare. */
-	JButton addReleaseSquare;
+	JToggleButton addReleaseSquare;
 	
 
 
@@ -278,12 +280,17 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton.addActionListener(new SaveLevelController(model, application));
 		add(saveButton);
 		
-		String twoLines = new String("New Release\nSquare");
-		addReleaseSquare = new JButton("<html>" + twoLines + "</html>");
-		addReleaseSquare.setFont(new Font("Dialog", Font.PLAIN, 13));
-		addReleaseSquare.setBounds(555, 300, 110, 60);
-		//addReleaseSquare.addActionListener(l);
-		add(addReleaseSquare);
+		if (model.getGameMode() == 3){
+			String twoLines = new String("New Release\nSquare");
+			addReleaseSquare = new JToggleButton("<html>" + twoLines + "</html>");
+			addReleaseSquare.setFont(new Font("Dialog", Font.PLAIN, 13));
+			addReleaseSquare.setBounds(555, 300, 110, 60);
+			addReleaseSquare.addActionListener(new MakeReleaseSquareController(topmodel, application));
+			add(addReleaseSquare);
+		}
+		
+		
+
 	}
 
 	
