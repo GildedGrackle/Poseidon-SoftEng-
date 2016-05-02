@@ -28,7 +28,7 @@ public class BuilderBullpenLogic implements IBullpenLogic {
 		int index = 0;
 		for(int i = 1; i <= 35; i++)
 		{
-			if(! bullpen.getPiece(i - 1).equals(fac.getPiece(i)))
+			if(! bullpen.getPiece(i - 1).getPiece().equals(fac.getPiece(i)))
 			{
 				index = i;
 				break;
@@ -38,6 +38,6 @@ public class BuilderBullpenLogic implements IBullpenLogic {
 		PieceContainer freshCopy = new PieceContainer(fac.getPiece(index), new Point(-1, -1));
 		
 		// Add the new copy
-		bullpen.addPieceAt(freshCopy, index - 1);
+		bullpen.addPieceAt(freshCopy, index-1);
 	}
 }
