@@ -1,5 +1,6 @@
 package poseidon.entities;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -10,6 +11,7 @@ import java.util.ArrayList;
  *  
  *  @author Natalia Kononenko
  *  @author Alex Titus
+ *  @author Jacob
  */
 public class LevelBuilderModel {
 	/** The number of game modes */
@@ -31,49 +33,22 @@ public class LevelBuilderModel {
 	/**
 	 *  Loads all custom levels into savedLevels.
 	 */
-	void initialize()
-	{
-		savedLevels = new ArrayList<ArrayList<LevelContainer>>(NUM_GAMEMODES);  // Gamemodes
-		for(int i = 0; i < NUM_GAMEMODES; i++)  // Levels
-		{
+	void initialize() {
+		// First tier of lists for number of gamemodes
+		savedLevels = new ArrayList<ArrayList<LevelContainer>>(NUM_GAMEMODES);
+		for(int i = 0; i < NUM_GAMEMODES; i++) {
 			savedLevels.add(new ArrayList<LevelContainer>());  // Default size of 10
 		}
 		
-		// Assuming naming convention of gamemode1, gamemode2, ... gamemode5
-		
-		// Puzzle levels
-		for (int i=0; i<5; i++) {
-			String filePath = "puzzle"+String.valueOf(i)+".xml";
-			PuzzleLevel levelTemp = (PuzzleLevel) XMLHandler.loadXML(filePath, true, false);
-			if (levelTemp == null) {
-				// TODO Need to account for this properly, what if the level file doesn't exist?
-				savedLevels.get(0).add(new LevelContainer(null, 0, i, null, 0));
-			} else {
-				savedLevels.get(0).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
-			}
-		}
-		
-		// Lightning Levels, same process
-		for (int i=0; i<5; i++) {
-			String filePath = "lightning"+String.valueOf(i)+".xml";
-			LightningLevel levelTemp = (LightningLevel) XMLHandler.loadXML(filePath, true, false);
-			if (levelTemp == null) {
-				// TODO Need to account for this properly, what if the level file doesn't exist?
-				savedLevels.get(1).add(new LevelContainer(null, 0, i, null, 0));
-			} else {
-				savedLevels.get(1).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
-			}
-		}
-		
-		// Release Levels, same process again
-		for (int i=0; i<5; i++) {
-			String filePath = "release"+String.valueOf(i)+".xml";
-			ReleaseLevel levelTemp = (ReleaseLevel) XMLHandler.loadXML(filePath, true, false);
-			if (levelTemp == null) {
-				// TODO Need to account for this properly, what if the level file doesn't exist?
-				savedLevels.get(2).add(new LevelContainer(null, 0, i, null, 0));
-			} else {
-				savedLevels.get(2).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
+		// Load in the list of filenames, if any, and load each named level file
+		String[] listOfNames = XMLHandler.loadFilenames("customFilenames.xml", true);
+		if (!(listOfNames == null)) {
+			for (String name : listOfNames) {
+				LevelModel loadedLevel = XMLHandler.loadXML(name, true, true);
+				if(!(loadedLevel == null)) {
+					int mode = loadedLevel.getGameMode();
+					savedLevels.get(mode-1).add(new LevelContainer(name, 0, mode, loadedLevel, 0));
+				}
 			}
 		}
 	}

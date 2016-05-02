@@ -126,6 +126,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	void initialize()
 	{
 		setLayout(null);
+		setBackground(new Color(0, 191, 255));
 		
 		board = new BoardView(model.getBoard());
 		board.setBounds(160, 250, 361, 361);
@@ -285,7 +286,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton = new JButton("Save");
 		saveButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		saveButton.setBounds(15, 510, 110, 55);
-		saveButton.addActionListener(new SaveLevelController(model, application));
+		saveButton.addActionListener(new SaveLevelController(topmodel, model, application));
 		add(saveButton);
 		
 		if (model.getGameMode() == 3){
