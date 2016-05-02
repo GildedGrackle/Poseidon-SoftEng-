@@ -16,7 +16,7 @@ public interface IBoardLogic {
 	
 	/**
 	 *  Removes a piece from the board, if possible.
-	 *  TODO figure out what shouldRemovePiece does and probably rename it
+	 * 
 	 *  @param board  board to remove the piece from
 	 *  @param piece  piece to remove
 	 *  @return  Indicator whether operation could be completed.

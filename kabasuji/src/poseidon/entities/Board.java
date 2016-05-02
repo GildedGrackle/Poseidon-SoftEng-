@@ -146,7 +146,7 @@ public class Board {
 					switch(gamemode)
 					{
 					case LevelModel.PUZZLE:
-						newBoard[i][j] = new PuzzleSquare(false);
+						newBoard[i][j] = new PuzzleSquare(false, false);
 						break;
 					case LevelModel.LIGHTNING:
 						newBoard[i][j] = new LightningSquare(false);
@@ -192,7 +192,7 @@ public class Board {
 			if(square instanceof NonplayableSquare) {
 				switch (type){
 				case 1:
-					playArea [row][col] = new PuzzleSquare(false);
+					playArea [row][col] = new PuzzleSquare(false, false);
 					break;
 				case 2:
 					playArea [row][col] = new LightningSquare(false);

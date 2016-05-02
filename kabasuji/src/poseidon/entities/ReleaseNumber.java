@@ -26,5 +26,21 @@ public class ReleaseNumber {
 	public int getColor() {
 		return color;
 	}
+	
+	boolean setNumber(int num) throws IllegalArgumentException{
+		if(num >= 1 && num <=6) {
+			number = num;
+			return true;
+		}
+		return false;
+	}
+	
+	boolean setColor(int col) {
+		if(col >= 1 && col <=3) {
+			color = col;
+			return true;
+		}
+		return false;
+	}
 
 }

@@ -26,7 +26,7 @@ public class LightningBoardLogic implements IBoardLogic {
 	/**
 	 * Meant to remove piece from the board, however there is no way to remove pieces from a lightning board.
 	 * In addition, the undo option doesn't apply to lightning level, so there is no need to create the function
-	 * for that purpose. TODO see IBoardLogic
+	 * for that purpose. 
 	 * 
 	 * @return Boolean - Always false.
 	 */

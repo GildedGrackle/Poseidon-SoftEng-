@@ -14,9 +14,9 @@ public class PuzzleSquare extends Square {
 	 *  Constructor.
 	 *  
 	 *  @param isFilled  indicator whether Square should be initialized as filled
-	 *  TODO add isHint to PuzzleSquare constructor
+	 *  
 	 */
-	public PuzzleSquare(Boolean isFilled) {
+	public PuzzleSquare(Boolean isFilled, Boolean isHint) {
 		super(isFilled);
 		this.isHint = false;					//Set to false as default
 	}

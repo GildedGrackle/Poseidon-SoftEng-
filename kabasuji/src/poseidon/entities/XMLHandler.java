@@ -225,7 +225,7 @@ public class XMLHandler {
 			if (type.equals("nonplayable")) {
 				loadSquares[(int)(index/12)][index%12] = new NonplayableSquare();
 			} else if (type.equals("puzzle")) {
-				loadSquares[(int)(index/12)][index%12] = new PuzzleSquare(false);
+				loadSquares[(int)(index/12)][index%12] = new PuzzleSquare(false, false);
 			} else if (type.equals("lightning")) {
 				loadSquares[(int)(index/12)][index%12] = new LightningSquare(false);
 			} else if (type.equals("release")) {
@@ -317,7 +317,7 @@ public class XMLHandler {
 		Square[][] lPlayArea = new Square[12][12];
 		Square[][] rPlayArea = new Square[12][12];
 		for(int i = 0; i < 144; i++) {
-			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false);
+			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false, false);
 			lPlayArea[(int)(i/12)][i%12] = new LightningSquare(false);
 			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, new ReleaseNumber(1, ReleaseNumber.GREEN));
 		}
@@ -396,7 +396,7 @@ public class XMLHandler {
 		Square[][] lPlayArea = new Square[12][12];
 		Square[][] rPlayArea = new Square[12][12];
 		for(int i = 0; i < 144; i++) {
-			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false);
+			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false, false);
 			lPlayArea[(int)(i/12)][i%12] = new LightningSquare(false);
 			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, new ReleaseNumber(1, ReleaseNumber.GREEN));
 		}

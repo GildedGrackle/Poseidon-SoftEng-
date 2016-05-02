@@ -41,8 +41,17 @@ public class ReleaseLevel extends LevelModel{
 		this.allottedMoves = allottedMoves;
 	}
 	
-	void markNumber(int color, int number, Square square) {	 //Not sure
-		//TODO: Change return value
+	/**
+	 * Sets the color and number on a release square
+	 * @param color   the wished color for the square
+	 * @param number  the wished number for the square
+	 * @param row
+	 * @param col     the position of the square
+	 */
+	void markNumber(int color, int number, int row, int col) {	 
+		Square [] [] area = board.getPlayArea();
+		area[row][col].getReleaseNumber().setColor(color);
+		area[row][col].getReleaseNumber().setNumber(number);
 	}
 	
 	void resetCollected () {

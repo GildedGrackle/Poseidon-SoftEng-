@@ -51,7 +51,7 @@ public class MarkPlayableSquareMove implements IMove{
 		if(isValid())
 		{
 			// Create new playable square
-			Square newSquare = new PuzzleSquare(false);  // Default is PuzzleSquare
+			Square newSquare = new PuzzleSquare(false, false);  // Default is PuzzleSquare
 			switch(gameMode)
 			{
 			case LevelModel.LIGHTNING:
