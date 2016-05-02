@@ -121,7 +121,7 @@ public class LightningLevel extends LevelModel{
 		Square [] [] playArea = new Square [board.getRows()] [board.getCols()];
 		for (int i=0; i<board.getRows();i++) {
 			for (int j=0; j<board.getCols();j++) {
-				if (!(playArea[i][j].isFilled()) && playArea[i][j] instanceof PuzzleSquare) {
+				if (!(playArea[i][j].isFilled()) && playArea[i][j] instanceof LightningSquare) {
 					nonFilledSquares+=1;
 				}
 			}
