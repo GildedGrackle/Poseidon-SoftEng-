@@ -56,4 +56,12 @@ public interface IBoardLogic {
 	
 	/** @return  Indicator of whether the board can be modified. */
 	Boolean canEdit(Board board);
+	
+	
+	/**
+	 *  Fills the squares covered by the given piece.
+	 *  
+	 *  @param piece  The piece used to fill squares
+	 */
+	void placePiece(Board board, PieceContainer piece);
 }

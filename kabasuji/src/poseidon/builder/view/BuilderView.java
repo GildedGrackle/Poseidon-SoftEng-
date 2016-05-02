@@ -126,6 +126,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	void initialize()
 	{
 		setLayout(null);
+		setBackground(new Color(0, 191, 255));
 		
 		board = new BoardView(model.getBoard());
 		board.setBounds(160, 250, 361, 361);

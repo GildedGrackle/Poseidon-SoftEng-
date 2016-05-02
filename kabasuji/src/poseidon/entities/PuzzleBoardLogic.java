@@ -142,4 +142,23 @@ public class PuzzleBoardLogic implements IBoardLogic{
 		return false;
 	}
 
+	
+	/**
+	 *  Fills the squares covered by the given piece.
+	 *  
+	 *  @param piece  The piece used to fill squares
+	 */
+	@Override
+	public void placePiece(Board board, PieceContainer piece){
+		Point location = piece.getLocation();
+		Square[][] playArea = board.getPlayArea();
+		
+		//fills the squares with the piece points
+		for (Point pt : piece.getPiece().getPiece()) {
+			int pointRow = pt.getRow() + location.getRow();
+			int pointCol = pt.getCol() + location.getCol();
+			playArea[pointRow][pointCol].fill();
+		}
+
+	}
 }

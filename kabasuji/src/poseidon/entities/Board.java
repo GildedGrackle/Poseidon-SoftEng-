@@ -82,25 +82,6 @@ public class Board {
 	
 	
 	/**
-	 *  Fills the squares covered by the given piece.
-	 *  
-	 *  @param piece  The piece used to fill squares
-	 */
-	private void placePiece(PieceContainer piece){
-		Point location = piece.getLocation();
-		Square[][] playArea = this.getPlayArea();
-		
-		//fills the squares with the piece points
-		for (Point pt : piece.getPiece().getPiece()) {
-			int pointRow = pt.getRow() + location.getRow();
-			int pointCol = pt.getCol() + location.getCol();
-			playArea[pointRow][pointCol].fill();
-		}
-
-		}
-	
-	
-	/**
 	 * Adds piece to a specific pivot point on the board depending on the type of board.
 	 * 
 	 * @param piece - The piece that needs to be placed on the board.
@@ -108,7 +89,7 @@ public class Board {
 	 */
 	public Boolean addPiece (PieceContainer piece) {
 		// Add piece
-		placePiece(piece);
+		logic.placePiece(this, piece);
 		
 		// If should add to list
 		if (logic.shouldAddList()){
