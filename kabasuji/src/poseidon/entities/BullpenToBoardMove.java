@@ -78,11 +78,8 @@ public class BullpenToBoardMove implements IMove{
 			game.getBoard().addPiece(piece);
 			
 			// Remove piece from bullpen
-			// TODO fix this when we fix Bullpen remove piece
-			boolean successRemove = view.getBullpen().getModel().removePiece(piece);
-			
 			// If remove was unsuccessful
-			if(!(successRemove))
+			if(!(view.getBullpen().getModel().removePiece(piece)))
 			{
 				// Then something bad happened, deselect everything in bullpen
 				// and hope for the best
