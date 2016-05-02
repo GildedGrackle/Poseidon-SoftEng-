@@ -74,7 +74,7 @@ public class BoardToBullpenMove implements IMove{
 			
 			// Decrease the number of moves remaining
 			game.decrementLimit();
-			
+			view.getModel().updateScore();
 			return true;
 		}
 		

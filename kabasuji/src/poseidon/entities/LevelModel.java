@@ -94,6 +94,12 @@ public abstract class LevelModel {
 	/** @return  The current score on this level. */
 	abstract int calculateScore();
 	
+	/**
+	 * Updates the score of the game
+	 */
+	void updateScore() {
+		score = calculateScore();
+	}
 
 	/** 
 	 *  Provides the game-type-specific limit for play.

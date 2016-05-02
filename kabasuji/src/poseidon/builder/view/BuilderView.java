@@ -96,6 +96,8 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	JLabel limitLabel;
 	/** Icons for the Rotate Buttons*/
 	Image rotateCW, rotateCCW;
+	/** To add a releaseSquare. */
+	JButton addReleaseSquare;
 	
 
 
@@ -275,6 +277,13 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton.setBounds(15, 510, 110, 55);
 		saveButton.addActionListener(new SaveLevelController(model, application));
 		add(saveButton);
+		
+		String twoLines = new String("New Release\nSquare");
+		addReleaseSquare = new JButton("<html>" + twoLines + "</html>");
+		addReleaseSquare.setFont(new Font("Dialog", Font.PLAIN, 13));
+		addReleaseSquare.setBounds(555, 300, 110, 60);
+		//addReleaseSquare.addActionListener(l);
+		add(addReleaseSquare);
 	}
 
 	
