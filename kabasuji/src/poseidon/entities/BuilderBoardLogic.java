@@ -26,7 +26,8 @@ public class BuilderBoardLogic implements IBoardLogic {
 	 */
 	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
 		return true;
-}
+	}
+	
 	
 	/**
 	 *  Removes a piece from the board.

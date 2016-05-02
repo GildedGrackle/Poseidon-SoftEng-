@@ -41,7 +41,7 @@ public class PieceContainer {
 	{
 		this.piece = new Piece();
 		this.location = location;
-		
+		this.isSelected = false;
 	}
 
 	
