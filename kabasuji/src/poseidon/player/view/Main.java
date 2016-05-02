@@ -27,7 +27,7 @@ public class Main
 					progress = (progress == null)? (new int[]{0,0,0}) : (progress);
 					
 					// TODO Make actual levels, until then use this to generate examples
-					XMLHandler.makeExampleLevels();
+					//XMLHandler.makeExampleLevels();
 
 					// Initialize the top-level model and view, and then display the main menu
 					LevelPlayerModel model = new LevelPlayerModel(progress, null);

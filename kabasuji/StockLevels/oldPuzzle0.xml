@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level gameMode="1">
-  <name>New Demo</name>
-  <countdown>30</countdown>
+  <name>puzzle0</name>
+  <countdown>15</countdown>
   <playableBullpen>
     <piece0>
       <point0>
@@ -17,16 +17,16 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>3</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
-        <row>4</row>
-        <column>0</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>5</row>
-        <column>0</column>
+        <row>1</row>
+        <column>1</column>
       </point5>
     </piece0>
     <piece1>
@@ -43,16 +43,16 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>3</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
-        <row>4</row>
-        <column>0</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>5</row>
-        <column>0</column>
+        <row>1</row>
+        <column>1</column>
       </point5>
     </piece1>
     <piece2>
@@ -69,15 +69,15 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>3</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
-        <row>4</row>
-        <column>0</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>0</row>
+        <row>1</row>
         <column>1</column>
       </point5>
     </piece2>
@@ -95,67 +95,67 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>3</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
-        <row>4</row>
-        <column>0</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>0</row>
+        <row>1</row>
         <column>1</column>
       </point5>
     </piece3>
     <piece4>
       <point0>
-        <row>3</row>
+        <row>0</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>0</row>
-        <column>1</column>
+        <row>1</row>
+        <column>0</column>
       </point1>
       <point2>
-        <row>1</row>
-        <column>1</column>
+        <row>2</row>
+        <column>0</column>
       </point2>
       <point3>
-        <row>2</row>
+        <row>0</row>
         <column>1</column>
       </point3>
       <point4>
-        <row>3</row>
-        <column>1</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>4</row>
+        <row>1</row>
         <column>1</column>
       </point5>
     </piece4>
     <piece5>
       <point0>
-        <row>3</row>
+        <row>0</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>0</row>
-        <column>1</column>
+        <row>1</row>
+        <column>0</column>
       </point1>
       <point2>
-        <row>1</row>
-        <column>1</column>
+        <row>2</row>
+        <column>0</column>
       </point2>
       <point3>
-        <row>2</row>
+        <row>0</row>
         <column>1</column>
       </point3>
       <point4>
-        <row>3</row>
-        <column>1</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>4</row>
+        <row>1</row>
         <column>1</column>
       </point5>
     </piece5>
@@ -173,15 +173,15 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>3</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
-        <row>4</row>
-        <column>0</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>2</row>
+        <row>1</row>
         <column>1</column>
       </point5>
     </piece6>
@@ -199,486 +199,70 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>3</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
-        <row>4</row>
-        <column>0</column>
+        <row>0</row>
+        <column>2</column>
       </point4>
       <point5>
-        <row>2</row>
+        <row>1</row>
         <column>1</column>
       </point5>
     </piece7>
     <piece8>
       <point0>
-        <row>1</row>
+        <row>0</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>2</row>
+        <row>1</row>
         <column>0</column>
       </point1>
       <point2>
-        <row>1</row>
-        <column>1</column>
+        <row>2</row>
+        <column>0</column>
       </point2>
       <point3>
-        <row>1</row>
-        <column>2</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
         <row>0</row>
         <column>2</column>
       </point4>
       <point5>
-        <row>0</row>
-        <column>3</column>
+        <row>1</row>
+        <column>1</column>
       </point5>
     </piece8>
     <piece9>
       <point0>
-        <row>1</row>
+        <row>0</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>2</row>
+        <row>1</row>
         <column>0</column>
       </point1>
       <point2>
-        <row>1</row>
-        <column>1</column>
+        <row>2</row>
+        <column>0</column>
       </point2>
       <point3>
-        <row>1</row>
-        <column>2</column>
+        <row>0</row>
+        <column>1</column>
       </point3>
       <point4>
         <row>0</row>
         <column>2</column>
       </point4>
       <point5>
-        <row>0</row>
-        <column>3</column>
+        <row>1</row>
+        <column>1</column>
       </point5>
     </piece9>
-    <piece10>
-      <point0>
-        <row>2</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>3</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>4</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>1</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>2</row>
-        <column>1</column>
-      </point5>
-    </piece10>
-    <piece11>
-      <point0>
-        <row>2</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>3</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>4</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>1</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>2</row>
-        <column>1</column>
-      </point5>
-    </piece11>
-    <piece12>
-      <point0>
-        <row>1</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>2</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>3</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>4</row>
-        <column>0</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece12>
-    <piece13>
-      <point0>
-        <row>1</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>2</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>3</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>4</row>
-        <column>0</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece13>
-    <piece14>
-      <point0>
-        <row>1</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>2</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>1</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>1</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>2</row>
-        <column>2</column>
-      </point5>
-    </piece14>
-    <piece15>
-      <point0>
-        <row>1</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>2</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>1</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>1</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>2</row>
-        <column>2</column>
-      </point5>
-    </piece15>
-    <piece16>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>2</column>
-      </point5>
-    </piece16>
-    <piece17>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>2</column>
-      </point5>
-    </piece17>
-    <piece18>
-      <point0>
-        <row>2</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>3</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>0</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>2</row>
-        <column>2</column>
-      </point5>
-    </piece18>
-    <piece19>
-      <point0>
-        <row>2</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>3</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>0</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>1</column>
-      </point4>
-      <point5>
-        <row>2</row>
-        <column>2</column>
-      </point5>
-    </piece19>
-    <piece20>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>1</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>3</column>
-      </point5>
-    </piece20>
-    <piece21>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>1</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>3</column>
-      </point5>
-    </piece21>
-    <piece22>
-      <point0>
-        <row>1</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>0</row>
-        <column>1</column>
-      </point1>
-      <point2>
-        <row>1</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>3</column>
-      </point5>
-    </piece22>
-    <piece23>
-      <point0>
-        <row>1</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>0</row>
-        <column>1</column>
-      </point1>
-      <point2>
-        <row>1</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>1</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>2</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>3</column>
-      </point5>
-    </piece23>
-    <piece24>
-      <point0>
-        <row>2</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>1</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>1</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>3</column>
-      </point5>
-    </piece24>
-    <piece25>
-      <point0>
-        <row>2</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>1</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>1</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>2</column>
-      </point3>
-      <point4>
-        <row>1</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>3</column>
-      </point5>
-    </piece25>
   </playableBullpen>
   <board>
     <square0 type="puzzle">
@@ -1114,6 +698,6 @@
       <isHint>false</isHint>
     </square143>
   </board>
-  <isCustom>true</isCustom>
+  <isCustom>false</isCustom>
   <isAddedToPlayer>true</isAddedToPlayer>
 </level>
