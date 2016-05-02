@@ -58,6 +58,11 @@ public class EndLevelView extends JPanel implements IGameScreen
 		JButton nextLevelButton = new JButton("Next Level");
 		nextLevelButton.setBounds(510, 500, 80, 80);
 		nextLevelButton.addActionListener(new ContinueController(model, view));
+		if(model.getPlayingLevel().getScore() < 1)  // If the next level hasn't been unlocked
+		{
+			// Then disable this button, can't move on
+			nextLevelButton.setEnabled(false);
+		}
 		add(nextLevelButton);
 	}
 

@@ -99,9 +99,9 @@ public class PuzzleLevel extends LevelModel {
 	int calculateScore() {
 		int nonFilledSquares = 0;
 		int stars = 0;
-		Square [] [] playArea = new Square [board.getRows()] [board.getCols()];
-		for (int i=0; i<board.getRows();i++) {
-			for (int j=0; j<board.getCols();j++) {
+		Square [] [] playArea = super.getBoard().getPlayArea();
+		for (int i = 0; i < Board.MAXROWS ; i++) {
+			for (int j = 0; j < Board.MAXCOLS ; j++) {
 				if (!(playArea[i][j].isFilled()) && playArea[i][j] instanceof PuzzleSquare) {
 					nonFilledSquares+=1;
 				}
