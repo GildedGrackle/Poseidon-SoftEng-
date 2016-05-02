@@ -1,5 +1,6 @@
 package poseidon.entities;
 
+import java.util.Deque;
 import java.util.Stack;
 
 /**
