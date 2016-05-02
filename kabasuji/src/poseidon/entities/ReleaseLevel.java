@@ -167,14 +167,15 @@ public class ReleaseLevel extends LevelModel{
 	private boolean trackRelease (int color) {
 		boolean [] checkSet = new boolean[6];
 		boolean passed = true;
-		Square [] [] playArea = new Square [board.getRows()] [board.getCols()];
+		Square [] [] playArea = super.getBoard().getPlayArea();
 		for (int i=0; i<board.getRows();i++) {
 			for (int j=0; j<board.getCols();j++) {
 				if (playArea[i][j].isFilled() && playArea[i][j] instanceof ReleaseSquare ) {
-					if(playArea[i][j].getReleaseNumber().getColor() == color) {
-						checkSet[playArea[i][j].getReleaseNumber().getNumber()] = true;
+					if(playArea[i][j].getReleaseNumber() != null){
+						if(playArea[i][j].getReleaseNumber().getColor() == color) {
+							checkSet[playArea[i][j].getReleaseNumber().getNumber()] = true;
+						}
 					}
-					
 				}
 			}
 		}

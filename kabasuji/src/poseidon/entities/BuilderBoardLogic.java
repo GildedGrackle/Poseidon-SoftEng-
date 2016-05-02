@@ -90,4 +90,51 @@ public class BuilderBoardLogic implements IBoardLogic {
 	public Boolean canEdit(Board board) {
 		return true;
 	}
+	
+	
+	/**
+	 *  Fills the squares covered by the given piece.
+	 *  
+	 *  @param piece  The piece used to fill squares
+	 */
+	@Override
+	public void placePiece(Board board, PieceContainer piece){
+		Point location = piece.getLocation();
+		Square[][] playArea = board.getPlayArea();
+		int gamemode = 0;
+		for(int i = 0; i < Board.MAXROWS; i++)
+		{
+			for(int j = 0; j < Board.MAXCOLS; j++)
+			{
+				if(playArea[i][j].getType() > 0)
+				{
+					gamemode = playArea[i][j].getType();
+					break;  // Sometimes I wish there would be a double-break
+				}
+			}
+			if(gamemode > 0)  // Then I wouldn't have to do this
+			{
+				break;
+			}
+		}
+		
+		//fills the squares with the piece points
+		for (Point pt : piece.getPiece().getPiece()) {
+			int pointRow = pt.getRow() + location.getRow();
+			int pointCol = pt.getCol() + location.getCol();
+			switch(gamemode)
+			{
+			case LevelModel.PUZZLE:
+				playArea[pointRow][pointCol] = new PuzzleSquare(true);
+				break;
+			case LevelModel.LIGHTNING:
+				playArea[pointRow][pointCol] = new LightningSquare(true);
+				break;
+			case LevelModel.RELEASE:
+				playArea[pointRow][pointCol] = new ReleaseSquare(true, null);
+				break;
+			}
+		}
+
+	}
 }
