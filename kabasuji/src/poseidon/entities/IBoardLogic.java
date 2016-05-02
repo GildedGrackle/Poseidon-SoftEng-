@@ -8,13 +8,10 @@ package poseidon.entities;
  * @author Alex Titus
  */
 public interface IBoardLogic {
-	/**
-	 *  TODO figure out what shouldAddPiece does and probably rename it.
-	 * @param board  Board being added to
-	 * @param piece  Piece being added, must have valid location set
-	 * @return
-	 */
-	Boolean shouldAddPiece (Board board, PieceContainer piece);
+	
+	/** @return  Whether the piece should be added to list of pieces on the
+	 *  board as well as used to filled the squares. */
+	Boolean shouldAddList();
 	
 	
 	/**

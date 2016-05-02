@@ -14,8 +14,10 @@ import poseidon.entities.UndoManager;
  */
 public class RowSizeController implements PropertyChangeListener
 {
-	/** The GUI for the Level under construction. */
+	/** The GUI for the level under construction. */
 	BuilderView view;
+	/** The gamemode of the board under construction. */
+	int gamemode;
 	
 	
 	/**
@@ -26,6 +28,7 @@ public class RowSizeController implements PropertyChangeListener
 	public RowSizeController(BuilderView view)
 	{
 		this.view = view;
+		this.gamemode = view.getModel().getGameMode();
 	}
 
 	
@@ -53,14 +56,17 @@ public class RowSizeController implements PropertyChangeListener
 		int oldVal = (int) evt.getOldValue();
 		int newVal = (int) evt.getNewValue();
 		int colVal = (int) view.getColSizeInput().getValue();
-		ResizeBoardMove move = new ResizeBoardMove(view.getBoard().getBoard(), oldVal, colVal, newVal, colVal);
+		ResizeBoardMove move = new ResizeBoardMove(view.getBoard().getBoard(), gamemode,
+				oldVal, colVal, newVal, colVal);
 		if(move.doMove())  // If move succeeds
 		{
 			// Then record it and indicate success
 			UndoManager.instance().recordMove(move);
+			view.modelUpdated();
 			return true;
 		}
 		// Else indicate failure
+		view.modelUpdated();
 		return false;
 	}
 

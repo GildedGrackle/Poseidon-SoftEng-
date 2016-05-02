@@ -20,7 +20,7 @@ public class LightningSquare extends Square{
 	/**
 	 *  Used to indicate the type of Square this is.
 	 *  
-	 *  @return one of the game type constants in LevelModel
+	 *  @return  The game type constant for the Lightning gamemode.
 	 */
 	@Override
 	public int getType()

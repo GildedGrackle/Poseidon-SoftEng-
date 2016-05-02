@@ -15,11 +15,9 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	}
 	
 
-	/**
-	 *  TODO PuzzleBoardLogic.shouldAddPiece documentation; see IBoardLogic
-	 */
+	/** @return  True - pieces should be added to the list of pieces on the board. */
 	@Override
-	public Boolean shouldAddPiece(Board board, PieceContainer piece) {
+	public Boolean shouldAddList() {
 		return true;
 	}
 	

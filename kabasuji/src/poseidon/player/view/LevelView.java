@@ -75,7 +75,9 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 	/** The current move/time limit for the Level. */
 	JLabel limitView;
 	/** Images for the rotate button Icons*/ 
-	Image rotateCW, rotateCCW;
+	Image rotateCW, rotateCCW, icon;
+	
+	JLabel poseidon;
 
 	/**
 	 *  Constructor.
@@ -157,12 +159,18 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		rotateCWButton.setBounds(93, 160, 45, 45);
 		rotateCWButton.addActionListener(new RotateCWController(bullpen));
 		rightPanel.add(rotateCWButton);
+		
+		poseidon = new JLabel("");
+		poseidon.setBounds(35, 40, 100, 100);
+		leftPanel.add(poseidon);
 
 		try {
 			rotateCCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCCW.png"));
 			rotateCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCW.png"));
+			icon = ImageIO.read(getClass().getClassLoader().getResource("images/Logo.png"));
 			rotateCCWButton.setIcon(new ImageIcon(rotateCCW));
 			rotateCWButton.setIcon(new ImageIcon(rotateCW));
+			poseidon.setIcon(new ImageIcon(icon));
 		} catch (IOException e) {
 		}
 		

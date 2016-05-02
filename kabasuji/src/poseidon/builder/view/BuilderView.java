@@ -13,6 +13,7 @@ import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -20,6 +21,7 @@ import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.ColSizeController;
 import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.LimitController;
+import poseidon.builder.controller.MakeReleaseSquareController;
 import poseidon.builder.controller.RedoController;
 import poseidon.builder.controller.ResetBuilderController;
 import poseidon.builder.controller.RowSizeController;
@@ -95,10 +97,11 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	/** Label for the limit input field. */
 	JLabel limitLabel;
 	/** Icons for the Rotate Buttons*/
-	Image rotateCW, rotateCCW;
+	Image rotateCW, rotateCCW, icon;
 	/** To add a releaseSquare. */
-	JButton addReleaseSquare;
+	JToggleButton addReleaseSquare;
 	
+	JLabel poseidon;
 
 
 	/**
@@ -162,11 +165,18 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		rotateCWButton.addActionListener(new RotateCWController(bullpen));
 		add(rotateCWButton);
 		
+		poseidon = new JLabel("");
+		poseidon.setBounds(35, 40, 100, 100);
+		add(poseidon);
+		
+		
 		try {
 			rotateCCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCCW.png"));
 			rotateCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCW.png"));
+			icon = ImageIO.read(getClass().getClassLoader().getResource("images/Logo.png"));
 			rotateCCWButton.setIcon(new ImageIcon(rotateCCW));
 			rotateCWButton.setIcon(new ImageIcon(rotateCW));
+			poseidon.setIcon(new ImageIcon(icon));
 		} catch (IOException e) {
 		}
 		
@@ -278,12 +288,17 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton.addActionListener(new SaveLevelController(model, application));
 		add(saveButton);
 		
-		String twoLines = new String("New Release\nSquare");
-		addReleaseSquare = new JButton("<html>" + twoLines + "</html>");
-		addReleaseSquare.setFont(new Font("Dialog", Font.PLAIN, 13));
-		addReleaseSquare.setBounds(555, 300, 110, 60);
-		//addReleaseSquare.addActionListener(l);
-		add(addReleaseSquare);
+		if (model.getGameMode() == 3){
+			String twoLines = new String("New Release\nSquare");
+			addReleaseSquare = new JToggleButton("<html>" + twoLines + "</html>");
+			addReleaseSquare.setFont(new Font("Dialog", Font.PLAIN, 13));
+			addReleaseSquare.setBounds(555, 300, 110, 60);
+			addReleaseSquare.addActionListener(new MakeReleaseSquareController(topmodel, application));
+			add(addReleaseSquare);
+		}
+		
+		
+
 	}
 
 	
