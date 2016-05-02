@@ -239,7 +239,7 @@ public class BoardController extends MouseAdapter
 	/**
 	 *  Used to place a piece on the board.
 	 *  
-	 *  Handles either a board-to-board move or a board-to-bullpen move
+	 *  Handles either a board-to-board move or a board-to-bullpen move.
 	 * 
 	 *  @param me  the initiating mouse release
 	 */
@@ -247,13 +247,14 @@ public class BoardController extends MouseAdapter
 	public void mouseReleased(MouseEvent me)
 	{
 		PieceContainer piece = boardModel.getActiveDragged();
+		PieceContainer bullpiece = bullpenModel.getPieceSelected();
 		
 		// Determine row and column of click
 		int col = me.getX() / BoardView.SQUARE_SIZE;
 		int row = me.getY() / BoardView.SQUARE_SIZE;
 		
-		// If there is no actively dragged piece
-		if(piece == null)
+		// If there is no actively dragged piece or there is a selected piece in the bullpen
+		if(piece == null || bullpiece != null)
 		{
 			// Then bail
 			return ;
