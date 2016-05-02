@@ -1,7 +1,10 @@
 package poseidon.player.view;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -14,6 +17,8 @@ public class ScoreView extends JPanel implements IModelUpdated{
 	JLabel firstStar;  // The left-most star in the score
 	JLabel secondStar;  // The middle star in the score
 	JLabel thirdStar;  // The right-most star in the score
+	/** Images of stars for score*/
+	Image star, greyStar;
 	
 
 	/**
@@ -24,9 +29,9 @@ public class ScoreView extends JPanel implements IModelUpdated{
 		
 		// Create objects in panel
 		setLayout(null);
-		setBackground(Color.white);
+		setBackground(new Color(0, 191, 255));
 		
-		ImageIcon emptyStar = new ImageIcon("images/emptyStar.gif");  // TODO Filename subject to change
+		ImageIcon emptyStar = new ImageIcon("images/Star-grey.gif");  
 		firstStar = new JLabel(emptyStar);
 		firstStar.setBounds(3, 0, 35, 35);
 		add(firstStar);
@@ -47,31 +52,48 @@ public class ScoreView extends JPanel implements IModelUpdated{
 	 */
 	@Override
 	public Boolean modelUpdated()
-	{
-		ImageIcon emptyStar = new ImageIcon("images/emptyStar.gif");  // TODO Filename subject to change
-		ImageIcon filledStar = new ImageIcon("images/filledStar.gif");
-		
+	{	
 		switch(model.getScore())
 		{
 		case 3:
-			thirdStar.setIcon(filledStar);
-			secondStar.setIcon(filledStar);
-			firstStar.setIcon(filledStar);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(star));
+				secondStar.setIcon(new ImageIcon(star));
+				thirdStar.setIcon(new ImageIcon(star));
+			} catch (IOException e) {
+			}
 			break;
 		case 2:
-			thirdStar.setIcon(emptyStar);
-			secondStar.setIcon(filledStar);
-			firstStar.setIcon(filledStar);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(star));
+				secondStar.setIcon(new ImageIcon(star));
+				thirdStar.setIcon(new ImageIcon(greyStar));
+			} catch (IOException e) {
+			}
 			break;
 		case 1:
-			thirdStar.setIcon(emptyStar);
-			secondStar.setIcon(emptyStar);
-			firstStar.setIcon(filledStar);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(star));
+				secondStar.setIcon(new ImageIcon(greyStar));
+				thirdStar.setIcon(new ImageIcon(greyStar));
+			} catch (IOException e) {
+			}
 			break;
 		default:  // Catches 0 and any error scores
-			thirdStar.setIcon(emptyStar);
-			secondStar.setIcon(emptyStar);
-			firstStar.setIcon(emptyStar);
+			try {
+				star = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+				greyStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+				firstStar.setIcon(new ImageIcon(greyStar));
+				secondStar.setIcon(new ImageIcon(greyStar));
+				thirdStar.setIcon(new ImageIcon(greyStar));
+			} catch (IOException e) {
+			}
 		}
 		
 		this.repaint();

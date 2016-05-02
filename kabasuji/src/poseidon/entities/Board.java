@@ -81,8 +81,10 @@ public class Board {
 	}
 	
 	
-	/*
-	 *  Fills the squares covered by the given piece
+	/**
+	 *  Fills the squares covered by the given piece.
+	 *  
+	 *  @param piece  The piece used to fill squares
 	 */
 	private void placePiece(PieceContainer piece){
 		Point location = piece.getLocation();
@@ -345,7 +347,7 @@ public class Board {
 		if(piece != null && activeSource.getCol() != -1 && activeSource.getRow() != -1)
 		{
 			// Then remove new active dragging Piece from Board
-			logic.shouldRemovePiece(this, piece);
+			removePiece(piece);
 		}
 		activeDragged = piece;
 	}

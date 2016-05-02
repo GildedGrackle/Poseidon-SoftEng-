@@ -3,8 +3,6 @@ package poseidon.common.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
 
 import poseidon.entities.Board;

@@ -279,6 +279,7 @@ public class BoardController extends MouseAdapter
 		{
 			// Then record it and reset Board and Bullpen's active/selection
 			boardModel.setActiveDragged(null);
+			boardModel.setActiveSource(new Point(-1, -1));
 			boardView.setActiveLocation(null);
 			UndoManager.instance().recordMove(move);
 			
