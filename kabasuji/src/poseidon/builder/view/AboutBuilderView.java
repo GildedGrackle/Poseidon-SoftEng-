@@ -13,22 +13,27 @@ import poseidon.builder.controller.BackBuilderController;
 import poseidon.entities.LevelBuilderModel;
 
 /**
- *  TODO AboutBuilder documentation
+ *  Screen showing information about the Level Builder application.
  *  
  *  @author Alex Titus
  */
 public class AboutBuilderView extends JPanel implements IBuilderScreen{
 	
-	LevelBuilderView application;  // The top-level GUI object
+	/** The top-level entity object. */
 	LevelBuilderModel model;
+	/** The top-level GUI object. */
+	LevelBuilderView application;
+	/** Used to view the next page of information, if applicable */
 	JButton nextButton;
+	/** Used to return to the main menu. */
 	JButton backButton;
 
+	
 	/**
 	 *  Constructor.
 	 *  
-	 *  @param model  
-	 *  @param view  
+	 *  @param model  the top-level entity object
+	 *  @param view  the top-level GUI object
 	 */
 	public AboutBuilderView(LevelBuilderModel model, LevelBuilderView view){
 		this.application = view;
@@ -70,14 +75,16 @@ public class AboutBuilderView extends JPanel implements IBuilderScreen{
 	 *  Updates display when model changes.
 	 *  
 	 *  Nothing can change on this screen.
-	 *  @return false
+	 *  
+	 *  @return  False - nothing can be updated on this screen.
 	 */
 	@Override
 	public Boolean modelUpdated(){
 		return false;
 	}
 	
-	/** Returns the Back button, used to navigate back to the main menu. */
+	
+	/** @return  The Back button, used to navigate back to the main menu. */
 	public JButton getBackButton(){
 		return backButton;
 	}

@@ -23,6 +23,7 @@ public class Bullpen {
 	/**The logic of the bullpen - game mode/builder*/
 	IBullpenLogic logic;
 	
+	
 	/**
 	 *  Constructor.
 	 *  
@@ -52,7 +53,7 @@ public class Bullpen {
 	
 	
 	/**
-	 *  Fills pieces with one of every type of Piece
+	 *  Fills pieces with one of every type of Piece.
 	 */
 	void initializeInfinite()
 	{
@@ -105,7 +106,7 @@ public class Bullpen {
 	 * @param index  the index of this piece, must be within bounds
 	 * @return  Indicator of whether the bullpen now contains that piece.
 	 */
-	boolean addPieceAt(PieceContainer piece, int index) {
+	Boolean addPieceAt(PieceContainer piece, int index) {
 		pieces.add(index, piece);
 		
 		return pieces.contains(piece);
@@ -134,7 +135,7 @@ public class Bullpen {
 	/**
 	 *  Returns the piece at index in the bullpen.
 	 *  
-	 *  @param index  the index of the piece
+	 *  @param index  the index of the piece, must be within bounds
 	 *  @return The piece contained at index. */
 	public PieceContainer getPiece(int index) {
 		return pieces.get(index);

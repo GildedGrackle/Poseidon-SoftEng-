@@ -3,20 +3,24 @@ package poseidon.builder.controller;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JToggleButton;
-
 import poseidon.builder.view.BuilderView;
 
 /**
  *  Switches between hint creation mode and normal mode.
- * @author Narfnof
- *
+ *  
+ *  @author Alex Titus
  */
 public class HintSelectModeController implements ItemListener
 {
 	/** The representation of the level currently under construction. */
 	BuilderView view;
 
+	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param view  the representation of the level currently under construction
+	 */
 	public HintSelectModeController(BuilderView view)
 	{
 		this.view = view;
@@ -42,7 +46,8 @@ public class HintSelectModeController implements ItemListener
 		{
 			view.getBoard().setHintSelectionMode(false);
 		}
-
+		
+		view.modelUpdated();
 	}
 
 }

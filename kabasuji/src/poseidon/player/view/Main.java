@@ -5,9 +5,18 @@ import java.awt.EventQueue;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.entities.XMLHandler;
 
+/**
+ *  Starts the Kabasuji Level Player application.
+ *  
+ *  @author Alex Titus
+ */
 public class Main
 {
 	
+	/**
+	 * Launch the application.
+	 * Starts with the splash screen and then opens to the main menu.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

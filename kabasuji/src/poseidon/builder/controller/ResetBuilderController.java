@@ -6,13 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
-import poseidon.builder.view.NewLevelView;
 import poseidon.entities.LevelBuilderModel;
-import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
-import poseidon.entities.XMLHandler;
 
 
 /**

@@ -21,6 +21,7 @@ public class DeleteLevelController implements ActionListener {
 	/** The level model being deleted. */
 	LevelContainer level;
 	
+	
 	/**
 	 * Constructor.
 	 * 
@@ -30,6 +31,7 @@ public class DeleteLevelController implements ActionListener {
 		this.topModel = topModel;
 		this.level = level;
 	}
+	
 	
 	/**
 	 *  Attempts to delete the file location associated with the specified level, remove from level list.

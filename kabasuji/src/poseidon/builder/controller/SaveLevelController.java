@@ -22,6 +22,7 @@ public class SaveLevelController implements ActionListener {
 	/** The top-level GUI object. */
 	LevelBuilderView view;
 	
+	
 	/**
 	 *  Constructor.
 	 *  
@@ -32,6 +33,7 @@ public class SaveLevelController implements ActionListener {
 		this.model = model;
 		this.view = view;
 	}
+	
 	
 	/**
 	 *  Creates and displays the save level screen.

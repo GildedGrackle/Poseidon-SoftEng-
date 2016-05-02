@@ -21,8 +21,8 @@ import poseidon.entities.LevelContainer;
  *  Can add Levels to the game, remove added Levels from the game,
  *  edit Levels, and delete Levels.
  *  
- * @author Alex Titus
- * @author Jacob
+ *  @author Alex Titus
+ *  @author Jacob
  */
 public class EditLevelView extends JPanel implements IBuilderScreen
 {
@@ -30,11 +30,11 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	LevelBuilderModel model;
 	/** The top-level GUI object. */
 	LevelBuilderView application;
-	/** To delete selected Level. */
+	/** To delete selected level. */
 	JButton deleteButton;
-	/** To edit selected Level. */
+	/** To edit selected level. */
 	JButton editButton;
-	/** To add selected Level to game. */
+	/** To add selected level to game. */
 	JButton addButton;
 	/** To return to the main menu (LevelBuilderView). */
 	JButton backButton;
@@ -42,9 +42,9 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	JScrollPane addLevelsContainer;
 	/** To hold the saved levels. */
 	JScrollPane savedLevelsContainer;
-	/** Custom Levels added to the game. */
+	/** Custom levels added to the game. */
 	SelectableEditLevelsView addedLevels;
-	/** Custom Levels saved but not added to the game. */
+	/** Custom levels saved but not added to the game. */
 	SelectableEditLevelsView savedLevels;
 	/** The level selected to edit by the user. */
 	LevelContainer selectedLevel;
@@ -158,8 +158,8 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	/**
 	 *  Updates the display when the model changes.
 	 *  
-	 *  Updates when Levels are deleted, when Levels are added to the game,
-	 *  or when Levels are removed from the game.
+	 *  Updates when levels are deleted, when levels are added to the game,
+	 *  or when levels are removed from the game.
 	 *  
 	 *  @return  Indicator of whether the operation completed successfully.
 	 */
@@ -173,7 +173,7 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	
 	
 	/**
-	 *  Resets all level select buttons to have blue backgrounds.
+	 *  Resets all level select buttons to have light blue backgrounds.
 	 */
 	public void resetSelectColors()
 	{

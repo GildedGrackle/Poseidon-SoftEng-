@@ -32,9 +32,11 @@ public class CancelEditController implements ActionListener
 
 	/**
 	 *  Display the build level screen (BuilderView).
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e)
+	public void actionPerformed(ActionEvent ae)
 	{
 		BuilderView currentScreen = (BuilderView) view.getCurrentScreen();
 		view.getBuilder().setContentPane(currentScreen);

@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import poseidon.entities.LevelModel;
 
 /**
- *  Handles a change level allocated limit request.
+ *  Handles a "change level allocated limit" request.
  *  
  *  @author Alex Titus
  */
