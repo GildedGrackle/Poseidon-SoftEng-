@@ -57,7 +57,7 @@ public class BoardController extends MouseAdapter
 		this.view = view;
 		this.boardModel = game.getBoard();
 		this.boardView = view.getBoard();
-		this.bullpenModel = game.getPlayableBullpen();
+		this.bullpenModel = view.getBullpen().getModel();
 		this.bullpenView = view.getBullpen();
 	}
 	

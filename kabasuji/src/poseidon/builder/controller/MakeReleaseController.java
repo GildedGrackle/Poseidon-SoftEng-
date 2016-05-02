@@ -77,7 +77,7 @@ public class MakeReleaseController implements ActionListener
 		}
 		BuilderBullpenLogic newBullpenLogic = new BuilderBullpenLogic();
 		BuilderBoardLogic newBoardLogic = new BuilderBoardLogic();
-		ReleaseLevel newLevel = new ReleaseLevel(10, "New Puzzle Level",
+		ReleaseLevel newLevel = new ReleaseLevel(10, "New Release Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
 				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
 		LevelContainer newContainer = new LevelContainer("newRelease", 3, 0, newLevel, 0);  // TODO use correct "inGame" input

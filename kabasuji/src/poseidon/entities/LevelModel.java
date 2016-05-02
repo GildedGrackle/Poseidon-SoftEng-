@@ -85,6 +85,12 @@ public abstract class LevelModel {
 	 */
 	public abstract void builderInitialize();
 	
+	void checkIfWon() {
+		if (hasWon()){
+			//TODO create action here
+		}
+	}
+	
 	/** @return  Whether the player reached 3 stars. */
 	abstract Boolean hasWon();
 	

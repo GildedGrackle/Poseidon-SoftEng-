@@ -34,7 +34,9 @@ public class ReleaseLevel extends LevelModel{
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
 	 */
-	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen,
+			Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+		
 		super(bullpen, infinite, board, RELEASE, levelName, isCustom, isAddedToPlayer);
 		this.allottedMoves = allottedMoves;
 	}
@@ -165,14 +167,15 @@ public class ReleaseLevel extends LevelModel{
 	private boolean trackRelease (int color) {
 		boolean [] checkSet = new boolean[6];
 		boolean passed = true;
-		Square [] [] playArea = new Square [board.getRows()] [board.getCols()];
+		Square [] [] playArea = super.getBoard().getPlayArea();
 		for (int i=0; i<board.getRows();i++) {
 			for (int j=0; j<board.getCols();j++) {
 				if (playArea[i][j].isFilled() && playArea[i][j] instanceof ReleaseSquare ) {
-					if(playArea[i][j].getReleaseNumber().getColor() == color) {
-						checkSet[playArea[i][j].getReleaseNumber().getNumber()] = true;
+					if(playArea[i][j].getReleaseNumber() != null){
+						if(playArea[i][j].getReleaseNumber().getColor() == color) {
+							checkSet[playArea[i][j].getReleaseNumber().getNumber()] = true;
+						}
 					}
-					
 				}
 			}
 		}
