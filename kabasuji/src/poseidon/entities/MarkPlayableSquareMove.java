@@ -3,7 +3,7 @@ package poseidon.entities;
 /**
  *  Handles performing, recording, and undoing of making a square playable.
  *  
- *  @author Natalia?
+ *  @author Natalia
  *  @author Alex Titus
  */
 public class MarkPlayableSquareMove implements IMove{

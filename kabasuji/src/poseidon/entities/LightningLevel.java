@@ -108,6 +108,7 @@ public class LightningLevel extends LevelModel{
 		return false;
 	}
 
+
 	/**
 	 * Checks the amount of stars the player has reached in the game.
 	 * 
