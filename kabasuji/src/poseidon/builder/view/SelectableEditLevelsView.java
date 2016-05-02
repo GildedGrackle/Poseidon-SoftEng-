@@ -93,7 +93,7 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 				buttons[gamemode][levelNumber] = new EditLevelIcon(model.getSavedLevels().get(gamemode).get(lc.getLevelNumber()));
 				buttons[gamemode][levelNumber].setBounds(10 + (ICON_SPACING_WIDTH + ICON_WIDTH) * lc.getLevelNumber(),
 						2 + (ICON_SPACING_HEIGHT + ICON_HEIGHT) * gamemode, ICON_WIDTH, ICON_HEIGHT);
-				buttons[gamemode][levelNumber].setBackground(Color.cyan);
+				buttons[gamemode][levelNumber].setBackground(new Color(0, 191, 255));
 				buttons[gamemode][levelNumber].addActionListener(new SelectEditLevelController(view));
 				add(buttons[gamemode][levelNumber]);
 				levelNumber++;
@@ -104,6 +104,8 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	
 	/**
 	 *  Update the display when the underlying model has changed.
+	 *  
+	 *  Changes all icon colors to blue.
 	 */
 	public void modelUpdated()
 	{
@@ -120,7 +122,7 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 		{
 			for(EditLevelIcon icon : type)
 			{
-				icon.setBackground(Color.cyan);
+				icon.setBackground(new Color(0, 191, 255));
 			}
 		}
 	}

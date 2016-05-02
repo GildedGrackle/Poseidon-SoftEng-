@@ -6,12 +6,25 @@ import java.awt.event.ActionListener;
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.entities.LevelBuilderModel;
 
+/**
+ *  Sets the display back to the main menu.
+ *  
+ *  @author Alex Titus
+ */
 public class BackBuilderController implements ActionListener
 {
-	LevelBuilderModel model;  // The top-level entity object, representing the application's state
-	LevelBuilderView application;  // The top-level GUI object
+	/** The top-level entity object, representing the application's state. */
+	LevelBuilderModel model;
+	/** The top-level GUI object. */
+	LevelBuilderView application;
 	
 	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object, representing the application's state
+	 *  @param view  the top-level GUI object
+	 */
 	public BackBuilderController(LevelBuilderModel model, LevelBuilderView view)
 	{
 		this.model = model;
@@ -21,7 +34,9 @@ public class BackBuilderController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  About screen
+	 *  main menu screen.
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -33,7 +48,9 @@ public class BackBuilderController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
-	 *  About screen
+	 *  main menu screen.
+	 *  
+	 *  @return  Indication of whether operation completed successfully.
 	 */
 	public Boolean goBack()
 	{	

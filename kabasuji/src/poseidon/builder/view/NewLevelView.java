@@ -13,17 +13,32 @@ import poseidon.builder.controller.MakePuzzleController;
 import poseidon.builder.controller.MakeReleaseController;
 import poseidon.entities.LevelBuilderModel;
 
+/**
+ *  The new level creation screen, where new levels can be created.
+ *   
+ *  @author Alex Titus
+ */
 public class NewLevelView extends JPanel implements IBuilderScreen{
 	
-	LevelBuilderModel model;  // The top-level state object
-	LevelBuilderView application;  // The top-level GUI object
-	JButton newPuzzleButton;  // To create a new Puzzle Level
-	JButton newLightningButton;  // To create a new Lightning Level
-	JButton newReleaseButton;  // To create a new Release Level
-	JButton backButton;  // To return to main menu (LevelBuilderView)
+	/** The top-level state object. */
+	LevelBuilderModel model;
+	/** The top-level GUI object. */
+	LevelBuilderView application;
+	/** To create a new Puzzle Level. */
+	JButton newPuzzleButton;
+	/** To create a new Lightning Level. */
+	JButton newLightningButton;
+	/** To create a new Release Level. */
+	JButton newReleaseButton;
+	/** To return to main menu (LevelBuilderView). */
+	JButton backButton;
 
+	
 	/**
-	 * Create the panel.
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level state object
+	 *  @param view  the top-level GUI object
 	 */
 	public NewLevelView(LevelBuilderModel model, LevelBuilderView view){
 		this.model = model;
@@ -34,7 +49,7 @@ public class NewLevelView extends JPanel implements IBuilderScreen{
 
 	
 	/**
-	 *  TODO
+	 *  Creates the panel.
 	 */
 	public void initialize()
 	{
@@ -72,23 +87,31 @@ public class NewLevelView extends JPanel implements IBuilderScreen{
 	
 	
 	/**
-	 *  Updates the display when the model changes
+	 *  Updates the display when the model changes.
+	 *  
+	 *  @return  False - nothing can be updated on this screen.
 	 */
 	@Override
 	public Boolean modelUpdated()
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
+	
 
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	/** @return  The "New Puzzle" button, which creates a new Puzzle level. */
 	public JButton getNewPuzzle(){
 		return newPuzzleButton;
 	}
 	
+	/** @return  The "New Lightning" button, which creates a new Lightning level. */
 	public JButton getNewLightning(){
 		return newLightningButton;
 	}
 	
+	/** @return  The "New Relese" button, which creates a new Release level. */
 	public JButton getNewRelease(){
 		return newReleaseButton;
 	}

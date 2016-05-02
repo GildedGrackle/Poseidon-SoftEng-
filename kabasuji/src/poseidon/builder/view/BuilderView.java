@@ -97,7 +97,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	JLabel title;
 	/** Label for the limit input field. */
 	JLabel limitLabel;
-	/** Icons for the Rotate Buttons*/
+	/** Icons for the rotate buttons*/
 	Image rotateCW, rotateCCW, icon;
 	/** To add a releaseSquare. */
 	JToggleButton addReleaseSquare;
@@ -307,6 +307,8 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	
 	/**
 	 *  Updates the display when the model is changed.
+	 *  
+	 *  @return  Indicator of whether operation completed successfully.
 	 */
 	@Override
 	public Boolean modelUpdated()
@@ -394,7 +396,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		return undoButton;
 	}
 	
-	/** @return  the button associated with the redo controller. */
+	/** @return  The button associated with the redo controller. */
 	public JButton getRedo(){
 		return redoButton;
 	}

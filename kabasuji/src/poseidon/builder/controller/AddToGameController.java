@@ -16,6 +16,7 @@ public class AddToGameController implements ActionListener {
 	/** The level model being deleted. */
 	LevelContainer level;
 	
+	
 	/**
 	 * Constructor.
 	 * 
@@ -24,6 +25,7 @@ public class AddToGameController implements ActionListener {
 	public AddToGameController(LevelContainer level) {
 		this.level = level;
 	}
+	
 	
 	/**
 	 *  Saves the specified level as being added to game (presumed to overwrite old version).

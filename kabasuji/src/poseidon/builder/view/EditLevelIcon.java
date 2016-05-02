@@ -12,11 +12,13 @@ import poseidon.entities.LevelContainer;
  */
 public class EditLevelIcon extends JButton
 {
-	/** The Level Container associated with this StarView. */
+	/** The Level Container associated with this icon. */
 	LevelContainer levelContainer;
 
 	/**
-	 *  Construct selectable icon
+	 *  Constructor.
+	 *  
+	 *  @param lc  the LevelContainer to associate
 	 */
 	public EditLevelIcon(LevelContainer lc)
 	{

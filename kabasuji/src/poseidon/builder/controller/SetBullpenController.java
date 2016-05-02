@@ -15,7 +15,8 @@ import poseidon.entities.PieceFactory;
 import poseidon.entities.Point;
 
 /**
- *  Sets the playable bullpen of the level currently being built and returns to the build level screen (BuilderView).
+ *  Sets the playable bullpen of the level currently being built and returns
+ *  to the build level screen (BuilderView).
  *  
  *  @author Alex Titus
  */
@@ -33,6 +34,7 @@ public class SetBullpenController implements ActionListener
 	 *  Constructor.
 	 *  
 	 *  @param view  the top-level GUI object
+	 *  @param editView  the screen with the information about piece counts
 	 *  @param playable  the playable bullpen
 	 */
 	public SetBullpenController(LevelBuilderView view, EditPlayableBullpenView editView,

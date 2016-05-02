@@ -51,6 +51,8 @@ public class MakePuzzleController implements ActionListener
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
 	 *  Level Builder screen, with a new Puzzle Level ready to build.
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -63,6 +65,8 @@ public class MakePuzzleController implements ActionListener
 	/**
 	 *  Switches the panel currently being displayed in LevelBuilderView to the
 	 *  Level Builder screen, with a new Puzzle Level ready to build.
+	 *  
+	 *  @return  Indicator of whether operation was successful.
 	 */
 	public Boolean toPuzzleLevel()
 	{

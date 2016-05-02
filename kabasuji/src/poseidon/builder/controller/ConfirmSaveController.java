@@ -28,6 +28,7 @@ public class ConfirmSaveController implements ActionListener {
 	/** The level model being built. */
 	LevelModel level;
 	
+	
 	/**
 	 * Constructor.
 	 * 
@@ -41,6 +42,7 @@ public class ConfirmSaveController implements ActionListener {
 		this.saveView = saveView;
 		this.level = level;
 	}
+	
 	
 	/**
 	 *  Saves the level using the new name and boolean flags, returns to the build level screen (BuilderView).

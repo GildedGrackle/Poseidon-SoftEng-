@@ -33,7 +33,7 @@ public class SelectEditLevelController implements ActionListener
 	/**
 	 *  Sets the selectedLevel LevelContainer in LevelSelectView to the
 	 *  LevelContainer associated with the StarView that produced this
-	 *  ActionEvent
+	 *  ActionEvent.
 	 *  
 	 *  @param ae  the initiating event
 	 */

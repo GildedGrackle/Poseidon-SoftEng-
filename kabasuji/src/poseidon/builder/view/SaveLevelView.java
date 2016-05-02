@@ -47,6 +47,7 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 	/** Button to confirm saving and return to the build level screen (BuilderView). */
 	JButton saveButton;
 	
+	
 	/**
 	 *  Constructor, creates all view elements and attached controllers.
 	 *  
@@ -94,6 +95,7 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 		add(saveButton);
 	}
 	
+	
 	/**
 	 *  Updates display when model changes, but the model cannot change while on this screen.
 	 *  
@@ -104,12 +106,14 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 		return false;
 	}
 	
-	/** Return the newly specified name for saving. */
+	
+	/** @return  The newly specified name for saving. */
 	public String getSaveName() {
 		return nameInput.getText();
 	}
 	
-	/** Return boolean if level should be added to player. */
+	
+	/** @return  Boolean if level should be added to player. */
 	public boolean getAddToGame() {
 		return addToGameCheckBox.isSelected();
 	}

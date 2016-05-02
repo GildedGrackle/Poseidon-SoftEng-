@@ -70,7 +70,7 @@ public class EditPlayableBullpenView extends JPanel implements IBuilderScreen
 	 *  Updates display when model changes.
 	 *  
 	 *  The model cannot change while on this screen.
-	 *  @return  False
+	 *  @return  False - nothing can be updated on this screen.
 	 */
 	@Override
 	public Boolean modelUpdated()
@@ -85,11 +85,14 @@ public class EditPlayableBullpenView extends JPanel implements IBuilderScreen
 		return pieceCountsPanel;
 	}
 	
+	/** @return  The "Done" button, which saves changes. */
 	public JButton getDoneButton(){
 		return doneButton;
 	}
 	
+	/** @return  The "Cancel" button, which discards changes. */
 	public JButton getCancelButton(){
 		return cancelButton;
 	}
+	
 }

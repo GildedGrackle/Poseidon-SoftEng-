@@ -49,7 +49,7 @@ public class RowSizeController implements PropertyChangeListener
 	 *  When the value of the Board row size changes, change Board row size to that.
 	 *  
 	 *  @param evt  the initiating event
-	 *  @return  indicator whether operation was successful
+	 *  @return  Indicator whether operation was successful.
 	 */
 	Boolean resizeBoard(PropertyChangeEvent evt)
 	{

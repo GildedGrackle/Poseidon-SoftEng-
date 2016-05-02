@@ -89,9 +89,9 @@ public class PlayBullpenInputView extends JPanel implements Scrollable
 
 	
 	/**
-	 *  Overrides JPanel's paintComponent() method, drawing the Board.
+	 *  Overrides JPanel's paintComponent() method, drawing all 35 game pieces.
 	 *  
-	 *  @param g  Graphics object used to render this object
+	 *  @param g  The Graphics object used to render this object
 	 */
 	@Override
 	public void paintComponent(Graphics g)
@@ -108,42 +108,16 @@ public class PlayBullpenInputView extends JPanel implements Scrollable
 	 *  This method shouldn't be called directly. It is automatically called
 	 *  during repaintComponent().
 	 *  
-	 *  @param g  Graphics object passed from repaintComponent()
+	 *  @param g  The Graphics object passed from repaintComponent()
 	 */
 	void drawPieces(Graphics g)
 	{
 		Graphics drawer = g.create();
 		PieceFactory pieces = new PieceFactory();
-		Color fill = Color.LIGHT_GRAY;
-		Color border = Color.BLACK;
 		
 		// Draw Pieces
 		for(int i = 0; i < 35; i++)
 		{
-			// Pick a color for each piece
-			switch(i % 5)
-			{
-			case 0:
-				fill = Color.yellow;
-				border = Color.orange;
-				break;
-			case 1:
-				fill = Color.pink;
-				border = Color.red;
-				break;
-			case 2:
-				fill = Color.cyan;
-				border = Color.blue;
-				break;
-			case 3:
-				fill = Color.green;
-				border = Color.darkGray;
-				break;
-			case 4:
-				fill = Color.orange;
-				border = Color.red;
-				break;
-			}
 			
 			// Now draw piece
 			Piece p = pieces.getPiece(i+1);
@@ -152,10 +126,10 @@ public class PlayBullpenInputView extends JPanel implements Scrollable
 			{
 				int pieceOffsetY = 2 + BullpenView.SQUARE_SIZE * pt.getRow();
 				int pieceOffsetX = 2 + BullpenView.SQUARE_SIZE * pt.getCol();
-				drawer.setColor(fill);
+				drawer.setColor(p.getPieceColor());
 				drawer.fillRoundRect(pieceOffsetX, pieceOffsetY + offsetY,
 						BullpenView.SQUARE_SIZE, BullpenView.SQUARE_SIZE, 3, 3);
-				drawer.setColor(border);
+				drawer.setColor(p.getPieceBorder());
 				drawer.drawRoundRect(pieceOffsetX, pieceOffsetY + offsetY,
 						BullpenView.SQUARE_SIZE, BullpenView.SQUARE_SIZE, 3, 3);
 			}
@@ -236,6 +210,9 @@ public class PlayBullpenInputView extends JPanel implements Scrollable
 	}
 
 	
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
 	/** @return  The input boxes, with information about the piece counts. */
 	public JFormattedTextField[] getInputs()
 	{

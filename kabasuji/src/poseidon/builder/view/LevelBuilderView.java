@@ -44,6 +44,7 @@ public class LevelBuilderView implements IBuilderScreen{
 	/** The current screen displayed in the frame. */
 	IBuilderScreen currentScreen;
 
+	
 	/**
 	 *  Constructor.
 	 *  
@@ -58,27 +59,7 @@ public class LevelBuilderView implements IBuilderScreen{
 		initialize();
 		currentScreen = null;
 	}
-	
-	
-	/*************************
-	 *  Getters and setters  *
-	 *************************/
-	public JFrame getBuilder()
-	{
-		return builder;
-	}
-	
-	public void setCurrentScreen(IBuilderScreen newScreen)
-	{
-		currentScreen = newScreen;
-	}
-	
-	public IBuilderScreen getCurrentScreen()
-	{
-		return currentScreen;
-	}
 
-	
 	
 	/**
 	 *  Initializes builder JFrame to show the main menu
@@ -124,30 +105,63 @@ public class LevelBuilderView implements IBuilderScreen{
 	 }
 
 
-	@Override
-	public Boolean modelUpdated()
+	 /**
+	  *  Updates the display when the underlying model changes.
+	  *  
+	  *  @return  False - nothing can be updated on this screen.
+	  */
+	 @Override
+	 public Boolean modelUpdated()
+	 {
+		 return false;
+	 }
+	
+	
+				/*************************
+				 *  Getters and setters  *
+				 *************************/
+	/** @return  The application frame. */
+	public JFrame getBuilder()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return builder;
+	}
+	
+	/** @return  The screen currently displayed in the application frame. */
+	public IBuilderScreen getCurrentScreen()
+	{
+		return currentScreen;
 	}
 
+	/** @return  The "About" button, which goes to the About screen. */
 	public JButton getAbout(){
 		return aboutButton;
 	}
 	
+	/** @return  The "New Level" button, which goes to the new level creation screen. */
 	public JButton getNewLevel(){
 		return newLevelButton;
 	}
 	
+	/** @return  The "Edit Level" button, which goes to the edit level screen. */
 	public JButton getEditLvl(){
 		return editLevelButton;
 	}
 	
+	/** @return  The "Exit" button, which closes the application. */
 	public JButton getExit(){
 		return exitButton;
 	}
-
 	
-	
+	/**
+	 *  Sets the current screen.
+	 *  
+	 *  Doesn't actually change the screen, use setContentPane().
+	 *  
+	 *  @param newScreen  new screen
+	 */
+	public void setCurrentScreen(IBuilderScreen newScreen)
+	{
+		currentScreen = newScreen;
+	}
 	
 }
