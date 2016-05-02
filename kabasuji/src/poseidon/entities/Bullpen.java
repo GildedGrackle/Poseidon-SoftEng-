@@ -131,12 +131,20 @@ public class Bullpen {
 		return pieceSelected;
 	}
 	
-	/** @return The piece contained at index. */
+	/**
+	 *  Returns the piece at index in the bullpen.
+	 *  
+	 *  @param index  the index of the piece
+	 *  @return The piece contained at index. */
 	public PieceContainer getPiece(int index) {
 		return pieces.get(index);
 	}
 	
-	/** @return The index of the given Piece. */
+	/** 
+	 *  Returns the index in the bullpen of the given piece.
+	 *  
+	 *  @param piece  the piece to return the index of
+	 *  @return The index of the given Piece. */
 	public int getLocation(PieceContainer piece){
 		return pieces.indexOf(piece);
 	}

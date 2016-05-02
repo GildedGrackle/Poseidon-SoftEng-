@@ -1,7 +1,6 @@
 package poseidon.entities;
 
 import poseidon.common.view.ILevelView;
-import poseidon.common.view.PieceView;
 
 /**
  * Moving a piece from bullpen to board.
@@ -18,8 +17,6 @@ public class BullpenToBoardMove implements IMove{
 	Point location;
 	/** The GUI representation of the Level. */
 	ILevelView view;
-	/** The color represenation of the piece being moved. */
-	PieceView draggedPiece;
 	
 	
 	/**
@@ -35,7 +32,6 @@ public class BullpenToBoardMove implements IMove{
 		this.piece = piece;
 		this.location = location;
 		this.view = view;
-		this.draggedPiece = view.getBullpen().getSelectedPiece();
 	}
 	
 	
@@ -80,7 +76,6 @@ public class BullpenToBoardMove implements IMove{
 			
 			// Add piece to board
 			game.getBoard().addPiece(piece);
-			view.getBoard().addPiece(draggedPiece);
 			
 			// Remove piece from bullpen
 			// TODO fix this when we fix Bullpen remove piece
@@ -89,15 +84,15 @@ public class BullpenToBoardMove implements IMove{
 			// If remove was unsuccessful
 			if(!(successRemove))
 			{
-				// Then nothing selected in the bullpen?
-				view.getBullpen().setSelectedPiece(null);
+				// Then something bad happened, deselect everything in bullpen
+				// and hope for the best
+				view.getBullpen().getModel().setPieceSelected(null);
 				
-				return true;  // ?
+				return false;
 			}
 			else  // Remove successful
 			{
-				view.getBullpen().removePiece(draggedPiece);
-				view.getBullpen().setSelectedPiece(null);
+				view.getBullpen().getModel().setPieceSelected(null);
 
 				// Decrease moves remaining by 1 (if applicable)
 				game.decrementLimit();
@@ -115,9 +110,8 @@ public class BullpenToBoardMove implements IMove{
 	 *  @return  Indicator of whether operation completed successfully.
 	 */
 	public Boolean undoMove() {
-		if (draggedPiece != null && game.getBoard().canEdit()) {
+		if (game.getBoard().canEdit()) {
 			game.getBoard().removePiece(piece);
-			view.getBoard().removePiece(draggedPiece);
 			piece.setLocation(new Point(-1, -1));
 			// TODO just select the new one in the bullpen
 //			view.getBullpen().getModel().addPiece(piece);

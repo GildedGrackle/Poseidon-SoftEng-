@@ -1,7 +1,6 @@
 package poseidon.entities;
 
 import poseidon.common.view.ILevelView;
-import poseidon.common.view.PieceView;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 
@@ -21,8 +20,6 @@ public class BoardToBoardMove implements IMove{
 	Point to;
 	/** The piece being moved. */
 	PieceContainer piece;
-	/** Color container for piece being moved. */
-	PieceView draggedPiece;
 	
 	
 	/**
@@ -85,8 +82,6 @@ public class BoardToBoardMove implements IMove{
 		{
 			piece.setLocation(to);
 			view.getBoard().getBoard().addPiece(piece);
-			draggedPiece = view.getBoard().getActiveDragging();
-			view.getBoard().addPiece(draggedPiece);
 
 			// Decrease moves remaining by 1 (if applicable)
 			view.getModel().decrementLimit();

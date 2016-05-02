@@ -1,10 +1,14 @@
 package poseidon.builder.view;
 
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.io.IOException;
 import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
@@ -90,6 +94,9 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	JLabel title;
 	/** Label for the limit input field. */
 	JLabel limitLabel;
+	/** Icons for the Rotate Buttons*/
+	Image rotateCW, rotateCCW;
+	
 
 
 	/**
@@ -131,7 +138,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		board.addMouseMotionListener(boardController);
 		bullpen.addMouseListener(new BullpenController(model.getInfiniteBullpen(), bullpen, board));
 		
-		rotateCCWButton = new JButton("<");
+		rotateCCWButton = new JButton("");
 		rotateCCWButton.setBounds(540, 160, 45, 45);
 		rotateCCWButton.addActionListener(new RotateCCWController(bullpen));
 		add(rotateCCWButton);
@@ -148,10 +155,18 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		verFlipButton.addActionListener(new VerticalFlipController(bullpen));
 		add(verFlipButton);
 		
-		rotateCWButton = new JButton(">");
+		rotateCWButton = new JButton("");
 		rotateCWButton.setBounds(623, 160, 45, 45);
 		rotateCWButton.addActionListener(new RotateCWController(bullpen));
 		add(rotateCWButton);
+		
+		try {
+			rotateCCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCCW.png"));
+			rotateCW  = ImageIO.read(getClass().getClassLoader().getResource("images/rotateCW.png"));
+			rotateCCWButton.setIcon(new ImageIcon(rotateCCW));
+			rotateCWButton.setIcon(new ImageIcon(rotateCW));
+		} catch (IOException e) {
+		}
 		
 		title = new JLabel(model.getLevelName());
 		title.setFont(new Font("Lucida Handwriting", Font.PLAIN, 35));
