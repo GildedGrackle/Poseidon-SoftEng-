@@ -14,21 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/images/LevelSelect.png</name>
-			<type>1</type>
-			<location>D:/Users/Natasha/Desktop/SoftEng/SoftEng UI/for real UI/Level select.png</location>
-		</link>
-		<link>
-			<name>src/images/NextLevel.png</name>
-			<type>1</type>
-			<location>D:/Users/Natasha/Desktop/SoftEng/SoftEng UI/for real UI/NextLevel.png</location>
-		</link>
-		<link>
-			<name>src/images/ReplayLevel.png</name>
-			<type>1</type>
-			<location>D:/Users/Natasha/Desktop/SoftEng/SoftEng UI/for real UI/ReplayLevel.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
