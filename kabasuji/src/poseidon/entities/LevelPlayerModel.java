@@ -60,7 +60,9 @@ public class LevelPlayerModel {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
 				levels.get(0).add(new LevelContainer(null, i, null, 0));
 			} else {
-				levels.get(0).add(new LevelContainer(filePath, i, levelTemp, 0));
+				LevelContainer levelContainerTemp = new LevelContainer(filePath, i, levelTemp, 0);
+				XMLHandler.loadScore(levelContainerTemp);
+				levels.get(0).add(levelContainerTemp);
 			}
 		}
 		
@@ -72,7 +74,9 @@ public class LevelPlayerModel {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
 				levels.get(1).add(new LevelContainer(null, i, null, 0));
 			} else {
-				levels.get(1).add(new LevelContainer(filePath, i, levelTemp, 0));
+				LevelContainer levelContainerTemp = new LevelContainer(filePath, i, levelTemp, 0);
+				XMLHandler.loadScore(levelContainerTemp);
+				levels.get(1).add(levelContainerTemp);
 			}
 		}
 		
@@ -84,7 +88,9 @@ public class LevelPlayerModel {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
 				levels.get(2).add(new LevelContainer(null, i, null, 0));
 			} else {
-				levels.get(2).add(new LevelContainer(filePath, i, levelTemp, 0));
+				LevelContainer levelContainerTemp = new LevelContainer(filePath, i, levelTemp, 0);
+				XMLHandler.loadScore(levelContainerTemp);
+				levels.get(2).add(levelContainerTemp);
 			}
 		}
 	

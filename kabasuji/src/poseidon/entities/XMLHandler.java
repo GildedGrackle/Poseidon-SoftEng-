@@ -505,7 +505,7 @@ public class XMLHandler {
 		try {
 			doc = saxBuilder.build(file);
 		} catch (Exception e) {
-			return null; // Can't load level as a valid XML JDOM tree
+			return null; // Can't load as a valid XML JDOM tree
 		}
 
 		// Get all of the elements out of the tree, sort of the reverse of creating the XML
@@ -590,7 +590,7 @@ public class XMLHandler {
 		try {
 			doc = saxBuilder.build(file);
 		} catch (Exception e) {
-			return null; // Can't load level as a valid XML JDOM tree
+			return null; // Can't load as a valid XML JDOM tree
 		}
 
 		// Get all of the elements out of the tree, sort of the reverse of creating the XML
@@ -603,5 +603,72 @@ public class XMLHandler {
 		}
 		
 		return names;
+	}
+
+	/**
+	 * Saves a simple XML file of the score of the given level, filename based on level filename.
+	 * 
+	 * @return True if successful.
+	 */
+	public static boolean saveScore(LevelContainer level) {
+		File file;
+		if (level.getLevel().getIsCustom()) {
+			file = new File(customDirectory + "score_" + level.getLevelFileName());
+		} else {
+			file = new File(stockDirectory + "score_" + level.getLevelFileName());
+		}
+		file.getParentFile().mkdirs();
+
+		// --- score (root) ---
+		Element scoreElement = new Element("score");
+		scoreElement.setText(String.valueOf(level.getScore()));
+		
+		// Generate new XML file at specified location
+		Document doc = new Document(scoreElement);
+		XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+		try {
+			xmlOutput.output(doc, new FileWriter(file));
+			return true; // Success (probably)
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Attempts to load the score file for the given LevelContainer, updates the level if score exists.
+	 * 
+	 * @param level	The LevelContainer to load the score for.
+	 * @return The given LevelContainer with the updated score.
+	 */
+	public static LevelContainer loadScore(LevelContainer level) {
+		File file;
+		if (level.getLevel().getIsCustom()) {
+			file = new File(customDirectory + "score_" + level.getLevelFileName());
+		} else {
+			file = new File(stockDirectory + "score_" + level.getLevelFileName());
+		}
+		
+		// Check if the file actually exists
+		if (!file.exists()) {
+			return level;
+		}
+		
+		// Turn file into a JDOM tree
+		SAXBuilder saxBuilder = new SAXBuilder();
+		Document doc;
+		try {
+			doc = saxBuilder.build(file);
+		} catch (Exception e) {
+			return level; // Can't load as a valid XML JDOM tree
+		}
+
+		// Get all of the elements out of the tree, sort of the reverse of creating the XML
+		Element scoreElement = doc.getRootElement();
+		
+		int newScore = Integer.parseInt(scoreElement.getText());
+		
+		level.setScore(newScore);
+		
+		return level;
 	}
 }

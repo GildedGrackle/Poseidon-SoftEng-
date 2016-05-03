@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LightningLevel;
+import poseidon.entities.XMLHandler;
 import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
 
@@ -49,6 +50,7 @@ public class EndLevelController implements ActionListener
 		{
 			// Then record it
 			currentContainer.setScore(currentLevel.getScore());
+			XMLHandler.saveScore(currentContainer);
 		}
 		// If new level unlocked
 		if(currentContainer.getScore() > 0 &&

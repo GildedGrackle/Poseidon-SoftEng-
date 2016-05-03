@@ -69,6 +69,7 @@ public class LevelContainer {
 	public void setLevel(LevelModel level)
 	{
 		this.level = level;
+		this.levelFileName = level.getLevelName() + ".xml";
 	}
 	public void setIsChanged(Boolean isChanged)
 	{
