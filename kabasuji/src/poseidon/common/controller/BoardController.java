@@ -15,6 +15,7 @@ import poseidon.entities.BullpenToBoardMove;
 import poseidon.entities.IMove;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
+import poseidon.entities.LightningLevel;
 import poseidon.entities.MarkPlayableSquareMove;
 import poseidon.entities.MarkUnplayableSquareMove;
 import poseidon.entities.PieceContainer;
@@ -251,27 +252,7 @@ public class BoardController extends MouseAdapter
 			if(application.isGame() && game.hasWon())
 			{
 				// Then to the win screen
-				LevelPlayerView topView = (LevelPlayerView) application;
-				// Set record score
-				LevelContainer currentContainer = topView.getModel().getPlayingLevel();
-				LevelModel currentLevel = currentContainer.getLevel();
-				if(currentContainer.getScore() < currentLevel.getScore())  // If have a new high score
-				{
-					// Then record it
-					currentContainer.setScore(currentLevel.getScore());
-				}
-				// If new level unlocked
-				if(currentContainer.getScore() > 0 &&
-						currentContainer.getLevelNumber() == topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1])
-				{
-					topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
-				}
-				EndLevelView newScreen = new EndLevelView(topView.getModel(), topView);
-				topView.getFrame().setContentPane(newScreen);
-				topView.setCurrentView(newScreen);
-
-				// Display new screen
-				topView.getFrame().setVisible(true);
+				handleGameWon();
 			}
 			
 			// Update display
@@ -334,22 +315,7 @@ public class BoardController extends MouseAdapter
 			// Check winning conditions (for Player only) (also probably doesn't happen off of these moves)
 			if(application.isGame() && game.hasWon())
 			{
-				// Then to the win screen
-				LevelPlayerView topView = (LevelPlayerView) application;
-				// Set record score
-				LevelContainer currentContainer = topView.getModel().getPlayingLevel();
-				LevelModel currentLevel = currentContainer.getLevel();
-				if(currentContainer.getScore() < currentLevel.getScore())  // If have a new high score
-				{
-					// Then record it
-					currentContainer.setScore(currentLevel.getScore());
-				}
-				EndLevelView newScreen = new EndLevelView(topView.getModel(), topView);
-				topView.getFrame().setContentPane(newScreen);
-				topView.setCurrentView(newScreen);
-
-				// Display new screen
-				topView.getFrame().setVisible(true);
+				handleGameWon();
 			}
 		}
 		else  // Move was unsuccessful
@@ -404,5 +370,45 @@ public class BoardController extends MouseAdapter
 			
 			boardView.repaint();	
 		}
+	}
+	
+	
+	/**
+	 *  Sets the new high score (if applicable), creates, and displays the end level screen.
+	 *  
+	 *  Also stops the Lightning timer.
+	 */
+	void handleGameWon()
+	{
+		// Then to the win screen
+		LevelPlayerView topView = (LevelPlayerView) application;
+		// Set record score
+		LevelContainer currentContainer = topView.getModel().getPlayingLevel();
+		LevelModel currentLevel = currentContainer.getLevel();
+		if(currentContainer.getScore() < currentLevel.getScore())  // If have a new high score
+		{
+			// Then record it
+			currentContainer.setScore(currentLevel.getScore());
+		}
+		// If new level unlocked
+		if(currentContainer.getScore() > 0 &&
+				currentContainer.getLevelNumber() == topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1])
+		{
+			topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
+		}
+
+		// If the level was a Lightning level
+		if(currentLevel.getGameMode() == LevelModel.LIGHTNING)
+		{
+			// Then stop the timer
+			LightningLevel level = (LightningLevel) currentLevel;
+			level.stopTimer();
+		}
+
+		// Create and display new screen
+		EndLevelView newScreen = new EndLevelView(topView.getModel(), topView);
+		topView.getFrame().setContentPane(newScreen);
+		topView.setCurrentView(newScreen);
+		topView.getFrame().setVisible(true);
 	}
 }

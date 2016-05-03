@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
+import poseidon.entities.LightningLevel;
 import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
 
@@ -43,7 +44,8 @@ public class EndLevelController implements ActionListener
 		// Set score
 		LevelContainer currentContainer = game.getModel().getPlayingLevel();
 		LevelModel currentLevel = currentContainer.getLevel();
-		if(currentContainer.getScore() < currentLevel.getScore())  // If have a new high score
+		// If have a new high score
+		if(currentContainer.getScore() < currentLevel.getScore())
 		{
 			// Then record it
 			currentContainer.setScore(currentLevel.getScore());
@@ -54,11 +56,19 @@ public class EndLevelController implements ActionListener
 		{
 			game.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
 		}
+		
+		// If the level was a Lightning level
+		if(currentLevel.getGameMode() == LevelModel.LIGHTNING)
+		{
+			// Then stop the timer
+			LightningLevel level = (LightningLevel) currentLevel;
+			level.stopTimer();
+		}
+		
+		// Create and display new screen
 		EndLevelView newScreen = new EndLevelView(game.getModel(), game);
 		game.getFrame().setContentPane(newScreen);
 		game.setCurrentView(newScreen);
-		
-		// Display new screen
 		game.getFrame().setVisible(true);
 	}
 

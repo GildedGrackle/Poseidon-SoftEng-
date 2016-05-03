@@ -69,8 +69,8 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 		int i = 0;
 		for(LevelContainer lc : model.getLevels().get(gameMode))
 		{
-			// If the level is unlocked
-			if(lc.getLevelNumber() <= model.getCurrentLevel()[gameMode])
+			// If the level is unlocked (custom levels always unlocked)
+			if(lc.getLevelNumber() <= model.getCurrentLevel()[gameMode] || lc.getLevel().getIsCustom())
 			{
 				// Then create a selectable icon
 				buttons[i] = new StarView(model.getLevels().get(gameMode).get(lc.getLevelNumber()));

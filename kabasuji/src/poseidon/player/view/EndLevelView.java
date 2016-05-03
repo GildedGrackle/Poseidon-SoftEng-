@@ -13,11 +13,12 @@ import java.io.IOException;
 import javax.swing.JButton;
 
 import poseidon.entities.LevelPlayerModel;
-import poseidon.player.controller.ContinueController;
 import poseidon.player.controller.LevelSelectController;
+import poseidon.player.controller.NextLevelController;
 import poseidon.player.controller.ResetController;
 
 import javax.swing.SwingConstants;
+
 import java.awt.Insets;
 
 /**
@@ -71,8 +72,12 @@ public class EndLevelView extends JPanel implements IGameScreen
 		nextLevelButton.setOpaque(false);
 		nextLevelButton.setBounds(510, 500, 80, 80);
 		nextLevelButton.setBackground(new Color(0, 191, 255));
-		nextLevelButton.addActionListener(new ContinueController(model, view));
-		if(model.getPlayingLevel().getScore() < 1)  // If the next level hasn't been unlocked
+		nextLevelButton.addActionListener(new NextLevelController(model, view));
+		// If the next level hasn't been unlocked or there are no levels after this
+		// one in this gamemode
+		if(model.getPlayingLevel().getScore() < 1 ||
+				model.getLevels().get(model.getPlayingLevel().getLevel().getGameMode() - 1).size()
+				<= model.getPlayingLevel().getLevelNumber() + 1)
 		{
 			// Then disable this button, can't move on
 			nextLevelButton.setEnabled(false);

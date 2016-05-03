@@ -31,6 +31,7 @@ import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.EndLevelController;
 import poseidon.player.controller.LevelSelectController;
+import poseidon.player.controller.LimitEndController;
 import poseidon.player.controller.ResetController;
 
 /**
@@ -208,6 +209,7 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		limitView.setBounds(10, 340, 140, 55);
 		limitView.setHorizontalAlignment(SwingConstants.LEFT);
 		limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		limitView.addPropertyChangeListener("text", new LimitEndController(topModel, game));
 		rightPanel.add(limitView);
 	}
 	
