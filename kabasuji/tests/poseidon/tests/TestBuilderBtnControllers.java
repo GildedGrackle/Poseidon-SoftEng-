@@ -14,6 +14,9 @@ import poseidon.entities.PieceFactory;
 import poseidon.entities.PuzzleLevel;
 import poseidon.entities.PuzzleSquare;
 import poseidon.entities.Square;
+import poseidon.player.controller.ResetController;
+import poseidon.player.view.LevelSelectView;
+import poseidon.player.view.LevelView;
 import poseidon.entities.Board;
 import poseidon.entities.BuilderBoardLogic;
 import poseidon.entities.BuilderBullpenLogic;
@@ -33,6 +36,7 @@ import poseidon.builder.controller.MakePuzzleController;
 import poseidon.builder.controller.MakeReleaseController;
 import poseidon.builder.controller.NewLevelController;
 import poseidon.builder.controller.RedoController;
+import poseidon.builder.controller.ResetBuilderController;
 import poseidon.builder.controller.SaveLevelController;
 import poseidon.builder.controller.SetBullpenController;
 import poseidon.builder.controller.UndoController;
@@ -43,6 +47,7 @@ import poseidon.builder.view.NewLevelView;
 import poseidon.builder.view.SaveLevelView;
 import poseidon.common.controller.BoardController;
 import poseidon.common.view.BoardView;
+import poseidon.common.view.BullpenView;
 import poseidon.builder.view.EditLevelView;
 import poseidon.builder.view.EditPlayableBullpenView;
 import junit.framework.TestCase;
@@ -335,4 +340,44 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 		}
 		
+		public void testResetBulider(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			PieceContainer selectedPiece = model.getBuildingLevel().getInfiniteBullpen().getPiece(1);
+			
+			BoardView board = builderView.getBoard();
+			model.getBuildingLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
+			
+			ResetBuilderController resetController = new ResetBuilderController(model, view);
+			
+			button = builderView.getResetButton();
+			ActionEvent reset = buttonPress(button);
+			
+			BoardController controller = new BoardController(view, model.getBuildingLevel(), builderView);
+			
+			MouseEvent movePiece = createBuilderMoved(builderView, board, 4, 5);
+			controller.mouseMoved(movePiece);
+			
+			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), selectedPiece);
+			
+			MouseEvent pressed = createBuilderPress(builderView, board, 4, 5);
+			controller.mousePressed(pressed);
+			
+			resetController.actionPerformed(reset);	
+
+			assertTrue(model.getBuildingLevel().getBoard().getPieces().isEmpty());
+			assertNull(model.getBuildingLevel().getBoard().getActiveDragged());
+			
+		}
+		
+		public void testChangeBoardSize(){
+			
+		}
 }
