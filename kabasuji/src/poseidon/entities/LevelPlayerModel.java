@@ -58,9 +58,9 @@ public class LevelPlayerModel {
 			PuzzleLevel levelTemp = (PuzzleLevel) XMLHandler.loadXML(filePath, false, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
-				levels.get(0).add(new LevelContainer(null, 0, i, null, 0));
+				levels.get(0).add(new LevelContainer(null, i, null, 0));
 			} else {
-				levels.get(0).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
+				levels.get(0).add(new LevelContainer(filePath, i, levelTemp, 0));
 			}
 		}
 		
@@ -70,9 +70,9 @@ public class LevelPlayerModel {
 			LightningLevel levelTemp = (LightningLevel) XMLHandler.loadXML(filePath, false, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
-				levels.get(1).add(new LevelContainer(null, 0, i, null, 0));
+				levels.get(1).add(new LevelContainer(null, i, null, 0));
 			} else {
-				levels.get(1).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
+				levels.get(1).add(new LevelContainer(filePath, i, levelTemp, 0));
 			}
 		}
 		
@@ -82,9 +82,9 @@ public class LevelPlayerModel {
 			ReleaseLevel levelTemp = (ReleaseLevel) XMLHandler.loadXML(filePath, false, false);
 			if (levelTemp == null) {
 				// TODO Need to account for this properly, what if the level file doesn't exist?
-				levels.get(2).add(new LevelContainer(null, 0, i, null, 0));
+				levels.get(2).add(new LevelContainer(null, i, null, 0));
 			} else {
-				levels.get(2).add(new LevelContainer(filePath, 0, i, levelTemp, 0));
+				levels.get(2).add(new LevelContainer(filePath, i, levelTemp, 0));
 			}
 		}
 	

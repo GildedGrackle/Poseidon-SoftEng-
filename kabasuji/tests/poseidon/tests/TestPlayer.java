@@ -55,7 +55,7 @@ public class TestPlayer extends TestCase{
 		testLevel = XMLHandler.getTestLevels()[2];
 		int[] currentLvl = new int[]{
 				1, 1, 1};
-		lvlContainer = new LevelContainer("puzzle0.xml", 0, 0, testLevel, 0);
+		lvlContainer = new LevelContainer("puzzle0.xml", 0, testLevel, 0);
 		model = new LevelPlayerModel(currentLvl, lvlContainer);
 		view = new LevelPlayerView(model);
 		current = new int[3];

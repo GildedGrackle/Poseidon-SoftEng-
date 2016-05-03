@@ -84,7 +84,7 @@ public class MakeLightningController implements ActionListener
 		LightningLevel newLevel = new LightningLevel(60, "New Lightning Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
 				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
-		LevelContainer newContainer = new LevelContainer("", 3, 0, newLevel, 0);  // TODO use correct "inGame" input
+		LevelContainer newContainer = new LevelContainer("", 0, newLevel, 0);  // TODO use correct "inGame" input
 		model.setBuildingLevel(newLevel);
 
 		

@@ -47,7 +47,7 @@ public class LevelBuilderModel {
 				LevelModel loadedLevel = XMLHandler.loadXML(name, true, true);
 				if(!(loadedLevel == null)) {
 					int mode = loadedLevel.getGameMode();
-					savedLevels.get(mode-1).add(new LevelContainer(name, 0, mode, loadedLevel, 0));
+					savedLevels.get(mode-1).add(new LevelContainer(name, mode, loadedLevel, 0));
 				}
 			}
 		}
