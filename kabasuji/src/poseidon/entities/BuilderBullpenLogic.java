@@ -28,7 +28,7 @@ public class BuilderBullpenLogic implements IBullpenLogic {
 		int index = 0;
 		for(int i = 1; i <= 35; i++)
 		{
-			if(! bullpen.getPiece(i - 1).getPiece().equals(fac.getPiece(i)))
+			if(! bullpen.getPiece(i - 1).getPiece().equalsWithPosition(fac.getPiece(i)))
 			{
 				index = i;
 				break;

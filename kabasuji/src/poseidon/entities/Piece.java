@@ -209,6 +209,9 @@ public class Piece {
 		}
 	}
 	
+	public PieceContainer getContainer() {
+		return this.container;
+	}
 	
 	@Override
 	/**
@@ -222,8 +225,35 @@ public class Piece {
 		Piece otherPiece = (Piece) o;
 		Set<Point> myPoints = new HashSet<>(Arrays.asList(this.piece));
 		Set<Point> otherPoints = new HashSet<>(Arrays.asList(otherPiece.getPiece()));
-		
-		return myPoints.equals(otherPoints);
+		if (myPoints.equals(otherPoints)) {return true;}
+		return false;
+	}
+	
+	/**
+	 * Checks if a piece is a rotated variation of a piece it's compared to.
+	 * @param o
+	 * @return
+	 */
+	public boolean equalsWithPosition(Object o){
+		boolean check = false;
+		if(!(o instanceof Piece)) { return false; }
+		if(this.equals(o)) {check = true;}
+		Piece myPiece = (Piece) o;
+		for(int i =0; i<3; i++) {
+			myPiece.rotateCW();
+			if(this.equals(o)) {check = true;}
+		}
+		myPiece.rotateCW(); 
+		myPiece.flipHorizontal();
+		if(this.equals(o)) {check = true;}
+		for(int j =0; j<3; j++) {
+			myPiece.rotateCW();
+			if(this.equals(o)) {check = true;}
+		}
+		myPiece.rotateCW();
+		myPiece.flipHorizontal();
+		return check;
+			
 	}
 	
 	@Override
