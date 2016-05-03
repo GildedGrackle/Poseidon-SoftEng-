@@ -54,7 +54,7 @@ import poseidon.builder.view.EditPlayableBullpenView;
 import junit.framework.TestCase;
 
 
-public class TestBuilderBtnControllers extends TestMouseEvents{
+public class TestBuilder extends TestMouseEvents{
 
 		
 	
