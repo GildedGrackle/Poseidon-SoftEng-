@@ -5,8 +5,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -29,6 +31,8 @@ import poseidon.common.view.ILevelView;
 import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.entities.ReleaseLevel;
+import poseidon.entities.ReleaseNumber;
 import poseidon.player.controller.EndLevelController;
 import poseidon.player.controller.LevelSelectController;
 import poseidon.player.controller.LimitEndController;
@@ -77,6 +81,8 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 	JLabel limitView;
 	/** Images for the rotate button Icons*/ 
 	Image rotateCW, rotateCCW, icon;
+	/** For Release levels, to show numbers collected. */
+	JPanel numbersCollected;
 	/** The logo. */
 	JLabel poseidon;
 
@@ -146,22 +152,16 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		finishButton.setBounds(10, 508, 130, 87);
 		finishButton.addActionListener(new EndLevelController(game));
 		leftPanel.add(finishButton);
-		
-		JPanel rightPanel = new JPanel();
-		rightPanel.setBackground(new Color(0, 191, 255));
-		rightPanel.setBounds(535, 0, 155, 631);
-		add(rightPanel);
-		rightPanel.setLayout(null);
-		
+				
 		rotateCCWButton = new JButton("");
-		rotateCCWButton.setBounds(10, 160, 45, 45);
+		rotateCCWButton.setBounds(545, 160, 45, 45);
 		rotateCCWButton.addActionListener(new RotateCCWController(bullpen));
-		rightPanel.add(rotateCCWButton);
+		add(rotateCCWButton);
 		
 		rotateCWButton = new JButton("");
-		rotateCWButton.setBounds(93, 160, 45, 45);
+		rotateCWButton.setBounds(628, 160, 45, 45);
 		rotateCWButton.addActionListener(new RotateCWController(bullpen));
-		rightPanel.add(rotateCWButton);
+		add(rotateCWButton);
 		
 		poseidon = new JLabel("");
 		poseidon.setBounds(35, 40, 100, 100);
@@ -179,24 +179,24 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		
 		flipHButton = new JButton("<html><center>Horizontal<br>Flip</center></html>");
 		flipHButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		flipHButton.setBounds(10, 100, 130, 50);
+		flipHButton.setBounds(545, 100, 130, 50);
 		flipHButton.addActionListener(new HorizontalFlipController(bullpen));
-		rightPanel.add(flipHButton);
+		add(flipHButton);
 		
 		flipVButton = new JButton("<html><center>Vertical<br>Flip</center></html>");
 		flipVButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		flipVButton.setBounds(10, 40, 130, 50);
+		flipVButton.setBounds(545, 40, 130, 50);
 		flipVButton.addActionListener(new VerticalFlipController(bullpen));
-		rightPanel.add(flipVButton);
+		add(flipVButton);
 		
 		scoreLabel = new JLabel("Score:");
 		scoreLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		scoreLabel.setBounds(10, 250, 115, 25);
-		rightPanel.add(scoreLabel);
+		scoreLabel.setBounds(545, 220, 115, 25);
+		add(scoreLabel);
 		
 		scoreView = new ScoreView(this.model);
-		scoreView.setBounds(10, 280, 115, 35);
-		rightPanel.add(scoreView);
+		scoreView.setBounds(545, 250, 115, 35);
+		add(scoreView);
 		
 		// Default limit display for Puzzle and Release Levels
 		String limitDisplay = "<html>Moves:<br><center>" + this.model.getLimit() + "</center></html>";
@@ -206,11 +206,21 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		}
 		limitView = new JLabel(limitDisplay);
 		limitView.setBackground(Color.WHITE);
-		limitView.setBounds(10, 340, 140, 55);
+		limitView.setBounds(545, 300, 140, 55);
 		limitView.setHorizontalAlignment(SwingConstants.LEFT);
 		limitView.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		limitView.addPropertyChangeListener("text", new LimitEndController(topModel, game));
-		rightPanel.add(limitView);
+		add(limitView);
+		
+		// Release only, for numbers collected
+		if(this.model.getGameMode() == LevelModel.RELEASE)
+		{
+			JLabel numbersCollectedLabel = new JLabel("<html>Numbers<br>Collected:</html>");
+			numbersCollectedLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			numbersCollectedLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+			numbersCollectedLabel.setBounds(545, 380, 115, 50);
+			add(numbersCollectedLabel);
+		}
 	}
 	
 	
@@ -222,10 +232,12 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 	@Override
 	public Boolean modelUpdated()
 	{
+		// ------- Send update requests out -------
 		bullpen.modelUpdated();
 		board.modelUpdated();
 		scoreView.modelUpdated();
 		
+		// ------- Update limit -------
 		switch(model.getGameMode())
 		{
 		case LevelModel.PUZZLE:
@@ -242,6 +254,77 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 		repaint();
 		
 		return true;
+	}
+	
+	
+	/**
+	 *  Used to draw the numbers collected in Release, otherwise normal.
+	 *  
+	 *  @param g  the Graphics object to render this object
+	 */
+	@Override
+	protected void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		
+		// If Release level
+		if(model.getGameMode() == LevelModel.RELEASE)
+		{
+			// Then draw numbers collected
+			Graphics drawer = g.create();
+			ReleaseLevel actualModel = (ReleaseLevel) model;
+			ArrayList<Integer> numbersCollected = new ArrayList<Integer>();
+			
+			// ------- Draw grid and numbers collected -------
+			for(int i = 0; i < 3; i++)
+			{
+				switch(i)
+				{
+				case 0:
+					numbersCollected = actualModel.getRedNumbers();
+					break;
+				case 1:
+					numbersCollected = actualModel.getGreenNumbers();
+					break;
+				case 2:
+					numbersCollected = actualModel.getYellowNumbers();
+				}
+				
+				for(int j = 0; j < 6; j++)
+				{
+					// Draw grid
+					drawer.setColor(Color.lightGray);
+					drawer.fillRect(555 + BoardView.SQUARE_SIZE * i, 440 + BoardView.SQUARE_SIZE * j,
+							BoardView.SQUARE_SIZE, BoardView.SQUARE_SIZE);
+					drawer.setColor(Color.black);
+					drawer.drawRect(555 + BoardView.SQUARE_SIZE * i, 440 + BoardView.SQUARE_SIZE * j,
+							BoardView.SQUARE_SIZE, BoardView.SQUARE_SIZE);
+					// If number collected
+					if(numbersCollected.contains(j + 1))
+					{
+						// Then draw that too
+						// Set graphics properties
+						drawer.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+						switch(i + 1)
+						{
+						case ReleaseNumber.RED:
+							drawer.setColor(Color.red);
+							break;
+						case ReleaseNumber.GREEN:
+							drawer.setColor(Color.green);
+							break;
+						case ReleaseNumber.YELLOW:
+							drawer.setColor(new Color(0xD0, 0xD0, 0));
+							break;
+						}
+
+						// Draw number
+						drawer.drawString("" + (j + 1), 555 + BoardView.SQUARE_SIZE * i + 10,
+								440 + BoardView.SQUARE_SIZE * j + 22);
+					}
+				}
+			}
+		}
 	}
 				/***********************
 				 *  Getters & Setters  *

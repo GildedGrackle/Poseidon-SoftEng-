@@ -76,7 +76,7 @@ public class TestCommonControllers extends TestMouseEvents{
 		int[] currentLvl = new int[]{
 				1, 1, 1
 		};
-		testLevelContainer = new LevelContainer("Test level X", 0, 0, testLevel, 0);  // TODO set this to whatever
+		testLevelContainer = new LevelContainer("Test level X", 0, testLevel, 0);  // TODO set this to whatever
 		testBoard = testLevel.getBoard();
 		testLocation = new Point(1,1);
 		model = new LevelPlayerModel(currentLvl, testLevelContainer);

@@ -62,7 +62,7 @@ public class ConfirmSaveController implements ActionListener {
 		// Add the level to the model list and re-save the list file
 		ArrayList<ArrayList<LevelContainer>> levelList = topModel.getSavedLevels();
 		levelList.get(level.getGameMode()-1).add(
-				new LevelContainer(level.getLevelName() + ".xml", 0, level.getGameMode(), level, 0));
+				new LevelContainer(level.getLevelName() + ".xml", level.getGameMode(), level, 0));
 		ArrayList<String> namesAL = new ArrayList<String>();
 		for (ArrayList<LevelContainer> sublist : levelList) {
 			for (LevelContainer level : sublist) {
