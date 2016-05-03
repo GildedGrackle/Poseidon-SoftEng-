@@ -135,7 +135,7 @@ public class Board {
 			for(int j = 0; j < Board.MAXCOLS; j++)
 			{
 				// If the square is outside of the resizing boundary
-				if(i > newRow || j > newCol)
+				if(i >= newRow || j >= newCol)
 				{
 					// Then make it unplayable
 					newBoard[i][j] = new NonplayableSquare();
