@@ -76,7 +76,7 @@ public class MakePuzzleController implements ActionListener
 		{
 			for(int j = 0; j < Board.MAXCOLS; j++)
 			{
-				newPlayArea[i][j] = new PuzzleSquare(false);
+				newPlayArea[i][j] = new PuzzleSquare(false, false);
 			}
 		}
 		BuilderBullpenLogic newBullpenLogic = new BuilderBullpenLogic();
