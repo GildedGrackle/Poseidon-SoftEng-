@@ -260,6 +260,12 @@ public class BoardController extends MouseAdapter
 					// Then record it
 					currentContainer.setScore(currentLevel.getScore());
 				}
+				// If new level unlocked
+				if(currentContainer.getScore() > 0 &&
+						currentContainer.getLevelNumber() == topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1])
+				{
+					topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
+				}
 				EndLevelView newScreen = new EndLevelView(topView.getModel(), topView);
 				topView.getFrame().setContentPane(newScreen);
 				topView.setCurrentView(newScreen);

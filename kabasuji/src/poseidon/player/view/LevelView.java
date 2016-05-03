@@ -76,9 +76,10 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 	JLabel limitView;
 	/** Images for the rotate button Icons*/ 
 	Image rotateCW, rotateCCW, icon;
-	
+	/** The logo. */
 	JLabel poseidon;
 
+	
 	/**
 	 *  Constructor.
 	 *  

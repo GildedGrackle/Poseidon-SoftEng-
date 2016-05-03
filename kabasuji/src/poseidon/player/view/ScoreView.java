@@ -12,17 +12,30 @@ import javax.swing.JLabel;
 import poseidon.common.view.IModelUpdated;
 import poseidon.entities.LevelModel;
 
+/**
+ *  Draws the star-representation of the score.
+ *  
+ *  @author Alex Titus
+ */
 public class ScoreView extends JPanel implements IModelUpdated{
-	LevelModel model;  // The state of the Level
-	JLabel firstStar;  // The left-most star in the score
-	JLabel secondStar;  // The middle star in the score
-	JLabel thirdStar;  // The right-most star in the score
+	/** The state of the Level. */
+	LevelModel model;
+	/** The left-most star in the score. */
+	JLabel firstStar;
+	/** The middle star in the score. */
+	JLabel secondStar;
+	/** The right-most star in the score. */
+	JLabel thirdStar;
 	/** Images of stars for score*/
 	Image star, greyStar;
 	
 
 	/**
-	 * Create the panel. All stars start as empty sockets
+	 *  Constructor.
+	 *  
+	 *  All stars start as empty sockets.
+	 *  
+	 *  @param model  the LevelModel containing the score being rendered
 	 */
 	public ScoreView(LevelModel model) {
 		this.model = model;

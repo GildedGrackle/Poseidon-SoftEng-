@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
@@ -15,6 +16,9 @@ import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.ContinueController;
 import poseidon.player.controller.LevelSelectController;
 import poseidon.player.controller.ResetController;
+
+import javax.swing.SwingConstants;
+import java.awt.Insets;
 
 /**
  *  The end level screen, with options to replay the current level, go to the
@@ -40,34 +44,40 @@ public class EndLevelView extends JPanel implements IGameScreen
 	{
 		this.view = view;  // The only view this could have come from
 		setLayout(null);
+		setBackground(new Color(0, 191, 255));
 		
 		JLabel title = new JLabel(model.getPlayingLevel().getLevel().getLevelName());
+		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Lucida Handwriting", Font.PLAIN, 25));
-		title.setBounds(250, 20, 115, 35);
+		title.setBounds(190, 20, 300, 35);
 		add(title);
 		
-		ScoreView levelScore = new ScoreView(model.getPlayingLevel().getLevel());
-		levelScore.setBounds(90, 85, 500, 350);
-		add(levelScore);
-		
 		JButton replayButton = new JButton();
+		replayButton.setOpaque(false);
 		replayButton.setBounds(90, 500, 80, 80);
+		replayButton.setBackground(new Color(0, 191, 255));
 		replayButton.addActionListener(new ResetController(model, view));
 		add(replayButton);
 		
 		JButton levelSelectButton = new JButton();
+		levelSelectButton.setOpaque(false);
 		levelSelectButton.setBounds(300, 500, 80, 80);
+		levelSelectButton.setBackground(new Color(0, 191, 255));
 		levelSelectButton.addActionListener(new LevelSelectController(model, view));
 		add(levelSelectButton);
 		
 		JButton nextLevelButton = new JButton();
+		nextLevelButton.setMargin(new Insets(0, 14, 2, 14));
+		nextLevelButton.setOpaque(false);
 		nextLevelButton.setBounds(510, 500, 80, 80);
+		nextLevelButton.setBackground(new Color(0, 191, 255));
 		nextLevelButton.addActionListener(new ContinueController(model, view));
 		if(model.getPlayingLevel().getScore() < 1)  // If the next level hasn't been unlocked
 		{
 			// Then disable this button, can't move on
 			nextLevelButton.setEnabled(false);
 		}
+		add(nextLevelButton);
 		
 		try
 		{
@@ -80,7 +90,54 @@ public class EndLevelView extends JPanel implements IGameScreen
 		}
 		catch (IOException e) {}
 		
-		add(nextLevelButton);
+		JLabel firstStar = new JLabel();
+		firstStar.setHorizontalAlignment(SwingConstants.CENTER);
+		firstStar.setBounds(90, 195, 150, 150);
+		add(firstStar);
+		
+		JLabel secondStar = new JLabel();
+		secondStar.setHorizontalAlignment(SwingConstants.CENTER);
+		secondStar.setBounds(265, 195, 150, 150);
+		add(secondStar);
+		
+		JLabel thirdStar = new JLabel();
+		thirdStar.setHorizontalAlignment(SwingConstants.CENTER);
+		thirdStar.setBounds(440, 195, 150, 150);
+		add(thirdStar);
+		
+		try
+		{
+			Image grayStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star-grey.png"));
+			Image filledStar = ImageIO.read(getClass().getClassLoader().getResource("images/Star.png"));
+			switch(model.getPlayingLevel().getScore())
+			{
+			case 0:
+				firstStar.setIcon(new ImageIcon(grayStar));
+				secondStar.setIcon(new ImageIcon(grayStar));
+				thirdStar.setIcon(new ImageIcon(grayStar));
+				break;
+			case 1:
+				firstStar.setIcon(new ImageIcon(filledStar));
+				secondStar.setIcon(new ImageIcon(grayStar));
+				thirdStar.setIcon(new ImageIcon(grayStar));
+				break;
+			case 2:
+				firstStar.setIcon(new ImageIcon(filledStar));
+				secondStar.setIcon(new ImageIcon(filledStar));
+				thirdStar.setIcon(new ImageIcon(grayStar));
+				break;
+			case 3:
+				firstStar.setIcon(new ImageIcon(filledStar));
+				secondStar.setIcon(new ImageIcon(filledStar));
+				thirdStar.setIcon(new ImageIcon(filledStar));
+				break;
+			default:
+				firstStar.setIcon(new ImageIcon());
+				secondStar.setIcon(new ImageIcon());
+				thirdStar.setIcon(new ImageIcon());
+			}
+		}
+		catch (IOException e) {}
 	}
 
 	

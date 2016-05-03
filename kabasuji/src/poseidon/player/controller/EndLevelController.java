@@ -40,13 +40,19 @@ public class EndLevelController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
-		// Set record score
+		// Set score
 		LevelContainer currentContainer = game.getModel().getPlayingLevel();
 		LevelModel currentLevel = currentContainer.getLevel();
 		if(currentContainer.getScore() < currentLevel.getScore())  // If have a new high score
 		{
 			// Then record it
 			currentContainer.setScore(currentLevel.getScore());
+		}
+		// If new level unlocked
+		if(currentContainer.getScore() > 0 &&
+				currentContainer.getLevelNumber() == game.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1])
+		{
+			game.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
 		}
 		EndLevelView newScreen = new EndLevelView(game.getModel(), game);
 		game.getFrame().setContentPane(newScreen);
