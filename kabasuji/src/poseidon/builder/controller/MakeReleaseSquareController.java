@@ -4,8 +4,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import poseidon.builder.view.BuilderView;
-import poseidon.builder.view.LevelBuilderView;
-import poseidon.entities.LevelBuilderModel;
 
 /**
  *  Switches between release number placement mode and normal mode.

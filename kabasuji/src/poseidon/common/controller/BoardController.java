@@ -26,7 +26,6 @@ import poseidon.entities.ReleaseNumber;
 import poseidon.entities.UndoManager;
 import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
-import poseidon.player.view.LevelView;
 
 /**
  *  Controls mouse events on the board.
@@ -58,8 +57,9 @@ public class BoardController extends MouseAdapter
 	/**
 	 *  Constructor.
 	 *  
-	 * @param model  the level that contains the board
-	 * @param view  the representation of the board
+	 *  @param application  the top-level GUI object, for if/when a game is won
+	 *  @param game  the level that contains the board
+	 *  @param view  the representation of the board
 	 */
 	public BoardController(ITopView application, LevelModel game, ILevelView view)
 	{

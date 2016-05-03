@@ -7,13 +7,22 @@ package poseidon.entities;
  * @author Alex Titus
  */
 public class Point {
+	/** The coordinates. */
 	int row, col;
 	
+	
+	/**
+	 *  Constructor.
+	 *  
+	 *  @param row  the row coordinate
+	 *  @param col  the column coordinate
+	 */
 	public Point (int row, int col) {
 		this.row = row;
 		this.col = col;
 	}
 
+	
 	/**
 	 * Flips the axis of the point
 	 */
@@ -24,10 +33,13 @@ public class Point {
 		this.col = temp;
 	}
 	
+	
 	/**
 	 * Overrides the standard equals() method for point.
 	 * 
 	 * Note: Checks if the point has the same value, not if it's pointing to the same exact point.
+	 * 
+	 * @param o  the object being compared against
 	 */
 	@Override
 	public boolean equals(Object o){
@@ -50,21 +62,33 @@ public class Point {
 	{
 		return "(" + row + ", " + col + ")";
 	}
-	/***********************
-	 *  Getters & Setters  *
-	 ***********************/
+				/***********************
+				 *  Getters & Setters  *
+				 ***********************/
+	/** @return  The row coordinate. */
 	public int getRow()
 	{
 		return this.row;
 	}
+	/** @return  The column coordinate. */
 	public int getCol()
 	{
 		return this.col;
 	}
+	/**
+	 *  Sets the row coordinate.
+	 *  
+	 *  @param row  the new coordinate
+	 */
 	public void setRow(int row)
 	{
 		this.row = row;
 	}
+	/**
+	 *  Sets the column coordinate.
+	 *  
+	 *  @param col  the new coordinate
+	 */
 	public void setCol(int col)
 	{
 		this.col = col;

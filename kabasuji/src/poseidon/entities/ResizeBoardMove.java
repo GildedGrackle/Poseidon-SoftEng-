@@ -27,6 +27,7 @@ public class ResizeBoardMove implements IMove{
 	/**
 	 *  Constructor.
 	 *  
+	 *  @param board  the board to modify
 	 *  @param view  the GUI of the Board being modified
 	 *  @param gamemode  to allow the proper squares to be built
 	 *  @param oldHeight  the previous number of rows of the Board

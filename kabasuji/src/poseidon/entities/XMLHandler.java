@@ -19,6 +19,7 @@ public class XMLHandler {
 	
 	/** These are what the filenames are appended onto for saving and loading. */
 	public static String stockDirectory = "StockLevels/";
+	/** These are what the filenames are appended onto for saving and loading. */
 	public static String customDirectory = "CustomLevels/";
 
 	/** Unnecessary, should just call the static methods directly. */
@@ -370,7 +371,7 @@ public class XMLHandler {
 	}
 	
 	/**
-	 * Return three test levels, identical to the first three example levels, for JUnit testing.
+	 *  @return  Three test levels, identical to the first three example levels, for JUnit testing.
 	 */
 	public static LevelModel[] getTestLevels() {
 		LevelModel[] testLevels = new LevelModel[3];

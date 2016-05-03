@@ -1,8 +1,6 @@
 package poseidon.entities;
 
 import java.util.ArrayList;
-import java.util.Set;
-
 import poseidon.entities.Board;
 import poseidon.entities.Bullpen;
 import poseidon.entities.LevelModel;
@@ -34,6 +32,7 @@ public class ReleaseLevel extends LevelModel{
 	 *  @param infinite  the infinite bullpen
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
+	 *  @param isAddedToPlayer  indicator whether level is part of Level Player
 	 */
 	public ReleaseLevel(int allottedMoves, String levelName, Bullpen bullpen,
 			Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){

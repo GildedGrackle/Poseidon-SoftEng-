@@ -20,15 +20,15 @@ public class Bullpen {
 	/** The piece that is currently selected to perform actions on */
 	PieceContainer pieceSelected;
 	
-	/**The logic of the bullpen - game mode/builder*/
+	/** The logic of the bullpen - game mode/builder */
 	IBullpenLogic logic;
 	
 	
 	/**
 	 *  Constructor.
 	 *  
-	 * @param pieces  the intial Pieces in the Bullpen
-	 * @param logic  the game-mode-specific logic associated with the Bullpen
+	 * @param pieces  the intial Pieces in the bullpen
+	 * @param logic  the game-mode-specific logic associated with the bullpen
 	 */
 	public Bullpen(ArrayList <PieceContainer> pieces, IBullpenLogic logic) {
 		this.pieces = new ArrayList<PieceContainer>(pieces);
@@ -38,9 +38,11 @@ public class Bullpen {
 	
 	
 	/**
-	 *  Constructor for infinite Bullpen.
+	 *  Constructor for infinite bullpen.
 	 *  
-	 *  Creates a Bullpen with one of every type of Piece in it.
+	 *  Creates a bullpen with one of every type of Piece in it.
+	 *  
+	 *  @param logic  the game-mode-specific logic associated with the bullpen
 	 */
 	public Bullpen(IBullpenLogic logic)
 	{
@@ -53,7 +55,7 @@ public class Bullpen {
 	
 	
 	/**
-	 *  Fills pieces with one of every type of Piece.
+	 *  Fills pieces with one of every type of piece.
 	 */
 	void initializeInfinite()
 	{
@@ -121,12 +123,12 @@ public class Bullpen {
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/** @return The list of pieces in the bullpen. */
+	/** @return  The list of pieces in the bullpen. */
 	public ArrayList<PieceContainer> getPieces()
 	{
 		return pieces;
 	}
-	/** @return The piece that is currently selected in the bullpen. */
+	/** @return  The piece that is currently selected in the bullpen. */
 	public PieceContainer getPieceSelected()
 	{
 		return pieceSelected;
@@ -136,7 +138,7 @@ public class Bullpen {
 	 *  Returns the piece at index in the bullpen.
 	 *  
 	 *  @param index  the index of the piece, must be within bounds
-	 *  @return The piece contained at index. */
+	 *  @return  The piece contained at index. */
 	public PieceContainer getPiece(int index) {
 		return pieces.get(index);
 	}
@@ -145,7 +147,7 @@ public class Bullpen {
 	 *  Returns the index in the bullpen of the given piece.
 	 *  
 	 *  @param piece  the piece to return the index of
-	 *  @return The index of the given Piece. */
+	 *  @return  The index of the given Piece. */
 	public int getLocation(PieceContainer piece){
 		return pieces.indexOf(piece);
 	}

@@ -8,7 +8,26 @@ package poseidon.entities;
  *
  */
 public interface IMove {
+	/**
+	 *  Move is validated according to game mode.
+	 * 
+	 *  @return  Whether the move is valid.
+	 */
 	Boolean isValid();
+	
+	
+	/**
+	 *  Performs the move.
+	 *  
+	 *  @return  Whether the move completed successfully.
+	 */
 	Boolean doMove();
+	
+	
+	/** 
+	 *  Reverses the effects of the move.
+	 * 
+	 *  @return  Whether the undo operation completed successfully.
+	 */
 	Boolean undoMove();
 }

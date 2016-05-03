@@ -51,6 +51,8 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 	/**
 	 *  Constructor, creates all view elements and attached controllers.
 	 *  
+	 *  @param topModel  The top-level entity.
+	 *  @param model  The state of the level under construction.
 	 *  @param view  The top-level GUI object.
 	 */
 	public SaveLevelView(LevelBuilderModel topModel, LevelModel model, LevelBuilderView view) {
@@ -118,10 +120,12 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 		return addToGameCheckBox.isSelected();
 	}
 	
+	/** @return  The "Save" button. */
 	public JButton getSave(){
 		return saveButton;
 	}
 	
+	/** @return  The "Canel" button. */
 	public JButton getCancel(){
 		return cancelButton; 
 	}

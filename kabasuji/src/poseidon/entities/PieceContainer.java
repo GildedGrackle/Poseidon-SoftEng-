@@ -78,30 +78,50 @@ public class PieceContainer {
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	/** @return  The Piece contained by this object. */
 	public Piece getPiece()
 	{
 		return piece;
 	}
 
+	/** @return  The current (row, col) position of this piece on the board;
+	 * (-1, -1) if not on the board. */
 	public Point getLocation()
 	{
 		return location;
 	}
 
+	/** @return  Whether this piece has been selected in the bullpen. */
 	public boolean getIsSelected()
 	{
 		return isSelected;
 	}
+	
+	/**
+	 *  Sets the Piece to be contained.
+	 *  
+	 *  @param piece  the new Piece
+	 */
 	public void setPiece(Piece piece)
 	{
 		this.piece = piece;
 	}
 
+	/**
+	 *  Sets the current location on the board.
+	 *  
+	 *  @param location  the new location
+	 */
 	public void setLocation(Point location)
 	{
 		this.location = location;
 	}
 
+	/**
+	 *  Sets the selection status of this piece.
+	 *  
+	 *  @param isSelected  the new status
+	 */
 	public void setIsSelected(Boolean isSelected)
 	{
 		this.isSelected = isSelected;

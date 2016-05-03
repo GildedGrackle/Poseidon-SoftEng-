@@ -6,16 +6,24 @@ import java.awt.event.ActionListener;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.view.LevelPlayerView;
 
+/**
+ *  Returns to (creates and displays) the main menu.
+ *  
+ *  @author Alex Titus
+ */
 public class BackPlayerController implements ActionListener
 {
-	LevelPlayerModel model;  // The top-level entity object, representing the game
-	LevelPlayerView game;  // The top-level GUI object
+	/** The top-level entity object, representing the game. */
+	LevelPlayerModel model;
+	/** The top-level GUI object. */
+	LevelPlayerView game;
 	
 	
 	/**
-	 *  Constructor
-	 * @param model
-	 * @param view
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object
+	 *  @param view  the top-level GUI object
 	 */
 	public BackPlayerController(LevelPlayerModel model, LevelPlayerView view)
 	{
@@ -26,7 +34,9 @@ public class BackPlayerController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelPlayerView to the
-	 *  About screen
+	 *  About screen.
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -38,7 +48,9 @@ public class BackPlayerController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelPlayerView to the
-	 *  About screen
+	 *  About screen.
+	 *  
+	 *  @return  Indication of whether the operation completed successfully.
 	 */
 	public Boolean goBack()
 	{	

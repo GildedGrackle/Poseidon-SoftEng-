@@ -24,8 +24,10 @@ public class PuzzleLevel extends LevelModel {
 	 *  @param infinite  the infinite bullpen
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
+	 *  @param isAddedToPlayer  indicator whether level is part of Level Player
 	 */
-	public PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer) {
+	public PuzzleLevel(int allottedMoves, String levelName, Bullpen bullpen,
+			Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer) {
 		super(bullpen, infinite, board, PUZZLE, levelName, isCustom, isAddedToPlayer);
 		this.allottedMoves = allottedMoves;
 	}

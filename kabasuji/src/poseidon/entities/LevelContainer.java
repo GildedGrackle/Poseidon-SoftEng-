@@ -14,7 +14,7 @@ public class LevelContainer {
 	LevelModel level;
 	/** If the level has been modified (for Level Builder). */
 	Boolean isChanged;
-	/** Added here to simplify LevelSelect display. */
+	/** The high score for the level associated with this container. */
 	int score;
 	
 	
@@ -38,43 +38,73 @@ public class LevelContainer {
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
+	/** @return  The file name for this level. */
 	public String getLevelFileName()
 	{
 		return levelFileName;
 	}
+	/** @return  The number of this level. */
 	public int getLevelNumber()
 	{
 		return levelNumber;
 	}
+	/** @return  The level contained by this object. */
 	public LevelModel getLevel()
 	{
 		return level;
 	}
+	/** @return  Whether the level has been modified (in the Builder). */
 	public Boolean getIsChanged()
 	{
 		return isChanged;
 	}
+	/** @return  The high score for this level. */
 	public int getScore()
 	{
 		return score;
 	}
+	/**
+	 *  Sets the file name for the level contained by this object.
+	 *  
+	 *  @param levelFileName  the new filename
+	 */
 	public void setLevelFileName(String levelFileName)
 	{
 		this.levelFileName = levelFileName;
 	}
+	/**
+	 *  Sets the level number for the level contained by this object.
+	 *  
+	 *  @param levelNumber  the new level number
+	 */
 	public void setLevelNumber(int levelNumber)
 	{
 		this.levelNumber = levelNumber;
 	}
+	/**
+	 *  Sets the level model to be contained by this object.
+	 *  
+	 *  @param level  the new level model
+	 */
 	public void setLevel(LevelModel level)
 	{
 		this.level = level;
 		this.levelFileName = level.getLevelName() + ".xml";
 	}
+	/**
+	 *  Sets whether the level has been modified.
+	 *  
+	 *  @param isChanged  the new modified status
+	 */
 	public void setIsChanged(Boolean isChanged)
 	{
 		this.isChanged = isChanged;
 	}
+	/**
+	 *  Sets the high score for this level.
+	 *  
+	 *  @param score  the new high score
+	 */
 	public void setScore(int score)
 	{
 		this.score = score;

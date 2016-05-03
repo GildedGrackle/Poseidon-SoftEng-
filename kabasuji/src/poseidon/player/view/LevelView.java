@@ -329,56 +329,71 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 				/***********************
 				 *  Getters & Setters  *
 				 ***********************/
-	/** Returns the model of the Level. */
+	/** @return  The model of the Level. */
 	public LevelModel getModel()
 	{
 		return model;
 	}
-	/** Returns the GUI representation of the Bullpen. */
+	/** @return  The GUI representation of the bullpen. */
 	public BullpenView getBullpen()
 	{
 		return bullpen;
 	}
-	/** Returns the GUI representation of the Board. */
+	/** @return  The GUI representation of the board. */
 	public BoardView getBoard()
 	{
 		return board;
 	}
-	/** Sets the GUI representation of the Bullpen. */
+	/** 
+	 *  Sets the GUI representation of the bullpen.
+	 * 
+	 *  @param bullpen  the new bullpen
+	 */
 	public void setBullpen(BullpenView bullpen)
 	{
 		this.bullpen = bullpen;
 	}
-	/** Sets the GUI representation of the Board. */
+	/** 
+	 *  Sets the GUI representation of the board.
+	 *  
+	 *  @param board  the new board
+	 */
 	public void setBoard(BoardView board)
 	{
 		this.board = board;
 	}
 	
+	/** @return  The "Rotate Counter-clockwise" button. */
 	public JButton getCCW(){
 		return rotateCCWButton;
 	}
 	
+	/** @return  The "Rotate Clockwise" button. */
 	public JButton getCW(){
 		return rotateCWButton;
 	}
 	
+	/** @return  The "Horizontal Flip" button. */
 	public JButton getHFlip(){
 		return flipHButton;
 	}
 	
+	/** @return  The "Vertical Flip" button. */
 	public JButton getVFlip(){
 		return flipVButton;
 	}
 	
+	/** @return  The "Reset" button. */
 	public JButton getReset(){
 		return resetButton;
 	}
 	
+	/** @return  The "Quit" button. */
 	public JButton getQuit(){
 		return quitButton;
 	}
 	
+	/** @return  The "Finish Level" button. */
 	public JButton getFinish(){
 		return finishButton;
 	}

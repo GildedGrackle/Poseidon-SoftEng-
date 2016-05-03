@@ -1,6 +1,5 @@
 package poseidon.builder.controller;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,18 +33,13 @@ public class ResetBuilderController implements ActionListener {
 	 *  Constructor.
 	 *  
 	 *  @param model  the model of the level to reset
-	 *  @param view  the representation of the level
+	 *  @param game  the representation of the level
 	 */
 	public ResetBuilderController(LevelBuilderModel model, LevelBuilderView game)
 	{
 		this.model = model;
 		this.game = game;
 	}
-	
-	
-	private ActionEvent buttonPress(Component button) {
-		return new ActionEvent(button, 0, "");
-		}
 	
 
 	@Override

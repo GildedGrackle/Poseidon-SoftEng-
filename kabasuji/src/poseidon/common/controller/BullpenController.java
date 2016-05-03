@@ -11,26 +11,27 @@ import poseidon.entities.PieceContainer;
 /**
  *  Handles click events on the Bullpen.
  *  
- *  Clicks to select and deselect a particular piece displayed in the Bullpen
+ *  Clicks to select and deselect a particular piece displayed in the bullpen
  *  are handled here.
  *  
  *  @author Alex Titus
  */
 public class BullpenController extends MouseAdapter
 {
-	/** The Bullpen model. */
+	/** The bullpen model. */
 	Bullpen model;
 	/** The GUI object representing the model. */
 	BullpenView view;
-	/** The GUI object representing the Board. */
+	/** The GUI object representing the board. */
 	BoardView boardView;
 	
 	
 	/**
 	 *  Constructor.
 	 *  
-	 * @param game  the top level model entity
-	 * @param view  the object displaying the bullpen
+	 * @param model  the bullpen model
+	 * @param view  the GUI object displaying the bullpen
+	 * @param boardView  the GUI object representing the board
 	 */
 	public BullpenController(Bullpen model, BullpenView view, BoardView boardView)
 	{

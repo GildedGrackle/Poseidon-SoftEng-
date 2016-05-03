@@ -5,24 +5,32 @@ import java.awt.event.ActionListener;
 
 import poseidon.player.view.LevelPlayerView;
 
+/**
+ *  Closes the application.
+ *  
+ *  @author Alex Titus
+ *
+ */
 public class ExitPlayerController implements ActionListener
 {
+	/** The top-level GUI object. */
 	LevelPlayerView view;
-//	LevelPlayerModel model;
 
 	/**
-	 *  Constructor
-	 * @param game
+	 *  Constructor.
+	 *  
+	 *  @param game  the top-level GUI object to close
 	 */
-	public ExitPlayerController(/* LevelPlayerModel model, */LevelPlayerView game)
+	public ExitPlayerController(LevelPlayerView game)
 	{
-//		model = model;
 		view = game;
 	}
 	
 	
 	/**
-	 *  Called when user clicks Exit button, closes game
+	 *  Called when user clicks Exit button, closes game.
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)

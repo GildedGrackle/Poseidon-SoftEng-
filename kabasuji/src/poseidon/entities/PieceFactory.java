@@ -9,8 +9,12 @@ import java.util.Random;
  *  @author Alex Titus
  */
 public class PieceFactory {
+	/** The created Pieces. */
 	Piece [] pieces = new Piece[35];
 	
+	/**
+	 *  Constructor.
+	 */
 	public PieceFactory () {
 		
 		pieces[0] = new Piece (new Point[] {new Point(0, 0), new Point(1, 0),
@@ -121,10 +125,11 @@ public class PieceFactory {
 	}
 	
 	/**
-	 * returns the piece whose number was passed to the function.
+	 * Returns the piece whose number was passed to the function.
 	 * 
 	 * NOTE: To avoid confusion, the pieces are numbered exactly in the way that was shown in the class slides.
 	 * That means that the numbers go 1-35 instead of 0-34 as they actually do in the array.
+	 * Also recreate the PieceFactory if multiple of the same Piece are required.
 	 * 
 	 * @param pieceNum
 	 * @return Piece
@@ -133,10 +138,7 @@ public class PieceFactory {
 		return pieces[pieceNum-1];
 	}
 	
-	/**
-	 * Returns a random piece.
-	 * @return Piece
-	 */
+	/** @return A random Piece. */
 	public Piece getRandomPiece() {
 		Random rand = new Random();
 		int randomNum = rand.nextInt(35);

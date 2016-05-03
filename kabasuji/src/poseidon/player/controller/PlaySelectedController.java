@@ -10,17 +10,27 @@ import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
 import poseidon.player.view.LevelView;
 
+/**
+ *  Creates and displays the level selected on the level select screen.
+ *  
+ *  @author Alex Titus
+ */
 public class PlaySelectedController implements ActionListener
 {
-	LevelPlayerModel model;  // The top-level entity object, representing the game
-	LevelSelectView select;  // The level select screen, where this was called from
-	LevelPlayerView game;  // The top-level GUI object
+	/** The top-level entity object, representing the game. */
+	LevelPlayerModel model;
+	/** The level select screen, where this was called from. */
+	LevelSelectView select;
+	/** The top-level GUI object. */
+	LevelPlayerView game;
 
 	
 	/**
-	 *  Constructor
-	 * @param model
-	 * @param game
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object
+	 *  @param select  the level select screen
+	 *  @param game  the top-level GUI object
 	 */
 	public PlaySelectedController(LevelPlayerModel model, LevelSelectView select, LevelPlayerView game)
 	{
@@ -30,9 +40,6 @@ public class PlaySelectedController implements ActionListener
 	}
 
 	
-	/**
-	 *  
-	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{
@@ -43,9 +50,9 @@ public class PlaySelectedController implements ActionListener
 	/**
 	 *  Switches the panel currently displayed in LevelPlayerView to the
 	 *  Level screen, where the level displayed is based on which level was
-	 *  selected on the Level Select screen
+	 *  selected on the Level Select screen.
 	 */
-	boolean playGame()
+	Boolean playGame()
 	{
 		// Get selected level container
 		LevelContainer lvlCon = select.getSelectedLevel();

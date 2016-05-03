@@ -32,6 +32,7 @@ public class ConfirmSaveController implements ActionListener {
 	/**
 	 * Constructor.
 	 * 
+	 * @param topModel  The top-level entity.
 	 * @param view		The top-level GUI object.
 	 * @param saveView	The save screen, with the new level name and flag checkboxes.
 	 * @param level		The level model being built.

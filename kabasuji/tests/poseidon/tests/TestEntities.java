@@ -366,7 +366,7 @@ public class TestEntities extends TestCase{
 		testBoard.returnPiece();
 
 		assertTrue(testBoard.canSelect(1,1));
-		assertTrue(testBoard.selectSquare(1,1));
+		assertTrue(testBoard.selectPiece(1,1));
 		assertEquals(testBoard.getActiveDragged(), testPiece);
 		assertEquals(testBoard.getActiveSource(), testLocation);
 

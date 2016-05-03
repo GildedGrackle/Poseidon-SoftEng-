@@ -175,58 +175,15 @@ public class Board {
 		this.playArea = newBoard;
 	}
 	
-	/**
-	 * Deals with selected squares depending on the type.
-	 * 
-	 * Note:	If builder, selects/deselects the square.
-	 * 			If puzzle, selects the piece that is on the square.
-	 * 			If lightning/release, doesn't perform any action.
-	 * 
-	 * @param row
-	 * @param col - parameters that indicate the square on the board that was selected
-	 * @return
-	 */
-	public Boolean selectSquare (int row, int col) {
-		if (logic instanceof BuilderBoardLogic) {
-			Square square = playArea [row][col];
-			if(square instanceof NonplayableSquare) {
-				switch (type){
-				case 1:
-					playArea [row][col] = new PuzzleSquare(false, false);
-					break;
-				case 2:
-					playArea [row][col] = new LightningSquare(false);
-					break;
-				case 3:
-					playArea [row][col] = new ReleaseSquare(false, null); //release number set to null until updated
-					break;
-				}
-			}
-			//set to nonplayable
-			else { playArea [row][col] = new NonplayableSquare();}
-			return true;
-		}
-		PieceContainer piece = findPiece(row,col);
-		if(piece != null) {
-			if(logic.canSelectPieces()) {
-				activeDragged.setIsSelected(false);
-				activeDragged = piece;
-				piece.setIsSelected(true);
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
 	
 	/**
 	 *  Sets the piece at (row, col) to the active dragged piece.
 	 *  
 	 *  @param row  the row of the selected square
 	 *  @param col  the column of the selected square
+	 *  @return  Indicator of whether the piece was found.
 	 */
-	public void selectPiece(int row, int col)
+	public Boolean selectPiece(int row, int col)
 	{
 		for(PieceContainer pc : pieces)
 		{
@@ -242,10 +199,13 @@ public class Board {
 				{
 					// Then set this piece as the active dragged piece
 					activeDragged = pc;
-					return ;  // No point in continuing, found what we were looking for
+					return true;  // No point in continuing, found what we were looking for
 				}
 			}
 		}
+		
+		// If we get here, somehow didn't find it; most likely won't happen
+		return false;
 	}
 	
 	

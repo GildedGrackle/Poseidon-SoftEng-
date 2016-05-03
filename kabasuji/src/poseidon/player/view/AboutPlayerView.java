@@ -13,15 +13,27 @@ import javax.swing.SwingConstants;
 import poseidon.entities.LevelPlayerModel;
 import poseidon.player.controller.BackPlayerController;
 
+/**
+ *  Renders the "About" screen.
+ *  
+ *  @author Alex Titus
+ *
+ */
 public class AboutPlayerView extends JPanel implements IGameScreen
 {
-	LevelPlayerModel model;  // The state of the game
-	LevelPlayerView game;  // The top-level GUI object
-	JButton backButton;  // Returns to the main menu (LevelPlayerView)
+	/** The top-level entity object, representing the state of the game. */
+	LevelPlayerModel model;
+	/** The top-level GUI object. */
+	LevelPlayerView game;
+	/** Returns to the main menu (LevelPlayerView). */
+	JButton backButton;
 
 
 	/**
-	 * Create the panel.
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object
+	 *  @param view  the top-level GUI object
 	 */
 	public AboutPlayerView(LevelPlayerModel model, LevelPlayerView view)
 	{
@@ -52,7 +64,7 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 
 
 	/**
-	 *  To satisfy IGameScreen
+	 *  To satisfy IGameScreen.
 	 */
 	@Override
 	public LevelView getCurrentlyPlaying()
@@ -63,7 +75,7 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 	
 	
 	/**
-	 *  To satisfy IGameScreen
+	 *  To satisfy IGameScreen.
 	 */
 	@Override
 	public Boolean setCurrentlyPlaying(LevelView newGame)
@@ -71,6 +83,8 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 		return false;
 	}
 	
+	
+	/** @return  The "Back" button. */
 	public JButton getBack(){
 		return backButton;
 	}

@@ -26,6 +26,8 @@ public class SaveLevelController implements ActionListener {
 	/**
 	 *  Constructor.
 	 *  
+	 *  @param topModel  The top-level entity.
+	 *  @param model  The state of the level under construction.
 	 *  @param view  The top-level GUI object.
 	 */
 	public SaveLevelController (LevelBuilderModel topModel, LevelModel model, LevelBuilderView view) {

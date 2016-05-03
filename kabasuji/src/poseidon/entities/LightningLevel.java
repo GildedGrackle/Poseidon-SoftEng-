@@ -25,14 +25,16 @@ public class LightningLevel extends LevelModel{
 	/**
 	 *  Constructor.
 	 *  
-	 *  @param allottedMoves  the maximum number of moves allowed
+	 *  @param allottedTime  the maximum number of moves allowed
 	 *  @param levelName  the displayed name of this level
 	 *  @param bullpen  the bullpen used in this level
 	 *  @param infinite  the infinite bullpen
 	 *  @param board  the board used in this level
 	 *  @param isCustom  indicator whether level is custom-made by user
+	 *  @param isAddedToPlayer  indicator whether level is in Level Player
 	 */
-	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen, Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
+	public LightningLevel(int allottedTime, String levelName, Bullpen bullpen,
+			Bullpen infinite, Board board, Boolean isCustom, Boolean isAddedToPlayer){
 		super(bullpen, infinite, board, LIGHTNING, levelName, isCustom, isAddedToPlayer);
 		this.allottedTime = allottedTime;
 	}

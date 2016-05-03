@@ -25,6 +25,7 @@ public class DeleteLevelController implements ActionListener {
 	/**
 	 * Constructor.
 	 * 
+	 * @param topModel  The top-level entity.
 	 * @param level The level to be deleted.
 	 */
 	public DeleteLevelController(LevelBuilderModel topModel, LevelContainer level) {

@@ -7,15 +7,16 @@ package poseidon.entities;
  * @author Alex Titus
  */
 public class ReleaseSquare extends Square{
-	/** Number to this Square contains. Consists of number and color. */
+	/** Number to this square contains. Consists of number and color. */
 	ReleaseNumber number;
+	/** Whether this square is a hint space. */
 	Boolean isHint;
 	
 	
 	/**
 	 *  Constructor.
 	 *  
-	 *  @param isFilled  indicator whether Square should be initialized as filled
+	 *  @param isFilled  indicator whether square should be initialized as filled
 	 *  @param number  the ReleaseNumber in this square, null if none
 	 */
 	public ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
@@ -83,7 +84,7 @@ public class ReleaseSquare extends Square{
 	/**
 	 *  Sets number.
 	 *  
-	 *  @param isHint  the new number
+	 *  @param number  the new number
 	 */
 	public void setNumber(ReleaseNumber number)
 	{

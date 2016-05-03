@@ -7,15 +7,25 @@ import poseidon.entities.LevelPlayerModel;
 import poseidon.player.view.AboutPlayerView;
 import poseidon.player.view.LevelPlayerView;
 
+/**
+ *  Creates and displays the "About" screen.
+ *  
+ *  @author Alex Titus
+ *
+ */
 public class AboutPlayerController implements ActionListener
 {
-	LevelPlayerModel model;  // The top-level entity object, representing the game
-	LevelPlayerView game;  // The top-level GUI object
+	/** The top-level entity object, representing the game. */
+	LevelPlayerModel model;
+	/** The top-level GUI object. */
+	LevelPlayerView game;
 	
 	
 	/**
-	 *  Constructor
-	 * @param view
+	 *  Constructor.
+	 *  
+	 *  @param model  the top-level entity object
+	 *  @param view  the top-level GUI object
 	 */
 	public AboutPlayerController(LevelPlayerModel model, LevelPlayerView view)
 	{
@@ -26,7 +36,9 @@ public class AboutPlayerController implements ActionListener
 
 	/**
 	 *  Switches the panel currently being displayed in LevelPlayerView to the
-	 *  About screen
+	 *  About screen.
+	 *  
+	 *  @param ae  the initiating event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae)
@@ -38,7 +50,9 @@ public class AboutPlayerController implements ActionListener
 	
 	/**
 	 *  Switches the panel currently being displayed in LevelPlayerView to the
-	 *  About screen
+	 *  About screen.
+	 *  
+	 *  @return  Indication of operation's exit status.
 	 */
 	public Boolean toAbout()
 	{

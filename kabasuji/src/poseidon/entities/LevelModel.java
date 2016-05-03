@@ -8,9 +8,9 @@ import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelView;
 
 /**
- *  The base class of a Kabasuji Level.
+ *  The base class of a Kabasuji level.
  *  
- *  Actual Levels are implemented as subclasses of this class.
+ *  Actual levels are implemented as subclasses of this class.
  *  
  * @author Natalia
  * @author Alex Titus
@@ -24,34 +24,37 @@ public abstract class LevelModel {
 	/** The number used to represent Release levels. */
 	public static final int RELEASE = 3;
 	
-	/** The name of the Level. */
+	/** The name of the level. */
 	String levelName;
-	/** The container for Pieces used in the Kabasuji Level Builder application. */
+	/** The container for pieces used in the Kabasuji Level Builder application. */
 	Bullpen infiniteBullpen;
-	/** The container for Pieces not on the Board. */
+	/** The container for pieces not on the board. */
 	Bullpen playableBullpen;
 	/** Indicates the type of game. */
 	int gameMode;
-	/** The player's current score on the Level, from 0 to 3, represented as stars. */
+	/** The player's current score on the level, from 0 to 3, represented as stars. */
 	int score; 
 	/** The Kabasuji game board. */
 	Board board;
-	/** Indicates if this Level is built-in or user-created. */
+	/** Indicates if this level is built-in or user-created. */
 	Boolean isCustom;
-	/** Indicates if this Level has been added to the player. */
+	/** Indicates if this level has been added to the player. */
 	Boolean isAddedToPlayer;
 	
 	
 	/**
 	 *  Constructor.
 	 *  
-	 *  @param bullpen  the model of this Level's Bullpen
-	 *  @param board  the model of this Level's Board
-	 *  @param gameMode  the type of Level this is
-	 *  @param levelName  the name of this Level
-	 *  @param isCustom  true if the Level is user-created
+	 *  @param bullpen  the model of this level's bullpen
+	 *  @param infinite  the container for pieces in the Level Builder
+	 *  @param board  the model of this level's board
+	 *  @param gameMode  the type of level this is
+	 *  @param levelName  the name of this level
+	 *  @param isCustom  true if the level is user-created
+	 *  @param isAddedToPlayer  true if the level is in the LevelPlayer
 	 */
-	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode, String levelName, Boolean isCustom, Boolean isAddedToPlayer) {
+	public LevelModel (Bullpen bullpen, Bullpen infinite, Board board, int gameMode,
+			String levelName, Boolean isCustom, Boolean isAddedToPlayer) {
 		this.levelName = levelName;
 		this.playableBullpen = bullpen;
 		this.infiniteBullpen = infinite;
@@ -59,15 +62,6 @@ public abstract class LevelModel {
 		this.board = board;
 		this.isCustom = isCustom;
 		this.isAddedToPlayer = isAddedToPlayer;
-	}
-	
-	
-	void saveLevel () {
-		//TODO: change return value
-	}
-	
-	void addToGame () {
-		//TODO: change return value
 	}
 	
 	/** 
@@ -103,6 +97,8 @@ public abstract class LevelModel {
 	 *  Provides the game-type-specific limit for play.
 	 *  
 	 *  Override this in level subclasses to provide the current remaining move or time limit.
+	 *  
+	 *  @return  The current limit for the level subclass.
 	 */
 	public abstract int getLimit();
 	
@@ -110,7 +106,9 @@ public abstract class LevelModel {
 	/** 
 	 *  Provides the game-type-specific allocated limit for play.
 	 *  
-	 *  Override this in level subclasses to provide the allocated move or time limit.
+	 *  Override this in level subclasses to provide the allotted move or time limit.
+	 *  
+	 *  @return  The allotted move or time limit for this level.
 	 */
 	public abstract int getMaxLimit();
 	
@@ -154,7 +152,11 @@ public abstract class LevelModel {
 	{
 		return levelName;
 	}
-	/** Set the level name. */
+	/** 
+	 *  Set the level name.
+	 *  
+	 *  @param levelName  the new level name
+	 */
 	public void setLevelName(String levelName) {
 		this.levelName = levelName;
 	}
@@ -187,7 +189,11 @@ public abstract class LevelModel {
 	public Boolean getIsCustom() {
 		return isCustom;
 	}
-	/** Set the custom level flag. */
+	/** 
+	 *  Set the custom level flag.
+	 *  
+	 *  @param isCustom  the new status
+	 */
 	public void setIsCustom(Boolean isCustom) {
 		this.isCustom = isCustom;
 	}
@@ -195,7 +201,11 @@ public abstract class LevelModel {
 	public Boolean getIsAddedToPlayer() {
 		return isAddedToPlayer;
 	}
-	/** Set the added level flag. */
+	/**
+	 *  Set the added level flag.
+	 *  
+	 *  @param isAddedToPlayer  the new status
+	 */
 	public void setIsAddedToPlayer(Boolean isAddedToPlayer) {
 		this.isAddedToPlayer = isAddedToPlayer;
 	}

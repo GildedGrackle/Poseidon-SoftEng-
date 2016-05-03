@@ -7,18 +7,19 @@ package poseidon.entities;
  * @author Alex Titus
  */
 public class PuzzleSquare extends Square {
+	/** Whether this is a hint space or not. */
 	Boolean isHint;
 	
 	
 	/**
 	 *  Constructor.
 	 *  
-	 *  @param isFilled  indicator whether Square should be initialized as filled
-	 *  
+	 *  @param isFilled  indicator whether square should be initialized as filled
+	 *  @param isHint  indicator whether square should be initialized as a hint space
 	 */
 	public PuzzleSquare(Boolean isFilled, Boolean isHint) {
 		super(isFilled);
-		this.isHint = false;					//Set to false as default
+		this.isHint = isHint;					//Set to false as default
 	}
 	
 	
@@ -28,7 +29,7 @@ public class PuzzleSquare extends Square {
 
 	
 	/**
-	 *  Used to indicate the type of Square this is.
+	 *  Used to indicate the type of square this is.
 	 *  
 	 *  @return one of the game-type constants in LevelModel
 	 */
@@ -52,7 +53,7 @@ public class PuzzleSquare extends Square {
 
 	
 	/**
-	 *  Indicates if this Square has been marked as a hint.
+	 *  Indicates if this square has been marked as a hint.
 	 *  
 	 *  @return whether this is a hint space or not
 	 */

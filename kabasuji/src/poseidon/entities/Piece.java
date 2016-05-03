@@ -7,15 +7,12 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Handles Pieces that are placed on the board/bullpen.
+ * Handles pieces that are placed on the board/bullpen.
  * @author Natalia
  */
 public class Piece {
-	/** The 6 points that construct a piece*/
+	/** The 6 points that construct a piece.*/
 	Point [] piece = new Point[6];
-	
-	/** The container that handles the moving and positioning the piece*/
-	PieceContainer container;
 	
 	/** The color of the constituent squares of this piece. */
 	Color pieceColor;
@@ -35,7 +32,6 @@ public class Piece {
 			throw new IllegalArgumentException("Piece must have 6 points");
 		}
 		this.piece = piece;
-		this.container = new PieceContainer (this, new Point(-1, -1));
 		
 		// Pick a random color for the Piece
 		switch(new Random().nextInt(5))
@@ -70,7 +66,6 @@ public class Piece {
 	public Piece() {
 		PieceFactory factory = new PieceFactory();
 		this.piece = factory.getRandomPiece().getPiece();
-		this.container = new PieceContainer (this, new Point(-1, -1));
 		
 		// Pick a random color for the Piece
 		switch(new Random().nextInt(5))
@@ -209,10 +204,6 @@ public class Piece {
 		}
 	}
 	
-	public PieceContainer getContainer() {
-		return this.container;
-	}
-	
 	@Override
 	/**
 	 * Overrides the standard equals() method for Pieces.
@@ -231,8 +222,9 @@ public class Piece {
 	
 	/**
 	 * Checks if a piece is a rotated variation of a piece it's compared to.
-	 * @param o
-	 * @return
+	 * 
+	 * @param o  the object being compared to
+	 * @return  Whether the piece is a rotated variation of the compared piece
 	 */
 	public boolean equalsWithPosition(Object o){
 		boolean check = false;

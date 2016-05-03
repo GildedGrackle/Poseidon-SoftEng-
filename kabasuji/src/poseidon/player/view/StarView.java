@@ -28,7 +28,9 @@ public class StarView extends JButton
 	Image star, greyStar, locked;
 
 	/**
-	 *  Construct selectable icon
+	 *  Constructor.
+	 *  
+	 *  @param lc  the level container to associate with
 	 */
 	public StarView(LevelContainer lc)
 	{
@@ -145,6 +147,7 @@ public class StarView extends JButton
 	}
 	
 	
+	/** @return  The LevelContainer associated with this object. */
 	public LevelContainer getLevelContainer()
 	{
 		return levelContainer;

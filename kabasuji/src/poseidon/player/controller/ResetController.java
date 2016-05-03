@@ -28,7 +28,7 @@ public class ResetController implements ActionListener
 	 *  Constructor.
 	 *  
 	 *  @param model  the model of the level to reset
-	 *  @param view  the representation of the level
+	 *  @param game  the representation of the level
 	 */
 	public ResetController(LevelPlayerModel model, LevelPlayerView game)
 	{
