@@ -27,6 +27,8 @@ public class BoardView extends JPanel implements IModelUpdated
 	java.awt.Point activeLocation;
 	/** Whether in hint selection mode or not. */
 	Boolean hintSelectionMode;
+	/** Whether in release number placement mode or not. */
+	Boolean releaseNumberMode;
 	/** The size (height or width) of a Square, in pixels. */
 	public static final int SQUARE_SIZE = 30;
 	/** The size (height or width) of a Piece when, in pixels. */
@@ -42,6 +44,7 @@ public class BoardView extends JPanel implements IModelUpdated
 	{
 		this.board = board;
 		this.hintSelectionMode = false;
+		this.releaseNumberMode = false;
 	}
 	
 	
@@ -216,7 +219,7 @@ public class BoardView extends JPanel implements IModelUpdated
 		}
 		
 		// Draw number
-		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * col + 10, SQUARE_SIZE * row + 10);
+		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * col + 10, SQUARE_SIZE * row + 22);
 	}
 	
 	
@@ -280,6 +283,13 @@ public class BoardView extends JPanel implements IModelUpdated
 	}
 	
 	
+	/** @return  Indication of whether in release number placement mode. */
+	public Boolean getReleaseNumberMode()
+	{
+		return releaseNumberMode;
+	}
+	
+	
 	/** @return The location of the anchor point of the piece being dragged. */
 	public java.awt.Point getActiveLocation()
 	{
@@ -305,5 +315,15 @@ public class BoardView extends JPanel implements IModelUpdated
 	public void setHintSelectionMode(Boolean newMode)
 	{
 		hintSelectionMode = newMode;
+	}
+	
+	/**
+	 *  Sets the release number placement mode.
+	 *  
+	 *  @param newMode  the new mode
+	 */
+	public void setReleaseNumberMode(Boolean newMode)
+	{
+		releaseNumberMode = newMode;
 	}
 }

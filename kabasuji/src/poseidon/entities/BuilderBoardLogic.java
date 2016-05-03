@@ -85,9 +85,10 @@ public class BuilderBoardLogic implements IBoardLogic {
 	}
 
 	
-	/** @return  True - can edit board during building. */
+	/**
+	 *  @return  True - can edit board during building. */
 	@Override
-	public Boolean canEdit(Board board) {
+	public Boolean canEdit() {
 		return true;
 	}
 	
@@ -95,6 +96,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 	/**
 	 *  Fills the squares covered by the given piece.
 	 *  
+	 *  @param board  the board to modify
 	 *  @param piece  The piece used to fill squares
 	 */
 	@Override
@@ -141,6 +143,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 	/** 
 	 *  Sets the square at (row, col) to be a hint, if possible.
 	 *  
+	 *  @param board  the board to modify
 	 *  @param row  the row of the square to make a hint
 	 *  @param col  the column of the square to make a hint
 	 */
@@ -186,4 +189,19 @@ public class BuilderBoardLogic implements IBoardLogic {
 		}
 	}
 	
+	
+	/** 
+	 *  Does nothing, can't set ReleaseNumbers during gameplay.
+	 *  
+	 *  @param board  the board to modify
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 *  @param rn  the ReleaseNumber to set
+	 */
+	public void setReleaseNumber(Board board, int row, int col, ReleaseNumber rn)
+	{
+		Square[][] playArea = board.getPlayArea();
+		ReleaseSquare newRNSquare = (ReleaseSquare) playArea[row][col];
+		newRNSquare.setNumber(rn);
+	}
 }

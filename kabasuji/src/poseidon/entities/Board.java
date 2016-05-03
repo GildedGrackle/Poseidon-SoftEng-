@@ -267,6 +267,25 @@ public class Board {
 	}
 	
 	
+	/** 
+	 *  Sets the square at (row, col) to have given ReleaseNumber, if possible.
+	 *  
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 *  @param rn  the ReleaseNumber to set
+	 */
+	public void setReleaseNumber(int row, int col, ReleaseNumber rn)
+	{
+		// Just in case
+		if(row >= MAXROWS || col >= MAXCOLS || row < 0 || col < 0 || type != LevelModel.RELEASE)
+		{
+			return ;
+		}
+		
+		logic.setReleaseNumber(this, row, col, rn);
+	}
+	
+	
 	/**
 	 *  Determines if the given piece can be played at the given location.
 	 *  
@@ -284,7 +303,7 @@ public class Board {
 	 *  @return  Indicates whether the board's play area can be modified.
 	 */
 	public boolean canEdit(){
-		Boolean editBoard = logic.canEdit(this);
+		Boolean editBoard = logic.canEdit();
 		return editBoard;
 	}
 	

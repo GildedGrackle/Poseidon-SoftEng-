@@ -55,7 +55,7 @@ public interface IBoardLogic {
 	
 	
 	/** @return  Indicator of whether the board can be modified. */
-	Boolean canEdit(Board board);
+	Boolean canEdit();
 	
 	
 	/**
@@ -73,4 +73,15 @@ public interface IBoardLogic {
 	 *  @param col  the column of the square to make a hint
 	 */
 	void setHint(Board board, int row, int col);
+	
+	
+	/** 
+	 *  Sets the square at (row, col) to have given ReleaseNumber, if possible.
+	 *  
+	 *  @param board  the board to modify
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 *  @param rn  the ReleaseNumber to set
+	 */
+	void setReleaseNumber(Board board, int row, int col, ReleaseNumber rn);
 }

@@ -30,19 +30,22 @@ public class HintSelectModeController implements ItemListener
 	/**
 	 *  Switches into or out of hint creation mode, depending.
 	 *  
+	 *  Deselects any selected piece in and locks the bullpen as a
+	 *  result of entering the mode.
+	 *  
 	 *  @param ie  the initiating event
 	 */
 	@Override
 	public void itemStateChanged(ItemEvent ie)
 	{
-		// If was selected
+		// If was just selected
 		if(ie.getStateChange() == ItemEvent.SELECTED)
 		{
 			view.getBoard().setHintSelectionMode(true);
 			view.getBullpen().getModel().setPieceSelected(null);
 			// Bullpen controller will also disallow any selections of pieces
 		}
-		else  // Was deselected
+		else  // Was just deselected
 		{
 			view.getBoard().setHintSelectionMode(false);
 		}

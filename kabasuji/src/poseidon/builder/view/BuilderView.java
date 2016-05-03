@@ -8,9 +8,11 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Insets;
 import java.io.IOException;
 import java.text.NumberFormat;
 
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
@@ -99,8 +101,12 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	JLabel limitLabel;
 	/** Icons for the rotate buttons*/
 	Image rotateCW, rotateCCW, icon;
-	/** To add a releaseSquare. */
+	/** To add a ReleaseSquare. */
 	JToggleButton addReleaseSquare;
+	/** To select the color of a ReleaseSquare. */
+	JComboBox<String> colorSelector;
+	/** To select the number of a ReleaseSquare. */
+	JComboBox<Integer> numberSelector;
 	/** The logo. */
 	JLabel poseidon;
 
@@ -136,7 +142,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		bullpen = new BullpenView(model.getInfiniteBullpen());
 		bullpenContainer = new JScrollPane(bullpen);
 		bullpenContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		bullpenContainer.setBounds(160, 80, 360, 78);
+		bullpenContainer.setBounds(160, 80, 360, 80);
 		add(bullpenContainer);
 		
 		// Add board and bullpen controllers
@@ -210,19 +216,20 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		
 		limitInput = new JFormattedTextField(limitFormatter);
 		limitInput.setValue(model.getMaxLimit());
-		limitInput.setBounds(555, 255, 110, 30);
+		limitInput.setBounds(540, 255, 130, 30);
 		limitInput.setColumns(10);
 		limitInput.addPropertyChangeListener("value", new LimitController(this.getModel()));
 		add(limitInput);
 		
 		addHintButton = new JToggleButton("Hint");
 		addHintButton.setFont(new Font("Dialog", Font.PLAIN, 20));
-		addHintButton.setBounds(555, 375, 110, 45);
+		addHintButton.setBounds(540, 300, 130, 45);
 		addHintButton.addItemListener(new HintSelectModeController(this));
 		add(addHintButton);
 		
 		editPlayBullpenButton = new JButton("Choose Pieces");
-		editPlayBullpenButton.setBounds(555, 450, 110, 90);
+		editPlayBullpenButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+		editPlayBullpenButton.setBounds(240, 180, 200, 50);
 		editPlayBullpenButton.addActionListener(new ToEditPlayableBullpenController(application));
 		add(editPlayBullpenButton);
 		
@@ -264,7 +271,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		colSizeInput.setValue(Board.MAXCOLS);
 		colSizeInput.setToolTipText("Enter new number of columns here.");
 		colSizeInput.setColumns(10);
-		colSizeInput.setBounds(70, 320, 45, 30);
+		colSizeInput.setBounds(80, 320, 45, 30);
 		colSizeInput.addPropertyChangeListener("value", new ColSizeController(this));
 		add(colSizeInput);
 		
@@ -291,13 +298,25 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		saveButton.addActionListener(new SaveLevelController(topmodel, model, application));
 		add(saveButton);
 		
-		if (model.getGameMode() == 3){
-			String twoLines = new String("New Release\nSquare");
-			addReleaseSquare = new JToggleButton("<html>" + twoLines + "</html>");
-			addReleaseSquare.setFont(new Font("Dialog", Font.PLAIN, 13));
-			addReleaseSquare.setBounds(555, 300, 110, 60);
-			addReleaseSquare.addActionListener(new MakeReleaseSquareController(topmodel, application));
+		if (model.getGameMode() == LevelModel.RELEASE){
+			addReleaseSquare = new JToggleButton("<html><center>New Release<br>Square</center></html>");
+			addReleaseSquare.setFont(new Font("Dialog", Font.PLAIN, 20));
+			addReleaseSquare.setMargin(new Insets(2, 8, 2, 8));
+			addReleaseSquare.setBounds(540, 385, 130, 80);
+			addReleaseSquare.addItemListener(new MakeReleaseSquareController(this));
 			add(addReleaseSquare);
+			
+			String[] colorModel = {"Red", "Green", "Yellow"};
+			colorSelector = new JComboBox<String>(colorModel);
+			colorSelector.setFont(new Font("Dialog", Font.PLAIN, 15));
+			colorSelector.setBounds(540, 480, 130, 30);
+			add(colorSelector);
+			
+			Integer[] numberModel = {1, 2, 3, 4, 5, 6};
+			numberSelector = new JComboBox<Integer>(numberModel);
+			numberSelector.setFont(new Font("Dialog", Font.PLAIN, 15));
+			numberSelector.setBounds(540, 525, 130, 30);
+			add(numberSelector);
 		}
 		
 		
@@ -406,8 +425,19 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		return editPlayBullpenButton;
 	}
 	
+	/** @return  The button associated with resetting the level. */
 	public JButton getResetButton(){
 		return resetButton;
+	}
+	
+	/** @return  The combo box associated with the release number's color. */
+	public JComboBox<String> getColorSelector(){
+		return colorSelector;
+	}
+	
+	/** @return  The combo box associated with the release number's number. */
+	public JComboBox<Integer> getNumberSelector(){
+		return numberSelector;
 	}
 	
 	
