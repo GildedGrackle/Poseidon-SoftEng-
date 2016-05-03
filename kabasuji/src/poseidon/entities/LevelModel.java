@@ -91,7 +91,7 @@ public abstract class LevelModel {
 	public abstract void builderInitialize();
 	
 	/** @return  Whether the player reached 3 stars. */
-	abstract Boolean hasWon();
+	public abstract Boolean hasWon();
 	
 	/** @return  Whether the player can move to the next level. */
 	abstract Boolean hasPassed();
@@ -138,14 +138,6 @@ public abstract class LevelModel {
 	 *  @param newLimit  the new limit
 	 */
 	public abstract void setMaxLimit(int newLimit);
-	
-	
-	void checkIfWon(ITopView application) {
-		if (hasWon() && application.isGame()){
-			EndLevelController finishLevel = new EndLevelController( (LevelPlayerView) application);
-			finishLevel.actionPerformed(null);  // Dangerous, but the action event itself is unused
-		}
-	}
 	
 	
 	/**

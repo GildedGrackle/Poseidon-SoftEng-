@@ -13,6 +13,7 @@ import poseidon.entities.BoardToBullpenMove;
 import poseidon.entities.Bullpen;
 import poseidon.entities.BullpenToBoardMove;
 import poseidon.entities.IMove;
+import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.MarkPlayableSquareMove;
 import poseidon.entities.MarkUnplayableSquareMove;
@@ -20,6 +21,9 @@ import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.entities.RedoManager;
 import poseidon.entities.UndoManager;
+import poseidon.player.view.EndLevelView;
+import poseidon.player.view.LevelPlayerView;
+import poseidon.player.view.LevelView;
 
 /**
  *  Controls mouse events on the board.
@@ -242,6 +246,29 @@ public class BoardController extends MouseAdapter
 			pc.setIsSelected(false);
 			UndoManager.instance().recordMove(move);
 			RedoManager.instance().clearMove();  // New move made, destroy redo stack
+			
+			// Check winning conditions (for Player only)
+			if(application.isGame() && game.hasWon())
+			{
+				// Then to the win screen
+				LevelPlayerView topView = (LevelPlayerView) application;
+				// Set record score
+				LevelContainer currentContainer = topView.getModel().getPlayingLevel();
+				LevelModel currentLevel = currentContainer.getLevel();
+				if(currentContainer.getScore() < currentLevel.getScore())  // If have a new high score
+				{
+					// Then record it
+					currentContainer.setScore(currentLevel.getScore());
+				}
+				EndLevelView newScreen = new EndLevelView(topView.getModel(), topView);
+				topView.getFrame().setContentPane(newScreen);
+				topView.setCurrentView(newScreen);
+
+				// Display new screen
+				topView.getFrame().setVisible(true);
+			}
+			
+			// Update display
 			view.modelUpdated();
 		}
 	}
@@ -297,8 +324,29 @@ public class BoardController extends MouseAdapter
 			
 			// Clear redo stack
 			RedoManager.instance().clearMove();
+			
+			// Check winning conditions (for Player only) (also probably doesn't happen off of these moves)
+			if(application.isGame() && game.hasWon())
+			{
+				// Then to the win screen
+				LevelPlayerView topView = (LevelPlayerView) application;
+				// Set record score
+				LevelContainer currentContainer = topView.getModel().getPlayingLevel();
+				LevelModel currentLevel = currentContainer.getLevel();
+				if(currentContainer.getScore() < currentLevel.getScore())  // If have a new high score
+				{
+					// Then record it
+					currentContainer.setScore(currentLevel.getScore());
+				}
+				EndLevelView newScreen = new EndLevelView(topView.getModel(), topView);
+				topView.getFrame().setContentPane(newScreen);
+				topView.setCurrentView(newScreen);
+
+				// Display new screen
+				topView.getFrame().setVisible(true);
+			}
 		}
-		else
+		else  // Move was unsuccessful
 		{
 			// Send the Piece back
 			boardModel.returnPiece();

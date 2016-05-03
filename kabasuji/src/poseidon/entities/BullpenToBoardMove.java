@@ -96,7 +96,6 @@ public class BullpenToBoardMove implements IMove{
 			view.getBullpen().getModel().removePiece(piece);
 			view.getBullpen().getModel().setPieceSelected(null);
 			view.getModel().updateScore();
-			view.getModel().checkIfWon(application);
 
 			// Decrease moves remaining by 1 (if applicable)
 			game.decrementLimit();

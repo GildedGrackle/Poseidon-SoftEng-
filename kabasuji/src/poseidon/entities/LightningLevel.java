@@ -95,7 +95,7 @@ public class LightningLevel extends LevelModel{
 	/**
 	 * Checks whether the player has achieved a perfect score.
 	 */
-	Boolean hasWon() {
+	public Boolean hasWon() {
 		if (calculateScore() == 3) {return true;}
 		return false;
 	}

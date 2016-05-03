@@ -115,7 +115,7 @@ public class ReleaseLevel extends LevelModel{
 	 * 
 	 * @return  indicator whether game has been completed
 	 */
-	Boolean hasWon() {
+	public Boolean hasWon() {
 		if (calculateScore() == 3) {return true;}
 		return false;
 	}
