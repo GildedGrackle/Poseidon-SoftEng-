@@ -95,7 +95,7 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	
 	/** @return  False - cannot edit Release board during gameplay. */
 	@Override
-	public Boolean canEdit(Board board) {
+	public Boolean canEdit() {
 		return false;
 	}
 	
@@ -122,6 +122,7 @@ public class ReleaseBoardLogic implements IBoardLogic{
 	/** 
 	 *  Does nothing, can't make hints during gameplay.
 	 *  
+	 *  @param board  the board to modify
 	 *  @param row  the row of the square to make a hint
 	 *  @param col  the column of the square to make a hint
 	 */
@@ -131,4 +132,18 @@ public class ReleaseBoardLogic implements IBoardLogic{
 		return ;
 	}
 	
+	
+	/** 
+	 *  Does nothing, can't set ReleaseNumbers during gameplay.
+	 *  
+	 *  @param board  the board to modify
+	 *  @param row  the row of the square to make a hint
+	 *  @param col  the column of the square to make a hint
+	 *  @param rn  the ReleaseNumber to set
+	 */
+	@Override
+	public void setReleaseNumber(Board board, int row, int col, ReleaseNumber rn)
+	{
+		return ;
+	}
 }

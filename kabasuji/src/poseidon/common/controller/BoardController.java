@@ -3,6 +3,7 @@ package poseidon.common.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import poseidon.builder.view.BuilderView;
 import poseidon.common.view.BoardView;
 import poseidon.common.view.BullpenView;
 import poseidon.common.view.ILevelView;
@@ -21,6 +22,7 @@ import poseidon.entities.MarkUnplayableSquareMove;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.Point;
 import poseidon.entities.RedoManager;
+import poseidon.entities.ReleaseNumber;
 import poseidon.entities.UndoManager;
 import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
@@ -226,10 +228,20 @@ public class BoardController extends MouseAdapter
 				
 				view.modelUpdated();
 			}
-			// Else maybe in hint selection mode
+			
+			// Else may be in hint selection mode
 			if(boardView.getHintSelectionMode())
 			{
 				boardModel.setHint(row, col);
+				view.modelUpdated();
+			}
+			
+			// Else else may be in release number placement mode
+			if(boardView.getReleaseNumberMode())
+			{
+				// Get release number
+				ReleaseNumber newNumber = createReleaseNumber();
+				boardModel.setReleaseNumber(row, col, newNumber);
 				view.modelUpdated();
 			}
 			
@@ -410,5 +422,35 @@ public class BoardController extends MouseAdapter
 		topView.getFrame().setContentPane(newScreen);
 		topView.setCurrentView(newScreen);
 		topView.getFrame().setVisible(true);
+	}
+	
+	
+	/**
+	 *  Determines the color and number for a newly created ReleaseNumber.
+	 *  
+	 *  @return  A ReleaseNumber based on the selections made in the BuilderView.
+	 */
+	ReleaseNumber createReleaseNumber()
+	{
+		BuilderView currentView = (BuilderView) view;
+		String colorChosen = (String) currentView.getColorSelector().getSelectedItem();
+		int numberChosen = (int) currentView.getNumberSelector().getSelectedItem();
+		
+		// ------- Figure out color -------
+		int numColor;
+		if(colorChosen == "Red")
+		{
+			numColor = ReleaseNumber.RED;
+		}
+		else if(colorChosen == "Green")
+		{
+			numColor = ReleaseNumber.GREEN;
+		}
+		else
+		{
+			numColor = ReleaseNumber.YELLOW;
+		}
+		
+		return new ReleaseNumber(numberChosen, numColor);
 	}
 }

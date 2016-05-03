@@ -53,8 +53,9 @@ public class BullpenController extends MouseAdapter
 		// known width of rendered Pieces in the Bullpen
 		int index = me.getX() / BullpenView.PIECE_SIZE;
 		
-		// If in hint selection mode, no selection of pieces is allowed
-		if(!boardView.getHintSelectionMode())
+		// If in hint selection or release number placement mode,
+		// no selection of pieces is allowed
+		if(!boardView.getHintSelectionMode() && !boardView.getReleaseNumberMode())
 		{
 			// Need to check that index is within the number of Pieces in Bullpen
 			if(index >= model.getSize())  // >= because 0-based indexing

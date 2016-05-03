@@ -15,6 +15,7 @@ import poseidon.entities.Piece;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.PieceFactory;
 import poseidon.entities.Point;
+import poseidon.entities.ReleaseNumber;
 import poseidon.entities.Square;
 import poseidon.entities.XMLHandler;
 import poseidon.player.view.LevelPlayerView;
@@ -323,7 +324,7 @@ public class TestEntities extends TestCase{
 		}
 
 		@Override
-		public Boolean canEdit(Board board) {
+		public Boolean canEdit() {
 			return false;
 		}
 
@@ -335,13 +336,16 @@ public class TestEntities extends TestCase{
 		@Override
 		public void placePiece(Board board, PieceContainer piece) {
 			return;
-			
 		}
 
 		@Override
 		public void setHint(Board board, int row, int col) {
 			return;
-			
+		}
+		
+		@Override
+		public void setReleaseNumber(Board board, int row, int col, ReleaseNumber rn) {
+			return;
 		}
 	}
 	

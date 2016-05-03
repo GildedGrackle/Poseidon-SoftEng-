@@ -78,5 +78,16 @@ public class ReleaseSquare extends Square{
 	{
 		this.isHint = isHint;
 	}
+	
+	
+	/**
+	 *  Sets number.
+	 *  
+	 *  @param isHint  the new number
+	 */
+	public void setNumber(ReleaseNumber number)
+	{
+		this.number = number;
+	}
 
 }
