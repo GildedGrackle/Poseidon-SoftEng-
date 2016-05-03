@@ -47,4 +47,8 @@ public class TestPlayerViews extends TestCase
 	  // Check that instance now exists
 		assertTrue(game instanceof LevelPlayerView);
 	}
+	
+	public void testBoardView(){
+		
+	}
 }

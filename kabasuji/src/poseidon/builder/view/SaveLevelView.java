@@ -117,4 +117,12 @@ public class SaveLevelView extends JPanel implements IBuilderScreen {
 	public boolean getAddToGame() {
 		return addToGameCheckBox.isSelected();
 	}
+	
+	public JButton getSave(){
+		return saveButton;
+	}
+	
+	public JButton getCancel(){
+		return cancelButton; 
+	}
 }
