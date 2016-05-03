@@ -54,10 +54,6 @@ public class ReleaseLevel extends LevelModel{
 		area[row][col].getReleaseNumber().setNumber(number);
 	}
 	
-	void resetCollected () {
-		//TODO: Change return value
-	}
-	
 	
 	/**
 	 *  Decreases the number of moves remaining by 1.
