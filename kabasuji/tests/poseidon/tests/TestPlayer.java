@@ -24,6 +24,7 @@ import poseidon.player.controller.EndLevelController;
 import poseidon.player.controller.ExitPlayerController;
 import poseidon.player.controller.LevelSelectController;
 import poseidon.player.controller.LimitEndController;
+import poseidon.player.controller.NextLevelController;
 import poseidon.player.controller.PlaySelectedController;
 import poseidon.player.controller.SelectLevelController;
 import poseidon.player.controller.TimeController;
@@ -246,9 +247,33 @@ public class TestPlayer extends TestCase{
 		limitCont.propertyChange(timeChange);
 		
 		assertEquals(view.getCurrentView().getClass(), EndLevelView.class);
-
 	
 	}
+		
+		public void testWinning(){
+			button = view.getContinue();
+			ActionEvent continuePress = buttonPress(button);
+			continueControl.actionPerformed(continuePress);
+			
+			lvlContainer.setScore(3);
+			
+			endLevel = new EndLevelController(view);
+			
+			button = view.getCurrentView().getCurrentlyPlaying().getFinish();
+			ActionEvent endLvl = buttonPress(button);
+			endLevel.actionPerformed(endLvl);
+			
+			EndLevelView endView = new EndLevelView(model, view);
+			NextLevelController nextLvlCont = new NextLevelController(model, view);
+			
+			button = endView.getNext();
+			ActionEvent nextLvl = buttonPress(button);
+			nextLvlCont.actionPerformed(nextLvl);
+			
+			assertEquals(view.getCurrentView().getCurrentlyPlaying().getClass(), LevelView.class );
+			
+			
+		}
 	
 	
 	

@@ -33,6 +33,8 @@ public class EndLevelView extends JPanel implements IGameScreen
 	LevelPlayerModel model;
 	/** The top-level GUI object. */
 	LevelPlayerView view;
+	/** JButton linking to the next playable level */ 
+	JButton nextLevelButton;
 
 	
 	/**
@@ -67,7 +69,7 @@ public class EndLevelView extends JPanel implements IGameScreen
 		levelSelectButton.addActionListener(new LevelSelectController(model, view));
 		add(levelSelectButton);
 		
-		JButton nextLevelButton = new JButton();
+		nextLevelButton = new JButton();
 		nextLevelButton.setMargin(new Insets(0, 14, 2, 14));
 		nextLevelButton.setOpaque(false);
 		nextLevelButton.setBounds(510, 500, 80, 80);
@@ -165,4 +167,7 @@ public class EndLevelView extends JPanel implements IGameScreen
 		return false;
 	}
 
+	public JButton getNext(){
+		return nextLevelButton;
+	}
 }
