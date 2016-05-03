@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 
 import poseidon.entities.LevelModel;
 import poseidon.entities.Piece;
@@ -378,6 +379,27 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 		}
 		
 		public void testChangeBoardSize(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			
+			int oldHeight = builderView.getBoard().getHeight();
+			int oldWidth = builderView.getBoard().getWidth();
+			
+			JFormattedTextField row = builderView.getRowSizeInput();
+			row.setValue(5);
+			
+			JFormattedTextField col = builderView.getColSizeInput();
+			col.setValue(5);
+			
+			assertNotSame(oldHeight, builderView.getBoard().getHeight());
+			assertNotSame(oldWidth, builderView.getBoard().getWidth());
 			
 		}
 }

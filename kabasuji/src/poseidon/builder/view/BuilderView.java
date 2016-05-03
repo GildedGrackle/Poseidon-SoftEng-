@@ -405,6 +405,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	public JButton getSetPlayBull(){
 		return editPlayBullpenButton;
 	}
+	
 	public JButton getResetButton(){
 		return resetButton;
 	}
