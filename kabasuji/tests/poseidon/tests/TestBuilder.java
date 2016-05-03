@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 
 import poseidon.entities.LevelModel;
 import poseidon.entities.Piece;
@@ -14,6 +15,9 @@ import poseidon.entities.PieceFactory;
 import poseidon.entities.PuzzleLevel;
 import poseidon.entities.PuzzleSquare;
 import poseidon.entities.Square;
+import poseidon.player.controller.ResetController;
+import poseidon.player.view.LevelSelectView;
+import poseidon.player.view.LevelView;
 import poseidon.entities.Board;
 import poseidon.entities.BuilderBoardLogic;
 import poseidon.entities.BuilderBullpenLogic;
@@ -23,6 +27,8 @@ import poseidon.entities.LevelContainer;
 import poseidon.builder.controller.AboutBuilderController;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.CancelEditController;
+import poseidon.builder.controller.CancelSaveController;
+import poseidon.builder.controller.ConfirmSaveController;
 import poseidon.builder.controller.ToEditLevelController;
 import poseidon.builder.controller.ToEditPlayableBullpenController;
 import poseidon.builder.controller.ExitBuilderController;
@@ -31,19 +37,24 @@ import poseidon.builder.controller.MakePuzzleController;
 import poseidon.builder.controller.MakeReleaseController;
 import poseidon.builder.controller.NewLevelController;
 import poseidon.builder.controller.RedoController;
+import poseidon.builder.controller.ResetBuilderController;
+import poseidon.builder.controller.SaveLevelController;
 import poseidon.builder.controller.SetBullpenController;
 import poseidon.builder.controller.UndoController;
 import poseidon.builder.view.AboutBuilderView;
 import poseidon.builder.view.BuilderView;
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.builder.view.NewLevelView;
+import poseidon.builder.view.SaveLevelView;
 import poseidon.common.controller.BoardController;
 import poseidon.common.view.BoardView;
+import poseidon.common.view.BullpenView;
 import poseidon.builder.view.EditLevelView;
 import poseidon.builder.view.EditPlayableBullpenView;
 import junit.framework.TestCase;
 
-public class TestBuilderBtnControllers extends TestMouseEvents{
+
+public class TestBuilder extends TestMouseEvents{
 
 		
 	
@@ -66,6 +77,10 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 	SetBullpenController setBullpenController;
 	EditPlayableBullpenView editBullpenView;
 	CancelEditController cancelBullEdit;
+	SaveLevelController saveButton;
+	ConfirmSaveController confirmSave; 
+	SaveLevelView saveView;
+	CancelSaveController cancelSave; 
 
 		
 	private ActionEvent buttonPress(Component button) {
@@ -275,6 +290,116 @@ public class TestBuilderBtnControllers extends TestMouseEvents{
 			
 		}
 
+		public void testSave(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			
+			button = builderView.getSetPlayBull();
+			ActionEvent setBullpen = buttonPress(button);
+			editBullpenScreen.actionPerformed(setBullpen);
+			editBullpenView = new EditPlayableBullpenView(view);
+			
+			setBullpenController = new SetBullpenController(view, editBullpenView, model.getBuildingLevel().getPlayableBullpen());
+			
+			editBullpenView.getPieceCountsPanel().getInputs()[0].setValue(4);
+			
+			button = editBullpenView.getDoneButton();
+			ActionEvent doneEditing = buttonPress(button);
+			setBullpenController.actionPerformed(doneEditing);
+			
+			saveView = new SaveLevelView(model, model.getBuildingLevel(), view);
+			saveButton = new SaveLevelController(model, model.getBuildingLevel(), view);
+			confirmSave = new ConfirmSaveController(model, view, saveView, model.getBuildingLevel());
+			cancelSave = new CancelSaveController(view); 
+			
+			button = builderView.getSave();
+			ActionEvent saveLevel = buttonPress(button);
+			saveButton.actionPerformed(saveLevel);
+			
+			assertEquals(view.getFrame().getContentPane().getClass(), saveView.getClass());
+			
+			button = saveView.getCancel();
+			ActionEvent cancelSavePress = buttonPress(button);
+			cancelSave.actionPerformed(cancelSavePress);
+			
+			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
+			
+			button = builderView.getSave();
+			saveButton.actionPerformed(saveLevel);
+			button = saveView.getSave();
+			ActionEvent newSave = buttonPress(button);
+			confirmSave.actionPerformed(newSave);
+			
+			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
+			
+		}
 		
+		public void testResetBulider(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			PieceContainer selectedPiece = model.getBuildingLevel().getInfiniteBullpen().getPiece(1);
+			
+			BoardView board = builderView.getBoard();
+			model.getBuildingLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
+			
+			ResetBuilderController resetController = new ResetBuilderController(model, view);
+			
+			button = builderView.getResetButton();
+			ActionEvent reset = buttonPress(button);
+			
+			BoardController controller = new BoardController(view, model.getBuildingLevel(), builderView);
+			
+			MouseEvent movePiece = createBuilderMoved(builderView, board, 4, 5);
+			controller.mouseMoved(movePiece);
+			
+			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), selectedPiece);
+			
+			MouseEvent pressed = createBuilderPress(builderView, board, 4, 5);
+			controller.mousePressed(pressed);
+			
+			resetController.actionPerformed(reset);	
+
+			assertTrue(model.getBuildingLevel().getBoard().getPieces().isEmpty());
+			assertNull(model.getBuildingLevel().getBoard().getActiveDragged());
+			
+		}
 		
+		public void testChangeBoardSize(){
+			button = view.getNewLevel();
+			ActionEvent newLvlPress = buttonPress(button);
+			newLevelControl.actionPerformed(newLvlPress);
+			
+			button = newLvlView.getNewPuzzle();
+			ActionEvent newPuzzle = buttonPress(button);
+			makePuzCont.actionPerformed(newPuzzle);
+			
+			BuilderView builderView = new BuilderView(model, view);
+			
+			int oldHeight = builderView.getBoard().getHeight();
+			int oldWidth = builderView.getBoard().getWidth();
+			
+			JFormattedTextField row = builderView.getRowSizeInput();
+			row.setValue(5);
+			
+			JFormattedTextField col = builderView.getColSizeInput();
+			col.setValue(5);
+			
+			assertNotSame(oldHeight, builderView.getBoard().getHeight());
+			assertNotSame(oldWidth, builderView.getBoard().getWidth());
+			
+		}
 }

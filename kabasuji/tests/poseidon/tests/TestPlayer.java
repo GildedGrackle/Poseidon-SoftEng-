@@ -14,17 +14,19 @@ import poseidon.entities.XMLHandler;
 import poseidon.player.controller.AboutPlayerController;
 import poseidon.player.controller.BackPlayerController;
 import poseidon.player.controller.ContinueController;
+import poseidon.player.controller.EndLevelController;
 import poseidon.player.controller.ExitPlayerController;
 import poseidon.player.controller.LevelSelectController;
 import poseidon.player.controller.PlaySelectedController;
 import poseidon.player.controller.SelectLevelController;
 import poseidon.player.view.AboutPlayerView;
+import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelSelectView;
 import poseidon.player.view.LevelView;
 import junit.framework.TestCase;
 
-public class TestPlayerBtnControllers extends TestCase{
+public class TestPlayer extends TestCase{
 	
 	LevelPlayerView view;
 	LevelPlayerModel model;
@@ -41,6 +43,7 @@ public class TestPlayerBtnControllers extends TestCase{
 	LevelSelectView lvlSelectView;
 	SelectLevelController selectLevel;
 	LevelContainer lvlContainer; 
+	EndLevelController endLevel;
 	
 	
 	private ActionEvent buttonPress(Component button) {
@@ -123,7 +126,33 @@ public class TestPlayerBtnControllers extends TestCase{
 		playSelect.actionPerformed(playPress);
 		
 		assertEquals(model.getPlayingLevel(), lvlContainer);
+	}
+	
+
+	/**
+	 *  Should return null
+	 */
+	public void testGetCurrentlyPlaying()
+	{
+		aboutView = new AboutPlayerView(model, view);
+		LevelView curPlay = aboutView.getCurrentlyPlaying();
 		
+		assertTrue(curPlay == null);
+	}
+	
+	
+	public void testEndLevel(){
+		button = view.getContinue();
+		ActionEvent continuePress = buttonPress(button);
+		continueControl.actionPerformed(continuePress);
+		
+		endLevel = new EndLevelController(view);
+		
+		button = view.getCurrentView().getCurrentlyPlaying().getFinish();
+		ActionEvent endLvl = buttonPress(button);
+		endLevel.actionPerformed(endLvl);
+		
+		assertEquals(EndLevelView.class, view.getCurrentView().getClass());
 	}
 	
 	
