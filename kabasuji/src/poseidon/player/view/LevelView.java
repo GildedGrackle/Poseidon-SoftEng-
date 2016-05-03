@@ -299,4 +299,8 @@ public class LevelView extends JPanel implements IModelUpdated, ILevelView
 	public JButton getFinish(){
 		return finishButton;
 	}
+	
+	public JLabel getLimitLabel(){
+		return limitView;
+	}
 }
