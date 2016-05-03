@@ -115,7 +115,8 @@ public class TestPlayer extends TestCase{
 		testLevels = XMLHandler.getTestLevels()[2];
 		int[] currentLvl = new int[]{
 				1, 1, 1};
-		lvlContainer = new LevelContainer("puzzle0.xml", 0, 0, testLevels, 0);
+
+		lvlContainer = new LevelContainer("puzzle0.xml", 0, testLevels, 0);
 		model = new LevelPlayerModel(currentLvl, lvlContainer);
 		view = new LevelPlayerView(model);
 		current = new int[3];
@@ -219,7 +220,7 @@ public class TestPlayer extends TestCase{
 	public void testAutomaticEnd(){
 		LightningLevel lightningLevel = new LightningLevel (1, "lightning0.xml", testLevels.getPlayableBullpen(), 
 				testLevels.getInfiniteBullpen(), new Board(new Square[12][12], testBoardLogic), false, true);
-		lvlContainerLightning = new LevelContainer("lightning0.xml", 0, 0, lightningLevel, 0);
+		lvlContainerLightning = new LevelContainer("lightning0.xml", 0, lightningLevel, 0);
 		LevelView lvlView = new LevelView(model, view);
 		lightningLevel.setMaxLimit(1);
 		
