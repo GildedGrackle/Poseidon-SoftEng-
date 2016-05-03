@@ -214,7 +214,7 @@ public class BoardView extends JPanel implements IModelUpdated
 			drawer.setColor(Color.green);
 			break;
 		case ReleaseNumber.YELLOW:
-			drawer.setColor(Color.yellow);
+			drawer.setColor(new Color(0xD0, 0xD0, 0));
 			break;
 		}
 		

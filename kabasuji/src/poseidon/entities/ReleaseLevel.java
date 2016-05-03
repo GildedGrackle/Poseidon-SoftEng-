@@ -195,4 +195,25 @@ public class ReleaseLevel extends LevelModel{
 		return passed;
 	}
 	
+	
+	/** @return  The list of all red numbers collected so far. */
+	public ArrayList<Integer> getRedNumbers()
+	{
+		return redNumbers;
+	}
+	
+	
+	/** @return  The list of all red numbers collected so far. */
+	public ArrayList<Integer> getGreenNumbers()
+	{
+		return greenNumbers;
+	}
+	
+	
+	/** @return  The list of all red numbers collected so far. */
+	public ArrayList<Integer> getYellowNumbers()
+	{
+		return yellowNumbers;
+	}
+	
 }
