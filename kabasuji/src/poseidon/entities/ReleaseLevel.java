@@ -1,5 +1,6 @@
 package poseidon.entities;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import poseidon.entities.Board;
@@ -21,7 +22,7 @@ public class ReleaseLevel extends LevelModel{
 	/** The number of moves remaining in this level. */
 	int remainingMoves;
 	/** Stores of numbers collected during gameplay. */
-	Set<Integer> redNumbers, greenNumbers, yellownumbers;
+	ArrayList<Integer> redNumbers, greenNumbers, yellowNumbers;
 	
 	
 	/**
@@ -39,19 +40,9 @@ public class ReleaseLevel extends LevelModel{
 		
 		super(bullpen, infinite, board, RELEASE, levelName, isCustom, isAddedToPlayer);
 		this.allottedMoves = allottedMoves;
-	}
-	
-	/**
-	 * Sets the color and number on a release square
-	 * @param color   the wished color for the square
-	 * @param number  the wished number for the square
-	 * @param row
-	 * @param col     the position of the square
-	 */
-	void markNumber(int color, int number, int row, int col) {	 
-		Square [] [] area = board.getPlayArea();
-		area[row][col].getReleaseNumber().setColor(color);
-		area[row][col].getReleaseNumber().setNumber(number);
+		this.redNumbers = new ArrayList<Integer>();
+		this.yellowNumbers = new ArrayList<Integer>();
+		this.greenNumbers = new ArrayList<Integer>();
 	}
 	
 	
@@ -152,9 +143,9 @@ public class ReleaseLevel extends LevelModel{
 	int calculateScore() {
 		int stars = 0;
 		boolean red, yellow, green;
-		red = trackRelease(1);
-		yellow = trackRelease(2);
-		green = trackRelease(3);
+		red = trackRelease(ReleaseNumber.RED);
+		green = trackRelease(ReleaseNumber.GREEN);
+		yellow = trackRelease(ReleaseNumber.YELLOW);
 		
 		if(red) {stars+=1;}
 		if(yellow) {stars+=1;}
@@ -166,6 +157,7 @@ public class ReleaseLevel extends LevelModel{
 	
 	/**
 	 * Helper function that determines whether an entire set of a specific color was covered.
+	 * Also adds any numbers covered to the collections of covered numbers.
 	 * @param color
 	 * @return
 	 */
@@ -175,10 +167,22 @@ public class ReleaseLevel extends LevelModel{
 		Square [] [] playArea = super.getBoard().getPlayArea();
 		for (int i=0; i<board.getRows();i++) {
 			for (int j=0; j<board.getCols();j++) {
-				if (playArea[i][j].isFilled() && playArea[i][j] instanceof ReleaseSquare ) {
+				if (playArea[i][j].isFilled() && playArea[i][j].getType() == LevelModel.RELEASE) {
 					if(playArea[i][j].getReleaseNumber() != null){
 						if(playArea[i][j].getReleaseNumber().getColor() == color) {
 							checkSet[playArea[i][j].getReleaseNumber().getNumber()] = true;
+							switch(color)
+							{
+							case ReleaseNumber.RED:
+								redNumbers.add(playArea[i][j].getReleaseNumber().getNumber());
+								break;
+							case ReleaseNumber.GREEN:
+								greenNumbers.add(playArea[i][j].getReleaseNumber().getNumber());
+								break;
+							case ReleaseNumber.YELLOW:
+								yellowNumbers.add(playArea[i][j].getReleaseNumber().getNumber());
+								break;
+							}
 						}
 					}
 				}
