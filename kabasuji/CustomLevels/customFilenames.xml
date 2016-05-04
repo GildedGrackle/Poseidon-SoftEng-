@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <names>
-  <name0>New Puzzle Level.xml</name0>
-  <name1>New Puzzle Level.xml</name1>
-  <name2>New Puzzle Level.xml</name2>
-  <name3>New Puzzle Level.xml</name3>
-  <name4>New Puzzle Level.xml</name4>
-  <name5>New Puzzle Level.xml</name5>
-  <name6>New Puzzle Level.xml</name6>
-  <name7>puzzle0.xml</name7>
-  <name8>puzzle2.xml</name8>
-  <name9>puzzle3.xml</name9>
-  <name10>Test.xml</name10>
-  <name11>test.xml</name11>
-  <name12>puzzle0.xml</name12>
-  <name13>puzzle0.xml</name13>
-  <name14>lightning1.xml</name14>
-  <name7>puzzle0.xml</name7>
-  <name8>puzzle2.xml</name8>
-  <name9>puzzle3.xml</name9>
+  <name0>puzzle0.xml</name0>
+  <name1>puzzle1.xml</name1>
+  <name2>puzzle3.xml</name2>
+  <name3>puzzle2.xml</name3>
+  <name4>lightning0.xml</name4>
+  <name5>lightning1.xml</name5>
+  <name6>lightning2.xml</name6>
+  <name7>lightning3.xml</name7>
+  <name8>lightning4.xml</name8>
+  <name9>release0.xml</name9>
 </names>

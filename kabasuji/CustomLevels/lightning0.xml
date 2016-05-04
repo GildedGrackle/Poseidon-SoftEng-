@@ -1,41 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level gameMode="2">
-  <name>lightning1</name>
-  <countdown>90</countdown>
-  <playableBullpen />
+  <name>lightning0</name>
+  <countdown>60</countdown>
+  <playableBullpen>
+    <piece0>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>1</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>2</row>
+        <column>1</column>
+      </point4>
+      <point5>
+        <row>2</row>
+        <column>2</column>
+      </point5>
+    </piece0>
+    <piece1>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>1</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>2</row>
+        <column>1</column>
+      </point4>
+      <point5>
+        <row>2</row>
+        <column>2</column>
+      </point5>
+    </piece1>
+    <piece2>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>1</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>2</row>
+        <column>1</column>
+      </point4>
+      <point5>
+        <row>2</row>
+        <column>2</column>
+      </point5>
+    </piece2>
+    <piece3>
+      <point0>
+        <row>0</row>
+        <column>0</column>
+      </point0>
+      <point1>
+        <row>1</row>
+        <column>0</column>
+      </point1>
+      <point2>
+        <row>2</row>
+        <column>0</column>
+      </point2>
+      <point3>
+        <row>1</row>
+        <column>1</column>
+      </point3>
+      <point4>
+        <row>2</row>
+        <column>1</column>
+      </point4>
+      <point5>
+        <row>2</row>
+        <column>2</column>
+      </point5>
+    </piece3>
+  </playableBullpen>
   <board>
-    <square0 type="lightning" />
-    <square1 type="lightning" />
-    <square2 type="lightning" />
+    <square0 type="nonplayable" />
+    <square1 type="nonplayable" />
+    <square2 type="nonplayable" />
     <square3 type="lightning" />
-    <square4 type="lightning" />
-    <square5 type="lightning" />
-    <square6 type="lightning" />
-    <square7 type="lightning" />
+    <square4 type="nonplayable" />
+    <square5 type="nonplayable" />
+    <square6 type="nonplayable" />
+    <square7 type="nonplayable" />
     <square8 type="nonplayable" />
     <square9 type="nonplayable" />
     <square10 type="nonplayable" />
     <square11 type="nonplayable" />
-    <square12 type="lightning" />
+    <square12 type="nonplayable" />
     <square13 type="nonplayable" />
-    <square14 type="nonplayable" />
+    <square14 type="lightning" />
     <square15 type="lightning" />
     <square16 type="lightning" />
     <square17 type="nonplayable" />
     <square18 type="nonplayable" />
-    <square19 type="lightning" />
+    <square19 type="nonplayable" />
     <square20 type="nonplayable" />
     <square21 type="nonplayable" />
     <square22 type="nonplayable" />
     <square23 type="nonplayable" />
-    <square24 type="lightning" />
-    <square25 type="nonplayable" />
+    <square24 type="nonplayable" />
+    <square25 type="lightning" />
     <square26 type="lightning" />
     <square27 type="lightning" />
     <square28 type="lightning" />
     <square29 type="lightning" />
     <square30 type="nonplayable" />
-    <square31 type="lightning" />
+    <square31 type="nonplayable" />
     <square32 type="nonplayable" />
     <square33 type="nonplayable" />
     <square34 type="nonplayable" />
@@ -47,7 +152,7 @@
     <square40 type="lightning" />
     <square41 type="lightning" />
     <square42 type="lightning" />
-    <square43 type="lightning" />
+    <square43 type="nonplayable" />
     <square44 type="nonplayable" />
     <square45 type="nonplayable" />
     <square46 type="nonplayable" />
@@ -59,31 +164,31 @@
     <square52 type="lightning" />
     <square53 type="lightning" />
     <square54 type="lightning" />
-    <square55 type="lightning" />
+    <square55 type="nonplayable" />
     <square56 type="nonplayable" />
     <square57 type="nonplayable" />
     <square58 type="nonplayable" />
     <square59 type="nonplayable" />
     <square60 type="lightning" />
-    <square61 type="lightning" />
-    <square62 type="nonplayable" />
+    <square61 type="nonplayable" />
+    <square62 type="lightning" />
     <square63 type="lightning" />
-    <square64 type="lightning" />
+    <square64 type="nonplayable" />
     <square65 type="nonplayable" />
     <square66 type="lightning" />
-    <square67 type="lightning" />
+    <square67 type="nonplayable" />
     <square68 type="nonplayable" />
     <square69 type="nonplayable" />
     <square70 type="nonplayable" />
     <square71 type="nonplayable" />
     <square72 type="lightning" />
-    <square73 type="nonplayable" />
-    <square74 type="nonplayable" />
+    <square73 type="lightning" />
+    <square74 type="lightning" />
     <square75 type="lightning" />
-    <square76 type="lightning" />
+    <square76 type="nonplayable" />
     <square77 type="nonplayable" />
-    <square78 type="nonplayable" />
-    <square79 type="lightning" />
+    <square78 type="lightning" />
+    <square79 type="nonplayable" />
     <square80 type="nonplayable" />
     <square81 type="nonplayable" />
     <square82 type="nonplayable" />
@@ -92,10 +197,10 @@
     <square85 type="lightning" />
     <square86 type="lightning" />
     <square87 type="lightning" />
-    <square88 type="lightning" />
-    <square89 type="lightning" />
+    <square88 type="nonplayable" />
+    <square89 type="nonplayable" />
     <square90 type="lightning" />
-    <square91 type="lightning" />
+    <square91 type="nonplayable" />
     <square92 type="nonplayable" />
     <square93 type="nonplayable" />
     <square94 type="nonplayable" />

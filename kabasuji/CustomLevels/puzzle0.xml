@@ -162,7 +162,7 @@
   </playableBullpen>
   <board>
     <square0 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square0>
     <square1 type="puzzle">
       <isHint>false</isHint>
@@ -177,7 +177,7 @@
       <isHint>false</isHint>
     </square4>
     <square5 type="puzzle">
-      <isHint>false</isHint>
+      <isHint>true</isHint>
     </square5>
     <square6 type="nonplayable" />
     <square7 type="nonplayable" />
@@ -186,7 +186,7 @@
     <square10 type="nonplayable" />
     <square11 type="nonplayable" />
     <square12 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square12>
     <square13 type="puzzle">
       <isHint>false</isHint>
@@ -201,7 +201,7 @@
       <isHint>false</isHint>
     </square16>
     <square17 type="puzzle">
-      <isHint>false</isHint>
+      <isHint>true</isHint>
     </square17>
     <square18 type="nonplayable" />
     <square19 type="nonplayable" />
@@ -210,7 +210,7 @@
     <square22 type="nonplayable" />
     <square23 type="nonplayable" />
     <square24 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square24>
     <square25 type="puzzle">
       <isHint>false</isHint>
@@ -225,7 +225,7 @@
       <isHint>false</isHint>
     </square28>
     <square29 type="puzzle">
-      <isHint>false</isHint>
+      <isHint>true</isHint>
     </square29>
     <square30 type="nonplayable" />
     <square31 type="nonplayable" />
@@ -234,7 +234,7 @@
     <square34 type="nonplayable" />
     <square35 type="nonplayable" />
     <square36 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square36>
     <square37 type="puzzle">
       <isHint>false</isHint>
@@ -249,7 +249,7 @@
       <isHint>false</isHint>
     </square40>
     <square41 type="puzzle">
-      <isHint>false</isHint>
+      <isHint>true</isHint>
     </square41>
     <square42 type="nonplayable" />
     <square43 type="nonplayable" />
@@ -258,7 +258,7 @@
     <square46 type="nonplayable" />
     <square47 type="nonplayable" />
     <square48 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square48>
     <square49 type="puzzle">
       <isHint>false</isHint>
@@ -273,7 +273,7 @@
       <isHint>false</isHint>
     </square52>
     <square53 type="puzzle">
-      <isHint>false</isHint>
+      <isHint>true</isHint>
     </square53>
     <square54 type="nonplayable" />
     <square55 type="nonplayable" />
@@ -282,7 +282,7 @@
     <square58 type="nonplayable" />
     <square59 type="nonplayable" />
     <square60 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square60>
     <square61 type="puzzle">
       <isHint>false</isHint>
@@ -297,7 +297,7 @@
       <isHint>false</isHint>
     </square64>
     <square65 type="puzzle">
-      <isHint>false</isHint>
+      <isHint>true</isHint>
     </square65>
     <square66 type="nonplayable" />
     <square67 type="nonplayable" />
