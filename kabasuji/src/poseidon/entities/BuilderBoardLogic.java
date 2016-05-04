@@ -133,7 +133,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 				playArea[pointRow][pointCol] = new LightningSquare(true);
 				break;
 			case LevelModel.RELEASE:
-				playArea[pointRow][pointCol] = new ReleaseSquare(true, new ReleaseNumber(-1, -1));
+				playArea[pointRow][pointCol] = new ReleaseSquare(true, false, new ReleaseNumber(-1, -1));
 				break;
 			}
 		}

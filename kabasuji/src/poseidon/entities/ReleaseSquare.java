@@ -19,9 +19,10 @@ public class ReleaseSquare extends Square{
 	 *  @param isFilled  indicator whether square should be initialized as filled
 	 *  @param number  the ReleaseNumber in this square, (-1, -1) if none
 	 */
-	public ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
+	public ReleaseSquare(Boolean isFilled, Boolean isHint, ReleaseNumber number) {
 		super(isFilled);
 		this.number = number;
+		this.isHint = isHint;
 		isHint = false;				// Set to false as default
 	}
 	

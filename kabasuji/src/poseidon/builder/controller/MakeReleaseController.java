@@ -77,7 +77,7 @@ public class MakeReleaseController implements ActionListener
 		{
 			for(int j = 0; j < Board.MAXCOLS; j++)
 			{
-				newPlayArea[i][j] = new ReleaseSquare(false, new ReleaseNumber(-1, -1));
+				newPlayArea[i][j] = new ReleaseSquare(false, false, new ReleaseNumber(-1, -1));
 			}
 		}
 		BuilderBullpenLogic newBullpenLogic = new BuilderBullpenLogic();

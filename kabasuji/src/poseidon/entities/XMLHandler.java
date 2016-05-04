@@ -231,7 +231,7 @@ public class XMLHandler {
 			} else if (type.equals("lightning")) {
 				loadSquares[(int)(index/12)][index%12] = new LightningSquare(false);
 			} else if (type.equals("release")) {
-				loadSquares[(int)(index/12)][index%12] = new ReleaseSquare(false,
+				loadSquares[(int)(index/12)][index%12] = new ReleaseSquare(false, isHint,
 						new ReleaseNumber(Integer.parseInt(sqrE.getChildText("isNumber")),
 								Integer.parseInt(sqrE.getChildText("isColor"))));
 			} else {
@@ -321,7 +321,7 @@ public class XMLHandler {
 		for(int i = 0; i < 144; i++) {
 			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false, false);
 			lPlayArea[(int)(i/12)][i%12] = new LightningSquare(false);
-			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, new ReleaseNumber(1, ReleaseNumber.GREEN));
+			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, false, new ReleaseNumber(1, ReleaseNumber.GREEN));
 		}
 		
 		PuzzleBoardLogic pborLog = new PuzzleBoardLogic();
@@ -400,7 +400,7 @@ public class XMLHandler {
 		for(int i = 0; i < 144; i++) {
 			pPlayArea[(int)(i/12)][i%12] = new PuzzleSquare(false, false);
 			lPlayArea[(int)(i/12)][i%12] = new LightningSquare(false);
-			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, new ReleaseNumber(1, ReleaseNumber.GREEN));
+			rPlayArea[(int)(i/12)][i%12] = new ReleaseSquare(false, false, new ReleaseNumber(1, ReleaseNumber.GREEN));
 		}
 		
 		PuzzleBoardLogic pborLog = new PuzzleBoardLogic();
