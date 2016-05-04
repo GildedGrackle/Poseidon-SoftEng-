@@ -32,7 +32,7 @@ public class LevelBuilderModel {
 	/**
 	 *  Loads all custom levels into savedLevels.
 	 */
-	void initialize() {
+	public void initialize() {
 		// First tier of lists for number of gamemodes
 		savedLevels = new ArrayList<ArrayList<LevelContainer>>(NUM_GAMEMODES);
 		for(int i = 0; i < NUM_GAMEMODES; i++) {

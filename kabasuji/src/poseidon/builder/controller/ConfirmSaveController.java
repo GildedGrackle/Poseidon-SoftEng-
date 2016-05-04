@@ -73,6 +73,8 @@ public class ConfirmSaveController implements ActionListener {
 		String[] names = namesAL.toArray(new String[namesAL.size()]);
 		XMLHandler.saveFilenames(names, "customFilenames.xml", true);
 		
+		topModel.initialize();
+		
 		// Set screen
 		BuilderView currentScreen = (BuilderView) view.getCurrentScreen();
 		view.getFrame().setContentPane(currentScreen);

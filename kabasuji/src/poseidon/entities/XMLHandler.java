@@ -129,7 +129,7 @@ public class XMLHandler {
 		isCustomElement.setText(String.valueOf(level.getIsCustom()));
 		levelElement.addContent(isCustomElement);
 		
-		// --- level.isCustom ---
+		// --- level.isAddedToPlayer ---
 		Element isAddedToPlayerElement = new Element("isAddedToPlayer");
 		isAddedToPlayerElement.setText(String.valueOf(level.getIsAddedToPlayer()));
 		levelElement.addContent(isAddedToPlayerElement);
