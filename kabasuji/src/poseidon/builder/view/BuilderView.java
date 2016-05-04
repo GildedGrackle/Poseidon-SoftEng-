@@ -225,7 +225,10 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 		addHintButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		addHintButton.setBounds(540, 300, 130, 45);
 		addHintButton.addItemListener(new HintSelectModeController(this));
-		add(addHintButton);
+		if(model.getGameMode() != LevelModel.LIGHTNING)  // No hints in Lightning
+		{
+			add(addHintButton);
+		}
 		
 		editPlayBullpenButton = new JButton("Choose Pieces");
 		editPlayBullpenButton.setFont(new Font("Dialog", Font.PLAIN, 20));

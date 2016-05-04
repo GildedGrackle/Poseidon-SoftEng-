@@ -15,7 +15,7 @@ import poseidon.entities.LevelContainer;
 import javax.swing.SwingConstants;
 
 /**
- *  TODO StarView documentation
+ *  Renders a JButton with attached stars representing an associated level's high score.
  *  
  *  @author Morgan Hopeman
  *  @author Alex Titus

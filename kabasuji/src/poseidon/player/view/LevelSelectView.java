@@ -19,7 +19,6 @@ import poseidon.player.controller.PlaySelectedController;
  *  Creates the level select screen.
  *  
  *  Allows player to select all levels that have been added to the game.
- *  TODO figure out if player-made levels are always unlocked
  *  
  *  @author Alex Titus
  */
