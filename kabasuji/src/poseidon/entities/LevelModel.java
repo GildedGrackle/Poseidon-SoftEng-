@@ -1,10 +1,5 @@
 package poseidon.entities;
 
-import java.awt.event.ActionEvent;
-
-import poseidon.common.view.ITopView;
-import poseidon.player.controller.EndLevelController;
-import poseidon.player.view.LevelPlayerView;
 import poseidon.player.view.LevelView;
 
 /**

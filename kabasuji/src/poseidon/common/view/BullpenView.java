@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 

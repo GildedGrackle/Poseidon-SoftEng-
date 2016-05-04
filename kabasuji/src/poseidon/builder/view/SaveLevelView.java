@@ -2,24 +2,14 @@ package poseidon.builder.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.text.NumberFormat;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.text.NumberFormatter;
-
-import poseidon.builder.controller.CancelEditController;
 import poseidon.builder.controller.CancelSaveController;
 import poseidon.builder.controller.ConfirmSaveController;
-import poseidon.builder.controller.LimitController;
-import poseidon.builder.controller.SetBullpenController;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelModel;
 
