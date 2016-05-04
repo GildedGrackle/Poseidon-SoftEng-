@@ -164,12 +164,12 @@ public class ReleaseLevel extends LevelModel{
 		boolean [] checkSet = new boolean[6];
 		boolean passed = true;
 		Square [] [] playArea = super.getBoard().getPlayArea();
-		for (int i=0; i<board.getRows();i++) {
-			for (int j=0; j<board.getCols();j++) {
+		for (int i=0; i<Board.MAXROWS;i++) {
+			for (int j=0; j<Board.MAXCOLS;j++) {
 				if (playArea[i][j].isFilled() && playArea[i][j].getType() == LevelModel.RELEASE) {
 					if(playArea[i][j].getReleaseNumber() != null){
 						if(playArea[i][j].getReleaseNumber().getColor() == color) {
-							checkSet[playArea[i][j].getReleaseNumber().getNumber()] = true;
+							checkSet[playArea[i][j].getReleaseNumber().getNumber() - 1] = true;
 							switch(color)
 							{
 							case ReleaseNumber.RED:
