@@ -223,10 +223,11 @@ public class XMLHandler {
 		for (Element sqrE : squareElement) {
 			sqrE = boardElement.getChild("square" + String.valueOf(index));
 			String type = sqrE.getAttributeValue("type");
+			Boolean isHint = Boolean.parseBoolean(sqrE.getChildText("isHint"));
 			if (type.equals("nonplayable")) {
 				loadSquares[(int)(index/12)][index%12] = new NonplayableSquare();
 			} else if (type.equals("puzzle")) {
-				loadSquares[(int)(index/12)][index%12] = new PuzzleSquare(false, false);
+				loadSquares[(int)(index/12)][index%12] = new PuzzleSquare(false, isHint);
 			} else if (type.equals("lightning")) {
 				loadSquares[(int)(index/12)][index%12] = new LightningSquare(false);
 			} else if (type.equals("release")) {
