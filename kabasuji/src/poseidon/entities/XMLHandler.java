@@ -338,7 +338,7 @@ public class XMLHandler {
 				switch(i) {
 				case 0:  // Puzzle levels
 					levels[i][j] = new PuzzleLevel(15,
-												   "puzzle" + String.valueOf(j),
+												   "TESTpuzzle" + String.valueOf(j),
 												   pbull,
 												   null,
 												   pbor,
@@ -347,7 +347,7 @@ public class XMLHandler {
 					break;
 				case 1:  // Lightning levels
 					levels[i][j] = new LightningLevel(60,
-												   "lightning" + String.valueOf(j),
+												   "TESTlightning" + String.valueOf(j),
 												   lbull,
 												   null,
 												   lbor,
@@ -356,7 +356,7 @@ public class XMLHandler {
 					break;
 				case 2:  // Release levels
 					levels[i][j] = new ReleaseLevel(10,
-												   "release" + String.valueOf(j),
+												   "TESTrelease" + String.valueOf(j),
 												   rbull,
 												   null,
 												   rbor,
@@ -416,7 +416,7 @@ public class XMLHandler {
 			switch(i) {
 			case 0:  // Puzzle levels
 				testLevels[i] = new PuzzleLevel(15,
-						"puzzle0",
+						"TESTpuzzle0",
 						pbull,
 						null,
 						pbor,
@@ -425,7 +425,7 @@ public class XMLHandler {
 				break;
 			case 1:  // Lightning levels
 				testLevels[i] = new LightningLevel(60,
-						"lightning0",
+						"TESTlightning0",
 						lbull,
 						null,
 						lbor,
@@ -434,7 +434,7 @@ public class XMLHandler {
 				break;
 			case 2:  // Release levels
 				testLevels[i] = new ReleaseLevel(10,
-						"release0",
+						"TESTrelease0",
 						rbull,
 						null,
 						rbor,

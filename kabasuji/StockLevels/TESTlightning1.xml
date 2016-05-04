@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level gameMode="2">
-  <name>TESTlightning0</name>
+  <name>TESTlightning1</name>
   <countdown>60</countdown>
   <playableBullpen>
     <piece0>
@@ -410,6 +410,6 @@
     <square142 type="lightning" />
     <square143 type="lightning" />
   </board>
-  <isCustom>true</isCustom>
+  <isCustom>false</isCustom>
   <isAddedToPlayer>true</isAddedToPlayer>
 </level>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level gameMode="1">
-  <name>TESTpuzzle0</name>
-  <countdown>15</countdown>
+  <name>New Puzzle Level</name>
+  <countdown>10</countdown>
   <playableBullpen>
     <piece0>
       <point0>
@@ -17,16 +17,16 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>0</row>
-        <column>1</column>
+        <row>3</row>
+        <column>0</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>4</row>
+        <column>0</column>
       </point4>
       <point5>
-        <row>1</row>
-        <column>1</column>
+        <row>5</row>
+        <column>0</column>
       </point5>
     </piece0>
     <piece1>
@@ -43,16 +43,16 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>0</row>
-        <column>1</column>
+        <row>3</row>
+        <column>0</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>4</row>
+        <column>0</column>
       </point4>
       <point5>
-        <row>1</row>
-        <column>1</column>
+        <row>5</row>
+        <column>0</column>
       </point5>
     </piece1>
     <piece2>
@@ -69,16 +69,16 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>0</row>
-        <column>1</column>
+        <row>3</row>
+        <column>0</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>4</row>
+        <column>0</column>
       </point4>
       <point5>
-        <row>1</row>
-        <column>1</column>
+        <row>5</row>
+        <column>0</column>
       </point5>
     </piece2>
     <piece3>
@@ -95,174 +95,18 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>0</row>
-        <column>1</column>
+        <row>3</row>
+        <column>0</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>4</row>
+        <column>0</column>
       </point4>
       <point5>
-        <row>1</row>
-        <column>1</column>
+        <row>5</row>
+        <column>0</column>
       </point5>
     </piece3>
-    <piece4>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece4>
-    <piece5>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece5>
-    <piece6>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece6>
-    <piece7>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece7>
-    <piece8>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece8>
-    <piece9>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece9>
   </playableBullpen>
   <board>
     <square0 type="puzzle">
@@ -698,6 +542,6 @@
       <isHint>false</isHint>
     </square143>
   </board>
-  <isCustom>false</isCustom>
-  <isAddedToPlayer>true</isAddedToPlayer>
+  <isCustom>true</isCustom>
+  <isAddedToPlayer>false</isAddedToPlayer>
 </level>
