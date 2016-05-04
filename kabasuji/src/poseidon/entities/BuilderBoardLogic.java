@@ -127,13 +127,13 @@ public class BuilderBoardLogic implements IBoardLogic {
 			switch(gamemode)
 			{
 			case LevelModel.PUZZLE:
-				playArea[pointRow][pointCol] = new PuzzleSquare(true, false);
+				playArea[pointRow][pointCol] = new PuzzleSquare(false, false);
 				break;
 			case LevelModel.LIGHTNING:
-				playArea[pointRow][pointCol] = new LightningSquare(true);
+				playArea[pointRow][pointCol] = new LightningSquare(false);
 				break;
 			case LevelModel.RELEASE:
-				playArea[pointRow][pointCol] = new ReleaseSquare(true, false, new ReleaseNumber(-1, -1));
+				playArea[pointRow][pointCol] = new ReleaseSquare(false, false, new ReleaseNumber(-1, -1));
 				break;
 			}
 		}
