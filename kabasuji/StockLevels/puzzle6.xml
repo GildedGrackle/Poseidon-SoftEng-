@@ -378,6 +378,6 @@
     <square142 type="nonplayable" />
     <square143 type="nonplayable" />
   </board>
-  <isCustom>true</isCustom>
+  <isCustom>false</isCustom>
   <isAddedToPlayer>true</isAddedToPlayer>
 </level>

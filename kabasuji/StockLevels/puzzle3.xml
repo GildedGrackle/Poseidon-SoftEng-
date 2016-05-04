@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level gameMode="1">
   <name>puzzle3</name>
-  <countdown>15</countdown>
+  <countdown>7</countdown>
   <playableBullpen>
     <piece0>
       <point0>
-        <row>0</row>
+        <row>3</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>1</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point1>
       <point2>
-        <row>2</row>
-        <column>0</column>
+        <row>1</row>
+        <column>1</column>
       </point2>
       <point3>
-        <row>0</row>
+        <row>2</row>
         <column>1</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>3</row>
+        <column>1</column>
       </point4>
       <point5>
-        <row>1</row>
+        <row>4</row>
         <column>1</column>
       </point5>
     </piece0>
@@ -43,29 +43,29 @@
         <column>0</column>
       </point2>
       <point3>
-        <row>0</row>
-        <column>1</column>
+        <row>3</row>
+        <column>0</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>4</row>
+        <column>0</column>
       </point4>
       <point5>
-        <row>1</row>
+        <row>2</row>
         <column>1</column>
       </point5>
     </piece1>
     <piece2>
       <point0>
-        <row>0</row>
+        <row>2</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>1</row>
+        <row>3</row>
         <column>0</column>
       </point1>
       <point2>
-        <row>2</row>
+        <row>4</row>
         <column>0</column>
       </point2>
       <point3>
@@ -73,81 +73,81 @@
         <column>1</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>1</row>
+        <column>1</column>
       </point4>
       <point5>
-        <row>1</row>
+        <row>2</row>
         <column>1</column>
       </point5>
     </piece2>
     <piece3>
       <point0>
-        <row>0</row>
+        <row>2</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>1</row>
+        <row>3</row>
         <column>0</column>
       </point1>
       <point2>
-        <row>2</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point2>
       <point3>
-        <row>0</row>
+        <row>1</row>
         <column>1</column>
       </point3>
       <point4>
-        <row>0</row>
-        <column>2</column>
+        <row>2</row>
+        <column>1</column>
       </point4>
       <point5>
-        <row>1</row>
+        <row>3</row>
         <column>1</column>
       </point5>
     </piece3>
     <piece4>
       <point0>
-        <row>0</row>
+        <row>1</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>1</row>
-        <column>0</column>
+        <row>0</row>
+        <column>1</column>
       </point1>
       <point2>
-        <row>2</row>
-        <column>0</column>
+        <row>1</row>
+        <column>1</column>
       </point2>
       <point3>
         <row>0</row>
-        <column>1</column>
+        <column>2</column>
       </point3>
       <point4>
-        <row>0</row>
+        <row>1</row>
         <column>2</column>
       </point4>
       <point5>
-        <row>1</row>
-        <column>1</column>
+        <row>0</row>
+        <column>3</column>
       </point5>
     </piece4>
     <piece5>
       <point0>
-        <row>0</row>
+        <row>1</row>
         <column>0</column>
       </point0>
       <point1>
-        <row>1</row>
+        <row>2</row>
         <column>0</column>
       </point1>
       <point2>
-        <row>2</row>
-        <column>0</column>
+        <row>1</row>
+        <column>1</column>
       </point2>
       <point3>
-        <row>0</row>
+        <row>2</row>
         <column>1</column>
       </point3>
       <point4>
@@ -156,151 +156,25 @@
       </point4>
       <point5>
         <row>1</row>
-        <column>1</column>
+        <column>2</column>
       </point5>
     </piece5>
-    <piece6>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece6>
-    <piece7>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece7>
-    <piece8>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece8>
-    <piece9>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>0</row>
-        <column>1</column>
-      </point3>
-      <point4>
-        <row>0</row>
-        <column>2</column>
-      </point4>
-      <point5>
-        <row>1</row>
-        <column>1</column>
-      </point5>
-    </piece9>
   </playableBullpen>
   <board>
-    <square0 type="puzzle">
-      <isHint>false</isHint>
-    </square0>
-    <square1 type="puzzle">
-      <isHint>false</isHint>
-    </square1>
+    <square0 type="nonplayable" />
+    <square1 type="nonplayable" />
     <square2 type="puzzle">
       <isHint>false</isHint>
     </square2>
-    <square3 type="puzzle">
-      <isHint>false</isHint>
-    </square3>
-    <square4 type="puzzle">
-      <isHint>false</isHint>
-    </square4>
-    <square5 type="puzzle">
-      <isHint>false</isHint>
-    </square5>
-    <square6 type="puzzle">
-      <isHint>false</isHint>
-    </square6>
-    <square7 type="puzzle">
-      <isHint>false</isHint>
-    </square7>
-    <square8 type="puzzle">
-      <isHint>false</isHint>
-    </square8>
-    <square9 type="puzzle">
-      <isHint>false</isHint>
-    </square9>
-    <square10 type="puzzle">
-      <isHint>false</isHint>
-    </square10>
-    <square11 type="puzzle">
-      <isHint>false</isHint>
-    </square11>
+    <square3 type="nonplayable" />
+    <square4 type="nonplayable" />
+    <square5 type="nonplayable" />
+    <square6 type="nonplayable" />
+    <square7 type="nonplayable" />
+    <square8 type="nonplayable" />
+    <square9 type="nonplayable" />
+    <square10 type="nonplayable" />
+    <square11 type="nonplayable" />
     <square12 type="puzzle">
       <isHint>false</isHint>
     </square12>
@@ -310,33 +184,15 @@
     <square14 type="puzzle">
       <isHint>false</isHint>
     </square14>
-    <square15 type="puzzle">
-      <isHint>false</isHint>
-    </square15>
-    <square16 type="puzzle">
-      <isHint>false</isHint>
-    </square16>
-    <square17 type="puzzle">
-      <isHint>false</isHint>
-    </square17>
-    <square18 type="puzzle">
-      <isHint>false</isHint>
-    </square18>
-    <square19 type="puzzle">
-      <isHint>false</isHint>
-    </square19>
-    <square20 type="puzzle">
-      <isHint>false</isHint>
-    </square20>
-    <square21 type="puzzle">
-      <isHint>false</isHint>
-    </square21>
-    <square22 type="puzzle">
-      <isHint>false</isHint>
-    </square22>
-    <square23 type="puzzle">
-      <isHint>false</isHint>
-    </square23>
+    <square15 type="nonplayable" />
+    <square16 type="nonplayable" />
+    <square17 type="nonplayable" />
+    <square18 type="nonplayable" />
+    <square19 type="nonplayable" />
+    <square20 type="nonplayable" />
+    <square21 type="nonplayable" />
+    <square22 type="nonplayable" />
+    <square23 type="nonplayable" />
     <square24 type="puzzle">
       <isHint>false</isHint>
     </square24>
@@ -346,39 +202,19 @@
     <square26 type="puzzle">
       <isHint>false</isHint>
     </square26>
-    <square27 type="puzzle">
-      <isHint>false</isHint>
-    </square27>
-    <square28 type="puzzle">
-      <isHint>false</isHint>
-    </square28>
-    <square29 type="puzzle">
-      <isHint>false</isHint>
-    </square29>
-    <square30 type="puzzle">
-      <isHint>false</isHint>
-    </square30>
+    <square27 type="nonplayable" />
+    <square28 type="nonplayable" />
+    <square29 type="nonplayable" />
+    <square30 type="nonplayable" />
     <square31 type="puzzle">
       <isHint>false</isHint>
     </square31>
-    <square32 type="puzzle">
-      <isHint>false</isHint>
-    </square32>
-    <square33 type="puzzle">
-      <isHint>false</isHint>
-    </square33>
-    <square34 type="puzzle">
-      <isHint>false</isHint>
-    </square34>
-    <square35 type="puzzle">
-      <isHint>false</isHint>
-    </square35>
-    <square36 type="puzzle">
-      <isHint>false</isHint>
-    </square36>
-    <square37 type="puzzle">
-      <isHint>false</isHint>
-    </square37>
+    <square32 type="nonplayable" />
+    <square33 type="nonplayable" />
+    <square34 type="nonplayable" />
+    <square35 type="nonplayable" />
+    <square36 type="nonplayable" />
+    <square37 type="nonplayable" />
     <square38 type="puzzle">
       <isHint>false</isHint>
     </square38>
@@ -397,24 +233,12 @@
     <square43 type="puzzle">
       <isHint>false</isHint>
     </square43>
-    <square44 type="puzzle">
-      <isHint>false</isHint>
-    </square44>
-    <square45 type="puzzle">
-      <isHint>false</isHint>
-    </square45>
-    <square46 type="puzzle">
-      <isHint>false</isHint>
-    </square46>
-    <square47 type="puzzle">
-      <isHint>false</isHint>
-    </square47>
-    <square48 type="puzzle">
-      <isHint>false</isHint>
-    </square48>
-    <square49 type="puzzle">
-      <isHint>false</isHint>
-    </square49>
+    <square44 type="nonplayable" />
+    <square45 type="nonplayable" />
+    <square46 type="nonplayable" />
+    <square47 type="nonplayable" />
+    <square48 type="nonplayable" />
+    <square49 type="nonplayable" />
     <square50 type="puzzle">
       <isHint>false</isHint>
     </square50>
@@ -433,270 +257,102 @@
     <square55 type="puzzle">
       <isHint>false</isHint>
     </square55>
-    <square56 type="puzzle">
-      <isHint>false</isHint>
-    </square56>
-    <square57 type="puzzle">
-      <isHint>false</isHint>
-    </square57>
-    <square58 type="puzzle">
-      <isHint>false</isHint>
-    </square58>
-    <square59 type="puzzle">
-      <isHint>false</isHint>
-    </square59>
-    <square60 type="puzzle">
-      <isHint>false</isHint>
-    </square60>
-    <square61 type="puzzle">
-      <isHint>false</isHint>
-    </square61>
+    <square56 type="nonplayable" />
+    <square57 type="nonplayable" />
+    <square58 type="nonplayable" />
+    <square59 type="nonplayable" />
+    <square60 type="nonplayable" />
+    <square61 type="nonplayable" />
     <square62 type="puzzle">
       <isHint>false</isHint>
     </square62>
-    <square63 type="puzzle">
-      <isHint>false</isHint>
-    </square63>
-    <square64 type="puzzle">
-      <isHint>false</isHint>
-    </square64>
-    <square65 type="puzzle">
-      <isHint>false</isHint>
-    </square65>
-    <square66 type="puzzle">
-      <isHint>false</isHint>
-    </square66>
+    <square63 type="nonplayable" />
+    <square64 type="nonplayable" />
+    <square65 type="nonplayable" />
+    <square66 type="nonplayable" />
     <square67 type="puzzle">
       <isHint>false</isHint>
     </square67>
-    <square68 type="puzzle">
-      <isHint>false</isHint>
-    </square68>
-    <square69 type="puzzle">
-      <isHint>false</isHint>
-    </square69>
-    <square70 type="puzzle">
-      <isHint>false</isHint>
-    </square70>
-    <square71 type="puzzle">
-      <isHint>false</isHint>
-    </square71>
-    <square72 type="puzzle">
-      <isHint>false</isHint>
-    </square72>
-    <square73 type="puzzle">
-      <isHint>false</isHint>
-    </square73>
+    <square68 type="nonplayable" />
+    <square69 type="nonplayable" />
+    <square70 type="nonplayable" />
+    <square71 type="nonplayable" />
+    <square72 type="nonplayable" />
+    <square73 type="nonplayable" />
     <square74 type="puzzle">
       <isHint>false</isHint>
     </square74>
-    <square75 type="puzzle">
-      <isHint>false</isHint>
-    </square75>
-    <square76 type="puzzle">
-      <isHint>false</isHint>
-    </square76>
-    <square77 type="puzzle">
-      <isHint>false</isHint>
-    </square77>
-    <square78 type="puzzle">
-      <isHint>false</isHint>
-    </square78>
+    <square75 type="nonplayable" />
+    <square76 type="nonplayable" />
+    <square77 type="nonplayable" />
+    <square78 type="nonplayable" />
     <square79 type="puzzle">
       <isHint>false</isHint>
     </square79>
-    <square80 type="puzzle">
-      <isHint>false</isHint>
-    </square80>
-    <square81 type="puzzle">
-      <isHint>false</isHint>
-    </square81>
-    <square82 type="puzzle">
-      <isHint>false</isHint>
-    </square82>
-    <square83 type="puzzle">
-      <isHint>false</isHint>
-    </square83>
-    <square84 type="puzzle">
-      <isHint>false</isHint>
-    </square84>
-    <square85 type="puzzle">
-      <isHint>false</isHint>
-    </square85>
-    <square86 type="puzzle">
-      <isHint>false</isHint>
-    </square86>
-    <square87 type="puzzle">
-      <isHint>false</isHint>
-    </square87>
-    <square88 type="puzzle">
-      <isHint>false</isHint>
-    </square88>
-    <square89 type="puzzle">
-      <isHint>false</isHint>
-    </square89>
-    <square90 type="puzzle">
-      <isHint>false</isHint>
-    </square90>
-    <square91 type="puzzle">
-      <isHint>false</isHint>
-    </square91>
-    <square92 type="puzzle">
-      <isHint>false</isHint>
-    </square92>
-    <square93 type="puzzle">
-      <isHint>false</isHint>
-    </square93>
-    <square94 type="puzzle">
-      <isHint>false</isHint>
-    </square94>
-    <square95 type="puzzle">
-      <isHint>false</isHint>
-    </square95>
-    <square96 type="puzzle">
-      <isHint>false</isHint>
-    </square96>
-    <square97 type="puzzle">
-      <isHint>false</isHint>
-    </square97>
-    <square98 type="puzzle">
-      <isHint>false</isHint>
-    </square98>
-    <square99 type="puzzle">
-      <isHint>false</isHint>
-    </square99>
-    <square100 type="puzzle">
-      <isHint>false</isHint>
-    </square100>
-    <square101 type="puzzle">
-      <isHint>false</isHint>
-    </square101>
-    <square102 type="puzzle">
-      <isHint>false</isHint>
-    </square102>
-    <square103 type="puzzle">
-      <isHint>false</isHint>
-    </square103>
-    <square104 type="puzzle">
-      <isHint>false</isHint>
-    </square104>
-    <square105 type="puzzle">
-      <isHint>false</isHint>
-    </square105>
-    <square106 type="puzzle">
-      <isHint>false</isHint>
-    </square106>
-    <square107 type="puzzle">
-      <isHint>false</isHint>
-    </square107>
-    <square108 type="puzzle">
-      <isHint>false</isHint>
-    </square108>
-    <square109 type="puzzle">
-      <isHint>false</isHint>
-    </square109>
-    <square110 type="puzzle">
-      <isHint>false</isHint>
-    </square110>
-    <square111 type="puzzle">
-      <isHint>false</isHint>
-    </square111>
-    <square112 type="puzzle">
-      <isHint>false</isHint>
-    </square112>
-    <square113 type="puzzle">
-      <isHint>false</isHint>
-    </square113>
-    <square114 type="puzzle">
-      <isHint>false</isHint>
-    </square114>
-    <square115 type="puzzle">
-      <isHint>false</isHint>
-    </square115>
-    <square116 type="puzzle">
-      <isHint>false</isHint>
-    </square116>
-    <square117 type="puzzle">
-      <isHint>false</isHint>
-    </square117>
-    <square118 type="puzzle">
-      <isHint>false</isHint>
-    </square118>
-    <square119 type="puzzle">
-      <isHint>false</isHint>
-    </square119>
-    <square120 type="puzzle">
-      <isHint>false</isHint>
-    </square120>
-    <square121 type="puzzle">
-      <isHint>false</isHint>
-    </square121>
-    <square122 type="puzzle">
-      <isHint>false</isHint>
-    </square122>
-    <square123 type="puzzle">
-      <isHint>false</isHint>
-    </square123>
-    <square124 type="puzzle">
-      <isHint>false</isHint>
-    </square124>
-    <square125 type="puzzle">
-      <isHint>false</isHint>
-    </square125>
-    <square126 type="puzzle">
-      <isHint>false</isHint>
-    </square126>
-    <square127 type="puzzle">
-      <isHint>false</isHint>
-    </square127>
-    <square128 type="puzzle">
-      <isHint>false</isHint>
-    </square128>
-    <square129 type="puzzle">
-      <isHint>false</isHint>
-    </square129>
-    <square130 type="puzzle">
-      <isHint>false</isHint>
-    </square130>
-    <square131 type="puzzle">
-      <isHint>false</isHint>
-    </square131>
-    <square132 type="puzzle">
-      <isHint>false</isHint>
-    </square132>
-    <square133 type="puzzle">
-      <isHint>false</isHint>
-    </square133>
-    <square134 type="puzzle">
-      <isHint>false</isHint>
-    </square134>
-    <square135 type="puzzle">
-      <isHint>false</isHint>
-    </square135>
-    <square136 type="puzzle">
-      <isHint>false</isHint>
-    </square136>
-    <square137 type="puzzle">
-      <isHint>false</isHint>
-    </square137>
-    <square138 type="puzzle">
-      <isHint>false</isHint>
-    </square138>
-    <square139 type="puzzle">
-      <isHint>false</isHint>
-    </square139>
-    <square140 type="puzzle">
-      <isHint>false</isHint>
-    </square140>
-    <square141 type="puzzle">
-      <isHint>false</isHint>
-    </square141>
-    <square142 type="puzzle">
-      <isHint>false</isHint>
-    </square142>
-    <square143 type="puzzle">
-      <isHint>false</isHint>
-    </square143>
+    <square80 type="nonplayable" />
+    <square81 type="nonplayable" />
+    <square82 type="nonplayable" />
+    <square83 type="nonplayable" />
+    <square84 type="nonplayable" />
+    <square85 type="nonplayable" />
+    <square86 type="nonplayable" />
+    <square87 type="nonplayable" />
+    <square88 type="nonplayable" />
+    <square89 type="nonplayable" />
+    <square90 type="nonplayable" />
+    <square91 type="nonplayable" />
+    <square92 type="nonplayable" />
+    <square93 type="nonplayable" />
+    <square94 type="nonplayable" />
+    <square95 type="nonplayable" />
+    <square96 type="nonplayable" />
+    <square97 type="nonplayable" />
+    <square98 type="nonplayable" />
+    <square99 type="nonplayable" />
+    <square100 type="nonplayable" />
+    <square101 type="nonplayable" />
+    <square102 type="nonplayable" />
+    <square103 type="nonplayable" />
+    <square104 type="nonplayable" />
+    <square105 type="nonplayable" />
+    <square106 type="nonplayable" />
+    <square107 type="nonplayable" />
+    <square108 type="nonplayable" />
+    <square109 type="nonplayable" />
+    <square110 type="nonplayable" />
+    <square111 type="nonplayable" />
+    <square112 type="nonplayable" />
+    <square113 type="nonplayable" />
+    <square114 type="nonplayable" />
+    <square115 type="nonplayable" />
+    <square116 type="nonplayable" />
+    <square117 type="nonplayable" />
+    <square118 type="nonplayable" />
+    <square119 type="nonplayable" />
+    <square120 type="nonplayable" />
+    <square121 type="nonplayable" />
+    <square122 type="nonplayable" />
+    <square123 type="nonplayable" />
+    <square124 type="nonplayable" />
+    <square125 type="nonplayable" />
+    <square126 type="nonplayable" />
+    <square127 type="nonplayable" />
+    <square128 type="nonplayable" />
+    <square129 type="nonplayable" />
+    <square130 type="nonplayable" />
+    <square131 type="nonplayable" />
+    <square132 type="nonplayable" />
+    <square133 type="nonplayable" />
+    <square134 type="nonplayable" />
+    <square135 type="nonplayable" />
+    <square136 type="nonplayable" />
+    <square137 type="nonplayable" />
+    <square138 type="nonplayable" />
+    <square139 type="nonplayable" />
+    <square140 type="nonplayable" />
+    <square141 type="nonplayable" />
+    <square142 type="nonplayable" />
+    <square143 type="nonplayable" />
   </board>
   <isCustom>false</isCustom>
   <isAddedToPlayer>true</isAddedToPlayer>

@@ -3,11 +3,16 @@
   <name0>puzzle0.xml</name0>
   <name1>puzzle1.xml</name1>
   <name2>puzzle3.xml</name2>
-  <name3>New Puzzle Level.xml</name3>
-  <name4>lightning0.xml</name4>
-  <name5>lightning1.xml</name5>
-  <name6>lightning2.xml</name6>
-  <name7>lightning3.xml</name7>
-  <name8>lightning4.xml</name8>
-  <name9>release0.xml</name9>
+  <name3>puzzle2.xml</name3>
+  <name4>puzzle4.xml</name4>
+  <name5>lightning0.xml</name5>
+  <name6>lightning1.xml</name6>
+  <name7>lightning2.xml</name7>
+  <name8>lightning3.xml</name8>
+  <name9>lightning4.xml</name9>
+  <name10>release0.xml</name10>
+  <name11>release2.xml</name11>
+  <name12>release1.xml</name12>
+  <name13>release3.xml</name13>
+  <name14>release4.xml</name14>
 </names>
