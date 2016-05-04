@@ -5,15 +5,12 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 
 import poseidon.builder.controller.SelectEditLevelController;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
-import poseidon.player.controller.SelectLevelController;
-import poseidon.player.view.StarView;
 
 /**
  *  Creates a panel containing selectable icons representing all custom-made
@@ -47,7 +44,7 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	 *  
 	 *  @param model  The top-level entity object, representing the game
 	 *  @param view  The level select screen to modify
-	 *  @param displayingAdded  Whether the screen displays saved or added levels
+	 *  @param displayingAdded  Whether the screen display for added levels
 	 */
 	public SelectableEditLevelsView(LevelBuilderModel model, EditLevelView view, Boolean displayingAdded)
 	{
@@ -94,7 +91,7 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 				// Determine type of levels to add
 				if(displayingAdded == lc.getLevel().getIsAddedToPlayer())
 				{
-					buttons.get(gamemode).add(new EditLevelIcon(model.getSavedLevels().get(gamemode).get(levelNumber)));
+					buttons.get(gamemode).add(new EditLevelIcon(lc));
 					buttons.get(gamemode).get(levelNumber).setBounds(10 + (ICON_SPACING_WIDTH + ICON_WIDTH) * levelNumber,
 							2 + (ICON_SPACING_HEIGHT + ICON_HEIGHT) * gamemode, ICON_WIDTH, ICON_HEIGHT);
 					buttons.get(gamemode).get(levelNumber).setBackground(new Color(0, 191, 255));
@@ -114,7 +111,9 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	 */
 	public void modelUpdated()
 	{
-		resetSelectColors();
+		removeAll();
+		initialize();
+		revalidate();
 	}
 	
 	

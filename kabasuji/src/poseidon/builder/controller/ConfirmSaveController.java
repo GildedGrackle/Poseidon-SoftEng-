@@ -37,7 +37,8 @@ public class ConfirmSaveController implements ActionListener {
 	 * @param saveView	The save screen, with the new level name and flag checkboxes.
 	 * @param level		The level model being built.
 	 */
-	public ConfirmSaveController(LevelBuilderModel topModel, LevelBuilderView view, SaveLevelView saveView, LevelModel level) {
+	public ConfirmSaveController(LevelBuilderModel topModel, LevelBuilderView view,
+			SaveLevelView saveView, LevelModel level) {
 		this.topModel = topModel;
 		this.view = view;
 		this.saveView = saveView;

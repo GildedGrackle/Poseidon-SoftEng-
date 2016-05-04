@@ -68,6 +68,7 @@ public class LevelBuilderView implements IBuilderScreen, ITopView{
 	 {
 		 builder.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 builder.setBounds(100, 100, 695, 670);
+		 builder.setResizable(false);
 		 mainMenu = new JPanel();
 		 mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 		 mainMenu.setLayout(null);

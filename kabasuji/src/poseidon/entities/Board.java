@@ -152,7 +152,7 @@ public class Board {
 						newBoard[i][j] = new LightningSquare(false);
 						break;
 					case LevelModel.RELEASE:
-						newBoard[i][j] = new ReleaseSquare(false, null);
+						newBoard[i][j] = new ReleaseSquare(false, new ReleaseNumber(-1, -1));
 						break;
 					default:
 						newBoard[i][j] = playArea[i][j];

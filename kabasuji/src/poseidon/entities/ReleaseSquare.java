@@ -17,7 +17,7 @@ public class ReleaseSquare extends Square{
 	 *  Constructor.
 	 *  
 	 *  @param isFilled  indicator whether square should be initialized as filled
-	 *  @param number  the ReleaseNumber in this square, null if none
+	 *  @param number  the ReleaseNumber in this square, (-1, -1) if none
 	 */
 	public ReleaseSquare(Boolean isFilled, ReleaseNumber number) {
 		super(isFilled);

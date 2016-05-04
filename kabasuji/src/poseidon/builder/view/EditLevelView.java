@@ -134,14 +134,14 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		addButton = new JButton("Add to Game");
 		addButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		addButton.setBounds(315, 580, 165, 45);
-		addButton.addActionListener(new AddToGameController(selectedLevel));
+		addButton.addActionListener(new AddToGameController(this));
 		addButton.setEnabled(false);  // Initially not usable
 		add(addButton);
 		
 		deleteButton = new JButton("Delete");
 		deleteButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		deleteButton.setBounds(170, 580, 120, 45);
-		deleteButton.addActionListener(new DeleteLevelController(model, selectedLevel));
+		deleteButton.addActionListener(new DeleteLevelController(model, this));
 		deleteButton.setEnabled(false);  // Initially not usable
 		add(deleteButton);
 		
@@ -172,6 +172,8 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	{
 		addedLevels.modelUpdated();
 		savedLevels.modelUpdated();
+		
+		repaint();
 		return true;
 	}
 	
@@ -194,6 +196,17 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		deleteButton.setEnabled(true);
 		editButton.setEnabled(true);
 		addButton.setEnabled(true);
+	}
+	
+	
+	/**
+	 *  Disables the delete level, edit level, and add level to game buttons.
+	 */
+	public void disableButtons()
+	{
+		deleteButton.setEnabled(false);
+		editButton.setEnabled(false);
+		addButton.setEnabled(false);
 	}
 	
 	
