@@ -409,6 +409,7 @@ public class BoardController extends MouseAdapter
 				currentContainer.getLevelNumber() == topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1])
 		{
 			topView.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
+			XMLHandler.saveProgressXML(topView.getModel().getCurrentLevel(), "progress.xml");
 		}
 
 		// If the level was a Lightning level

@@ -57,6 +57,7 @@ public class EndLevelController implements ActionListener
 				currentContainer.getLevelNumber() == game.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1])
 		{
 			game.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
+			XMLHandler.saveProgressXML(game.getModel().getCurrentLevel(), "progress.xml");
 		}
 		
 		// If the level was a Lightning level

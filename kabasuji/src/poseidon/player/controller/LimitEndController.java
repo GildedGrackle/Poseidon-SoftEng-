@@ -80,6 +80,7 @@ public class LimitEndController implements PropertyChangeListener
 					currentContainer.getLevelNumber() == application.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1])
 			{
 				application.getModel().getCurrentLevel()[currentLevel.getGameMode() - 1]++;
+				XMLHandler.saveProgressXML(topModel.getCurrentLevel(), "progress.xml");
 			}
 
 			// Create and display new screen
