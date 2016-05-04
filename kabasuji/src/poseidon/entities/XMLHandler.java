@@ -547,11 +547,26 @@ public class XMLHandler {
 		// Root element
 		Element namesElement = new Element("names");
 
-		// Go through the list and create elements from the names
+		// Go through the list and create elements from the names, no duplicates.
+		ArrayList<String> tempNames = new ArrayList<String>();
+		int count = 0;
 		for (int i=0; i<names.length; i++) {
-			Element nameElement = new Element("name"+String.valueOf(i));
-			nameElement.setText(String.valueOf(names[i]));
-			namesElement.addContent(nameElement);
+			String name = names[i];
+			// Check for duplicates first
+			boolean duplicate = false;
+			for (String tempName : tempNames) {
+				if (name.equals(tempName)) {
+					duplicate = true;
+				}
+			}
+			// If not a duplicate then proceed
+			if (!duplicate) {
+				tempNames.add(name);
+				Element nameElement = new Element("name"+String.valueOf(count));
+				nameElement.setText(String.valueOf(name));
+				namesElement.addContent(nameElement);
+				count++;
+			}
 		}
 		
 		// Generate new XML file at specified location
