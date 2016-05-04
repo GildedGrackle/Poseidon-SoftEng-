@@ -95,7 +95,20 @@ public class LevelPlayerModel {
 		}
 		
 		// Now add on the custom levels
-		
+		String[] listOfNames = XMLHandler.loadFilenames("customFilenames.xml", true);
+		if (!(listOfNames == null)) {
+			for (String name : listOfNames) {
+				LevelModel loadedLevel = XMLHandler.loadXML(name, false, true);
+				if(!(loadedLevel == null)) {
+					int mode = loadedLevel.getGameMode();
+					int number = levels.get(mode-1).size();
+					LevelContainer levelContainerTemp = new LevelContainer(name, number, loadedLevel, 0);
+					XMLHandler.loadScore(levelContainerTemp);
+					levels.get(mode-1).add(levelContainerTemp);
+				}
+				
+			}
+		}
 	
 	}
 	
