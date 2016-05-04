@@ -37,9 +37,16 @@ public class AddToGameController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		LevelContainer selected = view.getSelectedLevel();
+		if(selected == null)
+		{
+			// Bail
+			return ;
+		}
 		selected.getLevel().setIsAddedToPlayer(true);
 		XMLHandler.saveXML(selected.getLevel(), selected.getLevelFileName());
 		
+		view.setSelectedLevel(null);
+		view.disableButtons();
 		view.modelUpdated();
 	}
 }

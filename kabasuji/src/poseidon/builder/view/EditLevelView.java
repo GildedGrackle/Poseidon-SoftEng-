@@ -172,6 +172,8 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 	{
 		addedLevels.modelUpdated();
 		savedLevels.modelUpdated();
+		
+		repaint();
 		return true;
 	}
 	
@@ -194,6 +196,17 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		deleteButton.setEnabled(true);
 		editButton.setEnabled(true);
 		addButton.setEnabled(true);
+	}
+	
+	
+	/**
+	 *  Disables the delete level, edit level, and add level to game buttons.
+	 */
+	public void disableButtons()
+	{
+		deleteButton.setEnabled(false);
+		editButton.setEnabled(false);
+		addButton.setEnabled(false);
 	}
 	
 	

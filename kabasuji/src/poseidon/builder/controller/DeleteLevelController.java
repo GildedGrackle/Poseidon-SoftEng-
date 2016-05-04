@@ -44,6 +44,11 @@ public class DeleteLevelController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		LevelContainer selected = view.getSelectedLevel();
+		if(selected == null)
+		{
+			// Bail
+			return ;
+		}
 		File file = new File(XMLHandler.customDirectory + selected.getLevelFileName());
 		
 		if (file.exists()) {
@@ -62,6 +67,8 @@ public class DeleteLevelController implements ActionListener {
 			XMLHandler.saveFilenames(names, "customFilenames.xml", true);
 		}
 		
+		view.setSelectedLevel(null);
+		view.disableButtons();
 		view.modelUpdated();
 	}
 }

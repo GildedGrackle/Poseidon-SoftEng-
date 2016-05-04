@@ -5,15 +5,12 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 
 import poseidon.builder.controller.SelectEditLevelController;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
-import poseidon.player.controller.SelectLevelController;
-import poseidon.player.view.StarView;
 
 /**
  *  Creates a panel containing selectable icons representing all custom-made
@@ -114,8 +111,9 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	 */
 	public void modelUpdated()
 	{
+		removeAll();
 		initialize();
-		resetSelectColors();
+		revalidate();
 	}
 	
 	
