@@ -70,27 +70,31 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 		for(LevelContainer lc : model.getLevels().get(gameMode))
 		{
 			// If the level is unlocked (custom levels always unlocked)
-			if(lc.getLevelNumber() <= model.getCurrentLevel()[gameMode] || lc.getLevel().getIsCustom())
+			if(lc.getLevelNumber() <= model.getCurrentLevel()[gameMode] ||
+					(lc.getLevel().getIsCustom() && lc.getLevel().getIsAddedToPlayer()))
 			{
 				// Then create a selectable icon
 				buttons[i] = new StarView(model.getLevels().get(gameMode).get(lc.getLevelNumber()));
-				buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * lc.getLevelNumber(), 2, ICON_WIDTH, ICON_HEIGHT);
+				buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * i, 2, ICON_WIDTH, ICON_HEIGHT);
 				buttons[i].setBackground(Color.cyan);
 				buttons[i].addActionListener(new SelectLevelController(view));
 				add(buttons[i]);
+				i++;
 			}
 			else  // Level is locked
 			{
 				// Then create a nonselectable "level locked" icon
-				buttons[i] = new StarView();
-				buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * lc.getLevelNumber(), 2, ICON_WIDTH, ICON_HEIGHT);
-				buttons[i].setBackground(Color.cyan);
-				buttons[i].setEnabled(false);
-				add(buttons[i]);
-			}
-			
-			i++;
-		}
+				if(lc.getLevel().getIsAddedToPlayer())
+				{
+					buttons[i] = new StarView();
+					buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * i, 2, ICON_WIDTH, ICON_HEIGHT);
+					buttons[i].setBackground(Color.cyan);
+					buttons[i].setEnabled(false);
+					add(buttons[i]);
+					i++;
+				}
+			}	
+		}  // End for
 	}
 	
 	
