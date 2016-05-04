@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <names>
-<<<<<<< HEAD
   <name0>puzzle0.xml</name0>
   <name1>puzzle1.xml</name1>
   <name2>puzzle3.xml</name2>
-  <name3>puzzle2.xml</name3>
+  <name3>New Puzzle Level.xml</name3>
   <name4>lightning0.xml</name4>
   <name5>lightning1.xml</name5>
   <name6>lightning2.xml</name6>
   <name7>lightning3.xml</name7>
   <name8>lightning4.xml</name8>
   <name9>release0.xml</name9>
-=======
-  <name0>New Puzzle Level.xml</name0>
-  <name1>puzzle0.xml</name1>
-  <name2>puzzle2.xml</name2>
-  <name3>puzzle3.xml</name3>
-  <name4>lightning1.xml</name4>
-  <name5>Test.xml</name5>
-  <name6>test.xml</name6>
->>>>>>> branch 'develop' of https://github.com/Morgan05180/Poseidon-SoftEng-.git
 </names>
