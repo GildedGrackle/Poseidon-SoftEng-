@@ -3,6 +3,7 @@ package poseidon.builder.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -36,9 +37,9 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	/** The level select screen to modify. */
 	EditLevelView view;
 	/** The level select icons. */
-	EditLevelIcon[][] buttons;
-	/** Whether the displayed icons are for saved or added levels. */
-	int levelType;
+	ArrayList<ArrayList<EditLevelIcon>> buttons;
+	/** Whether the displayed icons are for added levels. */
+	Boolean displayingAdded;
 	
 	
 	/**
@@ -46,17 +47,17 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	 *  
 	 *  @param model  The top-level entity object, representing the game
 	 *  @param view  The level select screen to modify
-	 *  @param levelType  Whether the screen displays saved or added levels
+	 *  @param displayingAdded  Whether the screen displays saved or added levels
 	 */
-	public SelectableEditLevelsView(LevelBuilderModel model, EditLevelView view, int levelType)
+	public SelectableEditLevelsView(LevelBuilderModel model, EditLevelView view, Boolean displayingAdded)
 	{
 		this.model = model;
 		this.view = view;
-		this.levelType = levelType;
-		this.buttons = new EditLevelIcon[LevelBuilderModel.NUM_GAMEMODES][];
+		this.displayingAdded = displayingAdded;
+		this.buttons = new ArrayList<ArrayList<EditLevelIcon>>(LevelBuilderModel.NUM_GAMEMODES);
 		for(int i = 0; i < LevelBuilderModel.NUM_GAMEMODES; i++)
 		{
-			buttons[i] = new EditLevelIcon[model.getSavedLevels().get(i).size()];
+			buttons.add(new ArrayList<EditLevelIcon>(model.getSavedLevels().get(i).size()));
 		}
 		
 		// Set component details
@@ -90,13 +91,17 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 			for(LevelContainer lc : model.getSavedLevels().get(gamemode))
 			{
 				// Create a selectable icon
-				buttons[gamemode][levelNumber] = new EditLevelIcon(model.getSavedLevels().get(gamemode).get(lc.getLevelNumber()));
-				buttons[gamemode][levelNumber].setBounds(10 + (ICON_SPACING_WIDTH + ICON_WIDTH) * lc.getLevelNumber(),
-						2 + (ICON_SPACING_HEIGHT + ICON_HEIGHT) * gamemode, ICON_WIDTH, ICON_HEIGHT);
-				buttons[gamemode][levelNumber].setBackground(new Color(0, 191, 255));
-				buttons[gamemode][levelNumber].addActionListener(new SelectEditLevelController(view));
-				add(buttons[gamemode][levelNumber]);
-				levelNumber++;
+				// Determine type of levels to add
+				if(displayingAdded == lc.getLevel().getIsAddedToPlayer())
+				{
+					buttons.get(gamemode).add(new EditLevelIcon(model.getSavedLevels().get(gamemode).get(levelNumber)));
+					buttons.get(gamemode).get(levelNumber).setBounds(10 + (ICON_SPACING_WIDTH + ICON_WIDTH) * levelNumber,
+							2 + (ICON_SPACING_HEIGHT + ICON_HEIGHT) * gamemode, ICON_WIDTH, ICON_HEIGHT);
+					buttons.get(gamemode).get(levelNumber).setBackground(new Color(0, 191, 255));
+					buttons.get(gamemode).get(levelNumber).addActionListener(new SelectEditLevelController(view));
+					add(buttons.get(gamemode).get(levelNumber));
+					levelNumber++;
+				}
 			}
 		}
 	}
@@ -118,12 +123,12 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	 */
 	public void resetSelectColors()
 	{
-		for(EditLevelIcon[] type : buttons)
+		for(ArrayList<EditLevelIcon> type : buttons)
 		{
-			for(EditLevelIcon icon : type)
-			{
-				icon.setBackground(new Color(0, 191, 255));
-			}
+				for(EditLevelIcon icon : type)
+				{
+					icon.setBackground(new Color(0, 191, 255));
+				}
 		}
 	}
 	

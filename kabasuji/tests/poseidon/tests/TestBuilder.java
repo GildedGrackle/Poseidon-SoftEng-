@@ -194,7 +194,7 @@ public class TestBuilder extends TestMouseEvents{
 			 
 			editBullpenView = new EditPlayableBullpenView(view);
 			
-			setBullpenController = new SetBullpenController(view, editBullpenView, model.getBuildingLevel().getPlayableBullpen());
+			setBullpenController = new SetBullpenController(view, editBullpenView, model.getBuildingLevel().getLevel().getPlayableBullpen());
 			
 			editBullpenView.getPieceCountsPanel().getInputs()[0].setValue(4);
 			
@@ -203,7 +203,7 @@ public class TestBuilder extends TestMouseEvents{
 			setBullpenController.actionPerformed(doneEditing);
 			
 			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
-			assertEquals(model.getBuildingLevel().getPlayableBullpen().getSize(), 4);
+			assertEquals(model.getBuildingLevel().getLevel().getPlayableBullpen().getSize(), 4);
 			
 			button = builderView.getSetPlayBull();
 			editBullpenScreen.actionPerformed(setBullpen);
@@ -216,7 +216,7 @@ public class TestBuilder extends TestMouseEvents{
 			cancelBullEdit.actionPerformed(cancelEditing);
 			
 			assertEquals(view.getCurrentScreen().getClass(), BuilderView.class);
-			assertEquals(model.getBuildingLevel().getPlayableBullpen().getSize(), 4);
+			assertEquals(model.getBuildingLevel().getLevel().getPlayableBullpen().getSize(), 4);
 			
 		}
 		
@@ -231,21 +231,21 @@ public class TestBuilder extends TestMouseEvents{
 			
 			BuilderView builderView = new BuilderView(model, view);
 			
-			PieceContainer selectedPiece = model.getBuildingLevel().getInfiniteBullpen().getPiece(1);
+			PieceContainer selectedPiece = model.getBuildingLevel().getLevel().getInfiniteBullpen().getPiece(1);
 		
-			model.getBuildingLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
+			model.getBuildingLevel().getLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
 			
-			BoardController boardController = new BoardController(view, model.getBuildingLevel() , builderView);
+			BoardController boardController = new BoardController(view, model.getBuildingLevel().getLevel() , builderView);
 			
 			MouseEvent movePiece = createBuilderMoved(builderView, builderView.getBoard(), 0, 0);
 			boardController.mouseMoved(movePiece);
 			
-			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), selectedPiece);
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getActiveDragged(), selectedPiece);
 			
 			MouseEvent pressed = createBuilderPress(builderView, builderView.getBoard(), 0, 0);
 			boardController.mousePressed(pressed);
 			
-			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), null);
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getActiveDragged(), null);
 			
 			UndoController undo = new UndoController(builderView);
 			
@@ -254,7 +254,7 @@ public class TestBuilder extends TestMouseEvents{
 			
 			undo.actionPerformed(newUndo);
 			
-			assertFalse(model.getBuildingLevel().getBoard().getPieces().contains(selectedPiece));
+			assertFalse(model.getBuildingLevel().getLevel().getBoard().getPieces().contains(selectedPiece));
 			
 			RedoController redo = new RedoController(builderView);
 			
@@ -262,7 +262,7 @@ public class TestBuilder extends TestMouseEvents{
 			ActionEvent newRedo = buttonPress(button);
 			redo.actionPerformed(newRedo);
 			
-			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), null);
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getActiveDragged(), null);
 			
 		}
 		
@@ -277,16 +277,16 @@ public class TestBuilder extends TestMouseEvents{
 			
 			BuilderView builderView = new BuilderView(model, view);
 			
-			BoardController boardController = new BoardController(view, model.getBuildingLevel() , builderView);
+			BoardController boardController = new BoardController(view, model.getBuildingLevel().getLevel() , builderView);
 			
 			MouseEvent doubleClick = createDoubleClicked(builderView, builderView.getBoard(), 0, 0);
 			boardController.mouseClicked(doubleClick);
 			
-			assertEquals(model.getBuildingLevel().getBoard().getSquare(0, 0).getType(), -1);
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getSquare(0, 0).getType(), -1);
 			
 			boardController.mouseClicked(doubleClick);
 			
-			assertEquals(model.getBuildingLevel().getBoard().getSquare(0, 0).getType(), LevelModel.PUZZLE);
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getSquare(0, 0).getType(), LevelModel.PUZZLE);
 			
 		}
 
@@ -306,7 +306,8 @@ public class TestBuilder extends TestMouseEvents{
 			editBullpenScreen.actionPerformed(setBullpen);
 			editBullpenView = new EditPlayableBullpenView(view);
 			
-			setBullpenController = new SetBullpenController(view, editBullpenView, model.getBuildingLevel().getPlayableBullpen());
+			setBullpenController = new SetBullpenController(view, editBullpenView,
+					model.getBuildingLevel().getLevel().getPlayableBullpen());
 			
 			editBullpenView.getPieceCountsPanel().getInputs()[0].setValue(4);
 			
@@ -314,9 +315,9 @@ public class TestBuilder extends TestMouseEvents{
 			ActionEvent doneEditing = buttonPress(button);
 			setBullpenController.actionPerformed(doneEditing);
 			
-			saveView = new SaveLevelView(model, model.getBuildingLevel(), view);
-			saveButton = new SaveLevelController(model, model.getBuildingLevel(), view);
-			confirmSave = new ConfirmSaveController(model, view, saveView, model.getBuildingLevel());
+			saveView = new SaveLevelView(model, model.getBuildingLevel().getLevel(), view);
+			saveButton = new SaveLevelController(model, model.getBuildingLevel().getLevel(), view);
+			confirmSave = new ConfirmSaveController(model, view, saveView, model.getBuildingLevel().getLevel());
 			cancelSave = new CancelSaveController(view); 
 			
 			button = builderView.getSave();
@@ -351,30 +352,30 @@ public class TestBuilder extends TestMouseEvents{
 			makePuzCont.actionPerformed(newPuzzle);
 			
 			BuilderView builderView = new BuilderView(model, view);
-			PieceContainer selectedPiece = model.getBuildingLevel().getInfiniteBullpen().getPiece(1);
+			PieceContainer selectedPiece = model.getBuildingLevel().getLevel().getInfiniteBullpen().getPiece(1);
 			
 			BoardView board = builderView.getBoard();
-			model.getBuildingLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
+			model.getBuildingLevel().getLevel().getInfiniteBullpen().setPieceSelected(selectedPiece);
 			
 			ResetBuilderController resetController = new ResetBuilderController(model, view);
 			
 			button = builderView.getResetButton();
 			ActionEvent reset = buttonPress(button);
 			
-			BoardController controller = new BoardController(view, model.getBuildingLevel(), builderView);
+			BoardController controller = new BoardController(view, model.getBuildingLevel().getLevel(), builderView);
 			
 			MouseEvent movePiece = createBuilderMoved(builderView, board, 4, 5);
 			controller.mouseMoved(movePiece);
 			
-			assertEquals(model.getBuildingLevel().getBoard().getActiveDragged(), selectedPiece);
+			assertEquals(model.getBuildingLevel().getLevel().getBoard().getActiveDragged(), selectedPiece);
 			
 			MouseEvent pressed = createBuilderPress(builderView, board, 4, 5);
 			controller.mousePressed(pressed);
 			
 			resetController.actionPerformed(reset);	
 
-			assertTrue(model.getBuildingLevel().getBoard().getPieces().isEmpty());
-			assertNull(model.getBuildingLevel().getBoard().getActiveDragged());
+			assertTrue(model.getBuildingLevel().getLevel().getBoard().getPieces().isEmpty());
+			assertNull(model.getBuildingLevel().getLevel().getBoard().getActiveDragged());
 			
 		}
 		

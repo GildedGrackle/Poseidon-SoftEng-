@@ -121,7 +121,7 @@ public class BuilderView extends JPanel implements IBuilderScreen, ILevelView
 	{
 		this.topmodel = model;
 		application = view;
-		this.model = topmodel.getBuildingLevel();
+		this.model = topmodel.getBuildingLevel().getLevel();
 		
 		initialize();
 	}

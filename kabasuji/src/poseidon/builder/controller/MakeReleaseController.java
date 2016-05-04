@@ -84,8 +84,8 @@ public class MakeReleaseController implements ActionListener
 		ReleaseLevel newLevel = new ReleaseLevel(10, "New Release Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
 				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
-		LevelContainer newContainer = new LevelContainer("newRelease", 0, newLevel, 0);  // TODO use correct "inGame" input
-		model.setBuildingLevel(newLevel);
+		LevelContainer newContainer = new LevelContainer("newRelease", 0, newLevel, 0);
+		model.setBuildingLevel(newContainer);
 
 		
 		// Set new screen

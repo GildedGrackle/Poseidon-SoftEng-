@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import poseidon.builder.controller.AddToGameController;
 import poseidon.builder.controller.BackBuilderController;
 import poseidon.builder.controller.DeleteLevelController;
+import poseidon.builder.controller.EditLevelController;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 
@@ -126,6 +127,7 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		editButton = new JButton("Edit");
 		editButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 		editButton.setBounds(505, 580, 120, 45);
+		editButton.addActionListener(new EditLevelController(model, application, this));
 		editButton.setEnabled(false);  // Initially not usable
 		add(editButton);
 		
@@ -143,12 +145,14 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		deleteButton.setEnabled(false);  // Initially not usable
 		add(deleteButton);
 		
-		addLevelsContainer = new JScrollPane();
+		addedLevels = new SelectableEditLevelsView(model, this, true);
+		addLevelsContainer = new JScrollPane(addedLevels);
 		addLevelsContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		addLevelsContainer.setBounds(230, 115, 390, 202);
 		add(addLevelsContainer);
 		
-		savedLevelsContainer = new JScrollPane();
+		savedLevels = new SelectableEditLevelsView(model, this, false);
+		savedLevelsContainer = new JScrollPane(savedLevels);
 		savedLevelsContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		savedLevelsContainer.setBounds(230, 345, 390, 202);
 		add(savedLevelsContainer);
@@ -190,6 +194,13 @@ public class EditLevelView extends JPanel implements IBuilderScreen
 		deleteButton.setEnabled(true);
 		editButton.setEnabled(true);
 		addButton.setEnabled(true);
+	}
+	
+	
+	/** @return  The selected level. */
+	public LevelContainer getSelectedLevel()
+	{
+		return selectedLevel;
 	}
 	
 	

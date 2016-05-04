@@ -23,6 +23,9 @@ public class EditLevelIcon extends JButton
 	public EditLevelIcon(LevelContainer lc)
 	{
 		this.levelContainer = lc;
+		
+		setText("" + lc.getLevelNumber());
+		setToolTipText(lc.getLevelFileName());
 	}
 	
 	

@@ -84,8 +84,8 @@ public class MakePuzzleController implements ActionListener
 		PuzzleLevel newLevel = new PuzzleLevel(10, "New Puzzle Level",
 				new Bullpen(new ArrayList<PieceContainer>(), newBullpenLogic),
 				new Bullpen(newBullpenLogic), new Board(newPlayArea, newBoardLogic), true, false);
-		LevelContainer newContainer = new LevelContainer("newPuzzle", 0, newLevel, 0);  // TODO use correct "inGame" input
-		model.setBuildingLevel(newLevel);
+		LevelContainer newContainer = new LevelContainer("newPuzzle", 0, newLevel, 0);
+		model.setBuildingLevel(newContainer);
 
 		
 		// Set new screen

@@ -1,6 +1,5 @@
 package poseidon.entities;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +18,7 @@ public class LevelBuilderModel {
 	/** Saved levels [gamemode][level] */
 	ArrayList<ArrayList<LevelContainer>> savedLevels;
 	/** Level currently under construction. */
-	LevelModel buildingLevel;
+	LevelContainer buildingLevel;
 	
 	
 	/**
@@ -43,12 +42,15 @@ public class LevelBuilderModel {
 		// Load in the list of filenames, if any, and load each named level file
 		String[] listOfNames = XMLHandler.loadFilenames("customFilenames.xml", true);
 		if (!(listOfNames == null)) {
+			int levelNumber = 0;
 			for (String name : listOfNames) {
 				LevelModel loadedLevel = XMLHandler.loadXML(name, true, true);
 				if(!(loadedLevel == null)) {
 					int mode = loadedLevel.getGameMode();
-					savedLevels.get(mode-1).add(new LevelContainer(name, mode, loadedLevel, 0));
+					savedLevels.get(mode-1).add(new LevelContainer(name, levelNumber, loadedLevel, 0));
+					levelNumber++;
 				}
+				
 			}
 		}
 	}
@@ -56,7 +58,7 @@ public class LevelBuilderModel {
 				 *  Getter & Setter  *
 				 *********************/
 	/** @return  The level currently being built. */
-	public LevelModel getBuildingLevel()
+	public LevelContainer getBuildingLevel()
 	{
 		return buildingLevel;
 	}
@@ -65,7 +67,7 @@ public class LevelBuilderModel {
 	 *  
 	 *  @param buildingLevel  the new level
 	 */
-	public void setBuildingLevel(LevelModel buildingLevel)
+	public void setBuildingLevel(LevelContainer buildingLevel)
 	{
 		this.buildingLevel = buildingLevel;
 	}

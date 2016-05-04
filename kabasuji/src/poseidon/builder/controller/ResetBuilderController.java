@@ -7,7 +7,7 @@ import javax.swing.JButton;
 
 import poseidon.builder.view.LevelBuilderView;
 import poseidon.entities.LevelBuilderModel;
-import poseidon.entities.LevelModel;
+import poseidon.entities.LevelContainer;
 
 
 /**
@@ -58,19 +58,19 @@ public class ResetBuilderController implements ActionListener {
 	boolean resetBuilder() {
 		
 		// Reload the current level
-		LevelModel currentLevel = model.getBuildingLevel();
+		LevelContainer currentLevel = model.getBuildingLevel();
 		
-		if(currentLevel.getGameMode() == 1){
+		if(currentLevel.getLevel().getGameMode() == 1){
 			makePuzCont = new MakePuzzleController(model, game);
 			makePuzCont.toPuzzleLevel();
 		}
 		
-		else if(currentLevel.getGameMode() == 2){
+		else if(currentLevel.getLevel().getGameMode() == 2){
 			makeLightCont = new MakeLightningController(model, game);
 			makeLightCont.toLightningLevel();
 		}
 		
-		else if(currentLevel.getGameMode() == 3){
+		else if(currentLevel.getLevel().getGameMode() == 3){
 			makeReleaseCont = new MakeReleaseController(model, game);
 			makeReleaseCont.toReleaseLevel();
 		}

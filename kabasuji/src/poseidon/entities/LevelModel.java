@@ -209,4 +209,14 @@ public abstract class LevelModel {
 	public void setIsAddedToPlayer(Boolean isAddedToPlayer) {
 		this.isAddedToPlayer = isAddedToPlayer;
 	}
+	/**
+	 *  Sets the infinite bullpen.
+	 *  
+	 *  @param bullpen  the new bullpen
+	 */
+	public void setInfiniteBullpen(Bullpen bullpen)
+	{
+		this.infiniteBullpen = bullpen;
+	}
+	
 }
