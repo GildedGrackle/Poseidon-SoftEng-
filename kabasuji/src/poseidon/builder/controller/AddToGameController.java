@@ -40,6 +40,8 @@ public class AddToGameController implements ActionListener {
 		if(selected == null)
 		{
 			// Bail
+			view.disableButtons();
+			view.modelUpdated();
 			return ;
 		}
 		selected.getLevel().setIsAddedToPlayer(true);

@@ -47,6 +47,8 @@ public class DeleteLevelController implements ActionListener {
 		if(selected == null)
 		{
 			// Bail
+			view.disableButtons();
+			view.modelUpdated();
 			return ;
 		}
 		File file = new File(XMLHandler.customDirectory + selected.getLevelFileName());

@@ -11,7 +11,6 @@ import poseidon.entities.BuilderBullpenLogic;
 import poseidon.entities.Bullpen;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
-import poseidon.entities.XMLHandler;
 
 /**
  *  Loads the selected level for editing.
