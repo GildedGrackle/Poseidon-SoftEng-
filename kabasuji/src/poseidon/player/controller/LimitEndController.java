@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.LevelModel;
 import poseidon.entities.LevelPlayerModel;
+import poseidon.entities.XMLHandler;
 import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
 
@@ -72,6 +73,7 @@ public class LimitEndController implements PropertyChangeListener
 			{
 				// Then record it
 				currentContainer.setScore(currentLevel.getScore());
+				XMLHandler.saveScore(currentContainer);
 			}
 			// If new level unlocked
 			if(currentContainer.getScore() > 0 &&

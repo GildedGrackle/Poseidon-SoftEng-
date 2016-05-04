@@ -11,7 +11,7 @@ import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
 
 /**
- *  Handles both the "Finish Level" button press and the 3-star completion scenario.
+ *  Handles the "Finish Level" button press scenario.
  *  Displays the end level screen, with options to replay the game, return to the 
  *  level select screen, or advance to the next level.
  *  

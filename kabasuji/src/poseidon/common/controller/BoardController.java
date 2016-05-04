@@ -24,6 +24,7 @@ import poseidon.entities.Point;
 import poseidon.entities.RedoManager;
 import poseidon.entities.ReleaseNumber;
 import poseidon.entities.UndoManager;
+import poseidon.entities.XMLHandler;
 import poseidon.player.view.EndLevelView;
 import poseidon.player.view.LevelPlayerView;
 
@@ -401,6 +402,7 @@ public class BoardController extends MouseAdapter
 		{
 			// Then record it
 			currentContainer.setScore(currentLevel.getScore());
+			XMLHandler.saveScore(currentContainer);
 		}
 		// If new level unlocked
 		if(currentContainer.getScore() > 0 &&
