@@ -3,6 +3,7 @@ package poseidon.player.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
@@ -30,7 +31,7 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 	/** The level select screen to modify. */
 	LevelSelectView view;
 	/** The level select buttons. */
-	StarView[] buttons;
+	ArrayList<StarView> buttons;
 	/** Which gamemode's levels should be displayed. */
 	int gameMode;
 
@@ -47,7 +48,7 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 		this.model = model;
 		this.view = view;
 		this.gameMode = gameMode;
-		this.buttons = new StarView[model.getLevels().get(gameMode).size()];
+		this.buttons = new ArrayList<StarView>(model.getLevels().get(gameMode).size());
 		
 		// Set component details
 		setLayout(null);
@@ -74,11 +75,11 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 					(lc.getLevel().getIsCustom() && lc.getLevel().getIsAddedToPlayer()))
 			{
 				// Then create a selectable icon
-				buttons[i] = new StarView(model.getLevels().get(gameMode).get(lc.getLevelNumber()));
-				buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * i, 2, ICON_WIDTH, ICON_HEIGHT);
-				buttons[i].setBackground(Color.cyan);
-				buttons[i].addActionListener(new SelectLevelController(view));
-				add(buttons[i]);
+				buttons.add(new StarView(model.getLevels().get(gameMode).get(lc.getLevelNumber())));
+				buttons.get(i).setBounds(10 + (ICON_SPACING + ICON_WIDTH) * i, 2, ICON_WIDTH, ICON_HEIGHT);
+				buttons.get(i).setBackground(Color.cyan);
+				buttons.get(i).addActionListener(new SelectLevelController(view));
+				add(buttons.get(i));
 				i++;
 			}
 			else  // Level is locked
@@ -86,11 +87,11 @@ public class SelectableLevelsView extends JPanel implements Scrollable
 				// Then create a nonselectable "level locked" icon
 				if(lc.getLevel().getIsAddedToPlayer())
 				{
-					buttons[i] = new StarView();
-					buttons[i].setBounds(10 + (ICON_SPACING + ICON_WIDTH) * i, 2, ICON_WIDTH, ICON_HEIGHT);
-					buttons[i].setBackground(Color.cyan);
-					buttons[i].setEnabled(false);
-					add(buttons[i]);
+					buttons.add(new StarView());
+					buttons.get(i).setBounds(10 + (ICON_SPACING + ICON_WIDTH) * i, 2, ICON_WIDTH, ICON_HEIGHT);
+					buttons.get(i).setBackground(Color.cyan);
+					buttons.get(i).setEnabled(false);
+					add(buttons.get(i));
 					i++;
 				}
 			}	
