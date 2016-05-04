@@ -100,9 +100,8 @@ public class BoardView extends JPanel implements IModelUpdated
 					drawer.setColor(Color.black);
 					drawer.drawRect(SQUARE_SIZE * j, SQUARE_SIZE * i, SQUARE_SIZE, SQUARE_SIZE);
 					
-					// If the Square is a ReleaseSquare and it has a number to draw
-					if(playArea[i][j].getType() == LevelModel.RELEASE &&
-							playArea[i][j].getReleaseNumber() != null)
+					// If the Square is a ReleaseSquare
+					if(playArea[i][j].getType() == LevelModel.RELEASE)
 					{
 						// Then draw the number in its color
 						drawNumber(drawer, playArea[i][j].getReleaseNumber(), i, j);
@@ -201,25 +200,29 @@ public class BoardView extends JPanel implements IModelUpdated
 	 */
 	void drawNumber(Graphics g, ReleaseNumber toDraw, int row, int col)
 	{
-		Graphics drawer = g.create();
-		
-		// Set graphics properties
-		drawer.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
-		switch(toDraw.getColor())
+		// If there is actually a number to draw
+		if(toDraw.getColor() > 0)
 		{
-		case ReleaseNumber.RED:
-			drawer.setColor(Color.red);
-			break;
-		case ReleaseNumber.GREEN:
-			drawer.setColor(Color.green);
-			break;
-		case ReleaseNumber.YELLOW:
-			drawer.setColor(new Color(0xD0, 0xD0, 0));
-			break;
+			Graphics drawer = g.create();
+
+			// Set graphics properties
+			drawer.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+			switch(toDraw.getColor())
+			{
+			case ReleaseNumber.RED:
+				drawer.setColor(Color.red);
+				break;
+			case ReleaseNumber.GREEN:
+				drawer.setColor(Color.green);
+				break;
+			case ReleaseNumber.YELLOW:
+				drawer.setColor(new Color(0xD0, 0xD0, 0));
+				break;
+			}
+
+			// Draw number
+			drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * col + 10, SQUARE_SIZE * row + 22);
 		}
-		
-		// Draw number
-		drawer.drawString("" + toDraw.getNumber(), SQUARE_SIZE * col + 10, SQUARE_SIZE * row + 22);
 	}
 	
 	

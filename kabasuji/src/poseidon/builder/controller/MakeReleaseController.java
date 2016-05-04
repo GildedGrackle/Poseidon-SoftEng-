@@ -14,6 +14,7 @@ import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.PieceContainer;
 import poseidon.entities.ReleaseLevel;
+import poseidon.entities.ReleaseNumber;
 import poseidon.entities.ReleaseSquare;
 import poseidon.entities.Square;
 
@@ -76,7 +77,7 @@ public class MakeReleaseController implements ActionListener
 		{
 			for(int j = 0; j < Board.MAXCOLS; j++)
 			{
-				newPlayArea[i][j] = new ReleaseSquare(false, null);
+				newPlayArea[i][j] = new ReleaseSquare(false, new ReleaseNumber(-1, -1));
 			}
 		}
 		BuilderBullpenLogic newBullpenLogic = new BuilderBullpenLogic();

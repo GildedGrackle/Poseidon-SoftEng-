@@ -58,7 +58,7 @@ public class MarkPlayableSquareMove implements IMove{
 				newSquare = new LightningSquare(false);
 				break;
 			case LevelModel.RELEASE:
-				newSquare = new ReleaseSquare(false, null);
+				newSquare = new ReleaseSquare(false, new ReleaseNumber(-1, -1));
 				break;
 			default:
 				break;

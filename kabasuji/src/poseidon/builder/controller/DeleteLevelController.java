@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+import poseidon.builder.view.EditLevelView;
 import poseidon.entities.LevelBuilderModel;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.XMLHandler;
@@ -13,24 +14,25 @@ import poseidon.entities.XMLHandler;
  * Attempts to delete the file location associated with the specified level, remove from level list.
  * 
  * @author Jacob
+ * @author Alex Titus
  */
 public class DeleteLevelController implements ActionListener {
 	
 	/** The top-level entity. */
 	LevelBuilderModel topModel;
-	/** The level model being deleted. */
-	LevelContainer level;
+	/** The edit level screen, with information about the selected level. */
+	EditLevelView view;
 	
 	
 	/**
 	 * Constructor.
 	 * 
 	 * @param topModel  The top-level entity.
-	 * @param level The level to be deleted.
+	 * @param level  The edit level screen, with information about the selected level.
 	 */
-	public DeleteLevelController(LevelBuilderModel topModel, LevelContainer level) {
+	public DeleteLevelController(LevelBuilderModel topModel, EditLevelView view) {
 		this.topModel = topModel;
-		this.level = level;
+		this.view = view;
 	}
 	
 	
@@ -41,14 +43,15 @@ public class DeleteLevelController implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		File file = new File(XMLHandler.customDirectory + level.getLevelFileName());
+		LevelContainer selected = view.getSelectedLevel();
+		File file = new File(XMLHandler.customDirectory + selected.getLevelFileName());
 		
 		if (file.exists()) {
 			file.delete();
 			
 			// Remove the level from the model list and re-save the list file
 			ArrayList<ArrayList<LevelContainer>> levelList = topModel.getSavedLevels();
-			levelList.get(level.getLevel().getGameMode()-1).remove(level);
+			levelList.get(selected.getLevel().getGameMode()-1).remove(selected);
 			ArrayList<String> namesAL = new ArrayList<String>();
 			for (ArrayList<LevelContainer> sublist : levelList) {
 				for (LevelContainer level : sublist) {
@@ -58,5 +61,7 @@ public class DeleteLevelController implements ActionListener {
 			String[] names = namesAL.toArray(new String[namesAL.size()]);
 			XMLHandler.saveFilenames(names, "customFilenames.xml", true);
 		}
+		
+		view.modelUpdated();
 	}
 }

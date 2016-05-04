@@ -3,6 +3,7 @@ package poseidon.builder.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import poseidon.builder.view.EditLevelView;
 import poseidon.entities.LevelContainer;
 import poseidon.entities.XMLHandler;
 
@@ -10,20 +11,21 @@ import poseidon.entities.XMLHandler;
  * Re-saves the specified level as being added to game.
  * 
  * @author Jacob
+ * @author Alex Titus
  */
 public class AddToGameController implements ActionListener {
 	
-	/** The level model being deleted. */
-	LevelContainer level;
+	/** The edit level screen, with information about the selected level. */
+	EditLevelView view;
 	
 	
 	/**
 	 * Constructor.
 	 * 
-	 * @param level The level to be modified.
+	 * @param view The edit level screen, with information about the selected level.
 	 */
-	public AddToGameController(LevelContainer level) {
-		this.level = level;
+	public AddToGameController(EditLevelView view) {
+		this.view = view;
 	}
 	
 	
@@ -34,7 +36,10 @@ public class AddToGameController implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		level.getLevel().setIsAddedToPlayer(true);
-		XMLHandler.saveXML(level.getLevel(), level.getLevelFileName());
+		LevelContainer selected = view.getSelectedLevel();
+		selected.getLevel().setIsAddedToPlayer(true);
+		XMLHandler.saveXML(selected.getLevel(), selected.getLevelFileName());
+		
+		view.modelUpdated();
 	}
 }

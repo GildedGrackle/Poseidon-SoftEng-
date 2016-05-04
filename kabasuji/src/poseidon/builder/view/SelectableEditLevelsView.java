@@ -114,6 +114,7 @@ public class SelectableEditLevelsView extends JPanel implements Scrollable
 	 */
 	public void modelUpdated()
 	{
+		initialize();
 		resetSelectColors();
 	}
 	
