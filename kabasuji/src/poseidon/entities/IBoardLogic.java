@@ -68,13 +68,13 @@ public interface IBoardLogic {
 	
 	
 	/** 
-	 *  Sets the square at (row, col) to be a hint, if possible.
+	 *  Toggles the square at (row, col) to be a hint, if possible.
 	 *  
 	 *  @param board  the board to modify
 	 *  @param row  the row of the square to make a hint
 	 *  @param col  the column of the square to make a hint
 	 */
-	void setHint(Board board, int row, int col);
+	void toggleHint(Board board, int row, int col);
 	
 	
 	/** 

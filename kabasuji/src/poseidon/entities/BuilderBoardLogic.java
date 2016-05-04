@@ -147,7 +147,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 	 *  @param row  the row of the square to make a hint
 	 *  @param col  the column of the square to make a hint
 	 */
-	public void setHint(Board board, int row, int col)
+	public void toggleHint(Board board, int row, int col)
 	{
 		Square[][] playArea = board.getPlayArea();
 		
@@ -170,7 +170,7 @@ public class BuilderBoardLogic implements IBoardLogic {
 		}
 		
 		// If the gamemode is Lightning or the square is unplayable
-		if(gamemode == LevelModel.LIGHTNING && playArea[row][col].getType() < 0)
+		if(gamemode == LevelModel.LIGHTNING || playArea[row][col].getType() < 0)
 		{
 			// Then bail, can't make a hint
 			return ;
@@ -180,12 +180,28 @@ public class BuilderBoardLogic implements IBoardLogic {
 		if(gamemode == LevelModel.PUZZLE)
 		{
 			PuzzleSquare newHintSquare = (PuzzleSquare) playArea[row][col];
-			newHintSquare.setIsHint(true);
+			// Toggle hint
+			if(newHintSquare.getIsHint())
+			{
+				newHintSquare.setIsHint(false);
+			}
+			else
+			{
+				newHintSquare.setIsHint(true);
+			}
 		}
 		else
 		{
 			ReleaseSquare newHintSquare = (ReleaseSquare) playArea[row][col];
-			newHintSquare.setIsHint(true);
+			// Toggle hint
+			if(newHintSquare.getIsHint())
+			{
+				newHintSquare.setIsHint(false);
+			}
+			else
+			{
+				newHintSquare.setIsHint(true);
+			}
 		}
 	}
 	

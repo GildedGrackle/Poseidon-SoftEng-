@@ -339,7 +339,7 @@ public class TestEntities extends TestCase{
 		}
 
 		@Override
-		public void setHint(Board board, int row, int col) {
+		public void toggleHint(Board board, int row, int col) {
 			return;
 		}
 		

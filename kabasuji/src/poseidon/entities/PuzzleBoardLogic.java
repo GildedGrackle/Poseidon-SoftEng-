@@ -170,7 +170,7 @@ public class PuzzleBoardLogic implements IBoardLogic{
 	 *  @param col  the column of the square to make a hint
 	 */
 	@Override
-	public void setHint(Board board, int row, int col)
+	public void toggleHint(Board board, int row, int col)
 	{
 		return ;
 	}

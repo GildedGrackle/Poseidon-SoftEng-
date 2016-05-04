@@ -100,7 +100,7 @@ public class TestPlayer extends TestCase{
 		}
 
 		@Override
-		public void setHint(Board board, int row, int col) {
+		public void toggleHint(Board board, int row, int col) {
 			return;
 		}
 		

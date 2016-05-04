@@ -232,7 +232,7 @@ public class BoardController extends MouseAdapter
 			// Else may be in hint selection mode
 			if(boardView.getHintSelectionMode())
 			{
-				boardModel.setHint(row, col);
+				boardModel.toggleHint(row, col);
 				view.modelUpdated();
 			}
 			

@@ -210,12 +210,12 @@ public class Board {
 	
 	
 	/** 
-	 *  Sets the square at (row, col) to be a hint, if possible.
+	 *  Toggles the square at (row, col) to be a hint, if possible.
 	 *  
 	 *  @param row  the row of the square to make a hint
 	 *  @param col  the column of the square to make a hint
 	 */
-	public void setHint(int row, int col)
+	public void toggleHint(int row, int col)
 	{
 		// Just in case
 		if(row >= MAXROWS || col >= MAXCOLS || row < 0 || col < 0)
@@ -223,7 +223,7 @@ public class Board {
 			return ;
 		}
 		
-		logic.setHint(this, row, col);
+		logic.toggleHint(this, row, col);
 	}
 	
 	
