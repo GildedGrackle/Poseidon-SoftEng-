@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level gameMode="1">
-  <name>puzzle0</name>
+  <name>test</name>
   <countdown>10</countdown>
   <playableBullpen>
     <piece0>
@@ -107,62 +107,10 @@
         <column>0</column>
       </point5>
     </piece3>
-    <piece4>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>3</row>
-        <column>0</column>
-      </point3>
-      <point4>
-        <row>4</row>
-        <column>0</column>
-      </point4>
-      <point5>
-        <row>5</row>
-        <column>0</column>
-      </point5>
-    </piece4>
-    <piece5>
-      <point0>
-        <row>0</row>
-        <column>0</column>
-      </point0>
-      <point1>
-        <row>1</row>
-        <column>0</column>
-      </point1>
-      <point2>
-        <row>2</row>
-        <column>0</column>
-      </point2>
-      <point3>
-        <row>3</row>
-        <column>0</column>
-      </point3>
-      <point4>
-        <row>4</row>
-        <column>0</column>
-      </point4>
-      <point5>
-        <row>5</row>
-        <column>0</column>
-      </point5>
-    </piece5>
   </playableBullpen>
   <board>
     <square0 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square0>
     <square1 type="puzzle">
       <isHint>false</isHint>
@@ -179,14 +127,26 @@
     <square5 type="puzzle">
       <isHint>false</isHint>
     </square5>
-    <square6 type="nonplayable" />
-    <square7 type="nonplayable" />
-    <square8 type="nonplayable" />
-    <square9 type="nonplayable" />
-    <square10 type="nonplayable" />
-    <square11 type="nonplayable" />
+    <square6 type="puzzle">
+      <isHint>false</isHint>
+    </square6>
+    <square7 type="puzzle">
+      <isHint>false</isHint>
+    </square7>
+    <square8 type="puzzle">
+      <isHint>false</isHint>
+    </square8>
+    <square9 type="puzzle">
+      <isHint>false</isHint>
+    </square9>
+    <square10 type="puzzle">
+      <isHint>false</isHint>
+    </square10>
+    <square11 type="puzzle">
+      <isHint>false</isHint>
+    </square11>
     <square12 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square12>
     <square13 type="puzzle">
       <isHint>false</isHint>
@@ -203,14 +163,26 @@
     <square17 type="puzzle">
       <isHint>false</isHint>
     </square17>
-    <square18 type="nonplayable" />
-    <square19 type="nonplayable" />
-    <square20 type="nonplayable" />
-    <square21 type="nonplayable" />
-    <square22 type="nonplayable" />
-    <square23 type="nonplayable" />
+    <square18 type="puzzle">
+      <isHint>false</isHint>
+    </square18>
+    <square19 type="puzzle">
+      <isHint>false</isHint>
+    </square19>
+    <square20 type="puzzle">
+      <isHint>false</isHint>
+    </square20>
+    <square21 type="puzzle">
+      <isHint>false</isHint>
+    </square21>
+    <square22 type="puzzle">
+      <isHint>false</isHint>
+    </square22>
+    <square23 type="puzzle">
+      <isHint>false</isHint>
+    </square23>
     <square24 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square24>
     <square25 type="puzzle">
       <isHint>false</isHint>
@@ -227,14 +199,26 @@
     <square29 type="puzzle">
       <isHint>false</isHint>
     </square29>
-    <square30 type="nonplayable" />
-    <square31 type="nonplayable" />
-    <square32 type="nonplayable" />
-    <square33 type="nonplayable" />
-    <square34 type="nonplayable" />
-    <square35 type="nonplayable" />
+    <square30 type="puzzle">
+      <isHint>false</isHint>
+    </square30>
+    <square31 type="puzzle">
+      <isHint>false</isHint>
+    </square31>
+    <square32 type="puzzle">
+      <isHint>false</isHint>
+    </square32>
+    <square33 type="puzzle">
+      <isHint>false</isHint>
+    </square33>
+    <square34 type="puzzle">
+      <isHint>false</isHint>
+    </square34>
+    <square35 type="puzzle">
+      <isHint>false</isHint>
+    </square35>
     <square36 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square36>
     <square37 type="puzzle">
       <isHint>false</isHint>
@@ -251,14 +235,26 @@
     <square41 type="puzzle">
       <isHint>false</isHint>
     </square41>
-    <square42 type="nonplayable" />
-    <square43 type="nonplayable" />
-    <square44 type="nonplayable" />
-    <square45 type="nonplayable" />
-    <square46 type="nonplayable" />
-    <square47 type="nonplayable" />
+    <square42 type="puzzle">
+      <isHint>false</isHint>
+    </square42>
+    <square43 type="puzzle">
+      <isHint>false</isHint>
+    </square43>
+    <square44 type="puzzle">
+      <isHint>false</isHint>
+    </square44>
+    <square45 type="puzzle">
+      <isHint>false</isHint>
+    </square45>
+    <square46 type="puzzle">
+      <isHint>false</isHint>
+    </square46>
+    <square47 type="puzzle">
+      <isHint>false</isHint>
+    </square47>
     <square48 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square48>
     <square49 type="puzzle">
       <isHint>false</isHint>
@@ -275,14 +271,26 @@
     <square53 type="puzzle">
       <isHint>false</isHint>
     </square53>
-    <square54 type="nonplayable" />
-    <square55 type="nonplayable" />
-    <square56 type="nonplayable" />
-    <square57 type="nonplayable" />
-    <square58 type="nonplayable" />
-    <square59 type="nonplayable" />
+    <square54 type="puzzle">
+      <isHint>false</isHint>
+    </square54>
+    <square55 type="puzzle">
+      <isHint>false</isHint>
+    </square55>
+    <square56 type="puzzle">
+      <isHint>false</isHint>
+    </square56>
+    <square57 type="puzzle">
+      <isHint>false</isHint>
+    </square57>
+    <square58 type="puzzle">
+      <isHint>false</isHint>
+    </square58>
+    <square59 type="puzzle">
+      <isHint>false</isHint>
+    </square59>
     <square60 type="puzzle">
-      <isHint>true</isHint>
+      <isHint>false</isHint>
     </square60>
     <square61 type="puzzle">
       <isHint>false</isHint>
@@ -299,12 +307,24 @@
     <square65 type="puzzle">
       <isHint>false</isHint>
     </square65>
-    <square66 type="nonplayable" />
-    <square67 type="nonplayable" />
-    <square68 type="nonplayable" />
-    <square69 type="nonplayable" />
-    <square70 type="nonplayable" />
-    <square71 type="nonplayable" />
+    <square66 type="puzzle">
+      <isHint>false</isHint>
+    </square66>
+    <square67 type="puzzle">
+      <isHint>false</isHint>
+    </square67>
+    <square68 type="puzzle">
+      <isHint>false</isHint>
+    </square68>
+    <square69 type="puzzle">
+      <isHint>false</isHint>
+    </square69>
+    <square70 type="puzzle">
+      <isHint>false</isHint>
+    </square70>
+    <square71 type="puzzle">
+      <isHint>false</isHint>
+    </square71>
     <square72 type="nonplayable" />
     <square73 type="nonplayable" />
     <square74 type="nonplayable" />
@@ -379,5 +399,5 @@
     <square143 type="nonplayable" />
   </board>
   <isCustom>true</isCustom>
-  <isAddedToPlayer>true</isAddedToPlayer>
+  <isAddedToPlayer>false</isAddedToPlayer>
 </level>
