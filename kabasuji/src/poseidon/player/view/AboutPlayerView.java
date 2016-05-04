@@ -45,7 +45,7 @@ public class AboutPlayerView extends JPanel implements IGameScreen
 		JTextArea aboutUsTextArea = new JTextArea();
 		aboutUsTextArea.setEditable(false);
 		aboutUsTextArea.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		aboutUsTextArea.setText("This describes us and the project\r\n\r\nTeam Poseidon:\r\nMonika Danielewicz, Morgan Hopeman , Natalia Kononenko, Alex Titus, Jacob Wennersten");
+		aboutUsTextArea.setText("Welcome to the Kabasuji Level Player. Enjoy!\r\n\r\nMade by Team Poseidon:\r\nMonika Danielewicz, Morgan Hopeman , Natalia Kononenko, Alex Titus, Jacob Wennersten");
 		aboutUsTextArea.setBounds(25, 50, 615, 485);
 		add(aboutUsTextArea);
 		
